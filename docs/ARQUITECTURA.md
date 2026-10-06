@@ -9,6 +9,9 @@ Este documento responde dos preguntas (¿se comparte la logística? ¿qué del
 catálogo de comercios sirve para el visual?) y explica cómo funciona el motor
 que está en este repositorio.
 
+Cómo aplicarlo a los catálogos reales (búsqueda web, cuenta vs. clave de API,
+dos pasadas, costos y plan por etapas): [LOGISTICA_PARALELA.md](LOGISTICA_PARALELA.md).
+
 ---
 
 ## 1. ¿Logística compartida o separada?

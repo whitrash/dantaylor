@@ -7,7 +7,9 @@ dos proyectos de catálogo:
 - **comercios**: supermercados, librerías, almacenes, farmacias...
 
 El diseño (qué se comparte, qué no y qué se tomó del catálogo de comercios)
-está en [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md).
+está en [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md). Cómo aplicarlo a los
+catálogos reales, con búsqueda web y las dos vías de ejecución (cuenta o clave
+de API), en [docs/LOGISTICA_PARALELA.md](docs/LOGISTICA_PARALELA.md).
 
 ## Instalación
 
