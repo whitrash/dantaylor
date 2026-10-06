@@ -62,6 +62,10 @@ class Curiosidades(Dominio):
     facetas = ("epoca", "pais")
     prioridad_fuentes = {"wikidata": 3, "wikipedia": 2}
     campos_busqueda = ("categoria", "titulo", "descripcion")
+    politica_web = "si_dudoso"
+    max_busquedas = 2
+    reglas_web = """
+- Los récords y los "el más grande/rápido/antiguo" se superan: confirma que el dato siga vigente y acláralo si ya no lo está."""
     reglas = """
 - "titulo": nombre corto y reconocible de la obra, hecho o récord.
 - "resumen": 2 o 3 oraciones; "dato_curioso": un único dato sorprendente y verificable.

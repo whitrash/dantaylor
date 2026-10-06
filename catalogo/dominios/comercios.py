@@ -78,6 +78,14 @@ class Comercios(Dominio):
     # Un relevamiento propio en el local pesa más que un dato scrapeado de la web.
     prioridad_fuentes = {"relevamiento": 3, "web": 1}
     campos_busqueda = ("rubro", "nombre", "descripcion")
+    # Datos locales y cambiantes: el modelo no los sabe; siempre con web, acotada.
+    politica_web = "siempre"
+    max_busquedas = 3
+    campos_volatiles = ("servicios", "rango_precios")
+    reglas_web = """
+- Incluye la ciudad y el barrio del registro en cada búsqueda ("Librería Páginas Recoleta Buenos Aires").
+- Primero confirma que el comercio existe y sigue abierto en esa dirección. Si no hay rastro, deja la ficha mínima con confianza "baja".
+- Si el registro trae "sitio_web", lee esa página con la herramienta de lectura web antes de buscar: es la fuente más confiable para horario y servicios."""
     reglas = """
 - "nombre": nombre comercial tal como lo conoce la gente (sin "S.A.", "S.R.L.").
 - "rubros": rubros concretos que vende ("lácteos", "útiles escolares"...).

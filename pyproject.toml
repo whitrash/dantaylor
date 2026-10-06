@@ -29,3 +29,6 @@ line-length = 120
 select = ["E", "F", "W", "B"]
 # Los prompts y las listas de palabras clave se leen mejor en una sola línea.
 ignore = ["E501"]
+
+[tool.setuptools.package-data]
+catalogo = ["core/*.html"]

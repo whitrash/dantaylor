@@ -163,6 +163,26 @@ def test_error_fatal_corta_todo_sin_marcar_fallas():
     assert fallas == [] and len(iniciados) == 4
 
 
+def test_detener_no_arranca_entradas_nuevas():
+    hechos = []
+    producidos = []
+
+    def generador():
+        for i in range(100):
+            producidos.append(i)
+            yield i
+
+    async def trabajo(x):
+        await asyncio.sleep(0.005)
+        hechos.append(x)
+        return x
+
+    resumen = correr(ejecutar_en_paralelo(generador(), trabajo, concurrencia=3, detener=lambda: len(hechos) >= 4))
+    # Al cumplirse la condición hay a lo sumo 2 más en vuelo; lo encolado se descarta.
+    assert 4 <= len(hechos) <= 6 and resumen.ok == len(hechos)
+    assert len(producidos) < 100
+
+
 def test_concurrencia_invalida():
     async def trabajo(x):
         return x

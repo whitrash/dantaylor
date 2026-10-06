@@ -77,6 +77,9 @@ async def ejecutar_en_paralelo(
     pausa_global: Callable[[BaseException], float | None] = _sin_pausa,
     al_terminar: Callable[[Any, Any], None] | None = None,
     al_fallar: Callable[[Any, BaseException], None] | None = None,
+    al_reintentar: Callable[[Any, BaseException, float], None] | None = None,
+    al_pausar: Callable[[float], None] | None = None,
+    detener: Callable[[], bool] | None = None,
 ) -> Resumen:
     """Procesa `entradas` con `concurrencia` trabajadores.
 
@@ -86,6 +89,8 @@ async def ejecutar_en_paralelo(
     - Si `pausa_global` devuelve segundos (p. ej. por un 429), se frena a todos.
     - Si `es_fatal`, se detiene todo y se lanza `ErrorFatal`; las entradas en
       curso no se reportan como fallidas.
+    - Si `detener()` devuelve True (p. ej. tope de gasto), no se arranca ninguna
+      entrada más; las que ya están en vuelo terminan normalmente.
     - Las entradas se consumen de a poco (cola acotada), así que sirve con
       generadores de cientos de miles de elementos.
     """
@@ -99,6 +104,8 @@ async def ejecutar_en_paralelo(
 
     async def productor() -> None:
         for entrada in entradas:
+            if detener and detener():
+                break
             await cola.put(entrada)
         for _ in range(concurrencia):
             await cola.put(fin)
@@ -108,6 +115,8 @@ async def ejecutar_en_paralelo(
             entrada = await cola.get()
             if entrada is fin:
                 return
+            if detener and detener():
+                continue  # se vacía la cola sin arrancar nada nuevo
             intento = 0
             while True:
                 await limitador.esperar()
@@ -120,9 +129,13 @@ async def ejecutar_en_paralelo(
                         pausa = pausa_global(error)
                         if pausa:
                             limitador.pausar(pausa)
+                            if al_pausar:
+                                al_pausar(pausa)
                         espera = min(espera_max, espera_base * 2**intento)
                         intento += 1
                         resumen.reintentos += 1
+                        if al_reintentar:
+                            al_reintentar(entrada, error, espera)
                         await asyncio.sleep(espera * random.uniform(0.5, 1.0))
                         continue
                     resumen.fallidos += 1

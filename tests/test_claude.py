@@ -7,11 +7,13 @@ import pytest
 from catalogo.core import pipeline
 from catalogo.core.analizador import (
     BETA_FALLBACK,
+    HERRAMIENTA_FICHA,
     MODELO_POR_DEFECTO,
     AnalizadorClaude,
     Rechazo,
     RespuestaIncompleta,
     RespuestaInvalida,
+    costo_estimado,
 )
 from catalogo.core.modelos import Item
 from catalogo.core.paralelo import ErrorFatal
@@ -20,6 +22,7 @@ from falsos import ClienteFalso, mensaje, responder_simulando
 from test_pipeline import hojas, ingerir_ejemplos
 
 ANIMALES = DOMINIOS["animales"]
+COMERCIOS = DOMINIOS["comercios"]
 LEON = Item("animales", "panthera-leo", {"nombre": "León", "nombre_cientifico": "Panthera leo"}, ["wikipedia"])
 
 
@@ -30,21 +33,75 @@ def error_http(clase, status, headers=None):
     return clase(message="x", response=respuesta, body=None)
 
 
-def test_pedido_con_salida_estructurada_cache_y_fallback():
+def test_pedido_sin_web_con_salida_estructurada_cache_y_fallback():
     cliente = ClienteFalso(responder_simulando(ANIMALES))
-    ficha, modelo = asyncio.run(AnalizadorClaude(cliente=cliente).analizar(ANIMALES, LEON))
+    ficha, modelo, metricas = asyncio.run(AnalizadorClaude(cliente=cliente).analizar(ANIMALES, LEON))
     assert ficha["ruta"] == "Mamíferos > Felinos" and modelo == MODELO_POR_DEFECTO
+    # 1200 entrada x 4 + 800 salida x 20 + 3000 caché x 0,20 = US$ 0,0214
+    assert metricas["costo_usd"] == pytest.approx(0.0214)
+    assert metricas["tokens_entrada"] == 4200 and metricas["tokens_salida"] == 800 and metricas["busquedas"] == 0
 
     [pedido] = cliente.llamadas
     assert pedido["model"] == "claude-opus-5-5"
     assert pedido["betas"] == [BETA_FALLBACK] and pedido["fallbacks"] == "default"
+    assert "tools" not in pedido
     assert pedido["output_config"] == {
         "effort": "medium",
         "format": {"type": "json_schema", "schema": ANIMALES.esquema()},
     }
     assert pedido["system"] == [
-        {"type": "text", "text": ANIMALES.instrucciones(), "cache_control": {"type": "ephemeral"}}
+        {"type": "text", "text": ANIMALES.instrucciones(False), "cache_control": {"type": "ephemeral"}}
     ]
+    assert "No tienes acceso a internet" in pedido["system"][0]["text"]
+
+
+def test_pedido_con_web_usa_herramientas_fijas_y_la_ficha_vuelve_por_la_herramienta():
+    cliente = ClienteFalso(responder_simulando(COMERCIOS))
+    local = Item("comercios", "x", {"nombre": "Librería Zenda", "rubro": "librería", "ciudad": "Buenos Aires"}, ["web"])
+    ficha, _, metricas = asyncio.run(AnalizadorClaude(cliente=cliente).analizar(COMERCIOS, local, con_web=True))
+    assert ficha["ruta"] == "Cultura y ocio > Librerías"
+    assert metricas["busquedas"] == 2 and metricas["costo_usd"] == pytest.approx(0.0214 + 0.02)
+
+    [pedido] = cliente.llamadas
+    assert "format" not in pedido["output_config"]  # con herramientas, la ficha va por `entregar_ficha`
+    tipos = [t.get("type") for t in pedido["tools"]]
+    assert tipos == ["web_search_20260209", "web_fetch_20260209", None]
+    assert pedido["tools"][0]["max_uses"] == COMERCIOS.max_busquedas
+    ficha_tool = pedido["tools"][2]
+    assert ficha_tool["name"] == HERRAMIENTA_FICHA and ficha_tool["strict"] is True
+    assert ficha_tool["input_schema"] == COMERCIOS.esquema()
+    assert "Búsqueda web" in pedido["system"][0]["text"] and "entregar_ficha" in pedido["system"][0]["text"]
+    # Nada del item en system ni en tools: la caché sirve para todos los comercios.
+    assert "Zenda" not in pedido["system"][0]["text"]
+
+
+def test_turno_pausado_se_continua_hasta_la_ficha():
+    llamadas = {"n": 0}
+
+    def responder(params):
+        llamadas["n"] += 1
+        if llamadas["n"] == 1:
+            return mensaje({"parcial": True}, stop_reason="pause_turn", herramienta=False)
+        return mensaje(
+            COMERCIOS.simular(Item("comercios", "x", {"nombre": "Kiosco 24", "rubro": "kiosco"})), herramienta=True
+        )
+
+    cliente = ClienteFalso(responder)
+    local = Item("comercios", "x", {"nombre": "Kiosco 24", "rubro": "kiosco"}, ["web"])
+    ficha, _, metricas = asyncio.run(AnalizadorClaude(cliente=cliente).analizar(COMERCIOS, local, con_web=True))
+    assert ficha["ruta"] == "Alimentos y bebidas > Almacenes"
+    assert llamadas["n"] == 2
+    segundo = cliente.llamadas[1]["messages"]
+    assert [m["role"] for m in segundo] == ["user", "assistant"]  # se reenvía tal cual para que siga
+    assert metricas["tokens_salida"] == 1600  # se suman las dos vueltas
+
+
+def test_costo_estimado_conoce_precios_y_lote():
+    uso = {"input_tokens": 1_000_000, "output_tokens": 0, "web_search_requests": 10}
+    assert costo_estimado("claude-opus-5-5", uso) == pytest.approx(4.0 + 0.10)
+    assert costo_estimado("claude-opus-5-5", uso, lote=True) == pytest.approx(2.0 + 0.10)  # la web no tiene descuento
+    assert costo_estimado("claude-sonnet-5-5", {"output_tokens": 1_000_000}) == 10.0
+    assert costo_estimado("modelo-desconocido", uso) is None
 
 
 @pytest.mark.parametrize(
@@ -92,6 +149,7 @@ def test_sin_credenciales_corta_la_corrida_y_no_marca_errores(almacen):
     with pytest.raises(ErrorFatal):
         asyncio.run(pipeline.analizar(almacen, [ANIMALES], AnalizadorClaude(cliente=cliente), avisar=lambda m: None))
     assert almacen.errores("animales") == []
+    assert almacen.ultima_corrida()["estado"] == "interrumpida"
     pipeline.preparar(almacen, [ANIMALES])  # lo que estaba en curso vuelve a la cola
     assert almacen.estado("animales")["pendiente"] == 23
 
@@ -116,8 +174,10 @@ def test_tiempo_real_con_reintentos_rechazos_y_misma_especie_con_dos_nombres(alm
     resultado = asyncio.run(
         pipeline.analizar(almacen, [ANIMALES], analizador, modo="tiempo-real", avisar=lambda m: None)
     )
-    assert resultado["reintentos"] == 1
-    assert resultado["dominios"]["animales"] == {"listos": 22, "errores": 1}
+    assert resultado["reintentos"] == 1 and resultado["fases"] == 2
+    # Las fichas simuladas nunca son de confianza alta: todas pasan a verificar y luego quedan listas.
+    assert resultado["dominios"]["animales"] == {"listos": 22, "verificar": 22, "errores": 1}
+    assert resultado["costo_usd"] == pytest.approx(22 * 0.0214 + 22 * (0.0214 + 0.02))
     assert almacen.errores("animales")[0][1].startswith("Rechazo")
 
     # "Puma" y "León de montaña" entraron como dos filas, pero son la misma especie:

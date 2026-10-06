@@ -357,19 +357,21 @@ Propiedad clave: **los datos son locales y cambian**. El modelo no sabe nada de
 
 En orden de valor sobre esfuerzo. Tamaños aproximados.
 
-| # | Cambio | Para qué | Tamaño |
+| # | Cambio | Para qué | Estado |
 |---|---|---|---|
-| 1 | `importar-fichas <dominio> <archivos>`: cargar las fichas ya hechas como `listo` | No volver a pagar lo que ya está analizado | ~60 líneas |
-| 2 | `AnalizadorClaudeCode`: subproceso `claude -p` con `--json-schema`; leer `structured_output`, `total_cost_usd`, `is_error`; distinguir límite de uso (pausa global) de error del item | Vía B con el mismo motor | ~90 líneas |
-| 3 | `politica_web` por dominio (`nunca` / `si_dudoso` / `siempre`) + herramientas `web_search_20260209` y `web_fetch_20260209` en `AnalizadorClaude.parametros`; manejar `stop_reason == "pause_turn"` (reenviar) y, en lote, reencolar ese item a tiempo real | Vía A con web | ~70 líneas |
-| 4 | Etapa `recolectar`: un módulo por fuente (`wikidata`, `wikipedia`, `gbif`, `overpass`) que corre con `ejecutar_en_paralelo` y guarda aportes con prioridad alta | Menos búsquedas, más precisión | ~120 líneas por fuente |
-| 5 | Estado `verificar` (segunda pasada) + lista `campos_volatiles` por dominio + `fuentes_web` en la ficha | Dos pasadas en enciclopedias; refresco parcial en comercios | ~90 líneas |
-| 6 | Columna `prioridad` en la cola | Comercios vencidos antes que carga masiva | ~20 líneas |
-| 7 | `--max-costo` por corrida | Tope de gasto | ~30 líneas |
-| 8 | Campo `qid` / `osm_id` en la identidad | Deduplicación más robusta | ~20 líneas |
+| 1 | `importar <dominio> <archivos>`: cargar las fichas ya hechas como `listo` | No volver a pagar lo que ya está analizado | **Hecho** (`pipeline.importar`) |
+| 2 | `AnalizadorClaudeCode`: subproceso `claude -p` con `--json-schema`; lee `structured_output`, `total_cost_usd`, `usage`; distingue límite de uso (pausa global) de error del item | Vía B con el mismo motor | **Hecho y probado con `claude -p` real** (`--claude-code`) |
+| 3 | `politica_web` por dominio + herramientas `web_search_20260209` / `web_fetch_20260209` + ficha por herramienta estricta `entregar_ficha`; `pause_turn` se continúa en tiempo real y se reencola en lotes | Vía A con web | **Hecho** (probado con dobles; falta corrida real con clave) |
+| 4 | Etapa `recolectar`: un módulo por fuente (`wikidata`, `wikipedia`, `gbif`, `overpass`) | Menos búsquedas, más precisión | Pendiente (diseño en el informe para el Claude local, §6) |
+| 5 | Estado `verificar` (segunda pasada) + `campos_volatiles` por dominio + `fuentes_web` en la ficha | Dos pasadas en enciclopedias; una con web en comercios | **Hecho** (`estado_tras_analisis`) |
+| 6 | Columna `prioridad` en la cola | Comercios vencidos antes que carga masiva | **Hecho** (`vencer` pone prioridad 1) |
+| 7 | `--max-costo` por corrida | Tope de gasto | **Hecho** (no arranca items nuevos al llegar al tope) |
+| 8 | Campo `qid` / `osm_id` en la identidad | Deduplicación más robusta | Pendiente (va con el cambio 4) |
+| 9 | Métricas por item (segundos, tokens, búsquedas, costo), `corridas` y `eventos` en la base | Saber qué cuesta y qué pasa | **Hecho** |
+| 10 | Panel visual (`python -m catalogo panel`) + `--estado-json` para otros programas | Reemplazar el ícono naranja por progreso, ritmo, ETA, costo, actividad | **Hecho** (`core/panel.py`, `core/panel.html`) |
 
-Lo que **no** cambia: `paralelo.py`, `almacen.py` (salvo columnas nuevas),
-`taxonomia.py`, `catalogo.py`, los dominios existentes (salvo sus políticas).
+Lo que no cambió en esta ronda: `taxonomia.py` (salvo que el nombre de la hoja
+también cuenta como palabra clave), `catalogo.py`, `texto.py`.
 
 ---
 

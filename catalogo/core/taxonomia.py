@@ -35,7 +35,8 @@ class Taxonomia:
             else:
                 clave = SEPARADOR.join(ruta)
                 self._hojas.append(clave)
-                self._palabras[clave] = [palabras(p) for p in hijo]
+                # El nombre de la hoja también cuenta ("Cánidos" en una ficha vieja).
+                self._palabras[clave] = [palabras(p) for p in hijo] + [palabras(nombre)]
 
     def hojas(self) -> list[str]:
         return list(self._hojas)

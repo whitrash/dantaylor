@@ -76,6 +76,13 @@ class Animales(Dominio):
     facetas = ("continentes", "dieta", "estado_conservacion")
     prioridad_fuentes = {"gbif": 3, "uicn": 3, "wikipedia": 2}
     campos_busqueda = ("nombre", "notas")
+    # Conocimiento estable: primera pasada sin web; la web solo confirma lo dudoso.
+    politica_web = "si_dudoso"
+    max_busquedas = 2
+    campos_volatiles = ("estado_conservacion",)
+    reglas_web = """
+- Para "estado_conservacion", la referencia es la Lista Roja de la UICN (iucnredlist.org) o Wikidata; no lo tomes de un blog.
+- Si el registro trae nombre científico, busca por ese nombre, no por el común."""
     reglas = """
 - "nombre_cientifico": nomenclatura binomial (Género especie). Si el registro es un grupo ("pingüino"), elige la especie más representativa y usa confianza "media".
 - "descripcion": 2 o 3 oraciones para público general.

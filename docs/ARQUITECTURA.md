@@ -144,6 +144,33 @@ lee el `retry-after` y frena a todos los trabajadores.
 
 ---
 
+## 4b. Panel visual
+
+`python -m catalogo panel` levanta un servidor local (sin dependencias) que lee
+la misma base SQLite mientras el motor escribe (modo WAL) y muestra: estado
+general (trabajando, pausado por límite, esperando lotes, interrumpido,
+inactivo), avance total y por catálogo, ritmo de fichas por minuto con su
+gráfica, tiempo restante estimado, costo acumulado y por ficha, búsquedas web,
+qué items se están analizando ahora y la actividad reciente con el motivo de
+cada error. Tema claro y oscuro.
+
+El mismo resumen sale en JSON por `/api/estado` y, con `analizar --estado-json
+ruta`, a un archivo que se reescribe una vez por segundo: así un programa de
+escritorio (un ícono en la bandeja, un widget) puede mostrar el estado sin
+hablar con el servidor.
+
+## 4c. Dos vías para correr Claude
+
+| | `--claude-code` (Claude Code instalado, tu cuenta) | API de Claude (clave) |
+|---|---|---|
+| Qué lanza | `claude -p` N veces a la vez, con `--json-schema` y herramientas limitadas a web | `messages.create` con salida estructurada o, con web, la herramienta estricta `entregar_ficha` |
+| Costo | Incluido en el plan hasta su límite; el motor pausa cuando llega | Pago por uso; lotes a mitad de precio; caché del prompt |
+| Concurrencia útil | 2-4 | 16-32 |
+| Cuándo | Goteo semanal, muestras, reintentos | Carga inicial masiva, refresco mensual en lote |
+
+La cola, el estado, las dos pasadas, el catálogo y el panel son los mismos en
+las dos vías.
+
 ## 5. Cómo conectar los proyectos existentes
 
 1. Exportar los datos de cada fuente a CSV o JSONL, en
