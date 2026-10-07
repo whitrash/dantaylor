@@ -1,0 +1,212 @@
+<!--CAP {"num":"05","titulo":"Sol y Luna en Windows: más allá de Suspender, Apagar y Reiniciar","entrada":"Cómo se duerme y se despierta de verdad un equipo con Windows 11, y cómo convertir eso en dos rutinas que no fallen en silencio.","corto":"05","resumen":"Modelo de energía, casos fuera del menú, recetas de Sol y Luna, software existente y prueba"}-->
+<p class="lead">El menú de energía de Windows ofrece tres botones porque cubren lo que casi todos necesitan a mano. Una rutina automática necesita más: saber en qué estado queda el equipo, qué lo puede despertar y qué pasa con los programas que estaban trabajando. Este capítulo describe el modelo real de energía de Windows 11, enumera los casos que el menú no cubre y propone cómo construir Sol y Luna sobre esa base, con comandos concretos y con una prueba que hay que hacer antes de confiar en ellas.</p>
+
+<h2>Lo que hay debajo de los tres botones</h2>
+<p>Windows documenta seis estados del sistema: S0 es el estado de trabajo, S1 a S4 son estados de reposo y S5 es el apagado[[c:ms_estados]]. Para Sol y Luna importan cinco hechos:</p>
+<ul>
+<li><strong>Modern Standby o S3, nunca los dos.</strong> En los equipos con Modern Standby (el "S0 de bajo consumo"), Suspender no lleva a S3: el sistema sigue en S0 y la plataforma baja al mínimo consumo. Se averigua con <code>powercfg /a</code> y no se cambia desde la BIOS[[c:ms_ms,powercfg_copia]].</li>
+<li><strong>Hibernar</strong> (S4) guarda la memoria en <code>hiberfil.sys</code> y corta la energía. El archivo completo ocupa por defecto el 40 % de la memoria física; el reducido, el 20 %, y solo sirve para Inicio rápido[[c:ms_estados]].</li>
+<li><strong>Apagar no siempre apaga del todo.</strong> Con Inicio rápido activo (viene activo de fábrica) Windows hiberna la sesión del kernel en lugar de cerrarla: Microsoft lo describe como un estado que por dentro es S4 y por fuera se ve como S5[[c:ms_estados,ms_faststartup]]. <strong>Reiniciar</strong>, en cambio, hace siempre el ciclo completo.</li>
+<li><strong><code>shutdown /s</code> sin <code>/hybrid</code> es un apagado completo</strong>; con <code>/hybrid</code> prepara el Inicio rápido[[c:ms_shutdown,ms_estados]].</li>
+<li><strong>Wake-on-LAN funciona desde S3 o S4</strong>, no desde Inicio rápido ni desde S5, salvo placas cuya BIOS lo permita[[c:ms_estados]].</li>
+</ul>
+
+<!--DIAG estados | Cada flecha azul es una acción que Luna puede disparar con el comando indicado; cada flecha dorada, un evento que puede despertar al equipo. En un equipo dado existe Modern Standby o S3, nunca los dos.-->
+
+<h2>Los casos que el menú no cubre</h2>
+<p>El cuadro siguiente agrupa lo que Windows ya sabe hacer y no aparece en el menú. La tabla que lo sigue da, para cada caso, el comando o la API exacta.</p>
+
+<!--SIN {"titulo":"Fuera de Suspender, Apagar y Reiniciar","tono":"luna","arbol":["Fuera del menú",[["Bajar más hondo",["Hibernar (S4)","Apagado completo (S5)","Apagado híbrido explícito"],"luna"],["Bajar sin apagar",["Bloquear","Cerrar sesión","Desconectar la sesión"],"luna"],["Despertar solo",["Temporizador (S3 y S4)","Alarma RTC del BIOS","Wake-on-LAN","Vuelta de la corriente"],"sol"],["No dormir mientras trabaja",["Pedido de energía con motivo","Modo ausente"],"sol"],["Reiniciar distinto",["Al firmware UEFI","Al menú de arranque","Reabriendo apps"],"gris"]]],"pie":"A la izquierda, la familia de casos; a la derecha, cada caso concreto. Luna dispara las ramas azules; Sol depende de las doradas."}-->
+
+<table>
+<caption>Acciones fuera del menú y cómo dispararlas</caption>
+<colgroup><col style="width:19%"><col style="width:27%"><col style="width:28%"><col style="width:26%"></colgroup>
+<thead><tr><th>Acción</th><th>Comando o API</th><th>Qué hace</th><th>Salvedad</th></tr></thead>
+<tbody>
+<tr><td>Hibernar</td><td><code>shutdown /h</code></td><td>Guarda la sesión en <code>hiberfil.sys</code> y apaga (S4).</td><td>Requiere <code>powercfg /h on</code>.</td></tr>
+<tr><td>Apagado completo</td><td><code>shutdown /s /t 0</code></td><td>Cierra el kernel: el próximo arranque es en frío.</td><td>Con <code>/t</code> mayor que 0 se fuerza el cierre de programas (<code>/f</code>).</td></tr>
+<tr><td>Apagado híbrido</td><td><code>shutdown /s /hybrid /t 0</code></td><td>Lo mismo que Apagar con Inicio rápido.</td><td>Desde aquí no despiertan ni WoL ni temporizadores.</td></tr>
+<tr><td>Suspender sin ambigüedad</td><td><code>SetSuspendState(FALSE, …)</code> o <code>psshutdown -d</code></td><td>Suspende (S3 o Modern Standby, según el equipo).</td><td><code>rundll32 powrprof.dll,SetSuspendState</code> hiberna si la hibernación está activa.</td></tr>
+<tr><td>Bloquear</td><td><code>rundll32.exe user32.dll,LockWorkStation</code></td><td>Bloquea sin cerrar nada.</td><td>Asíncrono; solo con escritorio interactivo.</td></tr>
+<tr><td>Cerrar sesión</td><td><code>shutdown /l</code></td><td>Cierra la sesión de inmediato.</td><td>No admite cuenta atrás: la implementa WINT.</td></tr>
+<tr><td>Desconectar</td><td><code>tsdiscon</code></td><td>Deja la sesión abierta y desconectada.</td><td>Pensado para sesiones remotas.</td></tr>
+<tr><td>Reiniciar al firmware</td><td><code>shutdown /r /fw /t 0</code></td><td>Reinicia y entra a la configuración UEFI.</td><td><code>/fw</code> va con una opción de apagado.</td></tr>
+<tr><td>Reiniciar a opciones avanzadas</td><td><code>shutdown /r /o</code></td><td>Abre el menú de arranque avanzado.</td><td><code>/o</code> solo con <code>/r</code>.</td></tr>
+<tr><td>Reiniciar o apagar reabriendo apps</td><td><code>shutdown /g</code> · <code>shutdown /sg</code></td><td>Reinicia o apaga y reabre las aplicaciones registradas.</td><td><code>/sg</code> inicia sesión solo si está activo el inicio automático tras reinicio.</td></tr>
+<tr><td>Cuenta atrás y aborto</td><td><code>shutdown /s /t 600</code> · <code>shutdown /a</code></td><td>Apagado diferido y su cancelación.</td><td>Fuerza el cierre de programas al vencer.</td></tr>
+<tr><td>Mantener despierto</td><td><code>PowerCreateRequest</code> + <code>PowerSetRequest</code></td><td>Impide dormir mientras hay trabajo, con un motivo visible en <code>powercfg /requests</code>.</td><td>En Modern Standby a batería, 5 minutos como máximo.</td></tr>
+<tr><td>Despertar programado</td><td><code>SetWaitableTimer(…, fResume=TRUE)</code> o tarea con <code>WakeToRun</code></td><td>Despierta desde S3 o S4.</td><td>En Modern Standby no está documentado: hay que probarlo.</td></tr>
+</tbody></table>
+<p class="piefuente">Sintaxis y restricciones de <code>shutdown</code>[[c:ms_shutdown]]; PsShutdown v2.61[[c:psshutdown]]; pedidos de energía[[c:ms_pcr,ms_psr]]; temporizadores con reanudación[[c:ms_wt,ms_wake]]. <code>shutdown /full</code> no existe: no figura entre los conmutadores documentados.</p>
+
+<h2>Primero, perfilar el equipo</h2>
+<p>Todo el diseño depende de una pregunta: ¿el equipo tiene S3 o solo Modern Standby? La respuesta cambia cómo despierta Sol y en qué estado deja Luna al equipo. WINT debe hacer este perfil en su primer arranque y repetirlo después de cada actualización grande de Windows, sin preguntar nada: lee, guarda y decide.</p>
+<table class="suave">
+<caption>Cinco comandos para perfilar el equipo</caption>
+<colgroup><col style="width:30%"><col style="width:70%"></colgroup>
+<thead><tr><th>Comando</th><th>Para qué sirve</th></tr></thead>
+<tbody>
+<tr><td><code>powercfg /a</code></td><td>Estados de reposo disponibles (S3, Modern Standby, Hibernar, Inicio rápido) y por qué faltan los demás.</td></tr>
+<tr><td><code>powercfg /requests</code></td><td>Qué programa impide dormir en este momento y con qué motivo.</td></tr>
+<tr><td><code>powercfg /waketimers</code></td><td>Temporizadores de reactivación activos: ahí debe aparecer la tarea de Sol.</td></tr>
+<tr><td><code>powercfg /lastwake</code></td><td>Qué despertó al equipo la última vez.</td></tr>
+<tr><td><code>powercfg /sleepstudy</code></td><td>Informe del reposo en equipos con Modern Standby (útil en notebooks).</td></tr>
+</tbody></table>
+<p>Con el perfil en la mano, la matriz siguiente propone el estado final de Luna y el mecanismo de Sol para cada tipo de equipo. Es una <strong>propuesta de diseño</strong> construida sobre los hechos de este capítulo, no una receta de Microsoft.</p>
+
+<table>
+<caption>Luna y Sol según el tipo de equipo (propuesta)</caption>
+<colgroup><col style="width:21%"><col style="width:25%"><col style="width:28%"><col style="width:26%"></colgroup>
+<thead><tr><th>Equipo</th><th>Luna deja el equipo en…</th><th>Sol lo despierta con…</th><th>Nota</th></tr></thead>
+<tbody>
+<tr><td>Escritorio con S3</td><td>Suspensión (S3) o Hibernación</td><td>Tarea con <code>WakeToRun</code> y temporizadores habilitados; desde S5, alarma RTC</td><td>Comprobar con <code>powercfg /waketimers</code>.</td></tr>
+<tr><td>Escritorio solo con Modern Standby</td><td>Hibernación (<code>shutdown /h</code>)</td><td>Paquete mágico desde otro equipo (desde S4) o alarma RTC</td><td><code>WakeToRun</code> no es confiable aquí.</td></tr>
+<tr><td>Notebook con S3, enchufada</td><td>Suspensión (S3)</td><td>Tarea con <code>WakeToRun</code></td><td>Para que corra a batería, <code>DisallowStartIfOnBatteries</code> en false.</td></tr>
+<tr><td>Notebook a batería</td><td>Hibernación</td><td>Despertar manual</td><td>La hibernación no gasta batería.</td></tr>
+<tr><td>Cualquier equipo, sin despertar automático</td><td>El que corresponda</td><td>Nada: Sol corre apenas el equipo se usa por primera vez en el día</td><td>La opción más robusta. Ver la receta de Sol.</td></tr>
+</tbody></table>
+
+<div class="aviso"><span class="t">Lo esencial</span><p>Sol no necesita despertar la PC para cumplir su función. Si a las 07:30 el equipo está dormido, la tarea marcada con <strong>«Ejecutar lo antes posible si se perdió un inicio programado»</strong> (<code>StartWhenAvailable</code>) corre apenas el equipo despierta[[c:ms_tareas]]. El despertar automático es una mejora que se activa solo si la prueba de la etapa 0 sale bien.</p></div>
+
+<h2>La receta de Luna: cerrar el día</h2>
+<p>Luna no pregunta: avisa, espera el tiempo pactado y procede, porque la persona la habilitó en el archivo de reglas. La cuenta atrás con posibilidad de abortar es una <strong>notificación</strong>, no una pregunta. Los pasos, en orden (propuesta de diseño):</p>
+<ol>
+<li><strong>Avisar y abrir la cuenta atrás</strong> (por ejemplo, 10 minutos) con un botón para abortar.</li>
+<li><strong>Pedir energía con motivo</strong>: <code>PowerCreateRequest</code> con el texto «WINT Luna: cierre» y <code>PowerSetRequest</code>; liberarlo siempre en un bloque <code>finally</code>[[c:ms_pcr,ms_psr]]. Desde Python se llaman con <code>ctypes</code>: <code>pywin32</code> no expone estas funciones.</li>
+<li><strong>Pausar el Detector</strong> y esperar a que no haya escrituras abiertas en la base.</li>
+<li><strong>Pasada de cierre</strong>: bajar las series del día, recalcular y archivar (capítulo 6).</li>
+<li><strong>Copia de la base</strong> y verificación de la copia antes de seguir.</li>
+<li><strong>Programas ajenos abiertos</strong>: Luna no los cierra a la fuerza. Si hay programas con trabajo sin guardar, elige <strong>Hibernar</strong>, que no cierra nada, en lugar de apagar. Los mecanismos de cierre ordenado de Windows no se llegaron a verificar en esta investigación <span class="etq rojo">sin verificar</span>.</li>
+<li><strong>Programar el despertar</strong> si el perfil lo permite (tarea con <code>WakeToRun</code> o alarma RTC).</li>
+<li><strong>Ejecutar el estado final</strong> con un comando explícito de la tabla anterior y <strong>registrar</strong> qué se hizo y qué lo despertará.</li>
+<li><strong>Una vez por semana</strong>, un reinicio en frío (<code>shutdown /r /t 0</code>), porque Apagar con Inicio rápido no renueva el kernel.</li>
+</ol>
+
+<h3>Registrar la tarea de Sol</h3>
+<p><code>schtasks /create /sc …</code> no tiene un conmutador para «Reactivar el equipo». Hay que registrar la tarea desde un XML o con PowerShell[[c:ms_tareas,ms_ps_settings]]. Los ajustes mínimos:</p>
+<pre>&lt;Settings&gt;
+  &lt;WakeToRun&gt;true&lt;/WakeToRun&gt;
+  &lt;StartWhenAvailable&gt;true&lt;/StartWhenAvailable&gt;
+  &lt;RunOnlyIfNetworkAvailable&gt;true&lt;/RunOnlyIfNetworkAvailable&gt;
+  &lt;DisallowStartIfOnBatteries&gt;false&lt;/DisallowStartIfOnBatteries&gt;
+  &lt;StopIfGoingOnBatteries&gt;false&lt;/StopIfGoingOnBatteries&gt;
+&lt;/Settings&gt;
+
+schtasks /create /tn "WINT\Sol" /xml sol.xml /f</pre>
+<p>La alternativa en PowerShell, con la ruta del ejecutable como ejemplo:</p>
+<pre>$accion = New-ScheduledTaskAction -Execute "C:\WINT\wint.exe" -Argument "sol"
+$hora   = New-ScheduledTaskTrigger -Daily -At 07:30
+$ajuste = New-ScheduledTaskSettingsSet -WakeToRun -StartWhenAvailable -RunOnlyIfNetworkAvailable `
+          -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries
+Register-ScheduledTask -TaskPath "\WINT\" -TaskName "Sol" -Action $accion -Trigger $hora -Settings $ajuste
+
+<span class="c"># Permitir temporizadores de reactivación (con corriente; repetir con /setdcvalueindex en notebooks)</span>
+powercfg /setacvalueindex SCHEME_CURRENT SUB_SLEEP bd3b718a-0680-4d9d-8ab2-e1d2b4ac806d 1
+powercfg /setactive SCHEME_CURRENT</pre>
+<p>Por defecto <code>DisallowStartIfOnBatteries</code> vale true: en una notebook, una tarea registrada sin cambiarlo no arranca a batería[[c:ms_tareas]].</p>
+
+<h2>La receta de Sol: arrancar el día</h2>
+<ol>
+<li><strong>Disparo.</strong> Hora fija (la tarea anterior) o, si el equipo estaba dormido, apenas despierte. Como respaldo, una segunda tarea al iniciar sesión.</li>
+<li><strong>Saber cómo despertó.</strong> Con <code>PowerRegisterSuspendResumeNotification</code>, un aviso <code>PBT_APMRESUMEAUTOMATIC</code> sin <code>PBT_APMRESUMESUSPEND</code> indica que despertó sin usuario: Sol pide energía de inmediato, porque el sistema puede volver a dormirse a los pocos minutos[[c:ms_wake,ms_pbt]]. Guarda la salida de <code>powercfg /lastwake</code>.</li>
+<li><strong>Esperar la red</strong> con un tiempo máximo, sin reintentos infinitos.</li>
+<li><strong>Pasada diaria del Detector</strong> con el pedido de energía activo.</li>
+<li><strong>Resumen</strong> en una sola notificación (digest), sin preguntas.</li>
+<li><strong>Liberar el pedido</strong> de energía y dejar que el equipo siga su curso.</li>
+</ol>
+
+<!--DIAG anillo | Las horas son un ejemplo y se configuran. Sol (dorado) cubre la vigilia; Luna (azul), el reposo. Las marcas exteriores muestran entre qué horas sale y se pone el sol en Buenos Aires a lo largo del año: sirven para el tema claro u oscuro, no para suspender la PC.-->
+
+<p>¿Por qué no anclar Sol y Luna al amanecer y al atardecer? Porque en Buenos Aires el atardecer cae entre las 17:49 y las 20:09 según la época del año, y en Ushuaia llega pasadas las 22. Una Luna que suspendiera la PC a la puesta del sol sería absurda. La hora solar sirve para el tema claro u oscuro y la luz cálida (Auto Dark Mode, Luz nocturna); para la energía, hora fija con condiciones. Las horas se calculan con <code>astral</code> y se guardan con la zona IANA <code>America/Argentina/Buenos_Aires</code> y el paquete <code>tzdata</code>, porque Windows no trae la base IANA[[c:astral,tzdata]].</p>
+
+<h2>Cuando el equipo tiene Modern Standby</h2>
+<div class="aviso riesgo"><span class="t">El punto débil: despertar a hora fija</span><p>Para Modern Standby, Microsoft documenta solo dos despertares por trabajo programado: el mantenimiento automático, con el equipo enchufado, y un temporizador que programa el propio sistema. No documenta que una tarea con «Reactivar el equipo» lo despierte[[c:ms_ms_copia]]. Hay foros que lo niegan y un fabricante de software de respaldo declara que no puede despertar equipos en ese estado por límites del sistema operativo[[c:foro_ms,veeam]]. Hasta probarlo en el equipo real, Sol no debe prometer una hora exacta en un equipo con Modern Standby.</p></div>
+<p>Hay dos efectos más que conviene conocer. Un despertar que no inicia el usuario no enciende la pantalla. Y el moderador de actividad de escritorio (DAM) congela todos los hilos de los programas de la sesión del usuario, incluido un ícono de bandeja como el del Detector, y limita a los servicios a un segundo de actividad cada 30[[c:ms_dam]]. La excepción documentada es un pedido <code>PowerRequestExecutionRequired</code>: con corriente detiene esa fase de forma indefinida; a batería, solo 5 minutos después de vencido el tiempo de suspensión; y se cancela si la persona pulsa Suspender o cierra la tapa[[c:ms_dam,ms_psr]].</p>
+<p>Para ver lo que pasó, el visor de eventos registra la entrada a Modern Standby (Kernel-Power 506) y la salida (507), cada una con su motivo. Y <code>psshutdown -x</code>, que suele recomendarse para «apagar solo la pantalla», en estos equipos <strong>inicia Modern Standby</strong>: no sirve para seguir trabajando con la pantalla apagada[[c:psshutdown]].</p>
+
+<h2>Lo que cambió en 2026</h2>
+<table>
+<caption>Versiones de Windows y novedades que afectan a Sol y Luna</caption>
+<colgroup><col style="width:26%"><col style="width:74%"></colgroup>
+<thead><tr><th>Tema</th><th>Estado a octubre de 2026</th></tr></thead>
+<tbody>
+<tr><td>Windows 11 24H2</td><td>Deja de recibir actualizaciones en Home y Pro el 13 de octubre de 2026[[c:eol]].</td></tr>
+<tr><td>Windows 11 25H2 y 26H2</td><td>25H2 sigue con soporte; 26H2 salió el 29 de septiembre de 2026 como paquete de habilitación (KB5121794) para 24H2 y 25H2[[c:eol,kb26h2]].</td></tr>
+<tr><td>Windows 11 26H1</td><td>Solo para equipos nuevos con ciertos procesadores (primero Snapdragon X2); no llega por Windows Update[[c:ms_26h1]]. WINT no debe depender de ella.</td></tr>
+<tr><td>Menú de energía con actualizaciones</td><td>Con una actualización pendiente, el menú separa Apagar y Reiniciar de «Actualizar y apagar» y «Actualizar y reiniciar»; anunciado en el programa Insider el 24 de abril de 2026[[c:insider_menu]]. El paso a la versión estable (agosto de 2026) no tiene un KB confirmado. Luna debe elegir la variante a propósito y no dejar que una actualización decida por ella.</td></tr>
+<tr><td>Windows 10</td><td>El programa ESU para consumidores se extendió hasta el 12 de octubre de 2027: solo parches de seguridad y Windows 10 22H2 al día <span class="etq gris">según prensa y Microsoft</span>.</td></tr>
+</tbody></table>
+
+<h2>Fallas típicas y cómo verlas</h2>
+<table>
+<caption>Síntoma, causa probable y diagnóstico</caption>
+<colgroup><col style="width:22%"><col style="width:42%"><col style="width:36%"></colgroup>
+<thead><tr><th>Síntoma</th><th>Causa probable</th><th>Cómo verlo</th></tr></thead>
+<tbody>
+<tr><td>Se despierta sola</td><td>Una tarea con <code>WakeToRun</code>, Windows Update, un dispositivo habilitado para despertar o un paquete de red.</td><td><code>powercfg /lastwake</code>, <code>/waketimers</code>, <code>/devicequery wake_armed</code></td></tr>
+<tr><td>No despierta a la hora</td><td>Modern Standby, temporizadores deshabilitados, equipo apagado con Inicio rápido o en S5, tarea creada sin <code>WakeToRun</code>.</td><td><code>powercfg /a</code>, <code>/waketimers</code> e historial de la tarea</td></tr>
+<tr><td>No se duerme</td><td>Un programa sostiene un pedido de energía.</td><td><code>powercfg /requests</code></td></tr>
+<tr><td>La batería se vacía en reposo</td><td>Actividad durante Modern Standby.</td><td><code>powercfg /sleepstudy</code> y eventos 506/507</td></tr>
+<tr><td>El Detector se congela de noche</td><td>El DAM suspende los programas de escritorio.</td><td>El pedido de WINT debe figurar en <code>powercfg /requests</code></td></tr>
+<tr><td>«Apagar» no aplica un cambio</td><td>Inicio rápido conserva el kernel.</td><td>Reiniciar, o <code>shutdown /s /t 0</code></td></tr>
+</tbody></table>
+
+<h2>Software que ya existe</h2>
+<p>Windows trae casi todas las acciones que faltan en el menú. Lo que no trae es un disparador por hora solar, un motor de reglas ni un tablero que muestre qué pasó de noche: ahí está el aporte de WINT. Las dos tablas separan lo que sirve para <strong>facilitar</strong> (automatizar) de lo que sirve para <strong>visualizar</strong> (mostrar el estado). Los puntos indican el encaje con WINT.</p>
+
+<table>
+<caption>Para facilitar: automatizar los casos fuera del menú</caption>
+<colgroup><col style="width:23%"><col style="width:37%"><col style="width:28%"><col style="width:12%"></colgroup>
+<thead><tr><th>Herramienta</th><th>Qué caso cubre</th><th>Licencia · estado</th><th>Encaje</th></tr></thead>
+<tbody>
+<tr><td>Programador de tareas + PowerShell</td><td>Disparar a una hora, al iniciar sesión o al despertar; despertar desde S3 o S4.</td><td>Incluido en Windows</td><td><span class="dots"><i></i><i></i><i></i><i></i><i></i></span></td></tr>
+<tr><td>PowerToys Awake</td><td>Mantener despierto por tiempo o mientras corre un proceso.</td><td>MIT · 0.101.2362.0, 25 ago 2026[[c:powertoys]]</td><td><span class="dots"><i></i><i></i><i></i><i class="o"></i><i class="o"></i></span></td></tr>
+<tr><td><code>wakeonlan</code> (Python) · WakeMeOnLan</td><td>Enviar el paquete mágico desde otro equipo.</td><td>MIT · 4.0.0, 28 jun 2026[[c:wakeonlan]] · freeware</td><td><span class="dots"><i></i><i></i><i></i><i></i><i class="o"></i></span></td></tr>
+<tr><td><code>astral</code> + <code>tzdata</code></td><td>Calcular salida y puesta del sol con la zona IANA.</td><td>Apache-2.0 · 3.2 (2022) y 2026.5</td><td><span class="dots"><i></i><i></i><i></i><i></i><i class="o"></i></span></td></tr>
+<tr><td>APScheduler</td><td>Planificación interna del núcleo (no despierta el equipo).</td><td>MIT · 3.11.3, 28 jun 2026[[c:apscheduler]]</td><td><span class="dots"><i></i><i></i><i></i><i></i><i class="o"></i></span></td></tr>
+<tr><td>Auto Dark Mode</td><td>Tema claro u oscuro por amanecer y atardecer; sus scripts corren al cambiar el tema, no al amanecer.</td><td>GPL-3.0 · 11.1.1.1, 16 ago 2026[[c:autodark]]</td><td><span class="dots"><i></i><i></i><i></i><i class="o"></i><i class="o"></i></span></td></tr>
+<tr><td>PsShutdown</td><td>Suspender (<code>-d</code>), apagar sin cortar energía (<code>-s</code>) o cortándola (<code>-k</code>), bloquear (<code>-l</code>).</td><td>Gratis · 2.61, 10 sep 2026[[c:psshutdown]]</td><td><span class="dots"><i></i><i></i><i class="o"></i><i class="o"></i><i class="o"></i></span></td></tr>
+<tr><td>AutoHotkey v2</td><td>Scripts de teclado, ventanas y energía.</td><td>GPL-2.0 · 2.0.29 (octubre de 2026)</td><td><span class="dots"><i></i><i></i><i class="o"></i><i class="o"></i><i class="o"></i></span></td></tr>
+<tr><td>Power Automate para escritorio</td><td>Automatización de escritorio con flujos.</td><td>Incluido en Windows 11</td><td><span class="dots"><i></i><i></i><i class="o"></i><i class="o"></i><i class="o"></i></span></td></tr>
+<tr><td>Home Assistant · Node-RED · n8n</td><td>Hubs de automatización con disparadores solares.</td><td>Apache-2.0 · Apache-2.0 · Sustainable Use (no permite reventa)</td><td><span class="dots"><i></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i></span></td></tr>
+<tr><td>NirCmd, Wise Auto Shutdown, Airytec Switch Off, SleepTimer</td><td>Temporizadores de apagado con interfaz.</td><td>Gratis · versiones <span class="etq rojo">sin verificar</span>; Airytec posiblemente discontinuado</td><td><span class="dots"><i></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i></span></td></tr>
+</tbody></table>
+
+<table>
+<caption>Para visualizar: mostrar qué hizo WINT</caption>
+<colgroup><col style="width:23%"><col style="width:37%"><col style="width:28%"><col style="width:12%"></colgroup>
+<thead><tr><th>Herramienta</th><th>Qué muestra</th><th>Licencia · estado</th><th>Encaje</th></tr></thead>
+<tbody>
+<tr><td>Panel web del motor de catálogos</td><td>Progreso, ritmo, costo y actividad; ya existe en el repositorio.</td><td>Propio</td><td><span class="dots"><i></i><i></i><i></i><i></i><i></i></span></td></tr>
+<tr><td>Ícono de bandeja (<code>pystray</code>) y avisos (<code>win11toast</code>)</td><td>Estado por color, como el ícono naranja del Detector, y notificaciones del sistema.</td><td>LGPLv3 · 0.19.5, sep 2023[[c:pystray]] · MIT · 0.36.3, ene 2026[[c:win11toast]]</td><td><span class="dots"><i></i><i></i><i></i><i></i><i class="o"></i></span></td></tr>
+<tr><td>Rainmeter</td><td>Una tarjeta de escritorio con el estado de la noche.</td><td>GPLv2 · 4.5.27, 6 oct 2026[[c:rainmeter]]</td><td><span class="dots"><i></i><i></i><i></i><i class="o"></i><i class="o"></i></span></td></tr>
+<tr><td>Visor de eventos y <code>powercfg /sleepstudy</code></td><td>Historial de reposos y despertares, con su motivo.</td><td>Incluido en Windows</td><td><span class="dots"><i></i><i></i><i></i><i class="o"></i><i class="o"></i></span></td></tr>
+<tr><td>Lively Wallpaper</td><td>Fondo de pantalla que cambia con Sol y Luna.</td><td>GPL-3.0 · 2.2.1.0, sep 2025[[c:lively]]</td><td><span class="dots"><i></i><i></i><i class="o"></i><i class="o"></i><i class="o"></i></span></td></tr>
+<tr><td>Widgets de Windows 11</td><td>Tarjeta en el tablero de widgets.</td><td>Exige una app empaquetada (MSIX)</td><td><span class="dots"><i></i><i></i><i class="o"></i><i class="o"></i><i class="o"></i></span></td></tr>
+<tr><td>Dev Home</td><td>Descartado: discontinuado en mayo de 2025, repositorio archivado[[c:devhome]].</td><td>—</td><td><span class="dots"><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i></span></td></tr>
+</tbody></table>
+<p>Las herramientas con licencia GPL (Auto Dark Mode, Lively, AutoHotkey) conviene invocarlas como procesos externos y no incrustarlas en WINT. Que eso evite extender la licencia es un criterio habitual, no algo que esta investigación haya verificado con una fuente.</p>
+
+<h2>La prueba de la etapa 0</h2>
+<p>Antes de escribir una línea de Sol y Luna hay que medir el equipo real. Esta lista convierte las dudas del capítulo en resultados anotados:</p>
+<table>
+<caption>Protocolo de prueba de energía</caption>
+<colgroup><col style="width:6%"><col style="width:30%"><col style="width:64%"></colgroup>
+<thead><tr><th>#</th><th>Prueba</th><th>Criterio de aceptación</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><code>powercfg /a</code></td><td>Se sabe si hay S3 o Modern Standby, Hibernar e Inicio rápido.</td></tr>
+<tr><td>2</td><td>Tarea de Sol registrada con XML y temporizadores habilitados</td><td><code>powercfg /waketimers</code> la muestra como temporizador activo.</td></tr>
+<tr><td>3</td><td>Un ciclo real: Luna a la noche, Sol a la mañana</td><td><code>powercfg /lastwake</code> muestra la causa esperada y el registro de WINT tiene todos los pasos.</td></tr>
+<tr><td>4</td><td>Trabajo durante el reposo (solo Modern Standby)</td><td>El pedido de WINT aparece en <code>powercfg /requests</code>; los eventos 506 y 507 muestran entradas y salidas con su motivo.</td></tr>
+<tr><td>5</td><td>Sin despertar automático</td><td>Con el equipo dormido a la hora de Sol, la tarea corre apenas el equipo despierta.</td></tr>
+<tr><td>6</td><td>Notebook a batería</td><td>Luna hiberna y la batería no baja durante la noche.</td></tr>
+</tbody></table>
+
+<div class="aviso ok"><span class="t">Qué hacer</span><ol>
+<li>Correr <code>powercfg /a</code> y anotar el perfil del equipo.</li>
+<li>Elegir el estado final de Luna con la matriz de este capítulo.</li>
+<li>Registrar la tarea de Sol con XML o PowerShell, siempre con <code>StartWhenAvailable</code>; <code>WakeToRun</code> solo si el perfil lo admite.</li>
+<li>Implementar la cuenta atrás con aborto y el pedido de energía con motivo, liberado en <code>finally</code>.</li>
+<li>Hacer el ciclo real Luna → Sol y anotar el resultado de las seis pruebas.</li>
+<li>Programar un reinicio en frío semanal.</li>
+</ol></div>

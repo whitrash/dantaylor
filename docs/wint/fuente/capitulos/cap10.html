@@ -1,0 +1,83 @@
+<!--CAP {"num":"10","titulo":"Hoja de ruta: qué hay que hacer, en qué orden","entrada":"Seis etapas cortas, cada una con algo que funciona al final, un criterio para darla por cumplida y una forma de volver atrás.","corto":"10","resumen":"Etapas, criterios de aceptación, primeras tareas, costos y riesgos"}-->
+<p class="lead">La investigación produjo cinco planes distintos, uno por frente. Este capítulo los une en una sola hoja de ruta, ordenada por dependencias: primero medir el equipo real, después el núcleo y las rutinas, después el Detector, recién entonces el teléfono y el catálogo, y al final la calibración. Cada etapa deja algo usable y se puede deshacer sin romper lo que ya funcionaba.</p>
+
+<!--DIAG ruta | Semanas orientativas para una persona que dedica de 8 a 10 horas por semana, con ayuda de IA. Las etapas se solapan una semana porque la siguiente puede empezar mientras la anterior cumple su criterio de aceptación.-->
+
+<table>
+<caption>Las seis etapas</caption>
+<colgroup><col style="width:15%"><col style="width:31%"><col style="width:24%"><col style="width:15%"><col style="width:15%"></colgroup>
+<thead><tr><th>Etapa</th><th>Qué se construye</th><th>Se da por cumplida cuando…</th><th>Cómo volver atrás</th><th>Riesgo principal</th></tr></thead>
+<tbody>
+<tr><td>0 · Perfilar y decidir<span class="sub">semana 1</span></td><td>Perfil de energía del equipo; las seis pruebas del capítulo 5; definición de Osi; nombres; Python 3.13.</td><td>El perfil y el resultado de cada prueba están anotados y Osi tiene sus tres respuestas.</td><td>No hay nada que deshacer.</td><td>Que el equipo no despierte solo.</td></tr>
+<tr><td>1 · Núcleo y rutinas<span class="sub">semanas 2 a 4</span></td><td>Núcleo sin ventana (FastAPI, SQLite con eventos), cinco manifiestos, tareas de Sol y Luna, bandeja mínima.</td><td>Siete noches seguidas con el ciclo Luna → Sol completo en el registro, sin pérdida de datos y con el aborto probado.</td><td><code>schtasks /delete</code> de las dos tareas; el resto sigue como antes.</td><td>Cerrar programas con trabajo sin guardar.</td></tr>
+<tr><td>2 · Detector y reglas<span class="sub">semanas 4 a 7</span></td><td>Detector como módulo, deflactor (IPC y BCRA), algoritmo en modo sombra, reglas YAML, avisos con presupuesto.</td><td>30 días de capturas diarias sin huecos de más de tres días; cada veredicto con su motivo; ningún aviso fuera de presupuesto.</td><td>Poner las reglas en modo simulado.</td><td>Un comercio cambia su sitio.</td></tr>
+<tr><td>3 · Panel y teléfono<span class="sub">semanas 7 a 9</span></td><td>PWA servida por Tailscale Serve, ntfy en el teléfono, atajos HTTP.</td><td>20 de 20 avisos de prueba llegan en menos de un minuto; el panel abre fuera de casa.</td><td>Apagar Serve.</td><td>El ahorro de batería del teléfono.</td></tr>
+<tr><td>4 · Catálogo<span class="sub">semanas 9 a 12</span></td><td>Filas como consultas guardadas, gráfico de escalón, mini-gráficos.</td><td>Seis filas (dos temáticas y cuatro de precios) navegables con teclado, y el escalón con su tachado.</td><td>El panel actual del motor sigue disponible.</td><td>Perder tiempo en la estética.</td></tr>
+<tr><td>5 · Calibrar y decidir<span class="sub">semanas 12 a 15</span></td><td>Muestra humana de 139 a 385 casos, umbrales calibrados, decisión sobre app nativa, TV, marca y publicación.</td><td>La precisión está medida con su margen de error y la etiqueta «no sostenida por el historial» se habilita solo si la supera.</td><td>Volver al modo sombra.</td><td>Una muestra sesgada.</td></tr>
+</tbody></table>
+
+<h2>Las primeras diez tareas</h2>
+<p>Cada una lleva entre una y tres horas y deja algo comprobable:</p>
+<ol>
+<li>Correr <code>powercfg /a</code>, <code>/waketimers</code> y <code>/requests</code> y anotar el perfil del equipo.</li>
+<li>Abrir una bitácora del proyecto (un archivo de texto en el repositorio) para anotar cada prueba y cada decisión.</li>
+<li>Escribir los cinco manifiestos de módulo: Sol, Luna, Osi (vacío), Detector y Catálogos.</li>
+<li>Crear las tablas <code>eventos</code> y <code>estado</code> en SQLite.</li>
+<li>Levantar FastAPI en <code>127.0.0.1</code> con dos rutas: el estado y los eventos en vivo.</li>
+<li>Registrar la tarea de Sol desde un XML, con <code>StartWhenAvailable</code>.</li>
+<li>Escribir la Luna mínima: cuenta atrás con aborto, pedido de energía, copia de la base y <code>shutdown /h</code>.</li>
+<li>Dejar correr la primera noche real y revisar <code>powercfg /lastwake</code> a la mañana.</li>
+<li>Conectar la bandeja mínima a la ruta de estado.</li>
+<li>Escribir las cuatro reglas del capítulo 4 con sus pruebas sin red.</li>
+</ol>
+
+<h2>Costos</h2>
+<p>WINT puede funcionar sin costo recurrente: todo lo marcado «Usar» en el capítulo 9 es gratuito. Los costos aparecen solo con decisiones concretas:</p>
+<table>
+<caption>Costos posibles (cifras verificadas a octubre de 2026)</caption>
+<colgroup><col style="width:28%"><col style="width:40%"><col style="width:32%"></colgroup>
+<thead><tr><th>Concepto</th><th>Costo</th><th>Cuándo aplica</th></tr></thead>
+<tbody>
+<tr><td>API de Claude (Haiku 4.5)</td><td>US$ 1 y US$ 5 por millón de tokens de entrada y salida; unos US$ 3,50 cada 1.000 fichas, la mitad por lotes[[c:precios_api]]</td><td>Solo si se usa extracción con IA.</td></tr>
+<tr><td><code>claude -p</code></td><td>Unos US$ 0,012 por llamada simple</td><td>Pruebas y volúmenes chicos.</td></tr>
+<tr><td>ntfy</td><td>Gratis en ntfy.sh (250 mensajes por día) o autoalojado; Pro desde US$ 5 por mes[[c:ntfy_lim,ntfy_readme]]</td><td>Siempre: es el canal de avisos.</td></tr>
+<tr><td>Tailscale</td><td>Plan Personal gratuito para uso no comercial[[c:tailscale_free]]</td><td>Desde la etapa 3; verificar condiciones.</td></tr>
+<tr><td>Android</td><td>Distribución limitada: gratis. Google Play: US$ 25 por única vez[[c:verif_limited,play_testing]]</td><td>Solo si se publica en Play.</td></tr>
+<tr><td>Equipo siempre encendido</td><td>Raspberry Pi 5 de 4 GB: unos US$ 110; un mini PC N100 consume de 6 a 12 W[[c:rpi]]</td><td>Opcional, si se quiere despertar la PC desde fuera.</td></tr>
+<tr><td>Marca en el INPI</td><td>100 UMAPI por clase: unos $ 37.200 por clase a mayo de 2026[[c:inpi_res75]]</td><td>Solo antes de publicar o vender.</td></tr>
+<tr><td>Dominio <code>.com.ar</code></td><td>Unos $ 8.500 por año (a confirmar)[[c:nic_aranceles]]</td><td>Opcional.</td></tr>
+<tr><td>Pagos en dólares con tarjeta</td><td>Percepción del 30 % y, en servicios digitales, IVA: entre 1,3 y 1,6 veces el precio[[c:percepcion]]</td><td>Cualquier servicio pago del exterior.</td></tr>
+</tbody></table>
+
+<h2>Riesgos y cómo se notan</h2>
+<table>
+<caption>Riesgos, señales tempranas y mitigación</caption>
+<colgroup><col style="width:28%"><col style="width:30%"><col style="width:42%"></colgroup>
+<thead><tr><th>Riesgo</th><th>Señal temprana</th><th>Mitigación</th></tr></thead>
+<tbody>
+<tr><td>La tarea de Sol no despierta un equipo con Modern Standby</td><td>Falla la prueba 3 de la etapa 0.</td><td>Sol corre al primer uso del día; paquete mágico desde otro equipo si hace falta.</td></tr>
+<tr><td>La bandeja se congela de noche</td><td>El ícono no cambia tras un despertar automático.</td><td>La bandeja solo muestra; el trabajo corre con un pedido de energía.</td></tr>
+<tr><td>Pérdida de datos al apagar</td><td>Programas ajenos abiertos al llegar Luna.</td><td>Luna hiberna en lugar de apagar; nunca usa cierre forzado.</td></tr>
+<tr><td>Umbrales mal calibrados</td><td>Muchas «dudosas» o avisos que no se sostienen.</td><td>Modo sombra hasta la muestra humana.</td></tr>
+<tr><td>Un comercio cambia su sitio o bloquea</td><td>Errores de extracción, respuestas 403 o 429.</td><td>Extracción por capas, alarma en vez de adivinanza, menos ritmo; nunca evadir.</td></tr>
+<tr><td>Licencias</td><td>Una dependencia GPL o AGPL dentro del código de WINT.</td><td>Procesos externos y un registro de licencias.</td></tr>
+<tr><td>Nombre y marca</td><td>Una búsqueda de marcas con coincidencias.</td><td>Prefijo WINT y búsqueda en el INPI antes de publicar.</td></tr>
+<tr><td>Verificación de Android en 2027</td><td>Anuncio de Google para la región.</td><td>Cuenta de distribución limitada; <code>adb</code> como respaldo.</td></tr>
+<tr><td>Herramientas que mantiene una sola persona</td><td>Meses sin versiones nuevas.</td><td>Interfaces propias para poder cambiarlas (bandeja, avisos).</td></tr>
+</tbody></table>
+
+<h2>Lo que no conviene hacer todavía</h2>
+<ul>
+<li>Una app nativa de Android o una versión para TV: esperan a que la PWA se quede corta.</li>
+<li>Publicar acusaciones con nombres de comercios: esperan a la calibración y a una consulta legal.</li>
+<li>Poner IA en el bucle de decisión: no tiene lugar en el diseño.</li>
+<li>Montar Home Assistant, un VPS o una base de datos en la nube: no resuelven nada que hoy falte.</li>
+</ul>
+
+<div class="aviso ok"><span class="t">Qué hacer esta semana</span><ol>
+<li>Correr el perfil de energía y anotarlo.</li>
+<li>Definir Osi con sus tres preguntas.</li>
+<li>Elegir el primer comercio para el Detector (idealmente uno VTEX) y empezar las capturas antes del CyberMonday.</li>
+<li>Escribir los cinco manifiestos.</li>
+<li>Registrar Sol y una Luna mínima, y dejarlas correr una noche.</li>
+</ol></div>

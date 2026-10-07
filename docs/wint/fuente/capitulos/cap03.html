@@ -1,0 +1,63 @@
+<!--CAP {"num":"03","titulo":"Identidad: Sol, Luna, Osi y WINT","entrada":"Los nombres se eligen una vez y se repiten miles de veces: conviene que digan lo que hacen y que no choquen con nadie.","corto":"03","resumen":"Qué significan Sol y Luna, comparación de nombres, colisiones, marca e identidad visual"}-->
+<p class="lead">Renombrar Good Morning y Good Night como Sol y Luna es una buena idea: dos palabras cortas, propias del español, que forman un par evidente y que se dibujan solas en un ícono. Antes de fijarlas conviene resolver tres cosas: qué significan exactamente dentro de WINT, con qué otros productos chocan y cómo se escriben para que no se confundan con ellos.</p>
+
+<h2>Qué significan Sol y Luna en WINT</h2>
+<p>En la investigación aparecieron cuatro lecturas posibles del par: rutinas de arranque y de cierre del día; disparadores astronómicos (al amanecer, al atardecer); horas fijas con la variante astronómica como opción; y el modo claro u oscuro del sistema. El informe adopta una sola definición:</p>
+<!--SIN {"titulo":"Sol y Luna, definidos","tono":"sol","arbol":["Sol y Luna",[["Qué hacen",["Sol: despertar, pasada del Detector, resumen","Luna: cierre, copia, estado final"],"sol"],["Cuándo",["Hora fija configurable (por defecto)","Hora solar, solo como opción explícita"],"luna"],["Qué no hacen",["Cambiar el tema: eso es de Auto Dark Mode","Preguntar o conversar"],"gris"]]],"pie":"Sol sube y Luna baja: en la máquina de estados del capítulo 5, las flechas doradas son de Sol y las azules de Luna."}-->
+
+<h2>Good Morning, Sol o Sun</h2>
+<table>
+<caption>Comparación de los tres pares de nombres</caption>
+<colgroup><col style="width:28%"><col style="width:24%"><col style="width:24%"><col style="width:24%"></colgroup>
+<thead><tr><th>Criterio</th><th>Good Morning y Good Night</th><th>Sol y Luna</th><th>Sun y Moon</th></tr></thead>
+<tbody>
+<tr><td>Sin choque con otros productos</td><td><span class="dots"><i></i><i></i><i></i><i class="o"></i><i class="o"></i></span></td><td><span class="dots"><i></i><i></i><i class="o"></i><i class="o"></i><i class="o"></i></span></td><td><span class="dots"><i></i><i></i><i class="o"></i><i class="o"></i><i class="o"></i></span></td></tr>
+<tr><td>Natural en español</td><td><span class="dots"><i></i><i></i><i class="o"></i><i class="o"></i><i class="o"></i></span></td><td><span class="dots"><i></i><i></i><i></i><i></i><i></i></span></td><td><span class="dots"><i></i><i></i><i class="o"></i><i class="o"></i><i class="o"></i></span></td></tr>
+<tr><td>Corto y fácil de recordar</td><td><span class="dots"><i></i><i></i><i class="o"></i><i class="o"></i><i class="o"></i></span></td><td><span class="dots"><i></i><i></i><i></i><i></i><i></i></span></td><td><span class="dots"><i></i><i></i><i></i><i></i><i></i></span></td></tr>
+<tr><td>Coherente con un ícono de día y noche</td><td><span class="dots"><i></i><i></i><i></i><i class="o"></i><i class="o"></i></span></td><td><span class="dots"><i></i><i></i><i></i><i></i><i></i></span></td><td><span class="dots"><i></i><i></i><i></i><i></i><i></i></span></td></tr>
+<tr><td>Fácil de buscar en internet</td><td><span class="dots"><i></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i></span></td><td><span class="dots"><i></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i></span> solo; <span class="dots"><i></i><i></i><i></i><i></i><i class="o"></i></span> con «WINT»</td><td><span class="dots"><i></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i></span></td></tr>
+</tbody></table>
+<div class="aviso decision"><span class="t">Recomendación</span><p>Quedarse con <strong>Sol y Luna</strong>, siempre escritos con el prefijo en lo que se ve: <strong>«WINT Sol»</strong> y <strong>«WINT Luna»</strong>. Dentro del código, identificadores en ASCII: <code>wint.sol</code> y <code>wint.luna</code> para los módulos, <code>wint-sol</code> y <code>wint-luna</code> para paquetes y carpetas. Sun y Moon solo tendrían sentido si WINT se pensara para un público de habla inglesa.</p></div>
+
+<h2>Con qué chocan los nombres</h2>
+<table>
+<caption>Colisiones encontradas (octubre de 2026)</caption>
+<colgroup><col style="width:13%"><col style="width:55%"><col style="width:32%"></colgroup>
+<thead><tr><th>Nombre</th><th>Qué existe</th><th>Riesgo para WINT</th></tr></thead>
+<tbody>
+<tr><td>WINT</td><td>WINT Water Intelligence (wint.ai), empresa de Tel Aviv de IA y hardware para detectar fugas de agua, con rondas de US$ 15 y 35 millones según prensa especializada[[c:wint_esg]]. Es un homónimo: no tiene relación con este proyecto.</td><td>Fuerte en búsquedas y tiendas; medio a alto en las clases de software si WINT se publica. No se pudo ver si tiene marca en la Argentina.</td></tr>
+<tr><td><code>wint</code> (Rust)</td><td>Un paquete creado el 6 de octubre de 2026 que «encuentra las ventanas de tiempo en que un trabajo puede correr»[[c:wint_crate]]. Titular desconocido.</td><td>Su ejecutable se llama <code>wint</code>: chocaría con un comando <code>wint sol</code>.</td></tr>
+<tr><td><code>wint</code> (Python)</td><td>Un paquete de inyección de dependencias de 2018 ocupa el nombre en PyPI[[c:wint_pypi]].</td><td>Publicar como <code>wint-core</code>, <code>wint-sol</code>, etcétera.</td></tr>
+<tr><td>Sol y Luna</td><td>Son hoy nombres de modelos de OpenAI: GPT-5.6 Sol, Terra y Luna (julio de 2026), GPT-6 Sol y GPT-6 Luna (22 de septiembre de 2026) y GPT-6.1 Sol (29 de septiembre)[[c:openai_sol,techcrunch_sol]].</td><td>Alto para quien busque «Sol» o «Luna» junto a «IA». El prefijo WINT lo resuelve.</td></tr>
+<tr><td>Luna</td><td>Amazon Luna, servicio de juegos en la nube, sigue operativo en 2026; su disponibilidad en la Argentina no se confirmó[[c:amazon_luna]]. Existió un programa «Luna» para Windows 10 que cambiaba el tema por horario, descontinuado en 2020[[c:luna_win]].</td><td>Medio.</td></tr>
+<tr><td>Sol</td><td>Un lanzador de código abierto para macOS se llama Sol[[c:sol_mac]]; SOL es además la abreviatura de la criptomoneda Solana.</td><td>Bajo a medio.</td></tr>
+<tr><td>Osi</td><td>La Open Source Initiative protege «OSI» y «OSI Approved» y prohíbe marcas que se confundan con las suyas[[c:osi_tm]]; «modelo OSI» es además un término clásico de redes. No se encontró un asistente llamado Osi.</td><td>Medio. Escribirlo siempre «Osi», nunca «OSI».</td></tr>
+</tbody></table>
+
+<h2>Dominios y marca en la Argentina</h2>
+<p>Un dominio <code>.com.ar</code> o <code>.ar</code> se registra en NIC Argentina con CUIT o CUIL y Clave Fiscal de nivel 2 o superior, por un año renovable; <code>wint.ar</code> cumple el mínimo de cuatro letras[[c:nic_reg]]. La tarifa más probable es de $ 8.500 anuales para <code>.com.ar</code> y $ 25.500 para <code>.ar</code>, a confirmar en la página de aranceles[[c:nic_aranceles]]. Que <code>wint.ar</code> y <code>wint.com.ar</code> no respondan en el DNS no prueba que estén libres.</p>
+<p>La marca se registra en el INPI. Desde la Resolución INPI 75/2026 los aranceles se expresan en UMAPI, una unidad que se ajusta todos los meses por IPC: una marca nueva cuesta 100 UMAPI por clase, unos $ 37.200 por clase a valores de mayo de 2026[[c:inpi_res75]]. Para software y comparación de precios las clases probables son la 9, la 35 y la 42 (la clasificación de Niza vigente es la 13.ª edición, desde el 1 de enero de 2026[[c:inpi_niza]]), lo que da unos $ 110.000 a valores de mayo; el valor de octubre no se obtuvo. El trámite dura alrededor de 20 meses y la búsqueda previa por nombre idéntico es gratuita[[c:inpi_costos]]. Nada de esto es asesoramiento legal: si WINT se va a publicar o vender, la búsqueda de marcas conviene hacerla con un agente de la propiedad industrial.</p>
+
+<h2>Identidad visual</h2>
+<p>El par día y noche ya es un lenguaje conocido: la Luz nocturna de Windows, f.lux y Auto Dark Mode cambian el aspecto de la pantalla según la hora, y Android tiene un tema DayNight. WINT puede apoyarse en esa convención con una paleta corta y una regla: el color nunca es la única señal, siempre va con una forma o un texto.</p>
+<table>
+<caption>Paleta y estados del ícono (propuesta)</caption>
+<colgroup><col style="width:22%"><col style="width:18%"><col style="width:60%"></colgroup>
+<thead><tr><th>Elemento</th><th>Color</th><th>Uso</th></tr></thead>
+<tbody>
+<tr><td>Sol</td><td><span style="display:inline-block;width:9mm;height:3.2mm;background:#E2A83A;border-radius:1mm"></span> ámbar</td><td>Rutina de la mañana, avisos de ofertas verificadas.</td></tr>
+<tr><td>Luna</td><td><span style="display:inline-block;width:9mm;height:3.2mm;background:#2F3E75;border-radius:1mm"></span> azul lunar</td><td>Cierre, cuenta atrás, estado de reposo.</td></tr>
+<tr><td>Osi</td><td><span style="display:inline-block;width:9mm;height:3.2mm;background:#2F6F66;border-radius:1mm"></span> verde</td><td>Reservado hasta que se defina el módulo.</td></tr>
+<tr><td>Trabajando</td><td><span style="display:inline-block;width:9mm;height:3.2mm;background:#E07B24;border-radius:1mm"></span> naranja</td><td>Se conserva la convención del ícono del Detector, con un arco de actividad.</td></tr>
+<tr><td>Error</td><td><span style="display:inline-block;width:9mm;height:3.2mm;background:#8E3B32;border-radius:1mm"></span> rojo</td><td>Siempre con un triángulo, nunca solo el color.</td></tr>
+</tbody></table>
+
+<h2>Osi, el módulo sin definir</h2>
+<p>Ni el repositorio ni el encargo dicen qué hace Osi, y este informe no lo inventa. Para que encaje en la arquitectura del capítulo 4 alcanza con responder tres preguntas: qué recibe (eventos, datos, una orden de la persona), qué produce (un aviso, un archivo, una acción) y cuándo corre (a una hora, ante un evento, a pedido). Con esas tres respuestas, Osi tiene su manifiesto y su color.</p>
+
+<div class="aviso ok"><span class="t">Qué hacer</span><ol>
+<li>Adoptar «WINT Sol» y «WINT Luna» en todo lo visible y <code>wint.sol</code> / <code>wint.luna</code> en el código.</li>
+<li>Definir Osi con las tres preguntas de este capítulo.</li>
+<li>Usar nombres de paquete con guion (<code>wint-core</code>) y no publicar un comando llamado solo <code>wint</code>.</li>
+<li>Antes de publicar o vender WINT, hacer la búsqueda de marcas en el INPI y decidir si el nombre WINT se mantiene.</li>
+</ol></div>

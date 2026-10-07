@@ -1,0 +1,149 @@
+<!--CAP {"num":"04","titulo":"Arquitectura de WINT: un bot que no piensa","entrada":"Un núcleo sin ventana, módulos con contrato, reglas escritas y avisos con motivo: todo lo que decide se puede leer y probar.","corto":"04","resumen":"Capas, principios, contrato de módulos, reglas, avisos, IA y pila por defecto"}-->
+<p class="lead">Se puede pensar WINT más como un tablero de control que como un asistente. No conversa ni interpreta: mira el reloj y los datos, aplica reglas escritas de antemano y avisa con un motivo. Este capítulo describe su arquitectura: un núcleo sin ventana, módulos que son procesos con un manifiesto, reglas declarativas, una política de avisos y un lugar acotado para la IA.</p>
+
+<h2>Un flujo de trabajo, no un agente</h2>
+<p>Anthropic distingue dos arquitecturas. Los <em>workflows</em> orquestan modelos y herramientas «a través de rutas de código predefinidas»; los <em>agentes</em> son sistemas en los que el modelo dirige su propio proceso y decide qué herramientas usar. La recomendación es empezar por la solución más simple posible, porque los workflows ofrecen previsibilidad y consistencia en tareas bien definidas[[c:anthropic_agents]]. Lo que pide la persona («sin necesidad de pensar o evaluar, porque las variables son predecibles») describe exactamente un workflow. WINT no es un agente con buenos modales: es un programa que sigue reglas.</p>
+
+<!--SIN {"titulo":"Los seis atributos del bot que no piensa","tono":"luna","arbol":["WINT",[["Determinista",["Misma entrada, misma salida; reglas con versión"],"luna"],["Silencioso",["Nunca pregunta; avisos con presupuesto"],"sol"],["Explicable",["Cada aviso con motivo y registro"],"sol"],["Local primero",["Datos en la PC; lo que sale, declarado"],"osi"],["Reanudable",["Retoma tras un corte; repetir no duplica"],"luna"],["Acotado",["Solo lo habilitado, con cuenta atrás"],"rojo"]]],"pie":"Cada atributo se traduce en reglas de diseño concretas, enumeradas en el decálogo."}-->
+
+<h2>Las capas</h2>
+<!--DIAG capas | Los clientes solo muestran y avisan; el núcleo decide con reglas; cada módulo es un proceso aparte con su manifiesto; los bordes son lo que WINT usa pero no controla. La IA, si se usa, queda en el borde.-->
+<p>La razón para separar núcleo y clientes es técnica antes que estética. Un servicio de Windows corre aislado en la sesión 0 y no puede mostrar un ícono de bandeja[[c:repo_arq_int]]. Si el núcleo debe sobrevivir a que la persona cierre una ventana y además mostrar un ícono como el del Detector, la única arquitectura sana es un <strong>núcleo sin ventana</strong> y una <strong>bandeja como cliente aparte</strong>. El mismo núcleo atiende al panel web, a la bandeja y al teléfono.</p>
+<p>WINT no parte de cero. El motor de catálogos del repositorio ya tiene SQLite en modo WAL, un panel en <code>127.0.0.1:8765</code> y un <code>estado.json</code> que se reescribe una vez por segundo[[c:repo_readme]]. En la arquitectura propuesta ese motor pasa a ser un módulo más (Catálogos), su panel es la primera interfaz de WINT y el <code>estado.json</code> evoluciona hacia una tabla <code>estado</code> con eventos en vivo, sin reescribir el motor.</p>
+
+<h2>El decálogo</h2>
+<ol>
+<li><strong>Cada acción tiene un disparador y una regla escrita.</strong> Si no está en el archivo de reglas, no ocurre.</li>
+<li><strong>La IA no decide.</strong> Puede extraer datos de una página difícil; nunca elige si avisar, apagar o comprar.</li>
+<li><strong>Todo aviso dice por qué</strong>, con datos y fecha: «bajó 18 % respecto de la mediana de 90 días».</li>
+<li><strong>Hay un presupuesto diario de avisos.</strong> Lo que excede va al resumen de Sol o de Luna.</li>
+<li><strong>Las horas de silencio se respetan</strong>, salvo lo crítico que la persona haya marcado como tal.</li>
+<li><strong>Nada destructivo sin cuenta atrás</strong>, y la cuenta atrás es una notificación con botón de abortar, no una pregunta.</li>
+<li><strong>Todo queda en un registro de eventos</strong> que solo crece, con la versión de la regla que actuó.</li>
+<li><strong>Repetir no duplica.</strong> Cada acción lleva una clave de idempotencia.</li>
+<li><strong>Las reglas se prueban sin red</strong> en modo simulado, con el reloj fijado.</li>
+<li><strong>Local primero.</strong> Lo único que sale de la PC (una llamada a la API, un aviso al teléfono) está declarado en la configuración.</li>
+</ol>
+
+<h2>Módulos: el contrato</h2>
+<p>Todos los ecosistemas personales estudiados (Home Assistant, Node-RED, VS Code, Obsidian, Flow Launcher, Command Palette de PowerToys) comparten un patrón: un <strong>manifiesto declarativo</strong> por módulo, un <strong>registro central</strong> y un <strong>contrato de comunicación estrecho</strong>. Lo que cambia es el aislamiento: Obsidian carga los plugins en su mismo proceso; VS Code, Flow Launcher y Command Palette los corren en procesos aparte[[c:ha_manifest,flowlauncher]]. Para una persona sola que mantiene varios programas propios, el proceso aparte es lo que conviene: un módulo que se cuelga no tumba al resto, cada uno puede estar escrito en otro lenguaje y se reinicia por separado.</p>
+<p>Así se vería el manifiesto del Detector. Es un ejemplo de diseño, no un formato existente:</p>
+<pre>{
+  "id": "wint.detector",
+  "nombre": "Detector",
+  "version": "0.3.0",
+  "comando": ["python", "-m", "detector", "pasada"],
+  "programacion": { "tipo": "evento", "evento": "sol.inicio" },
+  "estado": "%LOCALAPPDATA%\\WINT\\detector\\estado.json",
+  "icono": { "trabajando": "#E2A83A", "pausado": "#8D96B3", "error": "#8E3B32" },
+  "emite": ["detector.veredicto", "detector.error"],
+  "permisos": ["red:comercios", "disco:datos"],
+  "tiempo_maximo_s": 5400
+}</pre>
+<p>WINT «contiene» un módulo cuando lo lanza y lo supervisa a partir de su manifiesto; lo «accede» cuando el módulo ya corre por su cuenta y solo se consulta su estado o se escuchan sus eventos. El contrato es el mismo en los dos casos. Sol, Luna, Osi, el Detector y los Catálogos son cinco manifiestos; Osi queda con su manifiesto vacío hasta que se defina qué hace.</p>
+<p>La comunicación usa lo mínimo: una API HTTP local con FastAPI en <code>127.0.0.1</code>, eventos en vivo por SSE para los clientes, y una tabla <code>eventos</code> en SQLite como bus entre módulos[[c:fastapi]]. MQTT, NATS o Redis solo se justifican si entra Home Assistant o hardware del hogar; gRPC y las tuberías con nombre no aportan nada a esta escala.</p>
+
+<table>
+<caption>Eventos de ejemplo y su motivo</caption>
+<colgroup><col style="width:27%"><col style="width:17%"><col style="width:20%"><col style="width:36%"></colgroup>
+<thead><tr><th>Evento</th><th>Lo emite</th><th>Lo escucha</th><th>Motivo que queda registrado</th></tr></thead>
+<tbody>
+<tr><td><code>sol.inicio</code></td><td>Núcleo</td><td>Detector, avisos</td><td>«07:30 · despertado por temporizador»</td></tr>
+<tr><td><code>detector.veredicto</code></td><td>Detector</td><td>Reglas</td><td>«verificada: −18 % frente a la mediana de 90 días; mínimo de 120 días»</td></tr>
+<tr><td><code>luna.cuenta_atras</code></td><td>Luna</td><td>Bandeja, teléfono</td><td>«Hibernar en 10 min · abortar»</td></tr>
+<tr><td><code>luna.fin</code></td><td>Luna</td><td>Registro</td><td>«Hibernó 23:41 · copia verificada · despierta 07:30»</td></tr>
+<tr><td><code>modulo.error</code></td><td>Cualquiera</td><td>Avisos</td><td>«Detector: el sitio cambió de estructura»</td></tr>
+</tbody></table>
+
+<h2>Reglas declarativas</h2>
+<p>El modelo de disparador, condición y acción de las automatizaciones de Home Assistant es la mejor plantilla disponible: legible, con modos de ejecución y con trazas de lo que pasó[[c:ha_auto]]. Para WINT alcanza con YAML validado con Pydantic y un evaluador de expresiones cerrado como <code>rule-engine</code>, que no ejecuta código arbitrario[[c:rule_engine]]. Node-RED, n8n y Huginn quedan como integraciones opcionales: agregan un servidor y un modelo mental más.</p>
+<p>Las reglas no reimplementan el algoritmo de ofertas del capítulo 6: solo leen su veredicto. Así hay una sola definición de «oferta real» y ningún umbral con precios nominales escondido en un YAML.</p>
+<pre>reglas:
+  - id: oferta-verificada
+    version: 3
+    cuando: { evento: detector.veredicto }
+    si: "veredicto == 'verificada'"
+    hacer: { avisar: { nivel: importante, canales: [toast, ntfy], agrupar: ofertas } }
+
+  - id: oferta-no-sostenida
+    version: 2
+    cuando: { evento: detector.veredicto }
+    si: "veredicto == 'no_sostenida'"
+    hacer: { resumen: luna }                  <span class="c"># nunca un aviso inmediato</span>
+
+  - id: sol
+    cuando: { hora: "07:30" }                  <span class="c"># entre comillas: YAML 1.1 lee 7:30 como 450</span>
+    hacer:
+      - { modulo: wint.detector, accion: pasada }
+      - { resumen: sol }
+
+  - id: luna
+    cuando: { hora: "23:30" }
+    si: "detector.inactivo"
+    hacer: { modulo: wint.luna, accion: cerrar, estado_final: hibernar, cuenta_atras_min: 10 }</pre>
+<div class="aviso riesgo"><span class="t">Trampas de YAML</span><p>Con PyYAML, <code>NO</code> se convierte en <code>False</code> y una hora sin comillas como <code>7:30</code> se lee como el número 450 (base 60). Hay que entrecomillar las horas, cargar siempre con <code>safe_load</code> y validar cada archivo contra un esquema antes de usarlo[[c:pyyaml]].</p></div>
+<p>Sol y Luna, además, son pequeñas máquinas de estados (esperando, avisando, trabajando, cerrando, terminado). Modelarlas con <code>python-statemachine</code> hace explícitas las transiciones válidas y permite probarlas una por una[[c:statemachine]]. Las pruebas usan casos fijos, el reloj congelado y la red desactivada: el motor de catálogos ya trabaja así, con sus pruebas sin red.</p>
+
+<h2>Política de avisos</h2>
+<p>Las guías de Android y de Windows piden lo mismo que la tecnología calma: pocos avisos, niveles de importancia, agrupar lo parecido y no avisar de lo que no requiere acción[[c:android_notif,win_notif]]. La política propuesta para WINT:</p>
+<table>
+<caption>Niveles de aviso (propuesta)</caption>
+<colgroup><col style="width:15%"><col style="width:37%"><col style="width:22%"><col style="width:26%"></colgroup>
+<thead><tr><th>Nivel</th><th>Cuándo</th><th>Cuánto</th><th>Cómo</th></tr></thead>
+<tbody>
+<tr><td>Crítico</td><td>Algo se rompió y puede perder datos o dinero (falló la copia de Luna, el disco se llena).</td><td>Sin tope; también en horas de silencio.</td><td>Aviso del sistema y en el teléfono, prioridad alta.</td></tr>
+<tr><td>Importante</td><td>Oferta verificada en un producto que se sigue.</td><td>Hasta 3 por día; el resto al resumen.</td><td>Aviso agrupado, con el motivo.</td></tr>
+<tr><td>Informativo</td><td>Ofertas no sostenidas, cambios de precio, novedades de un comercio.</td><td>Nunca inmediato.</td><td>Resumen de Sol o de Luna.</td></tr>
+<tr><td>Silencioso</td><td>Todo lo demás.</td><td>—</td><td>Solo registro y panel.</td></tr>
+</tbody></table>
+<p>Cada aviso trae un enlace «por qué te avisé» (la regla, su versión y los datos que la dispararon) y una acción para posponerlo. La cuenta atrás de Luna es un aviso más: informa y deja abortar, pero no espera respuesta.</p>
+
+<h2>Dónde entra la IA</h2>
+<table>
+<caption>Los tres niveles de IA en WINT</caption>
+<colgroup><col style="width:17%"><col style="width:30%"><col style="width:27%"><col style="width:26%"></colgroup>
+<thead><tr><th>Nivel</th><th>Qué hace</th><th>Costo</th><th>Si falla o no se usa</th></tr></thead>
+<tbody>
+<tr><td>1 · Construcción</td><td>Ayuda a escribir y revisar el código.</td><td>Lo que cueste la herramienta de desarrollo.</td><td>No afecta la ejecución.</td></tr>
+<tr><td>2 · Extracción en el borde (opcional)</td><td>Convierte una página difícil en datos con un esquema fijo.</td><td>Con la API, Haiku 4.5: US$ 1 y 5 por millón de tokens de entrada y salida; lotes a mitad de precio[[c:precios_api]].</td><td>Se usan las capas de reglas: API del comercio, JSON-LD, HTML.</td></tr>
+<tr><td>3 · Catálogos</td><td>Redacta y clasifica fichas en el motor existente.</td><td>Según volumen; lotes a mitad de precio.</td><td>La ficha va a la cola de revisión.</td></tr>
+</tbody></table>
+<p>Como referencia de costo, 1.000 fichas de 1.500 tokens de entrada y 400 de salida cuestan US$ 3,50 con Haiku 4.5 por la API y US$ 1,75 por lotes; con <code>claude -p</code>, una llamada trivial costó unos US$ 0,012, unas tres veces más por llamada[[c:precios_api]]. Por eso la extracción con IA es opcional y el modo por defecto es <strong>solo reglas</strong>.</p>
+<p>Si se usa <code>claude -p</code> con <code>--json-schema</code>, la investigación verificó cuatro cuidados: el esquema no debe declarar <code>$schema</code> 2020-12 (el CLI lo rechaza), no debe llevar <code>minimum</code> ni <code>maximum</code> (con rangos el modelo llegó a inventar un valor), el texto de la página va por la entrada estándar y no como argumento, y el proceso se lanza desde Python con <code>subprocess.run</code> sin shell[[c:claude_cli,claude_headless]]. Un resultado «exitoso» sin <code>structured_output</code> es un fallo y va a revisión.</p>
+<p>El determinismo no sale de la temperatura del modelo: sale de guardar una huella de los datos de entrada, versionar el prompt, el esquema y el modelo, y registrar cada decisión. El identificador del modelo se fija y se anota, porque los modelos se retiran: Sonnet 4.5 se retira el 30 de noviembre de 2026[[c:model_dep]]. Y el texto que se envía a la API sale de la PC: las condiciones de retención dependen del tipo de cuenta[[c:claude_data]].</p>
+
+<h2>La pila por defecto</h2>
+<table>
+<caption>Una elección por capa (propuesta)</caption>
+<colgroup><col style="width:16%"><col style="width:33%"><col style="width:22%"><col style="width:29%"></colgroup>
+<thead><tr><th>Capa</th><th>Elegido</th><th>Alternativa</th><th>Por qué</th></tr></thead>
+<tbody>
+<tr><td>Lenguaje</td><td>Python 3.13</td><td>—</td><td>Compatible con todas las bibliotecas evaluadas.</td></tr>
+<tr><td>Núcleo</td><td>Proceso sin ventana lanzado al iniciar sesión, con reinicio ante falla (Programador de tareas)</td><td>Servicio con WinSW o pywin32</td><td>Un servicio no puede tener bandeja[[c:winsw]].</td></tr>
+<tr><td>Planificación</td><td>Programador de tareas para despertar y lanzar; APScheduler 3.11 dentro del núcleo</td><td>—</td><td>APScheduler no despierta el equipo y descarta lo vencido si no se configura; la 4.x sigue en alfa[[c:apscheduler]].</td></tr>
+<tr><td>Datos</td><td>SQLite en modo WAL, tabla <code>eventos</code></td><td>PostgreSQL si hubiera varias máquinas</td><td>El motor ya la usa.</td></tr>
+<tr><td>Copias</td><td>API de respaldo en línea de <code>sqlite3</code></td><td>Litestream</td><td>Litestream declara que Windows no es una plataforma soportada[[c:litestream]].</td></tr>
+<tr><td>API y eventos</td><td>FastAPI en <code>127.0.0.1</code> + SSE</td><td><code>estado.json</code> (ya existe)</td><td>Un solo punto para panel, bandeja y teléfono.</td></tr>
+<tr><td>Reglas</td><td>YAML + Pydantic + <code>rule-engine</code></td><td>CEL</td><td>Legible y sin ejecución de código.</td></tr>
+<tr><td>Bandeja</td><td><code>pystray</code> detrás de una interfaz propia</td><td>Bandeja nativa en C#</td><td><code>pystray</code> no publica versiones desde 2023.</td></tr>
+<tr><td>Avisos</td><td>Avisos de Windows + ntfy (tiene servidor oficial para Windows)</td><td>Telegram, Pushover</td><td>Autoalojable y sin cuenta obligatoria[[c:ntfy]].</td></tr>
+<tr><td>Teléfono</td><td>Tailscale Serve: solo dentro de la red privada</td><td>Cloudflare Tunnel, WireGuard</td><td>Lo que menos expone a internet[[c:tailscale]].</td></tr>
+<tr><td>Adaptador opcional</td><td>MCP (especificación del 28 de julio de 2026; SDK <code>mcp</code> 2.3.0)</td><td>—</td><td>Expone módulos como herramientas sin que WINT razone[[c:mcp_spec,mcp_sdk]].</td></tr>
+</tbody></table>
+
+<h2>Seguridad y privacidad</h2>
+<ul>
+<li>El núcleo escucha solo en <code>127.0.0.1</code>; el teléfono llega por la red privada de Tailscale, sin abrir puertos.</li>
+<li>Cada cliente usa su propio token; los tokens no van en el YAML ni en el repositorio. El almacén de credenciales de Windows es el lugar natural, aunque esta investigación no verificó una biblioteca concreta para usarlo.</li>
+<li>Sin telemetría. Un archivo de configuración lista todo lo que sale: llamadas a la API, avisos al teléfono, descargas de datos públicos.</li>
+<li>WINT nunca compra, nunca publica en nombre de la persona, nunca cierra a la fuerza programas ajenos y nunca actúa fuera de lo habilitado en las reglas.</li>
+</ul>
+<p>Si en algún momento conviene que un asistente de IA consulte a WINT (por ejemplo, «¿qué bajó esta semana?»), un adaptador MCP delgado puede exponer los módulos como herramientas de solo lectura. Home Assistant ya hace eso con las entidades que la persona elige exponer[[c:ha_mcp]]. WINT seguiría sin razonar: respondería con datos.</p>
+
+<div class="aviso ok"><span class="t">Qué hacer</span><ol>
+<li>Escribir los cinco manifiestos (Sol, Luna, Osi, Detector, Catálogos), aunque Osi quede vacío.</li>
+<li>Crear la tabla <code>eventos</code> en SQLite y hacer que el Detector emita <code>detector.veredicto</code> con su motivo.</li>
+<li>Levantar el núcleo con FastAPI en <code>127.0.0.1</code> y mover el <code>estado.json</code> del motor a la tabla <code>estado</code> con SSE.</li>
+<li>Pasar las cuatro reglas de este capítulo a un YAML validado, con pruebas sin red y reloj fijo.</li>
+<li>Configurar la política de avisos: presupuesto diario, horas de silencio y resúmenes de Sol y Luna.</li>
+</ol></div>

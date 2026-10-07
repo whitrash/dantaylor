@@ -1,0 +1,94 @@
+<!--CAP {"num":"07","titulo":"WINT en Windows y en Android","entrada":"El trabajo pesado vive en la PC; el teléfono recibe, muestra y avisa. Se sube de peldaño solo cuando el anterior se queda corto.","corto":"07","resumen":"Modelos de app de Windows, opciones multiplataforma, Android hoy, avisos, distribución y acceso remoto"}-->
+<p class="lead">La idea de WINT como «plataforma Android» encaja bien si se reparte el trabajo con criterio. El análisis de precios necesita una máquina que esté encendida, con red y con espacio; el teléfono, en cambio, es ideal para recibir un aviso y mirar un catálogo. Este capítulo revisa con qué construir cada parte, qué impone Android en 2026, cómo llegan los avisos y cómo se instala una app propia sin publicarla.</p>
+
+<h2>Lo que Windows ofrece de fábrica</h2>
+<p>Si «las tres opciones de Windows» se leen como los modelos de aplicación que propone Microsoft, el mapa oficial de 2026 es este: WinUI es el framework nativo recomendado para proyectos nuevos, WPF y Windows Forms siguen como opciones y UWP solo recibe correcciones de seguridad y errores[[c:ms_platform]].</p>
+<table>
+<caption>Los modelos de aplicación de Windows en 2026</caption>
+<colgroup><col style="width:24%"><col style="width:38%"><col style="width:38%"></colgroup>
+<thead><tr><th>Modelo</th><th>Estado</th><th>Para WINT</th></tr></thead>
+<tbody>
+<tr><td>WinUI 3 / Windows App SDK</td><td>Recomendado por Microsoft; la documentación lista la 2.1.3 y NuGet ya publica la 2.5.1[[c:wasdk]].</td><td>No tiene una API oficial de ícono de bandeja; hay que sumar una biblioteca comunitaria.</td></tr>
+<tr><td>WPF y Windows Forms (.NET 10)</td><td>.NET 10 es LTS, con soporte hasta el 14 de noviembre de 2028[[c:dotnet_policy]].</td><td>Windows Forms trae <code>NotifyIcon</code>: el camino más corto para una bandeja nativa.</td></tr>
+<tr><td>UWP</td><td>Solo seguridad y errores.</td><td>No usar en proyectos nuevos.</td></tr>
+<tr><td>Aplicación web instalable (PWA)</td><td>Se instala desde Edge o Chrome y puede ir a Microsoft Store.</td><td>La base común más barata para Windows y Android.</td></tr>
+</tbody></table>
+
+<h2>Fuera de esas opciones: una base para los dos sistemas</h2>
+<p>La tabla compara lo que permite tener una sola base de código para Windows y Android. El criterio es el de una persona sola que programa con ayuda de IA y ya tiene su núcleo en Python.</p>
+<table>
+<caption>Opciones para Windows y Android (octubre de 2026)</caption>
+<colgroup><col style="width:20%"><col style="width:13%"><col style="width:16%"><col style="width:29%"><col style="width:22%"></colgroup>
+<thead><tr><th>Opción</th><th>Lenguaje</th><th>Bandeja</th><th>Estado</th><th>Veredicto</th></tr></thead>
+<tbody>
+<tr><td>PWA</td><td>Web</td><td>No</td><td>Estándar; no puede leer páginas de comercios (CORS) y su sincronización periódica es experimental</td><td><span class="etq osi">Base común</span></td></tr>
+<tr><td>Avalonia 12</td><td>C#</td><td>Nativa</td><td>12.1.3, 22 sep 2026; MIT[[c:avalonia]]</td><td><span class="etq sol">Cliente nativo</span> si la PWA no alcanza</td></tr>
+<tr><td>.NET MAUI 10</td><td>C#</td><td>Por biblioteca</td><td>Soporte de la versión hasta el 11 de mayo de 2027[[c:maui]]</td><td>Evaluar</td></tr>
+<tr><td>Compose Multiplatform</td><td>Kotlin</td><td>Nativa</td><td>1.12.1, 22 sep 2026[[c:compose_mp]]</td><td>Si se elige Kotlin para Android</td></tr>
+<tr><td>Flutter</td><td>Dart</td><td>Por complemento</td><td>3.47.6, 1 oct 2026[[c:flutter]]</td><td>Evaluar</td></tr>
+<tr><td>Tauri 2</td><td>Rust y web</td><td>Nativa</td><td>2.12.1; Tauri 3 en alfa[[c:tauri]]</td><td>Potente, pero exige Rust</td></tr>
+<tr><td>Qt for Python (PySide6)</td><td>Python</td><td>Nativa</td><td>6.11.2; Android en vista previa; LGPL[[c:pyside]]</td><td>Bandeja robusta solo en Windows</td></tr>
+<tr><td>Flet</td><td>Python</td><td>Sin confirmar</td><td>1.0 salió el 14 sep 2026[[c:flet]]</td><td>Prototipos</td></tr>
+<tr><td>BeeWare · Kivy</td><td>Python</td><td>No en Android</td><td>Pre-1.0 · sin versión desde dic 2024</td><td>No todavía</td></tr>
+<tr><td>Electron · Capacitor · React Native</td><td>JavaScript</td><td>—</td><td>Electron no llega a Android; Capacitor no llega a Windows; React Native for Windows va atrasado</td><td>No</td></tr>
+</tbody></table>
+<div class="aviso decision"><span class="t">Recomendación</span><p>Núcleo Python sin interfaz con su API local (capítulo 4), un <strong>panel web instalable</strong> como base común, una <strong>bandeja mínima</strong> en Windows y <strong>avisos por ntfy</strong>. Recién si la PWA se queda corta, un cliente nativo con Avalonia 12 o con .NET 10. Hoy ninguna opción en Python para una sola base de interfaz está madura.</p></div>
+
+<h2>La escalera en Android</h2>
+<!--DIAG escalera | Cada peldaño se sube solo si el anterior no alcanza, con el criterio indicado en dorado, azul y verde. La mayoría de los usos personales se resuelven en el primero.-->
+<p>En el primer peldaño, el panel de WINT se instala desde Chrome como aplicación; si hace falta un APK, Bubblewrap envuelve la PWA en una app que la abre a pantalla completa[[c:bubblewrap]]. Los avisos llegan por ntfy, que tiene app Android y también funciona como PWA[[c:ntfy_pwa]]. El acceso a la PC es privado, por Tailscale. Para un acceso directo en la pantalla de inicio alcanza con atajos HTTP; un widget propio, con datos en vivo, ya es motivo para pasar al segundo peldaño.</p>
+
+<h2>Android hoy: qué impone</h2>
+<ul>
+<li><strong>Versión.</strong> Android 17 (API 37) es estable desde el 16 de junio de 2026[[c:android17]]. Google Play exige desde el 31 de agosto de 2026 que las apps nuevas y las actualizaciones apunten a la API 36, con prórroga hasta el 1 de noviembre; la exigencia de API 37 para 2027 todavía no está anunciada[[c:play_target]].</li>
+<li><strong>Herramientas.</strong> Android Studio Rabbit 1 es la versión estable desde el 1 de octubre de 2026[[c:as_rabbit]]; Kotlin 2.4.20 y Compose BOM 2026.09.00 son las versiones estables de la pila.</li>
+<li><strong>Trabajo en segundo plano.</strong> WorkManager no admite trabajo periódico cada menos de 15 minutos[[c:workmanager]], y hay restricciones para iniciar servicios en primer plano desde segundo plano[[c:fgs]].</li>
+<li><strong>Alarmas exactas.</strong> Solo se justifican cuando la función central depende de una hora precisa, como un despertador o un calendario; el permiso <code>USE_EXACT_ALARM</code> está restringido por la política de Google Play a ese tipo de apps[[c:alarms]]. Sol y Luna en el teléfono no deben pedirlo.</li>
+</ul>
+<p>La consecuencia es la que ordena todo el diseño: <strong>el teléfono no revisa precios</strong>. El Detector corre en la PC (o en un equipo siempre encendido) y el teléfono recibe un aviso cuando hay algo que mirar.</p>
+
+<h2>Cómo llegan los avisos al teléfono</h2>
+<table>
+<caption>Canales de aviso</caption>
+<colgroup><col style="width:18%"><col style="width:30%"><col style="width:36%"><col style="width:16%"></colgroup>
+<thead><tr><th>Canal</th><th>Costo</th><th>Notas</th><th>Autoalojable</th></tr></thead>
+<tbody>
+<tr><td>ntfy</td><td>Gratis en ntfy.sh con límites (250 mensajes por día por visitante); Pro desde US$ 5 por mes[[c:ntfy_lim,ntfy_readme]]</td><td>App Android y PWA; servidor oficial también para Windows.</td><td>Sí</td></tr>
+<tr><td>FCM</td><td>Gratis</td><td>Requiere una app propia (segundo peldaño) y servicios de Google.</td><td>No</td></tr>
+<tr><td>UnifiedPush</td><td>Gratis</td><td>Estándar abierto; usa un distribuidor, que puede ser ntfy.</td><td>Sí</td></tr>
+<tr><td>Bot de Telegram</td><td>Gratis; alrededor de un mensaje por segundo por chat[[c:telegram]]</td><td>Exige cuenta de Telegram.</td><td>No</td></tr>
+<tr><td>Pushover</td><td>US$ 4,99 por única vez por plataforma[[c:pushover]]</td><td>30 días de prueba.</td><td>No</td></tr>
+</tbody></table>
+<p>Algunos fabricantes aplican un ahorro de batería agresivo que demora o corta las notificaciones de apps en segundo plano. Conviene excluir a ntfy de la optimización de batería y probar en el teléfono real antes de confiar en los avisos; las particularidades por marca no se llegaron a verificar <span class="etq rojo">sin verificar</span>.</p>
+
+<h2>Instalar una app propia: la verificación de Google</h2>
+<p>Desde 2026, Google exige que los desarrolladores se registren para que sus apps se instalen en dispositivos Android certificados. Para quien quiere instalar su propia app en su propio teléfono, el calendario y las vías son estas:</p>
+<table>
+<caption>Verificación de desarrolladores de Android</caption>
+<colgroup><col style="width:23%"><col style="width:77%"></colgroup>
+<thead><tr><th>Tema</th><th>Qué dice Google</th></tr></thead>
+<tbody>
+<tr><td>Primera fase</td><td>Desde el 30 de septiembre de 2026, en Brasil, Indonesia, Singapur y Tailandia, para instalaciones desde siete tiendas participantes (entre ellas Google Play, Galaxy Store y GetApps), en teléfonos y tabletas certificados con Android 7 o superior[[c:verif_faq]].</td></tr>
+<tr><td>Resto del mundo</td><td>«2027 y más adelante», sin calendario por país. Argentina no tiene fecha: conviene suponer que quedará alcanzada desde 2027 (inferencia, no anuncio)[[c:verif]].</td></tr>
+<tr><td>APK instalado a mano</td><td>Las preguntas frecuentes dicen que los requisitos «todavía no» se aplican; la página de distribución limitada dice que los paquetes no registrados dejarán de instalarse en las regiones alcanzadas. La ambigüedad es de Google y no se probó en un teléfono[[c:verif_faq,verif_limited]].</td></tr>
+<tr><td>Por cable con <code>adb</code></td><td>Sigue permitiendo instalar sin verificación y sin espera.</td></tr>
+<tr><td>Cuenta de distribución limitada</td><td>Gratis, sin documento de identidad, hasta 20 dispositivos: la vía natural para un APK personal de WINT. Hay que respaldar la clave de firma: sin ella no se pueden registrar los paquetes.</td></tr>
+<tr><td>Publicar en Google Play</td><td>US$ 25 por única vez; las cuentas personales nuevas deben pasar una prueba cerrada con al menos 12 testers durante 14 días[[c:play_testing]].</td></tr>
+</tbody></table>
+<p>En Windows, la cuenta individual de Microsoft Store es gratuita desde septiembre de 2025 y Argentina figura entre los países admitidos[[c:store_free]]. El servicio de firma de código en la nube de Microsoft, en cambio, solo acepta personas de Estados Unidos y Canadá[[c:artifact]]. Los pagos en dólares con tarjeta argentina llevan una percepción del 30 % y, en servicios digitales, IVA: el costo real queda entre 1,3 y 1,6 veces el precio en dólares, según prensa especializada[[c:percepcion]]. Conviene confirmarlo con un contador.</p>
+
+<h2>Llegar a la PC desde fuera</h2>
+<ul>
+<li><strong>Tailscale Serve</strong> publica el panel solo dentro de la red privada de la persona. Según la página de planes de Tailscale, el plan Personal gratuito admite hasta 6 usuarios para uso no comercial, y Funnel (exposición a internet) está en todos los planes con ancho de banda limitado[[c:tailscale_free,tailscale_funnel]]. Conviene revisar esa página antes de depender de ella.</li>
+<li><strong>Cloudflare Tunnel</strong> es gratuito, y Cloudflare Zero Trust con Access lo es hasta 50 usuarios[[c:cf]]: una alternativa si algún día hay que compartir el panel.</li>
+<li><strong>Despertar la PC desde fuera</strong> tiene un límite físico: el paquete mágico de Wake-on-LAN es un mensaje de la red local, así que hace falta un equipo siempre encendido dentro de la casa que lo envíe. Una Raspberry Pi 5 ronda los US$ 110 en su versión de 4 GB tras las subas de 2026 y consume unos 3 W en reposo[[c:rpi]]; un mini PC con procesador N100 consume de 6 a 12 W y puede correr también el Detector. El plan gratuito de Oracle Cloud se recortó en 2026 y puede reclamar instancias poco usadas[[c:oracle]]: no es una base confiable.</li>
+</ul>
+<p>Para probar apps Android en una PC con Windows ya no existe el Subsistema de Windows para Android: Microsoft le quitó el soporte el 5 de marzo de 2025 y no hay reemplazo oficial[[c:wsa]]. Quedan el emulador de Android Studio y un teléfono real conectado; Enlace a Windows refleja el teléfono, pero no ejecuta sus apps en la PC.</p>
+
+<div class="aviso ok"><span class="t">Qué hacer</span><ol>
+<li>Convertir el panel web del motor en una PWA instalable (HTTPS por Tailscale Serve) y probarla en Windows y en el teléfono.</li>
+<li>Instalar ntfy en el teléfono, excluirlo del ahorro de batería y mandar los primeros avisos de prueba desde el núcleo.</li>
+<li>Agregar una bandeja mínima en Windows detrás de una interfaz propia.</li>
+<li>Crear una cuenta de distribución limitada de Android y guardar la clave de firma en dos lugares.</li>
+<li>Pasar al segundo peldaño solo si aparece una necesidad concreta: un widget, avisos que no llegan o trabajo sin conexión.</li>
+</ol></div>

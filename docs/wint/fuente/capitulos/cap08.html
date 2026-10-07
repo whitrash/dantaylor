@@ -1,0 +1,131 @@
+<!--CAP {"num":"08","titulo":"Visualización: catálogos tipo Netflix, gráficos de precio y estado","entrada":"Qué se dibuja, con qué herramienta y cómo evitar que un gráfico mienta.","corto":"08","resumen":"Filas guardadas, gráficos de escalón, tableros sin programar y estado en la bandeja."}-->
+<p class="lead">La visualización de WINT tiene cuatro destinos: el catálogo temático, los precios y las ofertas, el estado de los módulos y la administración de los datos. Se propone una pila corta y propia: filas de catálogo definidas como consultas guardadas, gráficos de precio en escalón con dos bibliotecas (una para el detalle y otra para los mini-gráficos), un archivo de estado que leen la bandeja y el panel, y herramientas ajenas solo para explorar y administrar.</p>
+
+<h2>Qué se visualiza y con qué</h2>
+<p>El cuadro ordena las cuatro necesidades y la herramienta por defecto de cada una; es una propuesta de diseño. En todo el capítulo lo verificado lleva cita, lo propuesto se marca como tal y lo que no se pudo comprobar lleva la etiqueta <span class="etq rojo">sin verificar</span>.</p>
+<!--SIN {"tono":"luna","arbol":["Visualización de WINT",[["Catálogo temático",["CSS scroll-snap: filas","Norigin: foco y D-pad","Compose for TV"],"luna"],["Precios y ofertas",["ECharts: escalón y bandas","uPlot: mini-gráficos","Filas de precios guardadas"],"sol"],["Estado de WINT",["Ícono de bandeja","Toasts, ntfy y panel web","Rainmeter y Widgets (opcional)"],"osi"],["Administración",["Datasette sobre SQLite","Glance: pantalla de inicio","Grafana o Metabase"],"gris"]]],"pie":"Propuesta de diseño: cada rama es una necesidad y las hojas son la herramienta por defecto, no la única posible."}-->
+
+<h2>Catálogos tipo menú de Netflix</h2>
+<p>El patrón combina un destacado superior (<em>billboard</em>), filas horizontales desplazables (<em>swimlanes</em>), una tarjeta que crece con el foco y una fila personal, «Mi lista». Esa terminología no pudo verificarse con fuentes de Netflix <span class="etq rojo">sin verificar</span>; su equivalente documentado está en las guías de Android TV: el Featured Carousel (sobretítulo, título, descripción y botón sobre un scrim),[[c:and_featured]] el Immersive List (fila de tarjetas con un visor del ítem enfocado, que se agranda 1,1 veces)[[c:and_immersive]] y tarjetas que dejan asomar 20&nbsp;dp de la siguiente.[[c:and_cards]]</p>
+
+<h3>Cada fila es una consulta guardada</h3>
+<p>Tres referentes abiertos respaldan el patrón. La lista inteligente de Kodi guarda reglas combinables, agrupamiento, orden y límite, y genera el <code>WHERE</code> de SQL.[[c:kodi]] El catálogo de Stremio es <code>{type, id, name, extra[]}</code>, con paginación <code>skip</code> en múltiplos de 100.[[c:stremio_cat]] Jellyfin muestra el contraste: tipos de sección fijos en un enum, aunque <code>latestmedia</code> genera una fila por biblioteca.[[c:jf_tipos,jf_ultimos]]</p>
+<p><span class="etq luna">propuesta</span> Cada fila es un registro de datos y no código: una consulta sobre la taxonomía con facetas del motor de catálogos (países, animales, plantas, hechos históricos), con orden, límite y ventana; agregar una fila no toca la interfaz. El esquema real del motor no se revisó: los campos del ejemplo son ilustrativos.</p>
+<pre>{"slug":"mamiferos-de-sudamerica","consulta":{"categoria":"animales",
+ "facetas":{"clase":"mamíferos","region":"Sudamérica"}},"orden":"titulo","limite":40}</pre>
+<p>Las filas de precios invocan el veredicto del Detector (capítulo 6) y no reimplementan umbrales con precios nominales; los umbrales de los ejemplos son heurísticos y no están calibrados. Cada tarjeta indica la regla y las cifras que la pusieron en la fila. «Ofertas no sostenidas por el historial» queda oculta en modo sombra hasta tener una muestra humana de 139 a 385 casos.</p>
+
+<table>
+<caption>Filas de precios del catálogo (propuesta; pesos constantes, base de 90 días)</caption>
+<colgroup><col style="width:25%"><col style="width:41%"><col style="width:34%"></colgroup>
+<thead><tr><th>Fila</th><th>Consulta sobre el veredicto</th><th>La tarjeta muestra</th></tr></thead>
+<tbody>
+<tr><td>Bajaron de verdad</td><td>«Oferta real»: 75 puntos o más y baja de 10&nbsp;% o más.</td><td>Precio, mediana y baja real.</td></tr>
+<tr><td>Ofertas no sostenidas por el historial</td><td>Tachado sobre lo observado, o suba previa y rebaja.</td><td>Tachado frente al máximo observado.</td></tr>
+<tr><td>Mínimos históricos</td><td>Precio igual o menor al mínimo de la historia.</td><td>Fecha del mínimo anterior.</td></tr>
+<tr><td>Subieron antes de la oferta</td><td>Alza sobre un umbral en los 14 días previos.</td><td>Precio previo, alza y oferta.</td></tr>
+</tbody></table>
+
+<table>
+<caption>Implementación del catálogo y referencias abiertas: qué se toma de cada una</caption>
+<colgroup><col style="width:13%"><col style="width:30%"><col style="width:29%"><col style="width:28%"></colgroup>
+<thead><tr><th>Opción</th><th>Estado y licencia</th><th>Se aprende</th><th>Cautela</th></tr></thead>
+<tbody>
+<tr><td>Web (panel propio)</td><td>scroll-snap: Baseline desde jul 2022;[[c:webfeatures]] Embla 8.6.0[[c:embla]] y Swiper 14.3.0[[c:swiper]] (MIT), opcionales.</td><td><code>scroll-snap-type</code> y <code>scroll-snap-align</code> bastan para las filas.</td><td><code>::scroll-button</code> y <code>scroll-marker-group</code>: solo Chrome y Edge 135.[[c:scroll_marker]]</td></tr>
+<tr><td>Web en TV</td><td>Norigin 3.3.0 (MIT)[[c:norigin]] y lrud 0.0.18 (Apache-2.0),[[c:bbc_lrud]] de julio de 2026.</td><td>Navegación espacial por flechas; <code>focusgroup</code> aún sin soporte.[[c:webfeatures]]</td><td>Norigin apunta a React; lrud es 0.0.x.</td></tr>
+<tr><td>Android</td><td>Compose <code>LazyRow</code>; foundation 1.12.1 (sep 2026).[[c:compose_found]]</td><td><code>key</code> estable y <code>contentType</code>.[[c:compose_lists]]</td><td><code>LazyLayoutCacheWindow</code> es solo alfa.</td></tr>
+<tr><td>Android TV</td><td>tv-material 1.1.0 estable (may 2026); la 1.0.0, desde ago 2024.[[c:androidx_tv]]</td><td>Tarjetas, foco y D-pad; touchscreen <code>required="false"</code>.[[c:tv_hw]]</td><td><code>Carousel</code> experimental;[[c:carousel_kt]] ImmersiveList retirado; Leanback, deprecado.[[c:leanback]]</td></tr>
+<tr><td>Flutter</td><td><code>CarouselView</code> en la rama principal.[[c:flutter_car]]</td><td>Un código para móvil y escritorio.</td><td>Guía de TV y canal estable <span class="etq rojo">sin verificar</span>.</td></tr>
+<tr><td>Jellyfin</td><td>GPL-2.0-or-later; web 12.2 (oct 2026).[[c:jf_repo]]</td><td>Máximo de 10 secciones (11 en TV).[[c:jf_home]]</td><td>Tipos fijos en código; GPL: ideas, no código.</td></tr>
+<tr><td>Kodi</td><td>GPL-2.0-or-later; 22.0rc1 (sep 2026), candidata.[[c:kodi_repo]]</td><td>Reglas, grupo, orden y límite: fila = consulta guardada.</td><td>Solo se toma el modelo de datos.</td></tr>
+<tr><td>Stremio</td><td>GPL-2.0; web 5.0.0-beta.41 (oct 2026).[[c:stremio_web]]</td><td>Contrato de catálogo: tipo, id y filtros.</td><td>Beta: copiar el contrato, no el código.</td></tr>
+<tr><td>Plex</td><td>Propietario.</td><td>Nada verificable.</td><td>Sin fuente accesible <span class="etq rojo">sin verificar</span></td></tr>
+</tbody></table>
+
+<h3>Rendimiento, accesibilidad y control remoto</h3>
+<ul>
+<li><strong>Imágenes.</strong> AVIF con respaldo WebP generado con sharp,[[c:sharp]] <code>aspect-ratio</code> fijo, marcador borroso y <code>loading="lazy"</code>;[[c:webfeatures]] virtualizar solo con cientos de tarjetas por fila (criterio propio). Si Safari 26 corrigió la búsqueda en la página con <code>content-visibility: auto</code> está <span class="etq rojo">sin verificar</span>.</li>
+<li><strong>Accesibilidad.</strong> Un destacado que avanza solo lleva un botón de pausa, primero en el orden de Tab;[[c:apg]] WCAG 2.2.2 exige poder pausar lo que se mueve más de 5&nbsp;s,[[c:wcag_pause]] por lo que se propone un destacado estático. El foco no queda totalmente tapado por cabeceras fijas[[c:wcag_focus]] y los objetivos miden al menos 24 × 24 px CSS, salvo excepciones.[[c:wcag_target]]</li>
+<li><strong>TV y PWA.</strong> Todo se alcanza con el D-pad, con foco visible y Atrás predecible;[[c:tv_nav]] que el foco quede siempre en un elemento seleccionable no figura en las páginas oficiales revisadas <span class="etq rojo">sin verificar</span>. Una PWA solo se instala en Chromium por HTTPS o desde localhost, no por <code>http://IP-de-la-red-local</code>, y Firefox de escritorio no la instala;[[c:mdn_pwa]] el capítulo 7 trata la escalera.</li>
+</ul>
+
+<h2>Gráficos de precio honestos</h2>
+<p>Un precio observado una vez por día rige hasta la observación siguiente: la serie es un escalón «después» (<em>step-after</em>), no una curva suave que inventa valores intermedios. La figura del escalón del capítulo 6 muestra el caso completo. El cambio real ocurrió entre dos observaciones y el escalón lo ubica en una de ellas: la leyenda debe decirlo. La dirección por defecto engaña: en Chart.js <code>stepped: true</code> equivale a «before», lo contrario de lo que pide un precio, y en ECharts <code>step: 'end'</code> produce el escalón «después» según el código de la biblioteca;[[c:echarts_line,chartjs_line,plot_curves]] en Observable Plot es <code>curve: "step-after"</code>, en Plotly.js <code>line: { shape: 'hv' }</code> y en uPlot un trazador <code>stepped</code>.[[c:plotly_attr,uplot_readme]]</p>
+<ul>
+<li><strong>Huecos.</strong> Los días sin captura se ven como hueco o tramo «sin datos», no como línea continua: ECharts trae <code>connectNulls: false</code> por defecto y uPlot admite <code>spanGaps: false</code>.[[c:echarts_series,uplot_docs]] El submuestreo LTTB conserva la forma visual pero no cada escalón (inferencia propia): <code>sampling: 'none'</code> y agregación por día en SQL.</li>
+<li><strong>Bandas, tachado y eventos.</strong> Una banda de mínimo, mediana y máximo de 90 días da contexto (<code>areaY</code> con <code>y1</code> e <code>y2</code> en Plot,[[c:plot_area]] <code>series.band</code> en uPlot,[[c:uplot_docs]] <code>markArea</code> en ECharts);[[c:echarts_mark]] el tachado va en la misma escala con trazo punteado y la diferencia sombreada es el «descuento anunciado» (ejemplo sintético del capítulo 6: −20&nbsp;% declarado, +4&nbsp;% real). Hot Sale 2026: 11 al 13 de mayo, según terceros que citan a la cámara organizadora;[[c:hotsale]] CyberMonday 2026: 2 al 4 de noviembre (capítulo 6).</li>
+<li><strong>Mini-gráficos y color.</strong> Cada tarjeta lleva un sparkline en escalón de 30 a 90 días con su propio eje vertical declarado (uPlot trae una demostración).[[c:uplot_spark]] Las ofertas se marcan con forma, ícono y texto, y el trazo distingue el precio real del tachado; ECharts ofrece <code>aria.enabled</code> y <code>decal.show</code>[[c:echarts_aria]] y se exige contraste de 3:1.[[c:wcag_contrast]]</li>
+</ul>
+
+<table>
+<caption>Bibliotecas de gráficos (versiones al 7 de octubre de 2026)</caption>
+<colgroup><col style="width:16%"><col style="width:15%"><col style="width:27%"><col style="width:29%"><col style="width:13%"></colgroup>
+<thead><tr><th>Biblioteca</th><th>Licencia</th><th>Versión y estado</th><th>Papel en WINT</th><th>Veredicto</th></tr></thead>
+<tbody>
+<tr><td>Apache ECharts</td><td>Apache-2.0</td><td>6.1.0 (may 2026).[[c:npm_echarts]]</td><td>Detalle: escalón, <code>markArea</code>.</td><td><span class="etq osi">Adoptar</span></td></tr>
+<tr><td>uPlot</td><td>MIT</td><td>1.6.32 (mar 2025); commits hasta sep 2026.[[c:npm_uplot,uplot_repo]]</td><td>Mini-gráficos y bandas.</td><td><span class="etq osi">Adoptar</span></td></tr>
+<tr><td>D3</td><td>ISC</td><td>7.9.0 (mar 2024).[[c:npm_d3]]</td><td>Primitivas; dibujo a medida.</td><td><span class="etq luna">Reserva</span></td></tr>
+<tr><td>Observable Plot</td><td>ISC</td><td>0.6.17 (feb 2025).[[c:npm_plot]]</td><td>Exploración y facetas.</td><td><span class="etq sol">Opcional</span></td></tr>
+<tr><td>Chart.js</td><td>MIT</td><td>4.5.1 (oct 2025).[[c:npm_chartjs]]</td><td>Simple; escalón explícito.</td><td><span class="etq luna">Reserva</span></td></tr>
+<tr><td>Recharts</td><td>MIT</td><td>3.10.1 (jul 2026).[[c:npm_recharts]]</td><td>Solo si el panel usa React.</td><td><span class="etq luna">Reserva</span></td></tr>
+<tr><td>Plotly.js</td><td>MIT</td><td>4.1.2 (oct 2026).[[c:plotly_chlog]]</td><td>4.0.0 rompe compatibilidad y activa «Upload to Cloud».</td><td><span class="etq gris">Descartar</span></td></tr>
+<tr><td>Vega-Lite y Altair</td><td>BSD-3-Clause</td><td>6.4.3 (abr 2026);[[c:npm_vegalite]] Altair 6.3.0 (sep 2026).[[c:pypi_altair]]</td><td>Declarativos; para informes.</td><td><span class="etq luna">Reserva</span></td></tr>
+<tr><td>Lightweight Charts</td><td>Apache-2.0 + atribución</td><td>5.2.1 (ago 2026).[[c:lwc]]</td><td>Financiera; exige NOTICE y enlace a tradingview.com.</td><td><span class="etq gris">Descartar</span></td></tr>
+</tbody></table>
+
+<div class="aviso riesgo"><span class="t">Ajuste por inflación: cómo hacerlo sin fijar supuestos</span><p>El gráfico ofrece «pesos nominales / pesos de hoy», con índice y fecha rotulados, y deflacta con <code>precio × IPC_hoy / IPC_mes</code>. La API de series de tiempo del Estado (<code>https://apis.datos.gob.ar/series/api/series</code>)[[c:ipc_params]] respondió con el dato de julio de 2026, y el INDEC sigue publicando el IPC con base diciembre de 2016: el cambio de base previsto para 2026 no entró en vigor (capítulo 6). Aun así, el identificador se confirma con <code>metadata=full</code> antes de usarlo, se guarda la fecha del último dato y, si pasan 60 días sin actualización, el gráfico vuelve a pesos nominales y lo avisa.</p></div>
+
+<h2>Tableros y BI para usar sin programar</h2>
+<p>Ningún tablero genérico reemplaza al panel de catálogos: sirven para enlaces, estados, tablas y series, no para filas de tarjetas (opinión). No todos son «sin programar»: Datasette, Metabase y Grafana usan SQL o el navegador; Glance, Homepage y Evidence, YAML o Markdown; Streamlit y Dash, Python. El esfuerzo de mantenimiento es una estimación propia.</p>
+<table>
+<caption>Tableros y herramientas de BI (versiones al 7 de octubre de 2026)</caption>
+<colgroup><col style="width:13%"><col style="width:26%"><col style="width:24%"><col style="width:24%"><col style="width:13%"></colgroup>
+<thead><tr><th>Herramienta</th><th>Qué hace</th><th>Licencia y versión</th><th>Mantenimiento</th><th>Veredicto</th></tr></thead>
+<tbody>
+<tr><td>Datasette</td><td>Publica una base SQLite como sitio y API JSON.</td><td>Apache-2.0; 0.65.5 (sep 2026).[[c:datasette]]</td><td>Bajo; hubo parches de seguridad.</td><td><span class="etq osi">Adoptar</span></td></tr>
+<tr><td>Glance</td><td>Tablero YAML en un binario; lee el JSON de WINT.</td><td>AGPL-3.0; 0.8.6 (sep 2026).[[c:glance]]</td><td>Bajo; cadencia lenta, aún 0.x.</td><td><span class="etq sol">Opcional</span></td></tr>
+<tr><td>Grafana</td><td>Series y alertas; SQLite con plugin comunitario.</td><td>AGPL-3.0; 13.2.3 (sep 2026).[[c:grafana]]</td><td>Alto: cuatro ramas parcheadas el mismo día.</td><td><span class="etq sol">Opcional</span></td></tr>
+<tr><td>Metabase</td><td>Preguntas visuales sin SQL, tableros y alertas.</td><td>AGPL; v0.64.1 (oct 2026).[[c:metabase]]</td><td>Alto: Java 25; <code>latest</code> sigue en 0.63.19.3.</td><td><span class="etq sol">Opcional</span></td></tr>
+<tr><td>Apache Superset</td><td>BI sobre bases SQL.</td><td>Apache-2.0; 6.1.0 (may 2026).[[c:superset]]</td><td>Alto: el más pesado.</td><td><span class="etq gris">Descartar</span></td></tr>
+<tr><td>Evidence</td><td>Informes en SQL y Markdown; sitio estático.</td><td>MIT; npm 40.1.8 (feb 2026).[[c:evidence]]</td><td>Medio; CLI nueva sin aclarar frente a npm.</td><td><span class="etq sol">Opcional</span></td></tr>
+<tr><td>Observable Framework</td><td>Sitios estáticos con data loaders.</td><td>ISC; 1.13.4 (mar 2026).[[c:framework]]</td><td>Medio; despliegue en su nube deprecado.</td><td><span class="etq gris">Descartar</span></td></tr>
+<tr><td>Streamlit</td><td>Apps de datos en Python.</td><td>Apache-2.0; 1.65.0 (oct 2026).[[c:streamlit]]</td><td>Medio: hay que escribir la interfaz.</td><td><span class="etq luna">Reserva</span></td></tr>
+<tr><td>Dash</td><td>Apps y tableros en Python sobre Plotly.</td><td>MIT; 4.4.1 (jul 2026).[[c:dash]]</td><td>Medio; parche de seguridad en la 4.4.1.</td><td><span class="etq gris">Descartar</span></td></tr>
+<tr><td>Rill</td><td>BI sobre DuckDB o ClickHouse.</td><td>Apache-2.0; v0.90.3 (oct 2026).[[c:rill]]</td><td>Pide DuckDB o ClickHouse; Windows <span class="etq rojo">sin verificar</span></td><td><span class="etq gris">Descartar</span></td></tr>
+<tr><td>Homarr</td><td>Tablero visual con integraciones, en Docker.</td><td>Apache-2.0; v2.0.0 (oct 2026).[[c:homarr]]</td><td>Alto por ahora: versión mayor reciente.</td><td><span class="etq luna">Reserva</span></td></tr>
+<tr><td>Homepage</td><td>Tablero YAML con Custom API, en Docker.</td><td>GPL-3.0; v2.4.0 (sep 2026).[[c:homepage]]</td><td>Medio; la documentación no trata Windows.</td><td><span class="etq luna">Reserva</span></td></tr>
+<tr><td>Home Assistant</td><td>Domótica con tableros y API REST.</td><td>Apache-2.0; 2026.9.4 (sep 2026).[[c:hass]]</td><td>Alto: en Windows solo en VM.</td><td><span class="etq luna">Reserva</span></td></tr>
+</tbody></table>
+<p>Datasette y Dash publicaron correcciones de seguridad en 2026: conviene fijar versiones, escuchar solo en 127.0.0.1 o en la red privada y revisar parches una vez por mes. Grafana, Metabase y Glance son AGPL (obligaciones si el servicio se ofreciera a terceros; no es asesoramiento legal). Los instaladores <code>irm … | iex</code> se leen antes de ejecutarse.</p>
+
+<h2>Estado ambiental: bandeja, avisos y escritorio</h2>
+<p>El estado de WINT, Sol, Luna y el Detector se escribe en un único <code>estado.json</code>, que el motor de catálogos ya reescribe cada segundo; <span class="etq luna">propuesta</span> extenderlo con un enumerado de estados y un texto corto. Bandeja, panel web y Rainmeter son vistas de ese archivo; en Modern Standby el ícono puede quedar suspendido (capítulo 5), así que no es fuente de verdad. La bandeja va detrás de una interfaz propia: <code>pystray</code> 0.19.5 no publica desde el 17 de septiembre de 2023 (LGPL-3.0).[[c:pystray]]</p>
+<p>La guía de Microsoft para el área de notificación se escribió para Windows 7 y no se actualizó, aunque gran parte sigue aplicando; su comportamiento en Windows 11 no pudo verificarse. Pide una sola superposición de estado abajo a la derecha, evitar grandes superficies de rojo, amarillo y verde puros, no parpadear ni animar sin fin, mostrar un tooltip y ofrecer quitar el ícono; solo la persona puede promoverlo desde el desborde, así que el primer arranque explica cómo fijarlo.[[c:ms_uxguide]] El naranja de «trabajando» es una convención propia y sirve si va con forma y texto: el color no puede ser el único canal (WCAG 1.4.1).[[c:wcag_color]]</p>
+<table>
+<caption>Estados del ícono de bandeja (propuesta de diseño)</caption>
+<colgroup><col style="width:14%"><col style="width:36%"><col style="width:21%"><col style="width:29%"></colgroup>
+<thead><tr><th>Estado</th><th>Forma y superposición</th><th>Color</th><th>Tooltip de ejemplo</th></tr></thead>
+<tbody>
+<tr><td>Trabajando</td><td>Ícono lleno con arco de actividad</td><td>Naranja (ya existente)</td><td>«Detector: trabajando (07:42)»</td></tr>
+<tr><td>Pausado</td><td>Dos barras verticales</td><td>Gris cálido</td><td>«Detector: pausado hasta Sol»</td></tr>
+<tr><td>Error</td><td>Superposición: triángulo con «!»</td><td>Rojo, solo en la marca</td><td>«Detector: error en la pasada»</td></tr>
+<tr><td>Inactivo</td><td>Contorno sin relleno</td><td>Índigo o gris azulado</td><td>«Detector: inactivo (07:30)»</td></tr>
+<tr><td>Fuera de línea</td><td>Superposición: raya diagonal</td><td>Gris</td><td>«Sin red: reintento a las 09:00»</td></tr>
+</tbody></table>
+<p>Tres canales: el tooltip (estado a demanda), el toast de Windows (error, pausa por Luna, fin de pasada con novedades; uno por transición) y ntfy hacia el teléfono (lo que debe llegar aunque nadie mire la PC). La cuenta atrás de Luna con aborto es una notificación, no una pregunta: si nadie la aborta, Luna procede porque lo habilita el archivo de reglas. Con la persona ausente, Windows puede no mostrar o encolar las notificaciones (documentación de 2018),[[c:ms_notif]] así que el aviso crítico no depende solo del toast. <code>win11toast</code> 0.36.3 (MIT) los genera desde Python;[[c:win11toast]] que funcione sin empaquetar en el equipo real está <span class="etq rojo">sin verificar</span>.</p>
+
+<ul>
+<li><strong>Rainmeter</strong> (opcional; GPL v2; estable 4.5.27 del 6 de octubre de 2026):[[c:rainmeter]] leer <code>estado.json</code> con WebParser y <code>file://</code> <span class="etq rojo">sin verificar</span>; las compilaciones v5.0.0.x (agosto a octubre) son de desarrollo y no se usan.</li>
+<li><strong>Widgets de Windows 11</strong> (opcional): solo apps empaquetadas (MSIX) pueden ser proveedores y el único anfitrión documentado es el Tablero de widgets (documentación de 2022: evidencia débil);[[c:widgets]] Dev Home, archivado el 5 de junio de 2025, no es alternativa.[[c:devhome]]</li>
+<li><strong>Lively</strong> (opcional; GPL-3.0; sin versiones de 2026, la última es de septiembre de 2025):[[c:lively]] cambia el fondo con <code>setwp --file &lt;ruta&gt; --monitor &lt;id&gt;</code>;[[c:lively_cli]] es cosmético y se invoca como proceso externo (criterio habitual, sin fuente).</li>
+</ul>
+
+<div class="aviso ok"><span class="t">Qué hacer</span>
+<ol>
+<li>Extender <code>estado.json</code> con un enumerado de estados y mostrar los cinco en la bandeja, detrás de una interfaz propia; ntfy para lo que debe llegar al teléfono.</li>
+<li>Explorar los precios con Datasette sobre una copia de la base SQLite, en 127.0.0.1 y con versión fijada, antes de dibujar nada.</li>
+<li>Crear la tabla de filas y el panel con scroll-snap, destacado estático y «Mi lista»: dos filas temáticas y las cuatro de precios, con «Ofertas no sostenidas por el historial» oculta hasta calibrar.</li>
+<li>Dibujar el escalón con ECharts y los mini-gráficos con uPlot; el interruptor «pesos de hoy» llega tras consultar el IPC con <code>metadata=full</code>.</li>
+<li>Probar en el equipo real teclado, foco, contraste y PWA por HTTPS; D-pad y Compose for TV solo si el uso en televisor lo justifica.</li>
+<li>Dejar Rainmeter, Widgets y Lively para cuando el panel y la bandeja funcionen.</li>
+</ol></div>

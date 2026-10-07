@@ -1,0 +1,40 @@
+<!--CAP {"num":"01","titulo":"Resumen ejecutivo","entrada":"WINT en pocas páginas: qué es, qué conviene decidir y por dónde empezar.","corto":"01","resumen":"La tesis, las decisiones recomendadas y las primeras tareas"}-->
+<p class="lead">Bien diseñado, WINT es viable y pequeño: un núcleo sin ventana, en Python, que cierra y arranca el día con Sol y Luna, corre el Detector de precios, aplica reglas escritas y avisa con un motivo. No conversa, no pregunta y no usa IA para decidir. Casi todas las piezas ya existen: Windows trae las acciones de energía, el motor de catálogos ya guarda, analiza y muestra, y hay buenas herramientas libres para avisar y graficar. Lo que falta es la capa que las une con reglas propias.</p>
+
+<h2>Lo esencial</h2>
+<ul>
+<li><strong>Más allá de Suspender, Apagar y Reiniciar.</strong> Windows ya sabe hibernar, apagar del todo, despertar con un temporizador y mantenerse despierto mientras un programa trabaja. Sol y Luna se construyen sobre eso, con comandos concretos (capítulo 5).</li>
+<li><strong>El punto débil es despertar a una hora fija</strong> en equipos con Modern Standby: Microsoft no documenta que funcione y hay que probarlo en la PC real. Sol cumple igual si corre apenas el equipo se usa por primera vez en el día.</li>
+<li><strong>Desmentir una oferta exige un historial en pesos de hoy y un método escrito.</strong> El que se propone está especificado y probado con datos sintéticos, pero sus umbrales no están calibrados: arranca en modo sombra (capítulo 6).</li>
+<li><strong>Android es una escalera.</strong> Primero el panel instalable, avisos por ntfy y acceso privado por Tailscale; una app nativa solo si hace falta. El teléfono no revisa precios: recibe avisos (capítulo 7).</li>
+<li><strong>Sol y Luna son buenos nombres</strong> si van siempre con el prefijo: hoy también son nombres de modelos de OpenAI, y WINT es además el nombre de una empresa israelí de agua (capítulo 3).</li>
+<li><strong>No todo está igual de firme.</strong> Varios sitios oficiales estuvieron bloqueados durante la investigación; el informe marca lo no verificado, y lo legal argentino se leyó en espejos no oficiales (capítulo 2).</li>
+</ul>
+
+<!--SIN {"titulo":"WINT de un vistazo","tono":"luna","arbol":["WINT",[["Núcleo",["Reglas escritas, eventos con motivo","Avisos con presupuesto"],"luna"],["Módulos",["WINT Sol y WINT Luna","Detector y Catálogos","Osi (por definir)"],"sol"],["Clientes",["Bandeja y panel web","Teléfono, por ntfy"],"osi"]]],"pie":"El núcleo decide con reglas; los módulos hacen el trabajo; los clientes muestran y avisan."}-->
+
+<h2>Decisiones recomendadas</h2>
+<table>
+<caption>Diez decisiones y dónde se fundamentan</caption>
+<colgroup><col style="width:18%"><col style="width:70%"><col style="width:12%"></colgroup>
+<thead><tr><th>Tema</th><th>Recomendación</th><th>Capítulo</th></tr></thead>
+<tbody>
+<tr><td>Nombres</td><td>«WINT Sol» y «WINT Luna» en lo visible; <code>wint.sol</code> y <code>wint.luna</code> en el código.</td><td>3</td></tr>
+<tr><td>Arquitectura</td><td>Núcleo Python sin ventana; módulos como procesos con manifiesto; API local y eventos.</td><td>4</td></tr>
+<tr><td>IA</td><td>Solo reglas por defecto; IA opcional y en el borde, para extraer datos.</td><td>4</td></tr>
+<tr><td>Cuándo corren Sol y Luna</td><td>Hora fija configurable con condiciones; la hora solar, solo para el tema y la luz.</td><td>5</td></tr>
+<tr><td>Despertar</td><td>Tarea con «ejecutar apenas sea posible» siempre; despertar automático solo si la prueba sale bien.</td><td>5</td></tr>
+<tr><td>Cierre</td><td>Estado final según el perfil del equipo; Hibernar si hay programas abiertos; nunca cierre forzado.</td><td>5</td></tr>
+<tr><td>Ofertas</td><td>Algoritmo en pesos de hoy, en modo sombra hasta revisar una muestra a mano.</td><td>6</td></tr>
+<tr><td>Teléfono</td><td>PWA, ntfy y Tailscale; app nativa solo ante una necesidad concreta.</td><td>7</td></tr>
+<tr><td>Visualización</td><td>Panel propio con filas y gráficos de escalón; Datasette para explorar.</td><td>8</td></tr>
+<tr><td>Publicación</td><td>Consulta legal y búsqueda de marca antes de publicar nada con nombres de comercios.</td><td>3 y 6</td></tr>
+</tbody></table>
+
+<div class="aviso ok"><span class="t">Por dónde empezar</span><ol>
+<li>Perfilar la energía de la PC con <code>powercfg /a</code> y hacer las seis pruebas del capítulo 5.</li>
+<li>Definir Osi: qué recibe, qué produce y cuándo corre.</li>
+<li>Elegir el primer comercio para el Detector y empezar a guardar precios antes del CyberMonday.</li>
+<li>Escribir los cinco manifiestos de módulo y registrar Sol y una Luna mínima.</li>
+<li>Responder las preguntas del capítulo 11.</li>
+</ol></div>

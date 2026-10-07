@@ -1,0 +1,117 @@
+<!--CAP {"num":"06","titulo":"El Detector y la caza de ofertas falsas","entrada":"Para demostrar que una oferta miente hacen falta cuatro cosas: un historial bien guardado, pesos de hoy, un método escrito y un lenguaje que solo diga hechos.","corto":"06","resumen":"Qué es una oferta real, datos argentinos, algoritmo, validación y límites legales"}-->
+<p class="lead">El Detector ya hace la parte más laboriosa: recorre un comercio y guarda sus precios día tras día. Para «demostrar las mentiras de las ofertas» falta un método que resista una discusión: una definición escrita de oferta real, un historial guardado con cuidado, una comparación que no se deje engañar por la inflación y una forma de publicar que solo diga hechos con fecha. Este capítulo propone ese método y separa con claridad lo verificado de lo que todavía hay que calibrar.</p>
+
+<h2>Qué es una oferta real</h2>
+<p>La referencia más precisa que existe es europea. La Directiva 2019/2161 obliga a que todo anuncio de rebaja indique el precio anterior, y define ese precio como el más bajo que el comercio aplicó durante al menos 30 días antes de la rebaja[[c:eu_omnibus]]. No rige en la Argentina, pero sirve como prueba de control: si una «oferta» no la pasa, el Detector tiene un primer indicio.</p>
+<p>En la Argentina no se encontró una regla numérica de «precio de referencia». El control de las ofertas engañosas descansa en el criterio general de no inducir a error de la Ley 24.240 de Defensa del Consumidor (artículos 7 y 8) y del DNU 274/2019 de lealtad comercial (artículos 10 a y 11)[[c:ley24240,dnu274]]. La Ley 22.802 de Lealtad Comercial ya no está vigente: el DNU 274/2019 la derogó en 2019[[c:dnu274]]. Hay proyectos de ley que agregarían un historial de precios a la Ley 24.240, sin número de expediente verificado. La exhibición de precios se rige por la Resolución 4/2025 de la Secretaría de Industria y Comercio: precio final en pesos, precio por unidad de medida y, desde el 1 de abril de 2025, el importe sin impuestos nacionales[[c:res4_2025]].</p>
+<!--SIN {"titulo":"Ofertas que no lo son","tono":"rojo","arbol":["Engaños con nombre",[["Ancla falsa",["Tachado ficticio u oferta perpetua","Suba previa a la oferta"],"rojo"],["Presión",["Falsa urgencia o escasez"],"sol"],["Letra chica",["Cuotas «sin interés» con lista inflada","Descuento sobre lista o solo con un banco"],"luna"],["Producto que cambia",["Menos contenido al mismo precio"],"gris"]]],"pie":"La rama roja es la que el historial de precios permite demostrar; las demás exigen leer condiciones o comparar el producto."}-->
+
+<p>Con inflación, además, comparar precios nominales engaña. El IPC subió 2,1 % en julio y 1,7 % en agosto de 2026[[c:ipc_prensa]]: a ese ritmo, el precio «más bajo de los últimos cuatro meses» casi siempre está en el pasado aunque el producto se haya abaratado de verdad. Por eso el método trabaja en <strong>pesos de hoy</strong> (deflactados por IPC) y, como control, en dólares.</p>
+
+
+<p>Un caso con datos inventados muestra cómo se ve el engaño más común, el del ancla falsa:</p>
+<!--DIAG escalon | Datos sintéticos, solo para ilustrar el método. El precio se dibuja como escalón porque cambia de golpe. La rebaja anunciada del 20 % se calcula sobre un precio subido dos semanas antes: el «descuento» deja el producto más caro que antes de la suba.-->
+
+<h2>Qué existe hoy</h2>
+<p>Ningún servicio conocido cubre comercios argentinos con historial y método propios: los más usados en el mundo siguen a Amazon o a mercados europeos. Lo valioso está en los proyectos abiertos y en las bibliotecas de extracción.</p>
+<table>
+<caption>Herramientas para seguir precios</caption>
+<colgroup><col style="width:24%"><col style="width:34%"><col style="width:26%"><col style="width:16%"></colgroup>
+<thead><tr><th>Herramienta</th><th>Qué hace</th><th>Licencia · estado</th><th>Para el Detector</th></tr></thead>
+<tbody>
+<tr><td>Keepa · CamelCamelCamel</td><td>Historial y alertas de precio de Amazon.</td><td>Servicios; estado y precio <span class="etq rojo">sin verificar</span></td><td>Bajo: no cubre la Argentina</td></tr>
+<tr><td>PriceSpy · Idealo · PriceRunner · Google Shopping</td><td>Comparadores de precios.</td><td><span class="etq rojo">sin verificar</span></td><td>Bajo</td></tr>
+<tr><td>changedetection.io</td><td>Vigila páginas; detecta cambios de precio y reposición con umbrales.</td><td>Apache-2.0 · 0.60.8, 28 sep 2026[[c:changedetection]]</td><td>Alto como vigía complementario</td></tr>
+<tr><td>PriceBuddy · PriceGhost</td><td>Rastreadores autoalojados con historial.</td><td>Licencia propia · MIT</td><td>Medio: ideas de diseño</td></tr>
+<tr><td>preciazo · quiendamenos · superprecios-claros</td><td>Proyectos argentinos: supermercados, adaptadores VTEX, histórico sobre SEPA.</td><td>Licencias sin declarar o por revisar; superprecios-claros: código MIT y datos CC BY</td><td>Alto como referencia; no copiar código sin licencia</td></tr>
+<tr><td>Scrapy · selectolax · extruct · price-parser · Protego</td><td>Rastreo, análisis de HTML, datos estructurados, precios en texto, <code>robots.txt</code>.</td><td>BSD y MIT · versiones 2026 (extruct, 2024)</td><td>Alto</td></tr>
+<tr><td>Playwright · Crawlee</td><td>Navegador para sitios que arman la página con JavaScript.</td><td>Apache-2.0</td><td>Medio: solo si hace falta</td></tr>
+<tr><td>Firecrawl · Apify · Zyte</td><td>Servicios de extracción en la nube.</td><td>AGPL-3.0 o pagos</td><td>Bajo</td></tr>
+<tr><td>Herramientas anti-detección</td><td>Disfrazar el rastreador de navegador humano.</td><td>Varias (algunas AGPL)</td><td><strong>Evitar</strong>: cambia el riesgo legal</td></tr>
+</tbody></table>
+
+<h2>De dónde salen los datos en la Argentina</h2>
+<table>
+<caption>Fuentes para el Detector y su estado verificado</caption>
+<colgroup><col style="width:21%"><col style="width:31%"><col style="width:26%"><col style="width:22%"></colgroup>
+<thead><tr><th>Fuente</th><th>Qué da</th><th>Estado</th><th>Cautela</th></tr></thead>
+<tbody>
+<tr><td>VTEX (Carrefour, Jumbo, Disco, Vea, Día, Cetrogar, Naldo; Frávega con otro esquema)</td><td>API pública de catálogo y búsqueda por tienda, sin autenticación.</td><td>Esquemas OpenAPI oficiales; la API de catálogo figura como «Legacy»[[c:vtex]]</td><td>50 productos por llamada y desplazamiento hasta 2.500. Coto no aparece como VTEX.</td></tr>
+<tr><td>JSON-LD (schema.org Product y Offer)</td><td>Precio y disponibilidad embebidos en la página.</td><td>Estándar abierto</td><td>No todos los sitios lo publican.</td></tr>
+<tr><td>Mercado Libre</td><td>API oficial con aplicación registrada.</td><td>Búsqueda pública con error 403 en pruebas de 2026; su política declara medidas contra el rastreo[[c:meli_dev]]</td><td>Solo por el programa oficial.</td></tr>
+<tr><td>SEPA / Precios Claros</td><td>Precios diarios que las cadenas deben informar (Resolución 678/2020).</td><td>CC BY 4.0; siete archivos rotativos de 322 a 335 MB; última actualización confirmada: 22 sep 2026[[c:sepa]]</td><td>Sin histórico oficial; la descarga automática recibe 403 sin cabeceras de navegador: no imitar un navegador sin revisar términos.</td></tr>
+<tr><td>IPC (INDEC, API de series de tiempo)</td><td>Deflactor para pasar a pesos de hoy.</td><td>La serie <code>148.3_INIVELNAL_DICI_M_26</code> respondió con el dato de julio de 2026; base diciembre de 2016[[c:ipc_api]]</td><td>El cambio de base previsto para 2026 se postergó[[c:ipc_base]]. Confirmar con <code>metadata=full</code>.</td></tr>
+<tr><td>BCRA, Estadísticas Monetarias v4.0</td><td>Tipo de cambio mayorista de referencia (A3500).</td><td>Las versiones 2.0 y 3.0 responden 410 Gone[[c:bcra]]</td><td>Buscar la variable por nombre: los números cambian entre versiones.</td></tr>
+<tr><td>Hot Sale y CyberMonday (CACE)</td><td>Fechas de los grandes eventos de descuentos.</td><td>Hot Sale 2026: 11 al 13 de mayo. CyberMonday 2026: 2 al 4 de noviembre, según la página oficial del evento leída en un extracto de búsqueda[[c:hotsale26,cyber26]]</td><td>Empezar las capturas semanas antes de cada evento.</td></tr>
+</tbody></table>
+<p>Con bandas cambiarias desde abril de 2025 y sin cepo para personas, el dólar mayorista oficial sirve como segundo numerario[[c:bandas]]; el MEP queda como serie opcional. Si se archiva todo SEPA, el volumen ronda los 120 GB por año: conviene guardar solo las cadenas y productos que se siguen.</p>
+
+<h2>El pipeline del Detector</h2>
+<!--DIAG pipeline | Seis etapas, de la página del comercio al aviso. Debajo, las dos reglas que gobiernan todo el pipeline: rastreo cortés y solo reglas por defecto.-->
+<p>La extracción va por capas, de la más estable a la más frágil: primero la API pública del comercio, después el JSON-LD de la página, después el estado que la página trae embebido para su JavaScript y, al final, el HTML. La IA solo entra si todas fallan, y es opcional (capítulo 4). Por cada observación se guarda el precio, el precio tachado, el stock, las cuotas, el medio de pago exigido, la fecha y la hora y una copia del HTML, para poder mostrar la prueba. Si un selector deja de encontrar precios, el Detector no adivina: emite <code>modulo.error</code> con el motivo. SQLite sirve para la operación diaria; para el historial largo conviene Parquet consultado con DuckDB[[c:duckdb]].</p>
+
+<h2>El algoritmo (propuesta de diseño)</h2>
+<p>El método que sigue se especificó y se ejecutó sobre once escenarios sintéticos. Es una <strong>prueba de humo, no una validación</strong>: todos los umbrales son heurísticos y están sin calibrar con datos reales, salvo los 30 días que vienen de la norma europea. Los pasos:</p>
+<ol>
+<li>Armar una grilla diaria de precios; un día sin dato hereda el anterior, como máximo tres días.</li>
+<li>Pasar todo a pesos de hoy con el IPC y, aparte, a dólares constantes.</li>
+<li>Encontrar el día <em>r</em> en que empezó el nivel de precio actual (con ±1 % de tolerancia). Si ese nivel ya dura 60 días, no hay «evento»: solo se audita el tachado y la oferta perpetua.</li>
+<li>Calcular la base <em>B</em>: la mediana, ponderada por tiempo, del precio real entre 111 y 22 días antes de <em>r</em>. Se dejan afuera las tres semanas previas porque ahí es donde se infla el precio. Se exigen al menos 45 días observados.</li>
+<li>Aplicar las seis reglas de la tabla, sumar puntos y restar las banderas.</li>
+<li>Asignar una etiqueta y escribir el motivo con plantillas: «bajó 18 % frente a la mediana de 90 días y es el mínimo de 120 días».</li>
+</ol>
+
+<table>
+<caption>Reglas y puntos del veredicto (umbrales sin calibrar)</caption>
+<colgroup><col style="width:17%"><col style="width:41%"><col style="width:42%"></colgroup>
+<thead><tr><th>Regla</th><th>Qué mide</th><th>Puntos o bandera</th></tr></thead>
+<tbody>
+<tr><td>R1 · Profundidad</td><td>Descuento real <em>nd</em> = 1 − precio de hoy ÷ base.</td><td>Hasta 35, saturando en 20 %.</td></tr>
+<tr><td>R2 · Mínimo</td><td>Días desde el último precio real más bajo.</td><td>Hasta 20, saturando en 180 días.</td></tr>
+<tr><td>R3 · Tachado</td><td>Qué parte de los últimos 90 días rigió de verdad el precio tachado (en el mejor de los dos numerarios).</td><td>Hasta 15. Bandera «tachado ficticio» (−25) si rigió menos del 10 % de los días.</td></tr>
+<tr><td>R4 · Suba previa</td><td>Si el precio subió justo antes del evento.</td><td>15, 7 o 0. Bandera «suba previa» (−25) si subió 8 % o más en ambos numerarios y el descuento real es menos de la mitad del anunciado.</td></tr>
+<tr><td>R5 · Mercado</td><td>Comparación con al menos tres comercios con el mismo producto.</td><td>Hasta 15, saturando en 10 % bajo la mediana del mercado.</td></tr>
+<tr><td>R6 · Oferta perpetua</td><td>Si el «descuento» aparece casi siempre.</td><td>Bandera (−15) si estuvo en el 60 % o más de los últimos 180 días.</td></tr>
+</tbody></table>
+<p>El puntaje es 100 × puntos ganados ÷ puntos disponibles, más las penalidades, acotado entre 0 y 100. Etiquetas: <strong>oferta real</strong> (75 o más), <strong>dudosa</strong> (50 a 74), <strong>sin valor real</strong> (menos de 50), <strong>no sostenida por el historial</strong> (si hay alguna bandera), <strong>datos insuficientes</strong> y <strong>sin evento</strong>. El aviso inmediato se reserva para un puntaje de 75 o más con una baja real de al menos 10 %. Los rangos a calibrar son: base de 60, 90 o 120 días; zona de rampa de 14, 21 o 28; suba previa de 5, 8 o 10 %.</p>
+<pre><span class="k">def</span> evaluar(obs, ipc, dolar, comparables, hoy, cfg):
+    serie = grilla_diaria(obs, arrastre_max=3)
+    real  = deflactar(serie, ipc, hoy)                   <span class="c"># pesos de hoy; aparte, en dólares</span>
+    r     = inicio_nivel_actual(real, tolerancia=0.01)
+    <span class="k">if</span> dias(r, hoy) >= 60:
+        <span class="k">return</span> auditar_tachado_y_perpetua(serie)        <span class="c"># sin evento</span>
+    base = mediana_por_tiempo(real, desde=r - 111, hasta=r - 22)
+    <span class="k">if</span> cobertura(real, r - 111, r - 22) &lt; 45:
+        <span class="k">return</span> Veredicto(<span class="s">"datos insuficientes"</span>)
+    nd = 1 - real[hoy] / base                            <span class="c"># descuento real</span>
+    puntos, banderas, motivos = aplicar_reglas(real, serie, nd, comparables, cfg)
+    puntaje = acotar(100 * puntos.ganados / puntos.disponibles + sum(banderas.penalidades), 0, 100)
+    <span class="k">return</span> Veredicto(etiqueta(puntaje, banderas), puntaje, motivos)</pre>
+
+<h2>Validar antes de acusar</h2>
+<p>Acusar sin razón cuesta más que callar. Por eso el Detector arranca en <strong>modo sombra</strong>: calcula veredictos, los guarda y no los muestra como acusación. Necesita entre 45 y 90 días de historial para tener base, y la etiqueta pública «no sostenida por el historial» se habilita recién después de revisar a mano una muestra de casos: 385 para estimar la precisión con ±5 puntos y 95 % de confianza sin suponer nada, o 139 si se espera una precisión cercana al 90 %. La muestra se estratifica por categoría, comercio y banda de puntaje, y una quinta parte la revisa una segunda persona para medir el acuerdo.</p>
+<p>Dos cuidados más. El emparejamiento de productos entre comercios se hace primero por código EAN y después por marca, nombre y tamaño; la IA puede proponer pares dudosos, pero <strong>una persona los aprueba</strong>. Y el escenario de 4 % de inflación mensual que usa la investigación queda como prueba de estrés: la inflación real de los últimos meses fue menor.</p>
+
+<h2>Lo legal y lo ético</h2>
+<div class="aviso riesgo"><span class="t">Leer con un abogado</span><p>Toda la normativa argentina de esta sección se leyó en espejos no oficiales de InfoLeg y en notas de estudios jurídicos: los sitios oficiales (InfoLeg, SAIJ, Boletín Oficial) estuvieron bloqueados durante la investigación. Antes de publicar cualquier comparación con nombres de comercios conviene una consulta profesional.</p></div>
+<table>
+<caption>Qué se sabe y qué conviene hacer</caption>
+<colgroup><col style="width:19%"><col style="width:47%"><col style="width:34%"></colgroup>
+<thead><tr><th>Tema</th><th>Qué se sabe</th><th>Qué conviene hacer</th></tr></thead>
+<tbody>
+<tr><td>Rastrear precios públicos</td><td>No se encontró jurisprudencia argentina sobre el tema. Un precio suelto es un hecho; la Ley 11.723 protege las compilaciones solo por su originalidad y no hay un derecho especial sobre bases de datos[[c:ley11723]].</td><td>No copiar catálogos enteros. Respetar <code>robots.txt</code>, limitar el ritmo, identificarse y no usar sesiones.</td></tr>
+<tr><td>Términos de los sitios</td><td>No se pudieron leer los de Carrefour, Coto, Jumbo, Disco, Vea y Frávega. Mercado Libre declara medidas contra el rastreo.</td><td>Leerlos antes de rastrear; preferir APIs oficiales y SEPA.</td></tr>
+<tr><td>Publicar comparaciones</td><td>Comparar es lícito si es objetivo, comprobable y no induce a error (DNU 274/2019, art. 15; Código Civil y Comercial, art. 1101). Desacreditar solo es lícito con aseveraciones exactas, pertinentes y verdaderas (art. 10 i)[[c:dnu274,ccyc_pub]].</td><td>Publicar hechos con fecha, hora, URL, método y captura. Sin adjetivos ni atribución de intención.</td></tr>
+<tr><td>Decir «miente»</td><td>La calumnia y la injuria del Código Penal protegen a personas físicas; con empresas, el riesgo es civil y de competencia desleal, con cese y rectificación[[c:injurias]].</td><td>Escribir «precio de referencia no sostenido por el historial observado».</td></tr>
+<tr><td>Marcas de terceros</td><td>Las protege la Ley 22.362.</td><td>Usar el nombre solo para identificar al comercio.</td></tr>
+</tbody></table>
+<p>Hay un antecedente que valida el método. En diciembre de 2020, la autoridad de consumo multó a Telefónica y a Cencosud con 2,5 millones de pesos cada una por presentar como exclusivas del Hot Sale ofertas con precios que ya regían antes, y lo detectó comparando monitoreos de los días previos con las ofertas del evento[[c:multa_hotsale]]. Es exactamente lo que hace el Detector. Para el período 2023 a 2026 no se encontró ninguna sanción oficial; y la cifra que circula de «96 de cada 100 descuentos falsos» sale de un blog comercial con metodología no visible: no conviene usarla.</p>
+
+<div class="aviso ok"><span class="t">Qué hacer</span><ol>
+<li>Escribir un adaptador VTEX para el primer comercio y guardar cada observación con su captura.</li>
+<li>Agregar el deflactor: IPC por la API de series de tiempo y dólar mayorista por la API v4.0 del BCRA, con alerta si un dato se atrasa.</li>
+<li>Implementar el algoritmo en modo sombra y su batería de casos sintéticos.</li>
+<li>Empezar las capturas previas al CyberMonday (2 al 4 de noviembre de 2026) ya.</li>
+<li>Tras 45 a 90 días, revisar a mano la muestra y calibrar los umbrales.</li>
+<li>Antes de publicar nombres de comercios, consulta legal y plantillas de texto con solo hechos.</li>
+</ol></div>

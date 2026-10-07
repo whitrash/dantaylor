@@ -11,7 +11,7 @@ Directorio de trabajo: `/tmp/claude-0/-home-user-dantaylor/6e5bb834-7e4c-5ebb-a4
 
 `<id>` es el que te asignan (por ejemplo `cap05`, `apA`). **No toques** ningún otro archivo: ni `lib.py`, ni `estilo.css`, ni `diagramas.py`, ni los capítulos de otros.
 
-El ejemplo vivo está en `capitulos/cap00_ejemplo.html`: **leelo primero**; usa todos los macros.
+Los capítulos de `capitulos/` sirven de ejemplo vivo de todos los macros.
 
 ## 2. Estructura del fragmento
 1. Primera línea: `<!--CAP {"num":"05","titulo":"…","entrada":"…","corto":"05","resumen":"…"}-->`

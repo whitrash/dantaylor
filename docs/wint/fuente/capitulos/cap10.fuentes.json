@@ -1,0 +1,52 @@
+{
+ "precios_api": {
+  "t": "Anthropic · Precios de la API (extracto de búsqueda)",
+  "u": "https://docs.anthropic.com/en/docs/about-claude/pricing",
+  "f": "consultado 7 oct 2026"
+ },
+ "ntfy_lim": {
+  "t": "ntfy · Límites del servicio público (documentación, fuente en GitHub)",
+  "u": "https://raw.githubusercontent.com/binwiederhier/ntfy/main/docs/publish.md",
+  "f": "consultado 7 oct 2026"
+ },
+ "ntfy_readme": {
+  "t": "ntfy · README (planes)",
+  "u": "https://raw.githubusercontent.com/binwiederhier/ntfy/main/README.md",
+  "f": "consultado 7 oct 2026"
+ },
+ "tailscale_free": {
+  "t": "Tailscale · Free plans and discounts (extracto de búsqueda)",
+  "u": "https://tailscale.com/docs/account/manage-plans/free-plans-discounts",
+  "f": "consultado 7 oct 2026"
+ },
+ "verif_limited": {
+  "t": "Android Developers · Limited distribution accounts",
+  "u": "https://developer.android.com/developer-verification/guides/limited-distribution",
+  "f": "actualizada 30 sep 2026"
+ },
+ "play_testing": {
+  "t": "Ayuda de Play Console · Requisitos de prueba para cuentas personales nuevas (extracto de búsqueda)",
+  "u": "https://support.google.com/googleplay/android-developer/answer/14151465?hl=en",
+  "f": "consultado 7 oct 2026"
+ },
+ "rpi": {
+  "t": "Notebookcheck · Raspberry Pi 5 now costs up to $205 due to RAM crisis",
+  "u": "https://www.notebookcheck.net/Raspberry-Pi-5-now-costs-up-to-205-due-to-RAM-crisis.1218209.0.html",
+  "f": "2026"
+ },
+ "inpi_res75": {
+  "t": "abogados.com.ar · Resolución INPI 75/2026: creación de la UMAPI y actualización de aranceles",
+  "u": "https://abogados.com.ar/resolucion-752026-creacion-de-la-umapi-y-actualizacion-de-aranceles-del-inpi/38776",
+  "f": "mar 2026"
+ },
+ "nic_aranceles": {
+  "t": "NIC Argentina · Aranceles (extracto de búsqueda)",
+  "u": "https://nic.ar/es/dominios/aranceles",
+  "f": "consultado 7 oct 2026"
+ },
+ "percepcion": {
+  "t": "iProfesional · ARCA mantuvo el 30 % de percepción de Ganancias en el dólar tarjeta",
+  "u": "https://www.iprofesional.com/impuestos/419311-dolar-arca-ex-afip-mantuvo-30-por-ciento-percepcion-ganancias",
+  "f": "2026"
+ }
+}

@@ -158,7 +158,7 @@ figcaption b{color:var(--indigo);letter-spacing:.16em;text-transform:uppercase;f
 
 /* ---------- cuadro sinóptico con llaves ---------- */
 .sinoptico{font-family:var(--sans);margin:3mm 0 5mm;break-inside:avoid;text-align:left;hyphens:manual}
-.sinoptico .caja{border:.6pt solid var(--rule);background:#FFFEFB;padding:4mm 4mm 4.4mm;border-radius:1mm}
+.sinoptico .caja{border:.6pt solid var(--rule);background:#FFFEFB;padding:3.4mm 4mm 3.6mm;border-radius:1mm}
 .sinoptico .titulo{font-weight:600;font-size:7.4pt;letter-spacing:.22em;text-transform:uppercase;color:var(--indigo);margin:0 0 3.2mm}
 .sn{display:flex;align-items:stretch}
 .sn>.et{display:flex;align-items:center;flex:0 0 auto}
@@ -166,7 +166,7 @@ figcaption b{color:var(--indigo);letter-spacing:.16em;text-transform:uppercase;f
 .sn>.ll svg{display:block;width:100%;height:100%}
 .sn>.ll .tallo{border-left:.85pt solid var(--brace,#A87A22);margin-left:50%;width:50%}
 .sn>.hij{display:flex;flex-direction:column;justify-content:space-around;flex:1 1 auto;min-width:0}
-.sn>.hij>.sn{margin:.9mm 0}
+.sn>.hij>.sn{margin:.5mm 0}
 .sn.hoja>.et{padding:.5mm 0}
 .eti{display:block;line-height:1.22;padding:1.5mm 2.4mm;text-align:left}
 .n0>.et .eti{font-family:var(--display);font-weight:700;font-size:12.2pt;color:#FBF3DD;background:var(--navy);border-radius:1.2mm;padding:2.6mm 3.2mm;max-width:31mm;line-height:1.1}
@@ -203,3 +203,12 @@ figcaption b{font-weight:600}
 caption{break-after:avoid}
 thead,thead tr{break-after:avoid;break-inside:avoid}
 tbody tr:first-child{break-before:avoid}
+
+.fuentes{columns:2;column-gap:7mm;font-size:6.9pt}
+.fuentes .f{padding:.7mm 0}
+.fuentes .f .k{flex:0 0 6mm}
+.toc .fila{padding:1.55mm 0}
+.toc .t{font-size:13pt}
+.toc .t small{font-size:7.2pt}
+.toc .n{font-size:13.5pt}
+.toc .p{font-size:12pt}

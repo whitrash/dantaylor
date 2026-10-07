@@ -12,7 +12,7 @@ sys.path.insert(0, AQUI)
 from lib import sinoptico, emblema_portada, esc  # noqa: E402
 from diagramas import DIAGRAMAS  # noqa: E402
 
-CHROME = "/opt/pw-browsers/chromium-1194/chrome-linux/chrome"
+CHROME = os.environ.get("WINT_CHROME", "/opt/pw-browsers/chromium-1194/chrome-linux/chrome")  # en Windows: ruta a chrome.exe o msedge.exe
 CAPS = os.path.join(AQUI, "capitulos")
 SALIDA = os.path.join(AQUI, "salida")
 FECHA = "7 de octubre de 2026"
@@ -133,6 +133,8 @@ def indice(caps, paginas):
         pg = paginas.get(c["id"], "")
         filas.append(f'<div class="fila"><span class="n">{esc(et)}</span><span class="t">{m["titulo"]}'
                      f'<small>{m.get("resumen","")}</small></span><span class="p">{pg}</span></div>')
+    if paginas.get("fuentes"):
+        filas.append(f'<div class="fila"><span class="n">·</span><span class="t">Fuentes consultadas<small>Todas las citas del informe, numeradas</small></span><span class="p">{paginas["fuentes"]}</span></div>')
     return ('<div class="capitulo" style="break-before:page"><span class="num">Contenido</span><h1>Índice</h1>'
             '<p class="entrada">Qué hay en este informe y dónde encontrarlo.</p><div class="filete"></div></div>'
             '<div class="toc">' + "".join(filas) + "</div>")
@@ -162,26 +164,75 @@ def doc_html(caps, est, paginas, solo=False):
             '<link rel="stylesheet" href="estilo.css"></head><body>' + "\n".join(partes) + "</body></html>")
 
 def imprimir(html_path, pdf_path):
-    r = subprocess.run([CHROME, "--headless", "--no-sandbox", "--disable-gpu", "--no-pdf-header-footer",
+    r = subprocess.run([CHROME, "--headless", "--no-sandbox", "--disable-gpu", "--no-pdf-header-footer", "--generate-pdf-document-outline",
                         f"--print-to-pdf={pdf_path}", html_path], capture_output=True, text=True)
     if not os.path.exists(pdf_path):
         print(r.stderr[-800:])
         raise SystemExit("no se generó el PDF")
 
+def _nivel0(pdf):
+    from pypdf import PdfReader
+    r = PdfReader(pdf)
+    items = []
+    def walk(o, d=0):
+        for it in o:
+            if isinstance(it, list):
+                walk(it, d + 1)
+            else:
+                items.append((d, it.title, r.get_destination_page_number(it) + 1))
+    walk(r.outline)
+    return items, len(r.pages)
+
 def paginas_de(pdf, caps):
-    n = int(re.search(r"Pages:\s+(\d+)", subprocess.run(["pdfinfo", pdf], capture_output=True, text=True).stdout).group(1))
+    items, n = _nivel0(pdf)
+    top = [x for x in items if x[0] == 0]
+    # portada e índice primero; después los capítulos en orden; al final las fuentes
+    cuerpo = [x for x in top if x[1].strip() not in ("WINT", "Índice")]
     res = {}
-    textos = []
-    for p in range(1, n + 1):
-        t = subprocess.run(["pdftotext", "-f", str(p), "-l", str(p), "-layout", pdf, "-"], capture_output=True, text=True).stdout
-        textos.append(t.lower())
-    for c in caps:
-        etiqueta = (c["meta"].get("etiqueta") or f"Capítulo {c['meta']['num']}").lower()
-        for p, t in enumerate(textos, 1):
-            if p > 2 and etiqueta in t:
-                res[c["id"]] = p
-                break
+    for c, (_, _, pg) in zip(caps, cuerpo):
+        res[c["id"]] = pg
+    if len(cuerpo) > len(caps):
+        res["fuentes"] = cuerpo[len(caps)][2]
     return res, n
+
+def _h2s(html):
+    return [re.sub(r"<[^>]+>", "", h).strip() for h in re.findall(r"<h2>(.*?)</h2>", html, re.S)]
+
+def pulir_pdf(pdf, caps):
+    """Reconstruye los marcadores con títulos limpios y fija los metadatos."""
+    from pypdf import PdfReader, PdfWriter
+    items, _ = _nivel0(pdf)
+    r = PdfReader(pdf)
+    w = PdfWriter()
+    w.append(r, import_outline=False)
+    w.add_metadata({"/Title": "WINT · Informe técnico y hoja de ruta",
+                    "/Subject": "Sol, Luna y Osi: energía en Windows, plataforma Android, detección de ofertas falsas",
+                    "/Keywords": "WINT, Sol, Luna, Osi, Windows, Android, precios, ofertas",
+                    "/Creator": "Ensamblador WINT sobre Chromium"})
+    tops = [i for i, x in enumerate(items) if x[0] == 0]
+    w.add_outline_item("Índice", 1)
+    cap_i = 0
+    for k, idx in enumerate(tops):
+        _, titulo, pg = items[idx]
+        if titulo.strip() in ("WINT", "Índice"):
+            continue
+        fin = tops[k + 1] if k + 1 < len(tops) else len(items)
+        hijos = [x for x in items[idx + 1:fin] if x[0] == 1]
+        if cap_i < len(caps):
+            c = caps[cap_i]
+            et = c["meta"].get("etiqueta") or f"Capítulo {c['meta']['num']}"
+            limpio = re.sub(r"<[^>]+>", "", c["meta"]["titulo"])
+            padre = w.add_outline_item(f"{et} · {limpio}", pg - 1)
+            h2 = _h2s(c["cuerpo"])
+            for j, (_, t, p) in enumerate(hijos):
+                tt = h2[j] if len(h2) == len(hijos) else t
+                w.add_outline_item(tt, p - 1, parent=padre)
+            cap_i += 1
+        else:
+            w.add_outline_item("Fuentes consultadas", pg - 1)
+    w.page_mode = "/UseOutlines"
+    with open(pdf, "wb") as f:
+        w.write(f)
 
 def main():
     solo = None
@@ -203,6 +254,8 @@ def main():
             break
         paginas, total = paginas_de(pdf, caps)
         print(f"pasada {pasada}: {total} páginas; capítulos en {paginas}")
+    if not solo:
+        pulir_pdf(pdf, caps)
     for a in est.avisos:
         print("AVISO:", a)
     print("PDF:", pdf)

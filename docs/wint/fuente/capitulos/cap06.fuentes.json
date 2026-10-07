@@ -1,0 +1,22 @@
+{
+"eu_omnibus":{"t":"Directiva (UE) 2019/2161, art. 6a de la Directiva 98/6/CE (EUR-Lex; texto contrastado con un espejo)","u":"https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32019L2161","f":"27 nov 2019"},
+"ley24240":{"t":"Ley 24.240 de Defensa del Consumidor (espejo no oficial de InfoLeg)","u":"https://raw.githubusercontent.com/legalize-dev/legalize-ar/main/ar/LEY-24240.md","f":"consultado 7 oct 2026"},
+"dnu274":{"t":"DNU 274/2019 de Lealtad Comercial (espejo no oficial de InfoLeg)","u":"https://raw.githubusercontent.com/legalize-dev/legalize-ar/main/ar/DNU-274-2019.md","f":"consultado 7 oct 2026"},
+"res4_2025":{"t":"Allende & Brea · Nueva resolución sobre precios y su forma de exhibición (Resolución 4/2025)","u":"https://allende.com/administrativo/nueva-resolucion-sobre-precios-y-su-forma-de-exhibicion-01-20-2025/","f":"20 ene 2025"},
+"ipc_prensa":{"t":"iProUP · Inflación de agosto: dato oficial del INDEC","u":"https://www.iproup.com/finanzas/71297-inflacion-agosto-dato-oficial-indec-confirma-cuanto-llego-ipc-acumulado-anual-precios-2026","f":"sep 2026"},
+"changedetection":{"t":"changedetection.io · repositorio","u":"https://github.com/dgtlmoon/changedetection.io","f":"0.60.8, 28 sep 2026"},
+"vtex":{"t":"VTEX · esquemas OpenAPI oficiales","u":"https://github.com/vtex/openapi-schemas","f":"consultado 7 oct 2026"},
+"meli_dev":{"t":"Mercado Libre Developers · Términos y condiciones (extracto de búsqueda)","u":"https://developers.mercadolibre.com.ar/es-ar-terminos-y-condiciones","f":"consultado 7 oct 2026"},
+"sepa":{"t":"Ministerio de Economía · Dataset «Precios Claros - Base SEPA» (extracto de búsqueda y metadatos)","u":"https://datos.produccion.gob.ar/dataset/sepa-precios","f":"modificado 22 sep 2026"},
+"ipc_api":{"t":"API de Series de Tiempo · IPC nivel general nacional","u":"https://apis.datos.gob.ar/series/api/series/?ids=148.3_INIVELNAL_DICI_M_26&format=json&limit=2&sort=desc","f":"respuesta del 8 sep 2026"},
+"ipc_base":{"t":"Chequeado · INDEC: qué se sabe de la renuncia de Marco Lavagna y el nuevo IPC","u":"https://chequeado.com/el-explicador/indec-que-se-sabe-sobre-la-renuncia-de-marcos-lavagna-y-el-nuevo-ipc/","f":"feb 2026"},
+"bcra":{"t":"BCRA · Catálogo de la API Principales Variables v4.0 (PDF)","u":"https://web2.bcra.gob.ar/Catalogo/Content/files/pdf/principales-variables-v4.pdf","f":"consultado 7 oct 2026"},
+"hotsale26":{"t":"Mercado · CACE abrió las contrataciones para Hot Sale 2026, previsto del 11 al 13 de mayo","u":"https://mercado.com.ar/agenda/cace-abrio-las-contrataciones-para-hot-sale-2026-previsto-del-11-al-13-de-mayo","f":"feb 2026"},
+"cyber26":{"t":"CyberMonday Argentina · ¿Cuándo es el CyberMonday 2026? (extracto de búsqueda)","u":"https://www.cybermonday.com.ar/cuando-es-cybermonday","f":"consultado 7 oct 2026"},
+"bandas":{"t":"La Capital · Empezó el nuevo esquema cambiario: el BCRA ajustará el dólar por inflación","u":"https://www.lacapital.com.ar/economia/empezo-este-jueves-el-nuevo-esquema-cambiario-el-bcra-ajustara-el-dolar-inflacion-n10237873.html","f":"ene 2026"},
+"duckdb":{"t":"DuckDB · PyPI","u":"https://pypi.org/project/duckdb/","f":"1.5.6, 28 sep 2026"},
+"ley11723":{"t":"Ley 11.723 de Propiedad Intelectual (espejo no oficial de InfoLeg)","u":"https://raw.githubusercontent.com/legalize-dev/legalize-ar/main/ar/LEY-11723.md","f":"consultado 7 oct 2026"},
+"ccyc_pub":{"t":"abogados.com.ar · Publicidad prohibida por el Código Civil y Comercial de la Nación","u":"https://abogados.com.ar/publicidad-prohibida-por-el-codigo-civil-y-comercial-de-la-nacion/25846","f":"consultado 7 oct 2026"},
+"injurias":{"t":"Pensamiento Penal · Calumnias e injurias, arts. 109 y 110 del Código Penal (Ley 26.551)","u":"https://pensamientopenal.com.ar/fallos/33032-calumnias-e-injurias-cp-109-y-110-modificacion-ley-26551-fundamento-asunto-interes","f":"consultado 7 oct 2026"},
+"multa_hotsale":{"t":"iProUP · Hot Sale: multan a Telefónica y Cencosud por ofertas engañosas","u":"https://www.iproup.com/economia-digital/19066-hot-sale-multan-a-telefonica-y-cencosud-por-ofertas-enganosas","f":"14 dic 2020"}
+}

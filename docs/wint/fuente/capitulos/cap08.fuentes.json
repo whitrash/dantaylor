@@ -1,0 +1,402 @@
+{
+ "and_featured": {
+  "t": "Android Developers · Android TV: Featured carousel",
+  "u": "https://developer.android.com/design/ui/tv/guides/components/featured-carousel",
+  "f": "consultado 7 oct 2026 (la página no muestra fecha)"
+ },
+ "and_immersive": {
+  "t": "Android Developers · Android TV: Immersive list",
+  "u": "https://developer.android.com/design/ui/tv/guides/components/immersive-list",
+  "f": "consultado 7 oct 2026 (la página no muestra fecha)"
+ },
+ "and_cards": {
+  "t": "Android Developers · Android TV: Cards",
+  "u": "https://developer.android.com/design/ui/tv/guides/components/cards",
+  "f": "consultado 7 oct 2026 (la página no muestra fecha)"
+ },
+ "androidx_tv": {
+  "t": "Android Developers · Versiones de androidx.tv (tv-material y tv-foundation)",
+  "u": "https://developer.android.com/jetpack/androidx/releases/tv",
+  "f": "última actualización de la página: 6 may 2026; consultado 7 oct 2026"
+ },
+ "carousel_kt": {
+  "t": "Código fuente de Carousel.kt en androidx (rama androidx-main)",
+  "u": "https://raw.githubusercontent.com/androidx/androidx/androidx-main/tv/tv-material/src/main/java/androidx/tv/material3/Carousel.kt",
+  "f": "consultado 7 oct 2026"
+ },
+ "leanback": {
+  "t": "Android Developers · Versiones de androidx.leanback (deprecado)",
+  "u": "https://developer.android.com/jetpack/androidx/releases/leanback",
+  "f": "última actualización de la página: 17 jun 2026; consultado 7 oct 2026"
+ },
+ "compose_found": {
+  "t": "Android Developers · Versiones de compose-foundation",
+  "u": "https://developer.android.com/jetpack/androidx/releases/compose-foundation",
+  "f": "consultado 7 oct 2026"
+ },
+ "compose_lists": {
+  "t": "Android Developers · Listas y cuadrículas en Compose",
+  "u": "https://developer.android.com/develop/ui/compose/lists",
+  "f": "consultado 7 oct 2026"
+ },
+ "tv_hw": {
+  "t": "Android Developers · Requisitos de hardware en TV",
+  "u": "https://developer.android.com/training/tv/get-started/hardware",
+  "f": "consultado 7 oct 2026"
+ },
+ "tv_nav": {
+  "t": "Android Developers · Navegación en TV",
+  "u": "https://developer.android.com/training/tv/get-started/navigation",
+  "f": "consultado 7 oct 2026"
+ },
+ "webfeatures": {
+  "t": "web-features 3.40.1 (paquete npm, 1 oct 2026): datos de Baseline",
+  "u": "https://registry.npmjs.org/web-features/-/web-features-3.40.1.tgz",
+  "f": "consultado 7 oct 2026"
+ },
+ "scroll_marker": {
+  "t": "mdn/browser-compat-data · css/properties/scroll-marker-group.json",
+  "u": "https://raw.githubusercontent.com/mdn/browser-compat-data/main/css/properties/scroll-marker-group.json",
+  "f": "consultado 7 oct 2026"
+ },
+ "mdn_pwa": {
+  "t": "MDN (copia en GitHub) · Cómo hacer instalable una PWA",
+  "u": "https://raw.githubusercontent.com/mdn/content/main/files/en-us/web/progressive_web_apps/guides/making_pwas_installable/index.md",
+  "f": "consultado 7 oct 2026"
+ },
+ "norigin": {
+  "t": "npm · @noriginmedia/norigin-spatial-navigation",
+  "u": "https://registry.npmjs.org/@noriginmedia/norigin-spatial-navigation",
+  "f": "consultado 7 oct 2026"
+ },
+ "bbc_lrud": {
+  "t": "npm · @bbc/tv-lrud-spatial",
+  "u": "https://registry.npmjs.org/@bbc/tv-lrud-spatial",
+  "f": "consultado 7 oct 2026"
+ },
+ "swiper": {
+  "t": "npm · swiper",
+  "u": "https://registry.npmjs.org/swiper",
+  "f": "consultado 7 oct 2026"
+ },
+ "embla": {
+  "t": "npm · embla-carousel",
+  "u": "https://registry.npmjs.org/embla-carousel",
+  "f": "consultado 7 oct 2026"
+ },
+ "apg": {
+  "t": "WAI-ARIA Authoring Practices · patrón Carousel (copia en GitHub)",
+  "u": "https://raw.githubusercontent.com/w3c/aria-practices/main/content/patterns/carousel/carousel-pattern.html",
+  "f": "consultado 7 oct 2026"
+ },
+ "wcag_pause": {
+  "t": "W3C · WCAG 2.2, Understanding 2.2.2 Pause, Stop, Hide (copia en GitHub)",
+  "u": "https://raw.githubusercontent.com/w3c/wcag/main/understanding/20/pause-stop-hide.html",
+  "f": "consultado 7 oct 2026"
+ },
+ "wcag_color": {
+  "t": "W3C · WCAG 2.2, Understanding 1.4.1 Use of Color (copia en GitHub)",
+  "u": "https://raw.githubusercontent.com/w3c/wcag/main/understanding/20/use-of-color.html",
+  "f": "consultado 7 oct 2026"
+ },
+ "wcag_contrast": {
+  "t": "W3C · WCAG 2.2, Understanding 1.4.11 Non-text Contrast (copia en GitHub)",
+  "u": "https://raw.githubusercontent.com/w3c/wcag/main/understanding/21/non-text-contrast.html",
+  "f": "consultado 7 oct 2026"
+ },
+ "wcag_focus": {
+  "t": "W3C · WCAG 2.2, Understanding 2.4.11 Focus Not Obscured (Minimum) (copia en GitHub)",
+  "u": "https://raw.githubusercontent.com/w3c/wcag/main/understanding/22/focus-not-obscured-minimum.html",
+  "f": "consultado 7 oct 2026"
+ },
+ "wcag_target": {
+  "t": "W3C · WCAG 2.2, Understanding 2.5.8 Target Size (Minimum) (copia en GitHub)",
+  "u": "https://raw.githubusercontent.com/w3c/wcag/main/understanding/22/target-size-minimum.html",
+  "f": "consultado 7 oct 2026"
+ },
+ "sharp": {
+  "t": "sharp · README (Apache-2.0, salida AVIF y WebP)",
+  "u": "https://raw.githubusercontent.com/lovell/sharp/main/README.md",
+  "f": "consultado 7 oct 2026"
+ },
+ "jf_tipos": {
+  "t": "jellyfin-web · homeSectionType.ts (tipos de sección)",
+  "u": "https://raw.githubusercontent.com/jellyfin/jellyfin-web/master/src/constants/homeSectionType.ts",
+  "f": "consultado 7 oct 2026"
+ },
+ "jf_ultimos": {
+  "t": "jellyfin-web · sections/recentlyAdded.ts (fila por biblioteca)",
+  "u": "https://raw.githubusercontent.com/jellyfin/jellyfin-web/master/src/components/homesections/sections/recentlyAdded.ts",
+  "f": "consultado 7 oct 2026"
+ },
+ "jf_home": {
+  "t": "jellyfin-web · homesections.js (límite de secciones)",
+  "u": "https://raw.githubusercontent.com/jellyfin/jellyfin-web/master/src/components/homesections/homesections.js",
+  "f": "consultado 7 oct 2026"
+ },
+ "jf_repo": {
+  "t": "Repositorio jellyfin/jellyfin-web (etiquetas de versión leídas con git)",
+  "u": "https://github.com/jellyfin/jellyfin-web",
+  "f": "consultado 7 oct 2026"
+ },
+ "kodi": {
+  "t": "Kodi · SmartPlayList.h (listas inteligentes)",
+  "u": "https://raw.githubusercontent.com/xbmc/xbmc/master/xbmc/playlists/SmartPlayList.h",
+  "f": "consultado 7 oct 2026"
+ },
+ "kodi_repo": {
+  "t": "Repositorio xbmc/xbmc (etiquetas de versión leídas con git)",
+  "u": "https://github.com/xbmc/xbmc",
+  "f": "consultado 7 oct 2026"
+ },
+ "stremio_cat": {
+  "t": "Stremio addon SDK · defineCatalogHandler.md",
+  "u": "https://raw.githubusercontent.com/Stremio/stremio-addon-sdk/master/docs/api/requests/defineCatalogHandler.md",
+  "f": "consultado 7 oct 2026"
+ },
+ "stremio_web": {
+  "t": "stremio-web · package.json (rama development)",
+  "u": "https://raw.githubusercontent.com/Stremio/stremio-web/development/package.json",
+  "f": "consultado 7 oct 2026"
+ },
+ "flutter_car": {
+  "t": "Flutter · material/carousel.dart (rama master)",
+  "u": "https://raw.githubusercontent.com/flutter/flutter/master/packages/flutter/lib/src/material/carousel.dart",
+  "f": "consultado 7 oct 2026"
+ },
+ "echarts_line": {
+  "t": "Apache ECharts · LineView.ts (turnPointsIntoStep)",
+  "u": "https://raw.githubusercontent.com/apache/echarts/master/src/chart/line/LineView.ts",
+  "f": "consultado 7 oct 2026"
+ },
+ "echarts_series": {
+  "t": "Apache ECharts · LineSeries.ts (connectNulls, showSymbol, sampling)",
+  "u": "https://raw.githubusercontent.com/apache/echarts/master/src/chart/line/LineSeries.ts",
+  "f": "consultado 7 oct 2026"
+ },
+ "echarts_mark": {
+  "t": "Apache ECharts · MarkAreaModel.ts (markArea)",
+  "u": "https://raw.githubusercontent.com/apache/echarts/master/src/component/marker/MarkAreaModel.ts",
+  "f": "consultado 7 oct 2026"
+ },
+ "echarts_aria": {
+  "t": "Apache ECharts · util/types.ts (opciones aria y decal)",
+  "u": "https://raw.githubusercontent.com/apache/echarts/master/src/util/types.ts",
+  "f": "consultado 7 oct 2026"
+ },
+ "chartjs_line": {
+  "t": "Chart.js · docs/charts/line.md (stepped y spanGaps)",
+  "u": "https://raw.githubusercontent.com/chartjs/Chart.js/master/docs/charts/line.md",
+  "f": "consultado 7 oct 2026"
+ },
+ "plot_curves": {
+  "t": "Observable Plot · docs/features/curves.md",
+  "u": "https://raw.githubusercontent.com/observablehq/plot/main/docs/features/curves.md",
+  "f": "consultado 7 oct 2026"
+ },
+ "plot_area": {
+  "t": "Observable Plot · docs/marks/area.md (bandas con y1 e y2)",
+  "u": "https://raw.githubusercontent.com/observablehq/plot/main/docs/marks/area.md",
+  "f": "consultado 7 oct 2026"
+ },
+ "plotly_attr": {
+  "t": "plotly.js · traces/scatter/attributes.js (line.shape)",
+  "u": "https://raw.githubusercontent.com/plotly/plotly.js/master/src/traces/scatter/attributes.js",
+  "f": "consultado 7 oct 2026"
+ },
+ "plotly_chlog": {
+  "t": "plotly.js · CHANGELOG.md (versión 4.0.0)",
+  "u": "https://raw.githubusercontent.com/plotly/plotly.js/master/CHANGELOG.md",
+  "f": "consultado 7 oct 2026"
+ },
+ "uplot_readme": {
+  "t": "uPlot · README (trazadores de ruta)",
+  "u": "https://raw.githubusercontent.com/leeoniya/uPlot/master/README.md",
+  "f": "consultado 7 oct 2026"
+ },
+ "uplot_docs": {
+  "t": "uPlot · docs/README.md (spanGaps y bandas)",
+  "u": "https://raw.githubusercontent.com/leeoniya/uPlot/master/docs/README.md",
+  "f": "consultado 7 oct 2026"
+ },
+ "uplot_spark": {
+  "t": "uPlot · demos/sparklines.html",
+  "u": "https://raw.githubusercontent.com/leeoniya/uPlot/master/demos/sparklines.html",
+  "f": "consultado 7 oct 2026"
+ },
+ "uplot_repo": {
+  "t": "Repositorio leeoniya/uPlot (actividad de la rama principal, leída con git)",
+  "u": "https://github.com/leeoniya/uPlot",
+  "f": "consultado 7 oct 2026"
+ },
+ "npm_echarts": {
+  "t": "npm · echarts",
+  "u": "https://registry.npmjs.org/echarts",
+  "f": "consultado 7 oct 2026"
+ },
+ "npm_uplot": {
+  "t": "npm · uplot",
+  "u": "https://registry.npmjs.org/uplot",
+  "f": "consultado 7 oct 2026"
+ },
+ "npm_d3": {
+  "t": "npm · d3",
+  "u": "https://registry.npmjs.org/d3",
+  "f": "consultado 7 oct 2026"
+ },
+ "npm_plot": {
+  "t": "npm · @observablehq/plot",
+  "u": "https://registry.npmjs.org/@observablehq/plot",
+  "f": "consultado 7 oct 2026"
+ },
+ "npm_chartjs": {
+  "t": "npm · chart.js",
+  "u": "https://registry.npmjs.org/chart.js",
+  "f": "consultado 7 oct 2026"
+ },
+ "npm_recharts": {
+  "t": "npm · recharts",
+  "u": "https://registry.npmjs.org/recharts",
+  "f": "consultado 7 oct 2026"
+ },
+ "npm_vegalite": {
+  "t": "npm · vega-lite",
+  "u": "https://registry.npmjs.org/vega-lite",
+  "f": "consultado 7 oct 2026"
+ },
+ "pypi_altair": {
+  "t": "PyPI · altair",
+  "u": "https://pypi.org/pypi/altair/json",
+  "f": "consultado 7 oct 2026"
+ },
+ "lwc": {
+  "t": "TradingView Lightweight Charts · README (atribución y NOTICE)",
+  "u": "https://raw.githubusercontent.com/tradingview/lightweight-charts/master/README.md",
+  "f": "consultado 7 oct 2026"
+ },
+ "hotsale": {
+  "t": "proj-precio-real (repositorio de terceros que cita notas de la CACE sobre el Hot Sale 2026; las notas originales no se pudieron abrir)",
+  "u": "https://github.com/alelarancibia27/proj-precio-real",
+  "f": "consultado 7 oct 2026"
+ },
+ "ipc_params": {
+  "t": "datosgobar/series-tiempo-ar-api · docs/additional-parameters.md",
+  "u": "https://raw.githubusercontent.com/datosgobar/series-tiempo-ar-api/master/docs/additional-parameters.md",
+  "f": "consultado 7 oct 2026 (documentación sin fecha)"
+ },
+ "ipc_readme": {
+  "t": "datosgobar/series-tiempo-ar-api · README (estado beta)",
+  "u": "https://raw.githubusercontent.com/datosgobar/series-tiempo-ar-api/master/README.md",
+  "f": "consultado 7 oct 2026"
+ },
+ "datasette": {
+  "t": "PyPI · datasette",
+  "u": "https://pypi.org/pypi/datasette/json",
+  "f": "consultado 7 oct 2026"
+ },
+ "glance": {
+  "t": "Glance · release v0.8.6",
+  "u": "https://github.com/glanceapp/glance/releases/tag/v0.8.6",
+  "f": "consultado 7 oct 2026"
+ },
+ "grafana": {
+  "t": "Grafana · LICENSING.md",
+  "u": "https://raw.githubusercontent.com/grafana/grafana/main/LICENSING.md",
+  "f": "consultado 7 oct 2026"
+ },
+ "metabase": {
+  "t": "Metabase · imagen en Docker Hub (etiqueta latest)",
+  "u": "https://hub.docker.com/v2/repositories/metabase/metabase/tags/latest",
+  "f": "consultado 7 oct 2026"
+ },
+ "superset": {
+  "t": "PyPI · apache-superset",
+  "u": "https://pypi.org/pypi/apache-superset/json",
+  "f": "consultado 7 oct 2026"
+ },
+ "evidence": {
+  "t": "Evidence · README",
+  "u": "https://raw.githubusercontent.com/evidence-dev/evidence/main/README.md",
+  "f": "consultado 7 oct 2026"
+ },
+ "framework": {
+  "t": "Observable Framework · src/deploy.ts",
+  "u": "https://raw.githubusercontent.com/observablehq/framework/main/src/deploy.ts",
+  "f": "consultado 7 oct 2026"
+ },
+ "streamlit": {
+  "t": "PyPI · streamlit",
+  "u": "https://pypi.org/pypi/streamlit/json",
+  "f": "consultado 7 oct 2026"
+ },
+ "dash": {
+  "t": "PyPI · dash",
+  "u": "https://pypi.org/pypi/dash/json",
+  "f": "consultado 7 oct 2026"
+ },
+ "rill": {
+  "t": "Rill · README",
+  "u": "https://raw.githubusercontent.com/rilldata/rill/main/README.md",
+  "f": "consultado 7 oct 2026"
+ },
+ "homarr": {
+  "t": "Homarr (homarr-labs) · release v2.0.0",
+  "u": "https://github.com/homarr-labs/homarr/releases/tag/v2.0.0",
+  "f": "consultado 7 oct 2026"
+ },
+ "homepage": {
+  "t": "Homepage (gethomepage) · docs/installation/index.md",
+  "u": "https://raw.githubusercontent.com/gethomepage/homepage/main/docs/installation/index.md",
+  "f": "consultado 7 oct 2026"
+ },
+ "hass": {
+  "t": "Home Assistant · documentación de instalación (copia en GitHub)",
+  "u": "https://raw.githubusercontent.com/home-assistant/home-assistant.io/current/source/installation/index.html",
+  "f": "consultado 7 oct 2026"
+ },
+ "ms_uxguide": {
+  "t": "Microsoft · guía de diseño del área de notificación (copia en GitHub; escrita para Windows 7, ms.date 20 oct 2020)",
+  "u": "https://raw.githubusercontent.com/MicrosoftDocs/win32/docs/desktop-src/uxguide/winenv-notification.md",
+  "f": "consultado 7 oct 2026"
+ },
+ "ms_notif": {
+  "t": "Microsoft · documentación técnica del área de notificación (copia en GitHub; ms.date 31 may 2018)",
+  "u": "https://raw.githubusercontent.com/MicrosoftDocs/win32/docs/desktop-src/shell/notification-area.md",
+  "f": "consultado 7 oct 2026"
+ },
+ "pystray": {
+  "t": "PyPI · pystray",
+  "u": "https://pypi.org/pypi/pystray/json",
+  "f": "consultado 7 oct 2026"
+ },
+ "win11toast": {
+  "t": "PyPI · win11toast",
+  "u": "https://pypi.org/pypi/win11toast/json",
+  "f": "consultado 7 oct 2026"
+ },
+ "rainmeter": {
+  "t": "Repositorio rainmeter/rainmeter (etiquetas de versión leídas con git)",
+  "u": "https://github.com/rainmeter/rainmeter",
+  "f": "consultado 7 oct 2026"
+ },
+ "widgets": {
+  "t": "Microsoft · proveedores de widgets de Windows 11 (copia en GitHub)",
+  "u": "https://raw.githubusercontent.com/MicrosoftDocs/windows-dev-docs/docs/hub/apps/develop/widgets/widget-providers.md",
+  "f": "consultado 7 oct 2026"
+ },
+ "devhome": {
+  "t": "Repositorio microsoft/devhome (archivado el 5 jun 2025)",
+  "u": "https://github.com/microsoft/devhome",
+  "f": "consultado 7 oct 2026"
+ },
+ "lively": {
+  "t": "Repositorio rocksdanister/lively",
+  "u": "https://github.com/rocksdanister/lively",
+  "f": "consultado 7 oct 2026"
+ },
+ "lively_cli": {
+  "t": "Lively · Command Line Controls (wiki)",
+  "u": "https://github.com/rocksdanister/lively/wiki/Command-Line-Controls",
+  "f": "consultado 7 oct 2026"
+ }
+}
