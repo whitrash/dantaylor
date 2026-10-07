@@ -1,0 +1,63 @@
+<!--CAP {"num":"02","titulo":"De dónde se parte y qué se asume","entrada":"Qué existe hoy, cómo se leyó cada frase del pedido y qué tan firme es cada dato de este informe.","corto":"02","resumen":"Punto de partida, supuestos y nivel de confianza de los datos"}-->
+<p class="lead">Quien diseña WINT no parte de cero: ya tiene un motor de catálogos que funciona, un detector de precios propio y una idea clara de lo que no quiere, que es un asistente que converse, pregunte u opine. Este capítulo ordena lo que existe, aclara cómo se interpretó cada frase del pedido y dice con franqueza qué tan firme es cada dato del informe.</p>
+
+<h2>Lo que existe hoy</h2>
+<p>La columna de la derecha distingue lo que se pudo <strong>ver</strong> en el repositorio <code>whitrash/dantaylor</code>[[c:repo_readme,repo_arq]] de lo que se conoce solo porque la persona lo <strong>contó</strong>[[c:repo_informe]]. Esa diferencia importa: lo segundo no se verificó.</p>
+
+<table>
+<caption>Punto de partida de WINT</caption>
+<colgroup><col style="width:22%"><col style="width:56%"><col style="width:22%"></colgroup>
+<thead><tr><th>Pieza</th><th>Qué es</th><th>Cómo se sabe</th></tr></thead>
+<tbody>
+<tr><td>Motor de catálogos <code>catalogo</code></td><td>Python 3.10 o superior, SQLite y análisis en paralelo con Claude, ya sea con <code>claude -p</code> (cuenta) o con la API (clave). Tres dominios: animales, curiosidades y comercios. Reanuda si se corta y no repite lo que no cambió.</td><td><span class="etq sol">repositorio</span></td></tr>
+<tr><td>Panel visual local</td><td>Servidor HTTP en <code>127.0.0.1:8765</code> con progreso, ritmo, costo, tiempo restante y actividad. El mismo resumen sale por <code>/api/estado</code> y en un <code>estado.json</code> que se reescribe una vez por segundo.</td><td><span class="etq sol">repositorio</span></td></tr>
+<tr><td>Taxonomías y cola de revisión</td><td>Árbol de categorías como vocabulario controlado (el modelo no puede inventar categorías), filtros por faceta y una lista de fichas dudosas.</td><td><span class="etq sol">repositorio</span></td></tr>
+<tr><td>Detector</td><td>Software propio: se le indica un comercio web, busca sus productos y precios, los analiza día tras día, avisa de ofertas y compara con otros comercios. Un ícono junto al reloj se pone naranja mientras trabaja.</td><td><span class="etq luna">lo contó la persona</span> No se vio su código.</td></tr>
+<tr><td>Catálogos tipo menú de Netflix</td><td>Vistas por tema: países, animales, plantas y hechos históricos. El repositorio cubre animales y curiosidades; el resto se conoce solo por la descripción.</td><td><span class="etq luna">lo contó la persona</span></td></tr>
+<tr><td>Osi, Good Morning y Good Night</td><td>Los tres módulos que WINT contiene o a los que accede.</td><td><span class="etq rojo">sin información</span> Ni el repositorio ni el encargo dicen qué hacen.</td></tr>
+</tbody></table>
+
+<p>De ahí salen dos consecuencias. La primera: el panel web y el <code>estado.json</code> ya resuelven buena parte de "visualizar el estado" y pueden ser la primera interfaz de WINT. La segunda: el motor ya aplica, a escala chica, lo que WINT quiere generalizar. Valida cada ficha contra un esquema, guarda una huella de cada análisis para no pagarlo dos veces, se puede probar en modo simulado sin red y deja un registro de lo que hizo y por qué.</p>
+
+<h2>Cómo se leyó el pedido</h2>
+<p>Algunas frases admitían más de una lectura. Estas son las que se adoptaron; si alguna no coincide con lo que se quería decir, el cambio afecta casi siempre a un solo capítulo.</p>
+<ol>
+<li><strong>"Las 3 opciones que Windows te da"</strong> son <strong>Suspender, Apagar y Reiniciar</strong>, las tres del menú de energía (Hibernar existe, pero suele estar oculta). Good Morning y Good Night son entonces rutinas de arranque y de cierre del día que cubren lo que esas tres no cubren: hibernar, despertar a una hora, cerrar en orden, mantener el equipo despierto mientras trabaja. Capítulo 5.</li>
+<li><strong>Sol y Luna</strong> son los nuevos nombres de Good Morning y Good Night. El capítulo 3 los compara con Sun y Moon y revisa las colisiones de nombre.</li>
+<li><strong>"Plataforma Android"</strong> se leyó como una escalera de tres peldaños y no como una sola decisión: primero una aplicación web instalable, después una app nativa si hace falta, al final una versión para televisor. Capítulo 7.</li>
+<li><strong>"Un bot de IA sin pensar ni evaluar"</strong> se tradujo a una decisión de diseño: un flujo de trabajo <strong>determinista</strong>, con reglas explícitas y avisos con motivo, y no un agente que decide por su cuenta. La IA, si aparece, queda en el borde. Capítulo 4.</li>
+<li><strong>Osi</strong> queda como "módulo por definir". No hay en el repositorio ni en el encargo nada que lo describa, y el informe no lo inventa.</li>
+<li><strong>El equipo</strong> es una PC o notebook con Windows 11, de la que no se conoce el modelo. El capítulo 5 enseña a perfilarla con un solo comando antes de decidir cómo despierta y cómo se apaga.</li>
+</ol>
+<div class="aviso decision"><span class="t">Si la lectura 1 no era esa</span><p>Si "las 3 opciones" eran los tres modelos de aplicación que ofrece Windows (Win32/.NET, UWP/WinUI y aplicación web), el capítulo 7 los cubre en una tabla propia y compara qué existe fuera de ellos.</p></div>
+
+<h2>Cómo se investigó y qué tan firme es cada dato</h2>
+<p>El informe se apoya en una investigación de once frentes: energía de Windows, software existente, plataformas para Windows y Android, Android, arquitectura de módulos, precios y mercado argentino, ofertas falsas, visualización, bot determinista, nombres y lanzadores. Cada frente lo escribió un investigador y lo revisó, de forma independiente, un verificador escéptico; una auditoría final cruzó los once y marcó contradicciones y huecos. Después se hizo una segunda ronda de búsquedas para cerrar los huecos de mayor riesgo.</p>
+
+<div class="aviso riesgo"><span class="t">El límite de la investigación</span><p>Durante la primera ronda se agotó el cupo de búsqueda web y el proxy bloqueó casi todos los sitios oficiales (documentación de Microsoft, Google, INDEC, BCRA, INPI y otros). Muchas versiones y fechas salen entonces de repositorios de GitHub, incluidos los que contienen las fuentes de la documentación de Microsoft, de registros de paquetes (PyPI y npm) y de extractos de búsqueda. Cuando eso afecta a una afirmación importante, el texto lo dice en el lugar.</p></div>
+
+<table>
+<caption>Qué tan firme es cada área</caption>
+<colgroup><col style="width:34%"><col style="width:12%"><col style="width:54%"></colgroup>
+<thead><tr><th>Área</th><th>Firmeza</th><th>Por qué</th></tr></thead>
+<tbody>
+<tr><td>Comandos y APIs de energía de Windows</td><td><span class="dots"><i></i><i></i><i></i><i></i><i class="o"></i></span></td><td>Se leyeron en los repositorios fuente de la documentación de Microsoft y se contrastaron con otras páginas del mismo conjunto.</td></tr>
+<tr><td>Modern Standby y la tarea que despierta el equipo (<code>WakeToRun</code>)</td><td><span class="dots"><i></i><i></i><i class="o"></i><i class="o"></i><i class="o"></i></span></td><td>Hay dos posturas sin resolver y nadie lo probó en un equipo real. Es lo primero que hay que medir (etapa 0).</td></tr>
+<tr><td>Versiones 26H1 y 26H2 de Windows, cambios del menú de energía</td><td><span class="dots"><i></i><i></i><i class="o"></i><i class="o"></i><i class="o"></i></span></td><td>Solo prensa; ninguna fuente primaria se pudo abrir.</td></tr>
+<tr><td>Android: nivel de API, verificación de desarrolladores, cuentas</td><td><span class="dots"><i></i><i></i><i></i><i class="o"></i><i class="o"></i></span></td><td>Extractos de búsqueda y preguntas frecuentes de Google; algunos puntos se contradicen entre sí. Ver capítulo 7.</td></tr>
+<tr><td>Versiones, licencias y estado de las herramientas</td><td><span class="dots"><i></i><i></i><i></i><i class="o"></i><i class="o"></i></span></td><td>Registros de paquetes y publicaciones de GitHub; algunas fechas se infirieron y están marcadas.</td></tr>
+<tr><td>Normas argentinas (consumo, lealtad comercial, bases de datos, rastreo)</td><td><span class="dots"><i></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i></span></td><td>Se leyeron en espejos no oficiales. Antes de publicar nada sobre un comercio conviene consultar a un abogado.</td></tr>
+<tr><td>Planes y precios de servicios</td><td><span class="dots"><i></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i></span></td><td>Las fuentes se contradicen y ninguna es oficial. El informe no imprime cifras que no pudo verificar.</td></tr>
+<tr><td>Algoritmo para detectar ofertas falsas</td><td><span class="etq gris">propuesta</span></td><td>Es un diseño con umbrales heurísticos sin calibrar; se probó con escenarios sintéticos, no con datos reales.</td></tr>
+</tbody></table>
+
+<h3>Cómo se marca la confianza en el texto</h3>
+<ul>
+<li>Un número en voladita remite a una fuente del apéndice final.</li>
+<li>"Según prensa" o "según un espejo no oficial" avisa que no se abrió la fuente primaria.</li>
+<li>La etiqueta <span class="etq rojo">sin verificar</span> marca un dato que nadie pudo comprobar.</li>
+<li>Las recetas, umbrales, matrices y planes se presentan como <strong>propuestas de diseño</strong>: salen del criterio aplicado a hechos verificados, no de una fuente.</li>
+</ul>
+
+<h2>Cómo leer este informe</h2>
+<p>Cada capítulo se entiende por separado y termina con una caja <strong>Qué hacer</strong>. Para ir directo a lo operativo alcanzan el capítulo 1 (resumen), el 5 (Sol y Luna en Windows) y el 10 (hoja de ruta). Los cuadros sinópticos resumen cada tema con llaves, de izquierda a derecha: lo general a la izquierda y el detalle a la derecha. El mapa de software del capítulo 9 reúne en un solo lugar lo que existe, con su licencia, su estado y un veredicto.</p>

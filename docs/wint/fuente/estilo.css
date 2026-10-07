@@ -1,0 +1,205 @@
+/* ===== WINT · informe técnico · sistema de diseño ===== */
+
+@font-face{font-family:"Cormorant";src:url("../fonts/static/CormorantGaramond-500.ttf");font-weight:500;font-style:normal}
+@font-face{font-family:"Cormorant";src:url("../fonts/static/CormorantGaramond-600.ttf");font-weight:600;font-style:normal}
+@font-face{font-family:"Cormorant";src:url("../fonts/static/CormorantGaramond-700.ttf");font-weight:700;font-style:normal}
+@font-face{font-family:"Cormorant";src:url("../fonts/static/CormorantGaramond-Italic-500.ttf");font-weight:500;font-style:italic}
+@font-face{font-family:"Cormorant";src:url("../fonts/static/CormorantGaramond-Italic-600.ttf");font-weight:600;font-style:italic}
+@font-face{font-family:"Garamond";src:url("../fonts/static/EBGaramond-400.ttf");font-weight:400;font-style:normal}
+@font-face{font-family:"Garamond";src:url("../fonts/static/EBGaramond-500.ttf");font-weight:500;font-style:normal}
+@font-face{font-family:"Garamond";src:url("../fonts/static/EBGaramond-600.ttf");font-weight:600;font-style:normal}
+@font-face{font-family:"Garamond";src:url("../fonts/static/EBGaramond-700.ttf");font-weight:700;font-style:normal}
+@font-face{font-family:"Garamond";src:url("../fonts/static/EBGaramond-Italic-400.ttf");font-weight:400;font-style:italic}
+@font-face{font-family:"Garamond";src:url("../fonts/static/EBGaramond-Italic-500.ttf");font-weight:500;font-style:italic}
+@font-face{font-family:"Jost";src:url("../fonts/static/Jost-400.ttf");font-weight:400}
+@font-face{font-family:"Jost";src:url("../fonts/static/Jost-500.ttf");font-weight:500}
+@font-face{font-family:"Jost";src:url("../fonts/static/Jost-600.ttf");font-weight:600}
+@font-face{font-family:"Plex";src:url("../fonts/static/IBMPlexMono-Regular.ttf");font-weight:400}
+@font-face{font-family:"Plex";src:url("../fonts/static/IBMPlexMono-Medium.ttf");font-weight:500}
+@font-face{font-family:"Plex";src:url("../fonts/static/IBMPlexMono-Bold.ttf");font-weight:700}
+
+:root{
+  --paper:#FBF9F4;
+  --ink:#1B2033;
+  --navy:#121935;
+  --indigo:#2F3E75;
+  --indigo-soft:#E6E9F4;
+  --silver:#8D96B3;
+  --gold:#A87A22;
+  --amber:#E2A83A;
+  --cream:#F4EAD0;
+  --cream-soft:#F8F1DF;
+  --verde:#2F6F66;
+  --verde-soft:#E1EEEA;
+  --rojo:#8E3B32;
+  --rojo-soft:#F4E3DF;
+  --rule:#D9D1BE;
+  --rule-soft:#E8E2D3;
+  --muted:#656A7C;
+  --serif:"Garamond","EB Garamond","Liberation Serif",serif;
+  --display:"Cormorant","Cormorant Garamond","Garamond",serif;
+  --sans:"Jost","Liberation Sans",sans-serif;
+  --mono:"Plex","DejaVu Sans Mono",monospace;
+}
+
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact;background:var(--paper)}
+body{
+  margin:0;color:var(--ink);background:var(--paper);
+  font-family:var(--serif);font-size:10.7pt;line-height:1.43;font-weight:400;
+  text-align:justify;hyphens:auto;-webkit-hyphens:auto;
+  font-variant-numeric:oldstyle-nums proportional-nums;
+  font-feature-settings:"liga","kern","onum";
+}
+
+/* ---------- páginas ---------- */
+@page{
+  size:A4;margin:25mm 21mm 24mm 21mm;background:#FBF9F4;
+  @top-left{content:"WINT";font-family:"Jost";font-weight:600;font-size:7.4pt;letter-spacing:.34em;color:#A87A22;vertical-align:bottom;padding-bottom:5mm}
+  @top-right{content:"Informe técnico · Sol · Luna · Osi";font-family:"Jost";font-weight:400;font-size:7.4pt;letter-spacing:.14em;text-transform:uppercase;color:#656A7C;vertical-align:bottom;padding-bottom:5mm}
+  @bottom-center{content:counter(page);font-family:"Cormorant";font-weight:600;font-size:11pt;color:#656A7C;vertical-align:top;padding-top:6mm}
+}
+@page cover{margin:0;@top-left{content:none}@top-right{content:none}@bottom-center{content:none}}
+@page indice{@top-right{content:"Índice"}}
+.cover{page:cover}
+
+.pagina{page-break-after:always;break-after:page}
+.salto{break-before:page;page-break-before:always}
+
+/* ---------- portada ---------- */
+.cover{
+  width:210mm;height:297mm;position:relative;overflow:hidden;text-align:left;
+  background:
+    radial-gradient(ellipse 120% 55% at 50% 108%, rgba(226,168,58,.55) 0%, rgba(226,168,58,.18) 38%, rgba(18,25,53,0) 70%),
+    linear-gradient(180deg,#0B1030 0%,#141C44 46%,#27306A 74%,#4A3F6B 100%);
+  color:#F4EAD0;break-after:page;
+}
+.cover svg.emblema{position:absolute;left:0;top:0;width:210mm;height:297mm}
+.cover .marca{position:absolute;left:24mm;right:24mm;top:150mm;text-align:left}
+.cover .kicker{font-family:var(--sans);font-weight:500;font-size:8.6pt;letter-spacing:.42em;text-transform:uppercase;color:#E2A83A;margin:0 0 7mm}
+.cover h1{font-family:var(--display);font-weight:600;font-size:92pt;line-height:.92;letter-spacing:.12em;margin:0;color:#FBF3DD}
+.cover .sub{font-family:var(--display);font-style:italic;font-weight:500;font-size:19pt;line-height:1.25;margin:7mm 0 0;color:#E9DDBD;max-width:128mm}
+.cover .triada{margin-top:9mm;font-family:var(--sans);font-weight:500;font-size:9pt;letter-spacing:.34em;text-transform:uppercase;color:#C9CDE6}
+.cover .triada b{color:#E2A83A;font-weight:600;padding:0 .7em}
+.cover .pie{position:absolute;left:24mm;right:24mm;bottom:17mm;display:flex;justify-content:space-between;align-items:flex-end;font-family:var(--sans);font-size:7.6pt;letter-spacing:.2em;text-transform:uppercase;color:#C7BFA6}
+.cover .pie .l{max-width:100mm;line-height:1.7}
+.cover .regla{width:22mm;height:1.2pt;background:#E2A83A;margin:0 0 7mm}
+
+/* ---------- títulos ---------- */
+.capitulo{margin:0 0 7mm;break-after:avoid;break-before:page}
+.capitulo .num{font-family:var(--sans);font-weight:600;font-size:8.4pt;letter-spacing:.38em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:3mm}
+.capitulo h1{font-family:var(--display);font-weight:600;font-size:31pt;line-height:1.02;letter-spacing:.005em;margin:0;color:var(--navy);text-align:left;hyphens:manual}
+.capitulo .entrada{font-family:var(--display);font-style:italic;font-weight:500;font-size:13.6pt;line-height:1.3;color:var(--indigo);margin:3.4mm 0 0;max-width:150mm;text-align:left}
+.capitulo .filete{height:0;border-top:1.1pt solid var(--gold);width:18mm;margin-top:5mm}
+h2{font-family:var(--display);font-weight:600;font-size:17.5pt;line-height:1.12;margin:8mm 0 2.6mm;color:var(--navy);text-align:left;hyphens:manual;break-after:avoid}
+h3{font-family:var(--sans);font-weight:600;font-size:8.3pt;letter-spacing:.2em;text-transform:uppercase;margin:5.4mm 0 1.8mm;color:var(--indigo);text-align:left;hyphens:manual;break-after:avoid}
+p{margin:0 0 2.6mm;orphans:3;widows:3}
+p.lead{font-size:11.6pt;line-height:1.45}
+.capitulo + p:first-of-type::first-letter, p.capital::first-letter{
+  font-family:var(--display);font-weight:600;font-size:3.9em;line-height:.74;float:left;padding:.085em .09em 0 0;color:var(--gold);
+}
+strong,b{font-weight:600}
+em,i{font-style:italic}
+a{color:var(--indigo);text-decoration:none}
+sup.c{font-family:var(--sans);font-size:6.4pt;font-weight:500;color:var(--gold);vertical-align:super;line-height:0;margin-left:.1em;letter-spacing:0}
+ul,ol{margin:0 0 3mm;padding-left:5.2mm}
+li{margin:0 0 1.2mm;padding-left:.8mm}
+ul{list-style:none;padding-left:4.6mm}
+ul>li{position:relative}
+ul>li::before{content:"";position:absolute;left:-3.8mm;top:.62em;width:1.7mm;height:1.7mm;border-radius:50%;background:var(--amber)}
+ol>li::marker{font-family:var(--sans);font-weight:600;font-size:.82em;color:var(--gold)}
+code,.cmd{font-family:var(--mono);font-size:.78em;font-weight:500;background:#F0EBDD;color:#3B3550;padding:.1em .34em;border-radius:2px;hyphens:none;word-break:break-word}
+pre{
+  font-family:var(--mono);font-size:7.5pt;line-height:1.42;background:#F1ECDF;border-left:2.2pt solid var(--indigo);
+  padding:3mm 4mm;margin:0 0 4mm;text-align:left;hyphens:none;white-space:pre-wrap;word-break:break-word;break-inside:avoid;color:#262A40;
+}
+pre .k{color:#8E3B32;font-weight:500}pre .s{color:#2F6F66}pre .c{color:#7B7D8C;font-style:italic}
+
+/* ---------- avisos ---------- */
+.aviso{margin:3.4mm 0 4.6mm;padding:3.2mm 4.4mm 3mm;border-left:2.4pt solid var(--gold);background:var(--cream-soft);break-inside:avoid;text-align:left;hyphens:auto}
+.aviso>.t{font-family:var(--sans);font-weight:600;font-size:7.4pt;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:0 0 1.4mm;display:block}
+.aviso p:last-child,.aviso ul:last-child,.aviso ol:last-child{margin-bottom:0}
+.aviso.decision{border-color:var(--indigo);background:var(--indigo-soft)}.aviso.decision>.t{color:var(--indigo)}
+.aviso.riesgo{border-color:var(--rojo);background:var(--rojo-soft)}.aviso.riesgo>.t{color:var(--rojo)}
+.aviso.ok{border-color:var(--verde);background:var(--verde-soft)}.aviso.ok>.t{color:var(--verde)}
+.aviso.nota-sup{font-size:9.6pt}
+
+/* ---------- tablas ---------- */
+table{width:100%;border-collapse:collapse;margin:2.4mm 0 5mm;font-family:var(--sans);font-size:7.9pt;line-height:1.36;text-align:left;hyphens:auto;font-variant-numeric:lining-nums tabular-nums;font-feature-settings:"lnum","tnum"}
+caption{caption-side:top;text-align:left;font-family:var(--sans);font-weight:600;font-size:7.4pt;letter-spacing:.2em;text-transform:uppercase;color:var(--indigo);padding:0 0 2mm}
+th{font-weight:600;font-size:7.1pt;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);text-align:left;padding:1.8mm 2.2mm 1.6mm;border-bottom:1.1pt solid var(--navy);border-top:.6pt solid var(--navy);background:#F1EDE0;vertical-align:bottom}
+td{padding:1.7mm 2.2mm;border-bottom:.5pt solid var(--rule);vertical-align:top}
+tr{break-inside:avoid}
+tbody tr:last-child td{border-bottom:.8pt solid var(--navy)}
+td:first-child{font-weight:600;color:var(--navy)}
+table.suave td:first-child{font-weight:500}
+table .sub{display:block;font-weight:400;color:var(--muted);font-size:7.2pt}
+td code{font-size:.92em}
+.dots{white-space:nowrap;letter-spacing:0}
+.dots i{display:inline-block;width:5.2pt;height:5.2pt;border-radius:50%;background:var(--gold);margin-right:1.3pt;vertical-align:baseline}
+.dots i.o{background:transparent;border:.7pt solid var(--gold)}
+.dots.ind i{background:var(--indigo)}.dots.ind i.o{background:transparent;border:.7pt solid var(--indigo)}
+.etq{display:inline-block;font-family:var(--sans);font-weight:600;font-size:6.4pt;letter-spacing:.14em;text-transform:uppercase;padding:.35mm 1.6mm .25mm;border-radius:1.2mm;border:.6pt solid currentColor;white-space:nowrap}
+.etq.sol{color:var(--gold);background:var(--cream-soft)}
+.etq.luna{color:var(--indigo);background:var(--indigo-soft)}
+.etq.osi{color:var(--verde);background:var(--verde-soft)}
+.etq.rojo{color:var(--rojo);background:var(--rojo-soft)}
+.etq.gris{color:var(--muted);background:#EFEDE6}
+
+/* ---------- figuras ---------- */
+figure{margin:3mm 0 5mm;break-inside:avoid;text-align:left}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-family:var(--sans);font-size:7.3pt;letter-spacing:.04em;color:var(--muted);margin-top:2mm;text-align:left;line-height:1.4}
+figcaption b{color:var(--indigo);letter-spacing:.16em;text-transform:uppercase;font-size:6.8pt;margin-right:1.4mm}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:6mm}
+.dos>*{min-width:0}
+.tres{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5mm}
+.tres>*{min-width:0}
+
+/* ---------- cuadro sinóptico con llaves ---------- */
+.sinoptico{font-family:var(--sans);margin:3mm 0 5mm;break-inside:avoid;text-align:left;hyphens:manual}
+.sinoptico .caja{border:.6pt solid var(--rule);background:#FFFEFB;padding:4mm 4mm 4.4mm;border-radius:1mm}
+.sinoptico .titulo{font-weight:600;font-size:7.4pt;letter-spacing:.22em;text-transform:uppercase;color:var(--indigo);margin:0 0 3.2mm}
+.sn{display:flex;align-items:stretch}
+.sn>.et{display:flex;align-items:center;flex:0 0 auto}
+.sn>.ll{flex:0 0 auto;width:4.6mm;display:grid;grid-template-rows:2.2mm 1fr 5mm 1fr 2.2mm;margin:0 .6mm}
+.sn>.ll svg{display:block;width:100%;height:100%}
+.sn>.ll .tallo{border-left:.85pt solid var(--brace,#A87A22);margin-left:50%;width:50%}
+.sn>.hij{display:flex;flex-direction:column;justify-content:space-around;flex:1 1 auto;min-width:0}
+.sn>.hij>.sn{margin:.9mm 0}
+.sn.hoja>.et{padding:.5mm 0}
+.eti{display:block;line-height:1.22;padding:1.5mm 2.4mm;text-align:left}
+.n0>.et .eti{font-family:var(--display);font-weight:700;font-size:12.2pt;color:#FBF3DD;background:var(--navy);border-radius:1.2mm;padding:2.6mm 3.2mm;max-width:31mm;line-height:1.1}
+.n1>.et .eti{font-family:var(--sans);font-weight:600;font-size:8pt;letter-spacing:.07em;text-transform:uppercase;color:var(--navy);border:.8pt solid var(--brace,#A87A22);border-radius:1.2mm;background:#fff;max-width:31mm;padding:1.6mm 2.4mm}
+.n2>.et .eti{font-family:var(--sans);font-weight:500;font-size:8.1pt;color:var(--ink);max-width:36mm;border-bottom:.5pt solid var(--rule);padding:1mm 1.6mm}
+.n3>.et .eti,.n4>.et .eti{font-family:var(--sans);font-weight:400;font-size:7.8pt;color:var(--ink);border-bottom:.4pt solid var(--rule-soft);padding:.8mm 1.4mm}
+.sn.hoja.n1>.et .eti{max-width:none}
+.sn.hoja.n2>.et .eti,.sn.hoja.n3>.et .eti,.sn.hoja.n4>.et .eti{max-width:none}
+.tono-sol{--brace:#A87A22}.tono-luna{--brace:#2F3E75}.tono-osi{--brace:#2F6F66}.tono-rojo{--brace:#8E3B32}.tono-gris{--brace:#8D96B3}
+.n1.tono-sol>.et .eti{background:var(--cream-soft)}
+.n1.tono-luna>.et .eti{background:var(--indigo-soft)}
+.n1.tono-osi>.et .eti{background:var(--verde-soft)}
+.n1.tono-rojo>.et .eti{background:var(--rojo-soft)}
+.n1.tono-gris>.et .eti{background:#EEF0F6}
+
+/* ---------- índice ---------- */
+.toc{margin:4mm 0 0;font-family:var(--sans);text-align:left}
+.toc .fila{display:flex;align-items:baseline;gap:3mm;padding:2.3mm 0;border-bottom:.5pt solid var(--rule)}
+.toc .n{font-family:var(--display);font-weight:600;font-size:15pt;color:var(--gold);flex:0 0 11mm}
+.toc .t{font-family:var(--display);font-weight:600;font-size:14.2pt;color:var(--navy);flex:1}
+.toc .t small{display:block;font-family:var(--sans);font-weight:400;font-size:7.6pt;color:var(--muted);letter-spacing:.02em;margin-top:.5mm}
+.toc .p{font-family:var(--display);font-weight:600;font-size:13pt;color:var(--muted);flex:0 0 auto}
+
+.piefuente{font-family:var(--sans);font-size:7.2pt;color:var(--muted);line-height:1.5}
+.fuentes{font-family:var(--sans);font-size:7.2pt;line-height:1.42;color:var(--ink);text-align:left;hyphens:manual;columns:1}
+.fuentes .f{display:flex;gap:2.4mm;padding:.9mm 0;border-bottom:.4pt solid var(--rule-soft);break-inside:avoid}
+.fuentes .f .k{flex:0 0 7.6mm;color:var(--gold);font-weight:600}
+.fuentes .f .u{color:var(--muted);word-break:break-all;display:block;font-size:6.7pt;font-family:var(--mono)}
+
+.sinoptico .pie-cuadro{font-family:var(--sans);font-size:7.3pt;letter-spacing:.04em;color:var(--muted);margin-top:2mm;line-height:1.4;text-align:left}
+.sinoptico .pie-cuadro b{color:var(--indigo);letter-spacing:.16em;text-transform:uppercase;font-size:6.8pt;margin-right:1.4mm;font-weight:600}
+figcaption b{font-weight:600}
+
+caption{break-after:avoid}
+thead,thead tr{break-after:avoid;break-inside:avoid}
+tbody tr:first-child{break-before:avoid}
