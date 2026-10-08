@@ -1,0 +1,714 @@
+<title>Qué es Wint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: documento de lectura; índice fijo a la izquierda en pantallas anchas, una columna en teléfono y en PDF.
+   El boceto de pantalla de Wint es siempre oscuro (es una pantalla, no papel). */
+:root {
+  --paper: #F3F5F9;
+  --surface: #FFFFFF;
+  --ink: #151B2E;
+  --muted: #596178;
+  --line: #D8DDE8;
+  --tint: #E6EBF5;
+  --accent: #2F58CD;
+  --sun: #B9770A;
+  --moon: #5E62A6;
+  --detector: #E8892B;
+
+  --screen: #0F1526;
+  --screen-2: #182038;
+  --screen-ink: #E9EDF6;
+  --screen-muted: #97A1BB;
+  --screen-line: #2A3452;
+
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0C1120; --surface: #131A2C; --ink: #E6EAF3; --muted: #9BA4BA; --line: #262F48; --tint: #1A2238;
+    --accent: #8EAAFF; --sun: #F0B54A; --moon: #AEB2EA;
+    --screen: #070B16; --screen-2: #111830; --screen-line: #27304C;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0C1120; --surface: #131A2C; --ink: #E6EAF3; --muted: #9BA4BA; --line: #262F48; --tint: #1A2238;
+  --accent: #8EAAFF; --sun: #F0B54A; --moon: #AEB2EA;
+  --screen: #070B16; --screen-2: #111830; --screen-line: #27304C;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 1.0625rem;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+strong { font-weight: 700; }
+
+.page { max-width: 1180px; margin: 0 auto; padding-inline: 20px; padding-block: 0 72px; }
+
+/* ---------- Portada ---------- */
+.hero { padding-block: 56px 40px; border-bottom: 1px solid var(--line); display: grid; gap: 28px; }
+.eyebrow {
+  font-family: var(--f-mono); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 6px 18px;
+}
+.hero h1 {
+  font-family: var(--f-display); font-weight: 800; font-size: clamp(3.4rem, 9vw, 6.2rem); line-height: .92;
+  letter-spacing: -.035em; margin: 0;
+}
+.hero h1 .dot { color: var(--sun); }
+.hero .lede { font-size: clamp(1.15rem, 2.2vw, 1.4rem); line-height: 1.5; max-width: 40rem; margin: 0; text-wrap: pretty; }
+.hero .lede strong { color: var(--accent); font-weight: 700; }
+
+/* ---------- Grilla índice + contenido ---------- */
+.layout { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 56px; padding-top: 40px; }
+.toc { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 24px); align-self: start; }
+.toc p { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.cover-toc { display: none; }
+.toc a {
+  display: block; padding: 5px 0 5px 12px; border-left: 2px solid var(--line); color: var(--muted);
+  text-decoration: none; font-size: .9rem; line-height: 1.35;
+}
+.toc a:hover { color: var(--ink); border-left-color: var(--accent); }
+
+main { min-width: 0; }
+main > section { padding-bottom: 40px; margin-bottom: 40px; border-bottom: 1px solid var(--line); }
+main > section:last-of-type { border-bottom: 0; }
+main > section > :where(p, ul, ol:not(.phases):not(.day), h3, .note), .keep > :where(p, h3) { max-width: 44rem; }
+
+h2 {
+  font-family: var(--f-display); font-weight: 700; font-size: clamp(1.7rem, 3.4vw, 2.25rem); line-height: 1.12;
+  letter-spacing: -.02em; margin: 0 0 18px; text-wrap: balance; scroll-margin-top: 24px;
+}
+h3 { font-family: var(--f-display); font-weight: 650; font-size: 1.22rem; line-height: 1.25; margin: 30px 0 8px; letter-spacing: -.005em; }
+p { margin: 0 0 14px; text-wrap: pretty; }
+ul, ol { margin: 0 0 16px; padding-left: 1.2rem; }
+li { margin-bottom: 6px; }
+li::marker { color: var(--accent); }
+
+.chip {
+  display: inline-block; font-family: var(--f-mono); font-size: .74rem; font-weight: 600; letter-spacing: .02em;
+  padding: 2px 8px; border-radius: 4px; background: var(--tint); color: var(--ink); white-space: nowrap; vertical-align: 2px;
+}
+
+/* Resumen */
+.summary { list-style: none; padding: 0; display: grid; gap: 12px; counter-reset: s; }
+.summary li { display: grid; grid-template-columns: 2.1rem minmax(0, 1fr); gap: 4px; margin: 0; }
+.summary li::before {
+  content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); margin-top: .62em;
+}
+
+.note {
+  background: var(--tint); padding: 20px 22px; margin: 26px 0 0; border-radius: 6px;
+}
+.note h3 { margin-top: 0; font-size: 1.05rem; }
+.note ul { margin-bottom: 0; }
+
+/* ---------- Boceto de la pantalla de inicio ---------- */
+figure { margin: 26px 0 8px; }
+figcaption { font-size: .88rem; color: var(--muted); margin-top: 10px; max-width: 44rem; }
+.screen {
+  background: var(--screen); color: var(--screen-ink); border-radius: 14px; padding: 14px; display: grid; gap: 14px;
+  border: 1px solid var(--screen-line); font-size: .9rem; line-height: 1.4;
+}
+.sbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 4px 6px 12px; border-bottom: 1px solid var(--screen-line); }
+.sbar .logo { font-family: var(--f-display); font-weight: 800; font-size: 1.15rem; letter-spacing: -.02em; margin-right: auto; }
+.sbar .item { display: inline-flex; align-items: center; gap: 6px; color: var(--screen-muted); font-family: var(--f-mono); font-size: .78rem; }
+.sbar .item svg { width: 15px; height: 15px; color: var(--screen-ink); }
+.sbar .badge { background: #E2E8F6; color: #0F1526; border-radius: 9px; padding: 0 6px; font-weight: 600; }
+.sbar .det { width: 9px; height: 9px; border-radius: 50%; background: var(--detector); box-shadow: 0 0 0 3px rgba(232,137,43,.22); }
+.guide { display: flex; gap: 12px; align-items: flex-start; padding: 2px 6px; }
+.guide .face { flex: none; width: 30px; height: 30px; border-radius: 50%; background: #F0B54A; box-shadow: 0 0 0 5px rgba(240,181,74,.16); }
+.guide p { margin: 0; max-width: 38rem; font-size: .98rem; }
+.guide small { display: block; color: var(--screen-muted); font-family: var(--f-mono); font-size: .72rem; margin-bottom: 2px; }
+.tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.tile { border-radius: 9px; padding: 14px 14px 12px; min-height: 92px; display: flex; flex-direction: column; justify-content: space-between; gap: 10px; outline-offset: 2px; }
+.tile b { font-family: var(--f-display); font-weight: 700; font-size: 1.05rem; letter-spacing: -.01em; }
+.tile span { color: rgba(233,237,246,.78); font-size: .8rem; }
+.tile.focus { outline: 2px solid #E9EDF6; }
+.t-prog { background: #123349; } .t-arte { background: #4A2140; } .t-cien { background: #1F4030; }
+.t-sala { background: #46301A; } .t-prod { background: #33383F; } .t-inv { background: #2E2A4D; }
+.srow { display: grid; gap: 8px; padding: 0 2px; }
+.srow > small { color: var(--screen-muted); font-family: var(--f-mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; }
+.recent { display: flex; flex-wrap: wrap; gap: 8px; }
+.recent span { background: var(--screen-2); border: 1px solid var(--screen-line); border-radius: 6px; padding: 5px 10px; font-size: .8rem; }
+.recent em { font-style: normal; color: var(--screen-muted); }
+.hints { display: flex; flex-wrap: wrap; gap: 8px 18px; padding: 10px 6px 2px; border-top: 1px solid var(--screen-line); color: var(--screen-muted); font-size: .8rem; }
+.hints span { display: inline-flex; align-items: center; gap: 7px; }
+.btn { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; font-family: var(--f-mono); font-size: .7rem; font-weight: 600; color: #0F1526; }
+.b-a { background: #6FCF7F; } .b-b { background: #F07A6E; } .b-x { background: #6FA8F5; } .b-y { background: #F2CF5B; }
+.b-pad { background: #C9D0E0; border-radius: 4px; }
+
+/* ---------- Capas ---------- */
+.layers { display: grid; gap: 8px; margin: 22px 0 6px; }
+.layer { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 6px 20px; padding: 16px 18px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); }
+.layer h4 { margin: 0; font-family: var(--f-display); font-weight: 700; font-size: 1.05rem; }
+.layer h4 small { display: block; font-family: var(--f-body); font-weight: 400; font-size: .85rem; color: var(--muted); margin-top: 2px; }
+.layer .parts { display: flex; flex-wrap: wrap; gap: 6px; align-content: start; }
+.layer .parts span { font-size: .85rem; padding: 3px 9px; border-radius: 4px; background: var(--tint); }
+.layer.l-spaces { border-color: var(--accent); }
+.layer.l-os { background: transparent; border-style: dashed; }
+.layer.l-os .parts span { background: transparent; border: 1px solid var(--line); color: var(--muted); }
+
+/* ---------- Tablas ---------- */
+.table-wrap { overflow-x: auto; margin: 18px 0 8px; }
+table { border-collapse: collapse; width: 100%; font-size: .93rem; line-height: 1.45; min-width: 560px; }
+th {
+  text-align: left; font-family: var(--f-mono); font-size: .72rem; letter-spacing: .07em; text-transform: uppercase; font-weight: 600;
+  color: var(--muted); padding: 8px 12px; border-bottom: 2px solid var(--ink);
+}
+td { padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+td:first-child { font-weight: 700; }
+tr { break-inside: avoid; }
+.wide-table table { min-width: 720px; }
+
+/* ---------- Funciones de la base ---------- */
+.features { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 36px; margin-top: 10px; }
+.feature { border-top: 1px solid var(--line); padding: 16px 0 10px; break-inside: avoid; }
+.feature header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin-bottom: 6px; }
+.feature h3 { margin: 0; font-size: 1.1rem; }
+.feature p { margin: 0 0 8px; font-size: .98rem; }
+.keymap { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: .88rem; color: var(--muted); }
+.keymap span { display: inline-flex; align-items: center; gap: 6px; }
+
+/* ---------- Espacios ---------- */
+.spaces { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 14px; }
+.space { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 18px 18px 8px; break-inside: avoid; }
+.space header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin-bottom: 8px; }
+.space h3 { margin: 0; font-size: 1.12rem; }
+.space p { font-size: .96rem; margin-bottom: 10px; }
+.space dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px 12px; font-size: .9rem; margin: 0 0 10px; }
+.space dt { font-family: var(--f-mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); padding-top: 3px; }
+.space dd { margin: 0; }
+
+/* ---------- Un día con Wint ---------- */
+.day { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 0; max-width: 46rem; }
+.day li { display: grid; grid-template-columns: 4.2rem minmax(0, 1fr); gap: 16px; padding: 12px 0; border-top: 1px solid var(--line); margin: 0; break-inside: avoid; }
+.day time { font-family: var(--f-mono); font-weight: 600; font-size: .9rem; color: var(--accent); padding-top: 2px; font-variant-numeric: tabular-nums; }
+.day p { margin: 0; }
+
+/* ---------- Etapas ---------- */
+.phases { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 0; max-width: 50rem; }
+.phases > li { display: grid; grid-template-columns: 3.2rem minmax(0, 1fr); gap: 18px; margin: 0; position: relative; padding-bottom: 26px; break-inside: avoid; }
+.phases > li::before {
+  content: ""; position: absolute; left: calc(1.6rem - 1px); top: 2.9rem; bottom: 4px; width: 2px; background: var(--line);
+}
+.phases > li:last-child::before { display: none; }
+.phases .n {
+  width: 3.2rem; height: 3.2rem; border-radius: 50%; border: 2px solid var(--accent); display: grid; place-items: center;
+  font-family: var(--f-display); font-weight: 800; font-size: 1.3rem; color: var(--accent); background: var(--paper);
+}
+.phases h3 { margin: 4px 0 6px; }
+.phases h3 small { display: block; font-family: var(--f-mono); font-size: .7rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+.phases p { margin: 0 0 8px; }
+.phases .done { font-size: .94rem; background: var(--tint); padding: 8px 12px; border-radius: 6px; }
+.phases .done b { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .07em; text-transform: uppercase; margin-right: 6px; }
+
+.checklist { counter-reset: c; list-style: none; padding: 0; }
+.checklist li { counter-increment: c; display: grid; grid-template-columns: 2rem minmax(0, 1fr); margin-bottom: 8px; }
+.checklist li::before { content: counter(c); font-family: var(--f-mono); font-weight: 600; color: var(--accent); }
+
+.doc-foot { font-size: .86rem; color: var(--muted); max-width: 44rem; }
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 960px) {
+  .layout { grid-template-columns: minmax(0, 1fr); gap: 8px; padding-top: 24px; }
+  .toc { position: static; border-bottom: 1px solid var(--line); padding-bottom: 20px; margin-bottom: 24px; }
+  .toc ol { display: flex; flex-wrap: wrap; gap: 6px; }
+  .toc a { border: 1px solid var(--line); border-radius: 4px; padding: 4px 10px; }
+}
+@media (max-width: 700px) {
+  body { font-size: 1rem; }
+  .hero { padding-block: 36px 28px; }
+  .features, .spaces { grid-template-columns: minmax(0, 1fr); }
+  .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .layer { grid-template-columns: minmax(0, 1fr); }
+  .day li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .toc a { transition: color .15s, border-color .15s; }
+}
+
+/* ---------- PDF / impresión ---------- */
+@page { size: A4; margin: 15mm 15mm 16mm; }
+@media print {
+  :root, :root[data-theme="dark"] {
+    --paper: #FFFFFF; --surface: #FFFFFF; --ink: #151B2E; --muted: #596178; --line: #D8DDE8; --tint: #EEF1F7;
+    --accent: #2F58CD; --sun: #B9770A; --moon: #5E62A6; --screen: #0F1526; --screen-2: #182038; --screen-line: #2A3452;
+    color-scheme: light;
+  }
+  html { font-size: 9.8pt; }
+  body { font-size: 1.0625rem; line-height: 1.5; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { max-width: none; padding: 0; }
+  .layout { display: block; padding-top: 0; }
+  .toc { display: none; }
+  .hero { padding-block: 28mm 0; min-height: 252mm; display: flex; flex-direction: column; gap: 9mm; border-bottom: 0; break-after: page; }
+  .cover-toc { display: block; margin-top: auto; border-top: 1px solid var(--line); padding-top: 6mm; }
+  .cover-toc p { font-family: var(--f-mono); font-size: 7.5pt; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 3mm; }
+  .cover-toc ol { columns: 2; column-gap: 10mm; margin: 0; padding-left: 5mm; font-size: 10pt; color: var(--muted); }
+  .cover-toc li { margin-bottom: 1.2mm; }
+  .cover-toc li::marker { color: var(--accent); font-family: var(--f-mono); font-size: 8pt; }
+  .keep, .table-wrap { break-inside: avoid; }
+  .hero h1 { font-size: 64pt; }
+  .hero .lede { font-size: 15pt; }
+  main > section { break-before: auto; padding-bottom: 6mm; margin-bottom: 7mm; }
+  h2 { font-size: 20pt; break-after: avoid; }
+  h3 { break-after: avoid; }
+  .features { gap: 0 8mm; }
+  figure, .layers, .layer, .space, .feature, .note, .phases > li, .day li, .summary li { break-inside: avoid; }
+  .table-wrap { overflow: visible; }
+  table, .wide-table table { min-width: 0; font-size: 9pt; }
+  .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .spaces { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .features { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  a { color: inherit; text-decoration: none; }
+  .pb { break-before: page; }
+}
+</style>
+
+<div class="page">
+
+<header class="hero">
+  <div class="eyebrow"><span>Informe de visión</span><span>8 de octubre de 2026</span><span>Para la reunión de equipo</span></div>
+  <h1>Wint<span class="dot">.</span></h1>
+  <p class="lede">Una forma propia de usar la computadora. Wint corre sobre Windows y cambia <strong>cómo se ven los archivos, cómo se abren los programas y cómo llegan los avisos</strong>. Adentro tiene un espacio para cada actividad: arte, programación, ciencia, trabajo y las que se sumen después.</p>
+  <div class="cover-toc" aria-hidden="true">
+    <p>Contenido</p>
+    <ol>
+      <li>En pocas palabras</li><li>El problema</li><li>Qué es Wint</li><li>La base</li><li>Los espacios</li>
+      <li>SOF, el menú de arriba</li><li>Un día con Wint</li><li>Qué existe hoy</li><li>Qué se va a sumar</li>
+      <li>Plan de evolución</li><li>Cómo se construye</li><li>Sumar un espacio</li><li>Sobre los nombres</li><li>Decisiones pendientes</li>
+    </ol>
+  </div>
+</header>
+
+<div class="layout">
+
+<nav class="toc" aria-label="Contenido">
+  <p>Contenido</p>
+  <ol>
+    <li><a href="#resumen">En pocas palabras</a></li>
+    <li><a href="#problema">El problema</a></li>
+    <li><a href="#que-es">Qué es Wint</a></li>
+    <li><a href="#base">La base</a></li>
+    <li><a href="#espacios">Los espacios</a></li>
+    <li><a href="#sof">SOF, el menú de arriba</a></li>
+    <li><a href="#dia">Un día con Wint</a></li>
+    <li><a href="#hoy">Qué existe hoy</a></li>
+    <li><a href="#sumar">Qué se va a sumar</a></li>
+    <li><a href="#plan">Plan de evolución</a></li>
+    <li><a href="#como">Cómo se construye</a></li>
+    <li><a href="#nuevo">Sumar un espacio</a></li>
+    <li><a href="#nombres">Sobre los nombres</a></li>
+    <li><a href="#pendiente">Decisiones pendientes</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<section id="resumen">
+  <h2>En pocas palabras</h2>
+  <ul class="summary">
+    <li><span><strong>Wint es la forma de usar la computadora.</strong> Es la pantalla desde donde se ven los archivos, se abren los programas y se reciben los avisos. Cumple el papel que hoy cumplen el escritorio, el menú Inicio y el Explorador de Windows, con otra manera de mostrar las cosas.</span></li>
+    <li><span><strong>Windows sigue abajo.</strong> Wint no lo reemplaza ni lo bloquea. Es una aplicación que corre encima, a pantalla completa si se quiere, y siempre deja volver al escritorio normal.</span></li>
+    <li><span><strong>Adentro hay un espacio por actividad.</strong> Arte, programación, ciencia, trabajo, investigación. Cada espacio es una aplicación propia, armada y personalizada para esa actividad.</span></li>
+    <li><span><strong>Que dos espacios hagan cosas parecidas es a propósito.</strong> Todos muestran archivos, pendientes y herramientas, pero cada uno los muestra como los necesita su actividad.</span></li>
+    <li><span><strong>Los nombres son nombres de trabajo.</strong> Sun, Moon, Osi, SOF, Júpiter o Neptuno se eligieron por cortos. No forman una mitología y se pueden cambiar sin cambiar lo que hace cada pieza.</span></li>
+  </ul>
+
+  <div class="note">
+    <h3>Qué corrige este informe respecto de los textos de la reunión</h3>
+    <ul>
+      <li>Los textos anteriores describieron a Wint como un contenedor casi invisible, "la corriente" que conecta piezas. Wint es lo contrario: es lo que se ve y se usa todo el día.</li>
+      <li>Trataron los espacios por actividad como posible relleno o redundancia a podar. Los espacios son el centro de la idea: la personalización por actividad.</li>
+      <li>Leyeron los nombres como dioses con reglas propias. Son etiquetas cortas. La estructura de Wint no depende de ellos.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="problema">
+  <h2>El problema: ver archivos como en 1999</h2>
+  <p>En Windows casi todo pasa por el Explorador: carpetas, íconos y listas. Una película, un dibujo, un proyecto de código y un ejercicio de matemática se ven igual. Son archivos dentro de carpetas, y lo único que cambia es el ícono. Para encontrar lo de una actividad hay que recordar dónde quedó.</p>
+  <p>Otros lugares ya resolvieron partes de esto. Netflix y los Smart TV muestran películas como portadas. Steam y Playnite muestran los juegos como una biblioteca. Un teléfono Android arranca en una pantalla de inicio con aplicaciones que se sienten distintas entre sí. Programas como Eagle o Lightroom muestran imágenes como galería. Pero cada uno es una isla, y en la PC se salta de uno a otro pasando por el Explorador y la barra de tareas.</p>
+  <p>Hace más de veinte años, MSN Explorer juntaba en una sola ventana el correo de Hotmail, con un ícono arriba que avisaba cuando llegaba un mail, el Messenger, juegos, música y noticias. Tenía personalidad y todo estaba a mano. Wint retoma esa idea con los archivos y programas de cada persona: un solo entorno, con identidad propia, donde lo que uno hace está ordenado por actividad.</p>
+</section>
+
+<section id="que-es">
+  <h2>Qué es Wint</h2>
+  <p>Wint es un entorno personal que corre sobre Windows. Es el lugar desde donde se ven los archivos, se abren los programas y se reciben los avisos. No pretende hacer el cien por ciento de lo que hace Windows. Pretende que lo de todos los días se haga desde un lugar más claro y más lindo que una grilla de carpetas.</p>
+
+  <figure>
+    <div class="screen" role="img" aria-label="Boceto de la pantalla de inicio de Wint: barra de avisos arriba, mensaje de la guía, seis espacios, archivos recientes y los botones del joystick abajo.">
+      <div class="sbar">
+        <span class="logo">Wint</span>
+        <span class="item"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3.5" width="13" height="9" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M2.2 4.4 8 8.8l5.8-4.4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span class="badge">3</span></span>
+        <span class="item"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 3.5h11v7.2h-6.2L4.5 13v-2.3h-2z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="badge">1</span></span>
+        <span class="item"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8.6" r="5.4" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 5.8v3l2 1.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>19:00</span>
+        <span class="item"><span class="det"></span>Detector</span>
+        <span class="item">08:12</span>
+      </div>
+      <div class="guide">
+        <span class="face" aria-hidden="true"></span>
+        <p><small>Sun</small>Buen día. Tenés 3 mails y 2 tareas en Programación. El render de anoche terminó.</p>
+      </div>
+      <div class="tiles">
+        <div class="tile t-prog focus"><b>Programación</b><span>2 tareas · reporte listo</span></div>
+        <div class="tile t-arte"><b>Arte</b><span>Serie en curso · 4 obras</span></div>
+        <div class="tile t-cien"><b>Ciencia</b><span>Retomar: integrales</span></div>
+        <div class="tile t-sala"><b>Sala</b><span>Seguir viendo · episodio 6</span></div>
+        <div class="tile t-prod"><b>Producción</b><span>1 entrega el viernes</span></div>
+        <div class="tile t-inv"><b>Investigación</b><span>3 fuentes nuevas</span></div>
+      </div>
+      <div class="srow">
+        <small>Seguir donde quedaste</small>
+        <div class="recent">
+          <span>ilustracion_04.kra <em>· Arte</em></span>
+          <span>wint-escritorio <em>· Programación</em></span>
+          <span>Apuntes de cálculo <em>· Ciencia</em></span>
+        </div>
+      </div>
+      <div class="hints">
+        <span><i class="btn b-pad" aria-hidden="true">+</i>moverse</span>
+        <span><i class="btn b-a" aria-hidden="true">A</i>abrir</span>
+        <span><i class="btn b-b" aria-hidden="true">B</i>volver</span>
+        <span><i class="btn b-y" aria-hidden="true">Y</i>menú</span>
+        <span><i class="btn b-x" aria-hidden="true">X</i>guía</span>
+      </div>
+    </div>
+    <figcaption>Boceto del inicio de Wint. Arriba, la barra de avisos al estilo del ícono de mail de MSN. En el centro, los espacios con lo que tiene pendiente cada uno. Abajo, los botones del joystick, que ya funcionan así en el prototipo. Es una idea de cómo se ve, no un diseño final.</figcaption>
+  </figure>
+
+  <h3>Lo que no es</h3>
+  <ul>
+    <li><strong>No es un sistema operativo.</strong> No toca el kernel, los drivers ni el sistema de archivos, y no bloquea el Explorador ni la consola.</li>
+    <li><strong>No es un tema de Windows.</strong> No cambia colores de ventanas. Cambia cómo se organiza y se muestra lo que hay.</li>
+    <li><strong>No es solo un lanzador de programas.</strong> Además de abrir, muestra, ordena, recuerda y avisa.</li>
+    <li><strong>No es una sola aplicación gigante.</strong> Cada espacio es independiente. Si uno falla, Wint y los demás siguen andando.</li>
+  </ul>
+
+  <div class="keep">
+  <h3>Tres capas</h3>
+  <p>Wint se entiende en tres capas. La de abajo es Windows con sus programas. La del medio es la base de Wint, lo que está siempre. La de arriba son los espacios, una aplicación por actividad.</p>
+  <div class="layers">
+    <div class="layer l-spaces">
+      <h4>Espacios<small>Una aplicación por actividad</small></h4>
+      <div class="parts"><span>Arte y diseño</span><span>Programación</span><span>Ciencia y estudio</span><span>Producción</span><span>Investigación</span><span>Privado</span><span>Los que se sumen</span></div>
+    </div>
+    <div class="layer">
+      <h4>Base de Wint<small>Lo que está siempre</small></h4>
+      <div class="parts"><span>Inicio y archivos</span><span>Guía del día</span><span>Modo noche</span><span>Barra de avisos</span><span>Menú rápido</span><span>Teclado, mouse y joystick</span><span>Búsqueda</span><span>Apagado</span></div>
+    </div>
+    <div class="layer l-os">
+      <h4>Windows<small>Sigue instalado, abajo</small></h4>
+      <div class="parts"><span>Explorador</span><span>VS Code</span><span>Krita</span><span>Blender</span><span>mpv</span><span>Steam</span><span>Navegador</span></div>
+    </div>
+  </div>
+  </div>
+
+  <h3>Windows hoy y con Wint</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th style="width:22%">Qué se hace</th><th style="width:36%">Hoy en Windows</th><th>Con Wint</th></tr></thead>
+      <tbody>
+        <tr><td>Ver archivos</td><td>Carpetas e íconos, iguales para todo</td><td>Cada tipo a su manera: portadas, álbumes, galerías, proyectos</td></tr>
+        <tr><td>Encontrar lo de una actividad</td><td>Recordar en qué carpeta quedó</td><td>Entrar al espacio de esa actividad</td></tr>
+        <tr><td>Abrir un programa</td><td>Menú Inicio o acceso directo</td><td>Desde el espacio, ya en el archivo o la carpeta correcta</td></tr>
+        <tr><td>Avisos</td><td>Un centro de notificaciones general</td><td>Barra de avisos arriba, y dentro de cada espacio solo los suyos</td></tr>
+        <tr><td>Retomar algo</td><td>Archivos recientes, todos mezclados</td><td>"Seguir donde quedaste", separado por actividad</td></tr>
+        <tr><td>Control</td><td>Teclado y mouse; con joystick casi no se puede hacer nada</td><td>Teclado, mouse o joystick para lo mismo</td></tr>
+        <tr><td>De noche</td><td>Modo oscuro</td><td>Modo noche: menos luz, menos avisos y cierre del día</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="base">
+  <h2>La base: lo que Wint tiene siempre</h2>
+  <p>Estas funciones son de Wint y no de un espacio. Están disponibles desde cualquier lugar y se comparten, para que nada se configure dos veces. Al lado de cada una va su nombre de trabajo, cuando lo tiene.</p>
+  <div class="features">
+    <article class="feature">
+      <header><h3>Inicio y archivos</h3><span class="chip">Osi</span></header>
+      <p>La pantalla principal y la pieza que reconoce lo que hay en el disco. Mira las carpetas que se le indican, distingue películas, series, música, juegos, imágenes, documentos y proyectos, y muestra cada cosa como corresponde. Recuerda lo visto, lo favorito y lo que quedó para después. Los espacios usan lo que Osi ya encontró en lugar de revisar el disco otra vez.</p>
+    </article>
+    <article class="feature">
+      <header><h3>Guía del día</h3><span class="chip">Sun</span></header>
+      <p>Antes se llamaba Good Morning. Saluda, resume el día y sugiere qué sigue: mails, pendientes, algo que quedó a medias. Se puede silenciar. Cuando se entra a un espacio que tiene su propio informante, como Programación, la guía se hace a un lado y vuelve al salir.</p>
+    </article>
+    <article class="feature">
+      <header><h3>Modo noche</h3><span class="chip">Moon</span></header>
+      <p>Antes se llamaba Good Night. Es la misma casa con otra ambientación: menos brillo, menos avisos, la sala de películas y música más a mano. Al final ofrece cerrar el día: suspender, hibernar o apagar.</p>
+    </article>
+    <article class="feature">
+      <header><h3>Barra de avisos</h3></header>
+      <p>Arriba y siempre visible, como el ícono de mail de MSN. Muestra mails, mensajes, alarmas, pendientes por espacio y el estado de programas propios, por ejemplo el Detector de precios cuando está trabajando.</p>
+    </article>
+    <article class="feature">
+      <header><h3>Menú rápido</h3><span class="chip">SOF</span></header>
+      <p>Un menú que aparece encima de todo con una tecla o un botón del joystick. Da acceso a comunicación, alarmas, gestión y acciones del sistema sin abrir una aplicación entera. Tiene su propia sección más abajo.</p>
+    </article>
+    <article class="feature">
+      <header><h3>Teclado, mouse y joystick</h3></header>
+      <p>Los tres sirven para todo lo de la base, con navegación por foco. El teclado no se usa como una cadena de Tab, y el joystick no mueve un cursor falso.</p>
+      <div class="keymap">
+        <span><i class="btn b-pad" aria-hidden="true">+</i>moverse</span>
+        <span><i class="btn b-a" aria-hidden="true">A</i>abrir</span>
+        <span><i class="btn b-b" aria-hidden="true">B</i>volver</span>
+        <span><i class="btn b-y" aria-hidden="true">Y</i>menú</span>
+        <span><i class="btn b-x" aria-hidden="true">X</i>guía</span>
+      </div>
+    </article>
+    <article class="feature">
+      <header><h3>Modos de uso</h3></header>
+      <p>La misma PC puede ser tres cosas según el momento. <strong>Escritorio</strong>: teclado primero, espacios de trabajo. <strong>Sala</strong>: películas, series y música con joystick o control, como una Smart TV, sin pasar por el Explorador ni pagar una plataforma para ver lo que ya está en el disco. <strong>Consola</strong>: juegos y emuladores.</p>
+    </article>
+    <article class="feature">
+      <header><h3>Búsqueda, salida y apagado</h3></header>
+      <p>Buscar en todo: archivos, programas y espacios. Volver al escritorio de Windows con un botón, siempre. Cerrar sesión y apagar desde Wint, también con el joystick.</p>
+    </article>
+  </div>
+  <p style="margin-top:18px">Todo se personaliza: fondos, temas, tamaño de letra, qué carpetas ve cada espacio, qué programas abre y qué espacios aparecen en el inicio.</p>
+</section>
+
+<section id="espacios">
+  <h2>Los espacios: una aplicación por actividad</h2>
+  <p>Un espacio es una aplicación que se abre desde Wint y está armada para una actividad. Tiene sus carpetas, su forma de mostrarlas, sus herramientas, sus pendientes y su apariencia. Entrar a un espacio se siente como entrar a otra aplicación, igual que en un teléfono se pasa de la galería a WhatsApp.</p>
+
+  <h3>Por qué parece redundante y no lo es</h3>
+  <p>Casi todos los espacios muestran archivos, tienen pendientes y abren programas. Leído rápido, parece repetición. Es justamente la idea: cada actividad necesita ver esas mismas cosas de otra manera. Una galería pensada para valorar dibujos no sirve para revisar proyectos de código, y una lista de proyectos con errores no sirve para elegir qué película ver.</p>
+  <div class="table-wrap wide-table">
+    <table>
+      <thead><tr><th style="width:15%">Función</th><th>Arte</th><th>Programación</th><th>Ciencia</th><th>Sala</th></tr></thead>
+      <tbody>
+        <tr><td>Mostrar archivos</td><td>Galería de obras y series, como un salón</td><td>Proyectos con su estado y último cambio</td><td>Apuntes, ejercicios, investigaciones</td><td>Portadas de películas y series</td></tr>
+        <tr><td>Pendientes</td><td>Obras sin terminar, encargos</td><td>Tareas del día, reportes, avisos del sector</td><td>Ejercicios para practicar, temas para retomar</td><td>Seguir viendo</td></tr>
+        <tr><td>Herramientas</td><td>Krita, Blender, editor de fotos, tablero de referencias</td><td>VS Code, terminal, GitHub</td><td>Calculadoras, GeoGebra, Python</td><td>Reproductor (mpv)</td></tr>
+        <tr><td>Avisos</td><td>Redes del lado artístico</td><td>Mails y avisos de programación</td><td>Novedades de lo que se investiga</td><td>Ninguno: la sala no interrumpe</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Los espacios pensados hasta hoy</h3>
+  <div class="spaces">
+    <article class="space">
+      <header><h3>Arte y diseño</h3><span class="chip">Júpiter</span></header>
+      <p>Para crear y mostrar obra. La vista está pensada para valorar trabajos, como un salón o un portfolio, y no como una grilla de íconos.</p>
+      <dl><dt>Muestra</dt><dd>Obras por serie, fichas, referencias, pendientes artísticos</dd><dt>Abre</dt><dd>Dibujo, 3D y edición; redes del lado artístico</dd></dl>
+    </article>
+    <article class="space">
+      <header><h3>Programación</h3><span class="chip">Neptuno</span></header>
+      <p>Un asistente de programación. Vigila las carpetas de proyectos, arma el reporte del día y avisa tareas, pendientes y mails, solo de programación. Al entrar toma la palabra y la guía general se corre.</p>
+      <dl><dt>Muestra</dt><dd>Proyectos, estado, tareas del día, reportes</dd><dt>Abre</dt><dd>El editor (VS Code) en el proyecto elegido; no lo reemplaza</dd></dl>
+    </article>
+    <article class="space">
+      <header><h3>Ciencia y estudio</h3><span class="chip">Saturno</span></header>
+      <p>Herramientas para ciencia y matemática, materiales de estudio y práctica. Permite retomar una investigación o un tema donde quedó.</p>
+      <dl><dt>Muestra</dt><dd>Apuntes, ejercicios, historial de práctica</dd><dt>Abre</dt><dd>Calculadoras, graficadores, GeoGebra, Python</dd></dl>
+    </article>
+    <article class="space">
+      <header><h3>Producción y trabajo</h3><span class="chip">Marte</span></header>
+      <p>El lugar de las entregas: lo que hay que terminar y el foco del día. Menos adorno y más lista. Si un trabajo es de código, el proyecto vive en Programación y acá se ve la entrega.</p>
+      <dl><dt>Muestra</dt><dd>Entregas, plazos, documentos de trabajo</dd><dt>Abre</dt><dd>Los programas de oficina o de cada trabajo</dd></dl>
+    </article>
+    <article class="space">
+      <header><h3>Investigación</h3><span class="chip">CSI</span></header>
+      <p>Para investigar un tema o un caso: preguntas, fuentes, notas, lo descartado y las conclusiones. Se diferencia de Ciencia en que reúne y contrasta información. Ciencia aporta las herramientas de cálculo cuando hacen falta.</p>
+      <dl><dt>Muestra</dt><dd>Casos abiertos, fuentes, notas, conclusiones</dd><dt>Abre</dt><dd>Navegador, lector de PDF, notas</dd></dl>
+    </article>
+    <article class="space">
+      <header><h3>Contenido adulto</h3><span class="chip">Venus</span></header>
+      <p>Un espacio privado y separado. No aparece en el inicio, en lo reciente ni en la búsqueda general, y se abre con clave. Lo que hay adentro no se mezcla con la sala ni con los demás espacios.</p>
+      <dl><dt>Muestra</dt><dd>Solo sus propias carpetas</dd><dt>Abre</dt><dd>Su propio reproductor o visor</dd></dl>
+    </article>
+  </div>
+  <p style="margin-top:18px"><strong>Ideas sin actividad todavía.</strong> Black Hole, pensado como un software existencial, y Eclipse, un nombre que gusta. Quedan anotados y se construyen cuando haya una actividad concreta para ellos.</p>
+</section>
+
+<section id="sof">
+  <h2>SOF, el menú que está encima de todo</h2>
+  <p>SOF nace del menú del anime Sword Art Online y de las skins de teléfono que lo imitaron hace unos diez años. Aquellas skins fracasaron: tenían errores, eran lentas y consumían memoria sin dar nada a cambio. Terminaban siendo un fondo de pantalla. SOF se queda con lo bueno de ese menú, su dinámica y lo rápido que se ve todo, y le da funciones reales.</p>
+  <p>La propuesta es que SOF sea el menú que aparece sobre cualquier pantalla de Wint, con una tecla o un botón, para todo lo que no es entretenimiento ni pertenece a un espacio:</p>
+  <ul>
+    <li><strong>Comunicación:</strong> WhatsApp, Telegram, redes sociales, mail y llamadas.</li>
+    <li><strong>Alarmas y recordatorios.</strong></li>
+    <li><strong>Gestión:</strong> cuentas, contraseñas, trámites y papeles administrativos. Es la parte de seguridad.</li>
+    <li><strong>Acciones del sistema:</strong> volver al inicio, cambiar de espacio, apagar.</li>
+  </ul>
+  <p>Una regla evita que se repita el fracaso de las skins: cada figura del menú hace algo concreto. Primero se arma la lista de funciones y después la animación. Si un adorno no lleva a ninguna función, no se dibuja. Si con el uso la parte de gestión crece mucho, puede pasar a ser un espacio propio.</p>
+</section>
+
+<section id="dia">
+  <h2>Un día con Wint</h2>
+  <p>Un ejemplo para ver cómo encajan las piezas. Los horarios y los pendientes son inventados.</p>
+  <ol class="day">
+    <li><time>08:10</time><p>Prendés la PC y Wint abre a pantalla completa. Sun saluda: tres mails, dos tareas de programación, el render de anoche terminó. Arriba, el ícono de mail marca 3.</p></li>
+    <li><time>09:00</time><p>Entrás a Programación. Sun se corre y habla Neptuno: qué proyecto tiene cambios sin guardar, las tareas de hoy y el reporte de anoche. Elegís un proyecto y se abre VS Code en esa carpeta. Al cerrarlo, volvés a Programación.</p></li>
+    <li><time>15:30</time><p>Pasás a Arte. Ves la serie en curso como una galería, las referencias del proyecto y el pendiente "terminar el fondo de la ilustración 4". Un botón abre Krita con ese archivo.</p></li>
+    <li><time>18:45</time><p>Desde cualquier pantalla, el botón Y abre SOF: llegó un WhatsApp y a las 19:00 suena una alarma. Respondés y volvés a donde estabas.</p></li>
+    <li><time>22:00</time><p>Modo sala. El teclado queda guardado y se usa el joystick. Elegís una película de tu carpeta, se reproduce con mpv y en ningún momento aparece el Explorador.</p></li>
+    <li><time>00:30</time><p>Moon baja la luz, silencia los avisos y ofrece suspender o apagar. Con el botón A, la PC se apaga.</p></li>
+  </ol>
+</section>
+
+<section id="hoy">
+  <h2>Qué existe hoy</h2>
+  <h3>El prototipo</h3>
+  <p>Según los textos de la reunión, hoy Wint es una página web que ya muestra películas, series, música y juegos ordenados por tipo. Tiene un espacio de noche, una guía con cara propia (Bit, la cara de Good Morning) que se puede callar, Osi como visor de carpetas, navegación con teclado por foco, el mapa del joystick y una radio. Es la prueba de que la sala funciona.</p>
+  <p>Tiene cuatro límites conocidos:</p>
+  <ul>
+    <li>Como es una página del navegador, no puede abrir programas de Windows.</li>
+    <li>Está en un solo archivo, así que una falla en una parte afecta a todo.</li>
+    <li>Al volver a abrirlo, la biblioteca vuelve a la de ejemplo y se pierden las carpetas que se habían agregado.</li>
+    <li>La guía habla cada vez que se redibuja una vista, y no solo cuando tiene algo para decir.</li>
+  </ul>
+  <h3>Programas propios que pueden entrar</h3>
+  <p>El Detector de precios, con su ícono naranja junto al reloj, y el motor de catálogos (animales, curiosidades y comercios) con su panel visual. Los dos pueden entrar a Wint como aplicaciones: el estado del Detector en la barra de avisos y los catálogos con una vista de estantes tipo Netflix.</p>
+</section>
+
+<section id="sumar">
+  <h2>Qué se le va a sumar</h2>
+  <ul>
+    <li><strong>Más espacios</strong>, a medida que aparezcan actividades que los pidan.</li>
+    <li><strong>Programas propios como aplicaciones de Wint</strong>, empezando por el Detector y los catálogos.</li>
+    <li><strong>Comunicación integrada</strong> en SOF: mensajería, mail, redes y alarmas.</li>
+    <li><strong>Temas y apariencias por espacio</strong>, para que cada uno tenga su identidad visual.</li>
+    <li><strong>Una plantilla de espacio</strong>, para que otra persona arme el suyo sin tocar el resto.</li>
+    <li><strong>Perfiles</strong> para varias personas en la misma PC, cada una con sus espacios y carpetas.</li>
+    <li><strong>Acompañante en el teléfono</strong>, para ver avisos y estado desde Android.</li>
+    <li><strong>Asistentes propios</strong> en los espacios que los necesiten, como Neptuno en Programación.</li>
+    <li><strong>Arranque directo en Wint</strong> al prender la PC, opcional y siempre con salida al escritorio.</li>
+  </ul>
+</section>
+
+<section id="plan">
+  <h2>Plan de evolución</h2>
+  <p>Cada etapa deja algo que se puede usar y termina con una prueba simple. El orden importa: la base tiene que andar antes de sumar espacios, y los dos primeros espacios son las actividades de todos los días.</p>
+  <ol class="phases">
+    <li>
+      <span class="n">0</span>
+      <div>
+        <h3><small>Etapa 0</small>Ordenar el prototipo</h3>
+        <p>Que recuerde las carpetas del usuario al volver a abrirse. Que la guía hable solo cuando tiene algo para decir. Separar el código en partes: inicio, archivos, guía, noche, sala.</p>
+        <p class="done"><b>Lista cuando</b>Las carpetas se agregan una vez y al día siguiente siguen ahí.</p>
+      </div>
+    </li>
+    <li>
+      <span class="n">1</span>
+      <div>
+        <h3><small>Etapa 1</small>Wint de escritorio</h3>
+        <p>Pasar de página del navegador a aplicación de Windows a pantalla completa, capaz de leer el disco y abrir programas. Tauri es un buen candidato por liviano. Incluye la base completa: inicio y archivos, barra de avisos, guía, modo noche, menú rápido básico, búsqueda, salida a Windows y apagado, con teclado, mouse y joystick.</p>
+        <p class="done"><b>Lista cuando</b>Se puede pasar una tarde entera en Wint, abriendo archivos y programas, sin pasar por el Explorador.</p>
+      </div>
+    </li>
+    <li>
+      <span class="n">2</span>
+      <div>
+        <h3><small>Etapa 2</small>Sala y primeros espacios</h3>
+        <p>Modo sala completo con joystick, usando mpv como reproductor. Programación y Arte como aplicaciones separadas, cada una con su vista y sus carpetas reales. La guía se corre al entrar a un espacio.</p>
+        <p class="done"><b>Lista cuando</b>Los dos espacios funcionan con carpetas reales y, si uno se cierra mal, Wint sigue andando.</p>
+      </div>
+    </li>
+    <li>
+      <span class="n">3</span>
+      <div>
+        <h3><small>Etapa 3</small>Comunicación y programas propios</h3>
+        <p>SOF con mail, mensajería, alarmas y gestión. El Detector y los catálogos dentro de Wint. Sus avisos llegan a la barra.</p>
+        <p class="done"><b>Lista cuando</b>Los avisos del día llegan a Wint sin abrir el navegador para revisarlos.</p>
+      </div>
+    </li>
+    <li>
+      <span class="n">4</span>
+      <div>
+        <h3><small>Etapa 4</small>Más espacios y plantilla</h3>
+        <p>Ciencia, Producción, Investigación y el espacio privado. La plantilla para crear espacios nuevos. Temas por espacio.</p>
+        <p class="done"><b>Lista cuando</b>Un espacio nuevo se agrega sin modificar los que ya existen.</p>
+      </div>
+    </li>
+    <li>
+      <span class="n">5</span>
+      <div>
+        <h3><small>Etapa 5</small>Wint como entorno principal</h3>
+        <p>Arranque directo opcional, modo consola al encender, perfiles para varias personas y acompañante en el teléfono.</p>
+        <p class="done"><b>Lista cuando</b>El uso diario de la PC pasa por Wint y Windows queda para lo excepcional.</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<section id="como">
+  <h2>Cómo se construye, en simple</h2>
+  <ul>
+    <li><strong>Encima de Windows, no en su lugar.</strong> Wint corre como una aplicación a pantalla completa, como hacen Steam Big Picture o Playnite. Los programas que intentaron reemplazar el escritorio de Windows, como LiteStep, se rompían con cada actualización. Wint no repite ese camino.</li>
+    <li><strong>Cada espacio es su propio programa.</strong> Si uno se cuelga, la base y los demás siguen.</li>
+    <li><strong>Lo común se guarda una sola vez.</strong> La lista de archivos que arma Osi, lo visto y lo favorito, los controles, los avisos y el apagado son de la base. Así la misma carpeta no se agrega cinco veces.</li>
+    <li><strong>Los programas que ya existen se usan.</strong> Wint abre VS Code, Krita o mpv y vuelve cuando se cierran. No hace falta reescribirlos.</li>
+    <li><strong>Los archivos quedan donde están.</strong> Wint no los copia a una biblioteca propia. La carpeta sigue siendo la fuente.</li>
+    <li><strong>Liviano antes que vistoso.</strong> La lección de las skins de Sword Art Online: si algo consume memoria y no hace nada, sobra. Cada efecto visual acompaña a una función.</li>
+  </ul>
+</section>
+
+<section id="nuevo">
+  <h2>Cómo se suma un espacio nuevo</h2>
+  <p>Antes de programar un espacio, se responden seis preguntas:</p>
+  <ol class="checklist">
+    <li>Qué actividad cubre, y por qué no alcanza con un espacio que ya existe.</li>
+    <li>Qué carpetas mira.</li>
+    <li>Cómo muestra lo que hay.</li>
+    <li>Qué programas abre.</li>
+    <li>Qué pendientes y avisos da.</li>
+    <li>Qué apariencia tiene.</li>
+  </ol>
+  <p>Si las respuestas existen, el espacio se construye. Si por ahora solo existe el nombre, queda anotado como idea, como Black Hole y Eclipse.</p>
+</section>
+
+<section id="nombres">
+  <h2>Sobre los nombres</h2>
+  <p>Son nombres cortos. Algunos son planetas, otros son también personajes de anime o palabras sueltas. Se eligieron porque se dicen rápido: Sun y Moon son más cortos que Good Morning y Good Night. No hay una mitología detrás que respetar. Cambiar un nombre no cambia la función, y un espacio nuevo puede llamarse de cualquier forma.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th style="width:24%">Nombre de trabajo</th><th style="width:38%">Qué es</th><th>Nota</th></tr></thead>
+      <tbody>
+        <tr><td>Wint</td><td>El entorno completo</td><td>También se pensó como Wind (viento) o Winter (invierno). Por ahora, Wint.</td></tr>
+        <tr><td>Osi</td><td>Inicio y archivos</td><td>Viene de la biología: órganos sensoriales del tegumento.</td></tr>
+        <tr><td>Sun</td><td>Guía del día</td><td>Antes Good Morning.</td></tr>
+        <tr><td>Moon</td><td>Modo noche</td><td>Antes Good Night.</td></tr>
+        <tr><td>SOF</td><td>Menú rápido: comunicación y gestión</td><td>Nombre provisorio.</td></tr>
+        <tr><td>Júpiter</td><td>Arte y diseño</td><td></td></tr>
+        <tr><td>Neptuno</td><td>Programación</td><td></td></tr>
+        <tr><td>Saturno</td><td>Ciencia y estudio</td><td></td></tr>
+        <tr><td>Marte</td><td>Producción y trabajo</td><td></td></tr>
+        <tr><td>CSI</td><td>Investigación</td><td></td></tr>
+        <tr><td>Venus</td><td>Contenido adulto, privado</td><td></td></tr>
+        <tr><td>Black Hole, Eclipse</td><td>Ideas sin actividad todavía</td><td>Quedan anotados.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Antes de publicar algo hacia afuera conviene revisar si los nombres ya están registrados. El informe técnico del 7 de octubre encontró coincidencias para WINT y para OSI.</p>
+</section>
+
+<section id="pendiente">
+  <h2>Decisiones pendientes</h2>
+  <ul>
+    <li><strong>SOF:</strong> confirmar que reúne comunicación y gestión en un solo menú, o separarlas desde el principio.</li>
+    <li><strong>Carpetas:</strong> decidir qué carpetas reales corresponden a cada espacio.</li>
+    <li><strong>Tecnología de la versión de escritorio:</strong> la propuesta es Tauri.</li>
+    <li><strong>Arranque:</strong> definir si Wint se abre solo al iniciar sesión. La propuesta es que al principio se abra como cualquier programa.</li>
+    <li><strong>Black Hole:</strong> qué haría el software existencial.</li>
+  </ul>
+  <p class="doc-foot">Este informe reemplaza la lectura de los textos de la reunión en lo que se refiere a qué es Wint y para qué sirve. El informe técnico del 7 de octubre trató otros temas (las rutinas de energía de Sun y Moon, el Detector y el teléfono) y sigue sirviendo como referencia técnica para ellos.</p>
+</section>
+
+</main>
+</div>
+</div>
