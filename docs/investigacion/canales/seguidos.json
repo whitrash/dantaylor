@@ -1,0 +1,722 @@
+{
+ "canal": "Seguidos y suscripciones: lo que uno eligió, en orden cronológico inverso. Incluye el Twitter original (2006–2016), Instagram 2010–2016, la pestaña \"Siguiendo/Following\" de TikTok, Instagram, Threads y X, el feed de Suscripciones de YouTube, RSS y Google Reader (2005–2013), newsletters y Substack, podcasts (que viven sobre RSS), Bluesky con feeds elegibles y Mastodon con línea de tiempo cronológica.",
+ "expectativa_usuario": "Quiero ver lo nuevo de la gente y los temas que yo elegí, en el orden en que pasó, hasta llegar al final y saber que no me perdí nada.",
+ "modo_humano": "Sobre todo \"mantenerse al tanto\": una forma de investigar en modo seguimiento, no de descubrir. La persona ya hizo el trabajo de elegir (a quién seguir, qué newsletter, qué podcast) y después solo quiere cobrar la cosecha: ver qué hay de nuevo y terminar. Explora poco (el conjunto está cerrado por diseño; Instagram sacó el seguimiento de hashtags en 2024 justamente porque el descubrimiento lo quiere hacer el algoritmo), se comunica en las versiones sociales (Twitter cronológico era una conversación en vivo; Mastodon y Bluesky lo siguen siendo) y se acompaña: la suscripción a una persona (YouTuber, podcaster, autor de newsletter) es la infraestructura de lo parasocial. Lotun et al. (Scientific Reports, 2024) encontraron que la gente percibe esos vínculos con YouTubers como más eficaces que un conocido para cubrir necesidades emocionales, aunque menos que un amigo cercano. Pew (2023) midió que la gente escucha podcasts para entretenerse (60%), aprender (55%) y tener algo de fondo (52%); solo el 29% para estar al día de la actualidad. Es decir: el canal funciona como compañía elegida más que como fuente de novedades.",
+ "unidad": "El ítem nuevo con estado \"visto/no visto\": un tweet, un post, un video, un episodio, un correo. Se consume de a uno, en lista, y la sesión entera tiene una unidad mayor implícita: \"ponerme al día\" (todo lo nuevo desde la última vez). Google Reader lo hacía explícito con el contador de no leídos y \"Marcar todo como leído\"; Instagram lo hizo explícito en 2018 con \"Ya estás al día\".",
+ "quien_decide": "La persona decide el conjunto (a quién o qué seguir) y el tiempo decide el orden. Nadie rankea. Esa es la promesa. En la práctica hoy la plataforma decide dos cosas más: si esa pestaña es el default (casi nunca: Instagram 2022 no permite ponerla por defecto porque \"la gente está más satisfecha con el feed rankeado\"; X vuelve a \"Para ti\" y en noviembre de 2025 pasó a rankear con Grok incluso el feed \"Siguiendo\") y qué se cuela adentro (\"sugeridos\", anuncios). En Bluesky el que decide puede ser un tercero: cualquiera publica un feed con su propia regla y uno lo fija como pestaña; había más de 100.000 feeds personalizados en 2026. En RSS, newsletters y podcasts el control es total: el cliente baja lo que el emisor publica, sin intermediario que ordene.",
+ "tiene_final": "Sí, y es su rasgo definitorio. Cuando viste todo lo nuevo, se terminó: Reader llegaba a cero no leídos, Instagram muestra \"Ya estás al día\" (viste todo lo de los últimos dos días), el podcast tiene cola y el episodio termina. El efecto medido es que la gente usa menos la aplicación: en el experimento de Guess et al. (Science, 2023; 23.000 usuarios de Facebook y 21.000 de Instagram) el feed cronológico redujo el tiempo en la plataforma un 20% en Facebook y un 11% en Instagram, y los de Instagram se fueron a TikTok (+36% de tiempo) y YouTube (+20%). Mosseri dijo en septiembre de 2026 que con feed cronológico el engagement cae hasta un 50%. Para la persona ese final es alivio y control (46% de los estadounidenses prefiere cronológico vs 26% algorítmico, YouGov agosto 2026); para la plataforma que vende atención es un costo, y por eso las pestañas \"Siguiendo\" existen pero están escondidas.",
+ "mecanismo": "Por dentro es una operación simple: una lista de fuentes elegidas (el \"grafo de seguimiento\", un OPML de RSS, los correos a los que te anotaste), una consulta de \"qué hay nuevo desde X\", y una mezcla ordenada por fecha. RSS lo hace con sondeo: el lector baja periódicamente cada feed (un XML con ítems, cada uno con GUID y fecha) y marca como nuevo lo que no vio; los podcasts son exactamente eso más una etiqueta <enclosure> con el archivo de audio, que Apple exige en su especificación. El estado \"leído/no leído\" vive en el cliente o en la cuenta del lector, no en el emisor. Las newsletters invierten el flujo (push al buzón) pero conservan la lógica: lo que llega está porque vos lo pediste, en orden de llegada, con un final (inbox cero). Como no hay ranking, el costo computacional es trivial y la \"relevancia\" es responsabilidad de la persona al elegir y podar sus fuentes.\n\nPor fuera se ve como una lista vertical inversa, con tres piezas de interfaz que sostienen la sensación de control: un indicador de progreso (contador de no leídos, punto azul, \"N posts nuevos\"), un gesto para cerrar (\"marcar todo como leído\", \"ya estás al día\") y agrupadores que la persona arma (carpetas en Reader, Favoritos en Instagram con tope de 50 cuentas, subpestañas Todos/Favoritos/Amigos/Grupos en la pestaña Feeds de Facebook de 2022, feeds fijados como pestañas en Bluesky). La relación con el emisor es directa: si una cuenta publica, aparece; si publica mucho, aparece mucho.\n\nEsa última propiedad es el talón de Aquiles y la razón económica del abandono. El orden cronológico premia la frecuencia: marcas, medios y bots pueden publicar más que tus amigos, así que el feed \"se inunda de empresas, marcas y publishers; los creadores se ahogan y tus amigos todavía más\" (Mosseri, 2026). Instagram justificó el cambio de 2016 diciendo que la gente se perdía en promedio el 70% de su feed; Twitter dijo en 2016 que con el ranking la gente tuiteaba y retuiteaba más y que solo el 2% desactivó la opción. YouTube reportó en 2018 que el 70% del tiempo de visualización venía de sus recomendaciones, y Netflix estimó en 2015 que el 80% de las horas vistas salían del recomendador. Más tiempo en la app es más inventario publicitario; una pestaña que termina es un techo. Por eso el patrón actual es híbrido y asimétrico: Inicio/Para ti algorítmico como default, \"Siguiendo\" como pestaña secundaria (Twitter 2023, Threads 2023, Instagram 2022), con reversión automática al algoritmo (el \"sparkle\" de Twitter de 2018 volvía solo al ranking si no entrabas por un tiempo; Instagram vuelve a Inicio al reabrir).\n\nEl contrapeso vino por tres lados. Regulación: el DSA europeo obligó desde agosto de 2023 a que las plataformas muy grandes ofrezcan una opción sin perfilado, y Meta y TikTok la implementaron como feeds cronológicos de Siguiendo/Amigos (aunque nadie publica cuánta gente la usa). Protocolos abiertos: RSS nunca murió porque los podcasts corren sobre él; Feedly sumó 3 millones de usuarios en dos semanas cuando Google anunció el cierre de Reader en 2013; Substack llegó a 5 millones de suscripciones pagas en marzo de 2025; Mastodon mantiene ~938.000 usuarios activos mensuales con línea de tiempo cronológica. Y una tercera vía, \"elección algorítmica\": Bluesky separó el ranking de la red (julio de 2023) y dejó que cualquiera publique un feed; Threads copió los feeds personalizados en 2024–2025. La discusión ya no es cronológico vs. algoritmo sino quién elige la regla y si se puede cambiar.",
+ "historia": "2005: Google Reader se lanza (7 de octubre) como lector RSS; en septiembre de 2006 incorpora contador de no leídos, \"marcar todo como leído\" y carpetas. 2006: Facebook lanza News Feed (septiembre); el grupo \"Students Against Facebook News Feed\" junta más de 700.000 miembros y Zuckerberg responde \"Calm down. Breathe. We hear you.\" (la queja era de privacidad, pero fijó el reflejo de rebelión ante cambios de feed). 2006–2016: Twitter es una línea de tiempo cronológica pura, su identidad de \"lo que pasa ahora\". 2009: Facebook introduce \"Top News\" (EdgeRank) y relega \"Most Recent\"; hacia 2011 pasa a machine learning. 2010: Instagram nace cronológico. 2013: Google anuncia el cierre de Reader (13 de marzo) por \"uso en declive\" y lo apaga el 1 de julio; la petición \"Keep Google Reader Running\" supera las 130.000 firmas; Feedly suma 500.000 usuarios en 48 horas y 3 millones en dos semanas. Fue el momento en que la suscripción elegida dejó de ser infraestructura de las grandes empresas y pasó a nichos. 2016: Twitter anuncia el 10 de febrero \"Show me the best Tweets first\" tras el #RIPTwitter del fin de semana anterior; Dorsey promete que no reordenarán la línea de tiempo \"la semana que viene\"; en marzo dice que solo el 2% desactivó la opción. Instagram anuncia el 15 de marzo su feed rankeado alegando que la gente se pierde el 70% de los posts; una petición en Change.org junta 70.000 firmas en 24 horas y termina con ~340.000; el despliegue total es en junio. 2017: Instagram permite seguir hashtags (12 de diciembre): seguir un tema, no solo una cuenta. 2018: YouTube dice en CES que el 70% del tiempo de visualización viene de recomendaciones; en mayo prueba ordenar el feed de Suscripciones por algoritmo y los creadores (Jacksepticeye: \"la gente usa la pestaña de suscripciones justamente para evitar ese comportamiento algorítmico\") lo frenan; Instagram lanza \"Ya estás al día\" (2 de julio); Twitter trae de vuelta el cronológico con el botón \"sparkle\" (18 de diciembre). 2019: Twitter lanza Topics (noviembre, 300+ temas para seguir). 2021: Apple Podcasts cambia \"Suscribirse\" por \"Seguir\" en iOS 14.5 porque el 47% de la gente asociaba \"suscribirse\" con pagar (Edison); Substack llega a 1 millón de suscripciones pagas (noviembre). 2022: Instagram lanza Following y Favoritos (23 de marzo, tope de 50 cuentas, no pueden ser default); Facebook lanza la pestaña \"Feeds\" cronológica y renombra \"Home\" al inicio algorítmico (21 de julio). 2023: Twitter pone \"Para ti\" como default (enero) y luego acepta recordar la última pestaña; Threads lanza su feed Following (25 de julio); Bluesky publica \"Algorithmic Choice with Custom Feeds\" (27 de julio); Guess et al. publican en Science el experimento de feed cronológico (27 de julio); el DSA obliga a opción sin perfilado y Meta (22 de agosto) y TikTok (4 de agosto) la anuncian para la UE; The Verge publica la historia oral \"Who killed Google Reader?\" (30 de junio). 2024: Mosseri admite en Threads que cuando el cronológico es default \"la gente usa la app mucho menos y el alcance promedio baja mucho\" (marzo); Threads prueba dejar elegir el feed default, incluido Following (25 de noviembre); Instagram elimina el seguimiento de hashtags (13 de diciembre); Pew: el 21% de los adultos de EE.UU. se informa regularmente con influencers de noticias (noviembre); Mastodon cierra el año con 938.000 usuarios activos mensuales (-38%). 2025: Substack pasa los 5 millones de suscripciones pagas (marzo); Reuters DNR: 7% usa chatbots de IA para noticias semanalmente, 15% entre menores de 25 (junio); Bluesky llega a 40 millones de usuarios (31 de octubre); X pasa a rankear con Grok incluso el feed \"Siguiendo\", dejando el cronológico como opción secundaria (30 de noviembre). 2026: Mosseri, ante una posible ley australiana de opt-out, dice que el feed cronológico es \"mucho peor\" y que el engagement cae hasta 50% (10–11 de septiembre); YouGov: 46% prefiere cronológico vs 26% algorítmico, pero entre quienes usan redes 5+ horas por día gana el algoritmo 44–38 (agosto); un estudio en arXiv cuenta más de 100.000 feeds personalizados en Bluesky, 85% alojados en SkyFeed (septiembre).",
+ "patrones_ux": [
+  {
+   "nombre": "Lista inversa con estado leído/no leído y contador por carpeta",
+   "descripcion": "Google Reader (2006): a la izquierda, carpetas armadas por el usuario con el número de no leídos entre paréntesis; a la derecha, la lista de ítems nuevos más reciente arriba; al pasar con el scroll o con teclas j/k el ítem se marca leído y el contador baja; arriba, 'Marcar todo como leído'. Los lectores actuales (Feedly, Inoreader, NetNewsWire) conservan el esquema.",
+   "por_que_funciona": "Hace visible el progreso y el tamaño de la tarea: sabés cuánto falta y cuándo terminaste. Convierte un flujo en una pila finita. El 'marcar todo como leído' es la válvula para no sentir culpa cuando el número crece."
+  },
+  {
+   "nombre": "Fin de feed explícito ('Ya estás al día')",
+   "descripcion": "Instagram (julio 2018): al llegar al último post nuevo de los últimos dos días aparece una tarjeta con un tilde y el texto 'You're All Caught Up'; debajo, posts viejos o ya vistos, separados visualmente.",
+   "por_que_funciona": "Da cierre y permiso para irse. Instagram lo lanzó como herramienta de bienestar; NN/g recomienda evitar el scroll infinito cuando la persona busca algo concreto y usar hitos o 'cargar más'. El cierre es lo que diferencia a este canal de los reels."
+  },
+  {
+   "nombre": "Pestañas Inicio/Para ti vs. Siguiendo, con memoria de la última pestaña",
+   "descripcion": "Twitter (enero 2023) puso dos pestañas arriba, 'For you' y 'Following', deslizables; tras las quejas por volver siempre a 'For you', desde el 24 de enero recuerda la última abierta. Threads (noviembre 2024) permite mantener presionado, 'Editar feeds' y poner primero el que querés como default. Bluesky: fila de pestañas Following, Discover y los feeds que fijaste, reordenables.",
+   "por_que_funciona": "El default decide el uso real; recordar la elección es la forma barata de respetar a quien eligió el cronológico sin obligar a todos. Lo contrario (Instagram 2022: Following no puede ser default y la app vuelve a Inicio al reabrir) se percibe como trampa."
+  },
+  {
+   "nombre": "Favoritos acotados que suben en el feed principal",
+   "descripcion": "Instagram Favorites (marzo 2022): hasta 50 cuentas, con estrella; se puede ver como feed cronológico separado y además sus posts aparecen más arriba en Inicio. Facebook Feeds (2022) tiene subpestaña Favoritos. Nadie es notificado al entrar o salir de la lista.",
+   "por_que_funciona": "Un conjunto chico elegido a mano es manejable y siempre tiene final. El tope (50) obliga a curar. Y el 'bump' en el feed principal hace que la curación de la persona tenga efecto aunque no entre a la pestaña."
+  },
+  {
+   "nombre": "Interruptor de orden visible (el 'sparkle')",
+   "descripcion": "Twitter (diciembre 2018): un ícono de destellos arriba a la derecha alterna entre 'Top Tweets' y 'Latest Tweets'; cuanto más lo usabas, más tiempo la app mantenía el cronológico, pero si dejabas de entrar volvía solo al algoritmo. X (2025) replica la idea con un desplegable 'Recent' dentro de Siguiendo.",
+   "por_que_funciona": "Un control de un toque, siempre en el mismo lugar, da sensación de agencia inmediata. La parte que falla (reversión silenciosa) enseña lo contrario: cada vez que el sistema deshace la elección, la confianza baja."
+  },
+  {
+   "nombre": "Seguir un tema, no solo una cuenta",
+   "descripcion": "Instagram (2017–2024) dejaba seguir #hashtags y mezclaba lo mejor del tag en el feed; Twitter Topics (2019) ofrecía 300+ temas con botón 'Seguir' como si fueran cuentas; Bluesky lleva esto al extremo: una página 'Feeds' donde se buscan, previsualizan y fijan feeds temáticos hechos por terceros (más de 100.000 en 2026).",
+   "por_que_funciona": "Permite armar una colección por interés sin conocer a los emisores. La vista previa antes de fijar baja el riesgo de la elección; el pin convierte el feed en una pestaña propia, que se puede quitar sin culpa."
+  },
+  {
+   "nombre": "'Seguir' en lugar de 'Suscribirse'",
+   "descripcion": "Apple Podcasts (iOS 14.5, 2021) renombró el botón principal de 'Subscribe' a 'Follow' y Spotify y YouTube usan el mismo verbo; la pantalla del programa muestra el botón grande arriba y la lista de episodios en orden inverso debajo, con progreso de reproducción por episodio.",
+   "por_que_funciona": "Edison Research encontró que el 47% asociaba 'suscribirse' con pagar. Una palabra cambia la tasa de adopción de una acción gratuita. El progreso por episodio hace que la colección 'recuerde' dónde quedaste."
+  },
+  {
+   "nombre": "Cola / bandeja con lo pendiente de lo que seguís",
+   "descripcion": "Apps de podcast (cola 'A continuación', descargas automáticas de lo que seguís), Suscripciones de YouTube (grilla cronológica de todos los canales) y la bandeja de Substack (app que reúne todas tus newsletters, separadas del email). Cada ítem muestra fuente, fecha y si ya lo viste.",
+   "por_que_funciona": "Reúne en un solo lugar lo que ya decidiste que te importa, en el orden en que llegó, sin mezclar con sugerencias. Es el 'inbox' del canal: finito, propio, revisable."
+  },
+  {
+   "nombre": "Agrupadores armados por la persona",
+   "descripcion": "Carpetas de Reader; listas de Twitter; subpestañas Todos/Favoritos/Amigos/Grupos/Páginas de la pestaña Feeds de Facebook (2022), todas cronológicas y sin 'Sugerido para vos'.",
+   "por_que_funciona": "Dejar que la persona parta el conjunto en pedazos manejables es lo que hace tolerable seguir a muchos. Cada grupo tiene su propio final."
+  },
+  {
+   "nombre": "Control de cadencia",
+   "descripcion": "Opción al suscribirse o en preferencias: 'diario / semanal / solo lo importante'. Baymard (2022) midió que el 51% se desuscribe de newsletters por exceso de frecuencia y que el 80% de los sitios no deja ajustarla.",
+   "por_que_funciona": "La suscripción es un contrato de atención; si el ritmo no se puede negociar, la única salida es romperlo. Ofrecer un digest es lo que hace sostenible seguir muchas fuentes."
+  }
+ ],
+ "que_funciona": [
+  "Da control real y verificable: lo que ves es lo que elegiste y el orden es inspeccionable (fecha). YouGov (agosto 2026): 46% de los estadounidenses prefiere cronológico vs 26% algorítmico; 60% vs 15% entre mayores de 65.",
+  "Tiene final. Reader llegaba a cero, Instagram dice 'ya estás al día', el episodio termina. Eso produce sesiones más cortas (Guess et al.: -20% de tiempo en Facebook, -11% en Instagram), que para la persona es alivio.",
+  "Sostiene la relación con creadores: la suscripción es la promesa de que si publican, lo vas a ver. Por eso los creadores de YouTube defendieron el feed cronológico de suscripciones en 2018 y por eso Substack llegó a 5 millones de suscripciones pagas (2025): la gente paga por una relación directa que no depende de un ranking.",
+  "Es portable y abierta en sus formas más puras: RSS, podcasts y newsletters sobreviven a cualquier plataforma; cuando Reader cerró, Feedly absorbió 3 millones de usuarios en dos semanas porque el OPML se exporta.",
+  "Funciona para colecciones chicas y curadas: Favoritos de Instagram (hasta 50) o una carpeta de 20 feeds se pueden 'terminar' todos los días.",
+  "La elección por tema (Topics, hashtags, feeds de Bluesky) permite armar una colección por interés sin saber a quién seguir; la vista previa antes de fijar reduce el miedo a elegir mal.",
+  "Es predecible: la persona aprende el ritmo de cada fuente (el podcast de los martes, la newsletter del domingo) y organiza su atención alrededor."
+ ],
+ "que_falla": [
+  "Premia la frecuencia, no la calidad: quien publica más ocupa más. Mosseri (2026): el feed cronológico 'se inunda de empresas, marcas y publishers; los creadores se ahogan y tus amigos todavía más'. Twitter 2016 e Instagram 2016 usaron esto como justificación ('te perdés el 70% del feed').",
+  "No descubre nada: el conjunto es cerrado. Si nunca seguiste algo, no existe. Instagram eliminó el seguimiento de hashtags en 2024 y dejó el descubrimiento al algoritmo.",
+  "Escala mal: seguir a 500 cuentas o 60 newsletters vuelve el 'ponerse al día' imposible y el contador de no leídos pasa de progreso a culpa (la queja clásica de Reader; ensayos como 'RSS Zero isn't the path to RSS Joy', 2023). Baymard: el 51% se desuscribe por exceso de frecuencia.",
+  "Más contenido político y poco confiable: en el experimento de Guess et al. (2023) el feed cronológico aumentó la exposición a contenido político y a fuentes no confiables en ambas plataformas (aunque sin cambiar polarización ni actitudes en 3 meses).",
+  "Las plataformas lo esconden porque baja el uso: no puede ser default en Instagram, X vuelve a 'Para ti', el sparkle revertía solo. El resultado es que casi nadie lo usa y nadie publica cuánta gente lo usa.",
+  "Nada separa 'nuevo' de 'importante': un cambio de vida y una foto del café pesan igual. Reader lo paliaba con carpetas; el feed social cronológico no tiene jerarquía.",
+  "La relación directa con creadores tiene costo emocional: la parasocialidad se asocia a ansiedad social y uso compulsivo (de Bérail et al., 2019, n=932), y la gente la percibe menos eficaz que un vínculo cercano real (Lotun et al., 2024).",
+  "Fragmentación: lo que uno sigue está repartido en bandejas que no se hablan (email, app de podcasts, YouTube, Bluesky). El 'lugar único' que era Reader no volvió."
+ ],
+ "evidencia": [
+  {
+   "afirmacion": "Instagram justificó el feed algorítmico diciendo que la gente se perdía la mayor parte de su feed cronológico.",
+   "dato": "\"La gente se pierde en promedio el 70% de su feed\"; anuncio del 15 de marzo de 2016, despliegue completo en junio de 2016.",
+   "fuente_titulo": "Instagram Blog: See the Moments You Care About First / Techmeme (junio 2016)",
+   "url": "https://instagram.tumblr.com/post/141107034797/160315-news",
+   "anio": "2016"
+  },
+  {
+   "afirmacion": "La gente reclamó mantener el orden cronológico en Instagram de forma masiva.",
+   "dato": "La petición 'Keep Instagram Chronological' juntó 70.000 firmas en 24 horas y cerró con unas 340.000.",
+   "fuente_titulo": "PetaPixel: 100,000+ Sign Petition to Keep Instagram Chronological / Change.org",
+   "url": "https://www.change.org/p/keep-instagram-chronological",
+   "anio": "2016"
+  },
+  {
+   "afirmacion": "Twitter introdujo el ranking como opción tras el #RIPTwitter y dijo que pocos lo desactivaron.",
+   "dato": "Anuncio 'Show me the best Tweets first' el 10 de febrero de 2016; en marzo Twitter dijo que ~2% de los usuarios desactivó la opción y que el engagement subió.",
+   "fuente_titulo": "Slate: Twitter's algorithmic timeline is increasing engagement, few are opting out",
+   "url": "https://slate.com/technology/2016/03/twitter-s-algorithmic-timeline-is-increasing-engagement-few-are-opting-out-company-says.html",
+   "anio": "2016"
+  },
+  {
+   "afirmacion": "El post oficial de Twitter describe el mecanismo híbrido: 'los mejores' arriba y debajo todo en orden inverso.",
+   "dato": "10 de febrero de 2016; 'la gente que usa esta función tuitea y retuitea más'.",
+   "fuente_titulo": "Twitter Blog: Never miss important Tweets from people you follow",
+   "url": "https://blog.x.com/en_us/a/2016/never-miss-important-tweets-from-people-you-follow",
+   "anio": "2016"
+  },
+  {
+   "afirmacion": "El feed cronológico reduce el tiempo en la plataforma y no cambia la polarización.",
+   "dato": "Experimento con >23.000 usuarios de Facebook y >21.000 de Instagram (sep–dic 2020): tiempo en plataforma -20% (FB) y -11% (IG); usuarios de IG con cronológico pasaron 36% más tiempo en TikTok y 20% más en YouTube; más contenido político y de fuentes no confiables; sin efecto en polarización, conocimiento ni actitudes.",
+   "fuente_titulo": "Guess et al., Science: How do social media feed algorithms affect attitudes and behavior in an election campaign? (y hilo del autor)",
+   "url": "https://www.science.org/doi/10.1126/science.abp9364",
+   "anio": "2023"
+  },
+  {
+   "afirmacion": "Cifras de tiempo del experimento, en palabras del autor principal.",
+   "dato": "'The chrono feed decreased the time users spent on the platforms (by about 20% on FB and 11% on IG)'.",
+   "fuente_titulo": "Andy Guess en X, hilo del 27 de julio de 2023",
+   "url": "https://twitter.com/andyguess/status/1684632245611769856",
+   "anio": "2023"
+  },
+  {
+   "afirmacion": "Meta reconoce que el cronológico como default baja el uso y el alcance.",
+   "dato": "Mosseri (Threads, marzo 2024): 'you can switch to chronological feed, but when we make it the default people use the app a lot less, and in turn average reach goes down a lot as well'.",
+   "fuente_titulo": "Adam Mosseri en Threads",
+   "url": "https://www.threads.com/@mosseri/post/C4gk87Xvb_d?hl=en",
+   "anio": "2024"
+  },
+  {
+   "afirmacion": "Mosseri cuantificó la caída y explicó el sesgo de frecuencia del cronológico.",
+   "dato": "Septiembre de 2026, ante una posible ley australiana de opt-out: el engagement cae 'hasta un 50%' con feed cronológico; 'se inunda de empresas, marcas y publishers; los creadores se ahogan y tus amigos todavía más'.",
+   "fuente_titulo": "ABC News (Australia): Instagram chief Adam Mosseri warns against turning off algorithm",
+   "url": "https://www.abc.net.au/news/2026-09-10/instagram-ceo-adam-mosseri-algorithm-laws/107136992",
+   "anio": "2026"
+  },
+  {
+   "afirmacion": "Instagram volvió a ofrecer cronológico pero sin dejar que sea el default.",
+   "dato": "23 de marzo de 2022: feeds Following (cronológico) y Favorites (hasta 50 cuentas, también suben en Inicio); Instagram dice que su investigación indica que la gente está 'más satisfecha' con el feed rankeado.",
+   "fuente_titulo": "TechCrunch: Instagram launches chronological and favorites feeds for all users, but they can't be the default",
+   "url": "https://techcrunch.com/2022/03/23/instagram-launches-chronological-and-favorites-feeds-for-all-users-but-they-cant-be-the-default",
+   "anio": "2022"
+  },
+  {
+   "afirmacion": "Instagram puso un final explícito al feed.",
+   "dato": "2 de julio de 2018: 'You're All Caught Up' aparece cuando viste todos los posts de los últimos dos días.",
+   "fuente_titulo": "Instagram Blog: Introducing 'You're All Caught Up' in Instagram Feed",
+   "url": "https://about.instagram.com/blog/announcements/introducing-youre-all-caught-up-in-feed",
+   "anio": "2018"
+  },
+  {
+   "afirmacion": "Twitter devolvió el cronológico como interruptor, con reversión automática.",
+   "dato": "18 de diciembre de 2018: botón 'sparkle' para alternar 'Latest Tweets'; la app volvía al ranking si dejabas de usarlo un tiempo.",
+   "fuente_titulo": "TechCrunch: Twitter rolls out 'sparkle button' to let users hide the algorithmic feed",
+   "url": "https://techcrunch.com/2018/12/18/twitter-rolls-out-the-sparkle-button-to-let-users-see-the-latest-tweets-first/",
+   "anio": "2018"
+  },
+  {
+   "afirmacion": "Twitter puso 'Para ti' como default y, tras las quejas, aceptó recordar la última pestaña.",
+   "dato": "Pestañas 'For you'/'Following' desde el 11 de enero de 2023; desde el 24 de enero la web vuelve a la última pestaña abierta.",
+   "fuente_titulo": "TechCrunch: Twitter won't force you to the For You timeline on web anymore",
+   "url": "https://techcrunch.com/2023/01/24/twitter-wont-force-you-to-the-for-you-timeline-on-web-anymore",
+   "anio": "2023"
+  },
+  {
+   "afirmacion": "X rankeó con IA incluso el feed de seguidos.",
+   "dato": "30 de noviembre de 2025: 'Posts of people you follow are now ranked by Grok. You can still access unfiltered chronological if you want' (Musk); el cronológico queda como opción 'Recent' no default.",
+   "fuente_titulo": "Social Media Today: X Now Algorithmically Ranks Posts in Following Feed",
+   "url": "https://www.socialmediatoday.com/news/x-formerly-twitter-sorts-following-feed-algorithm-ai-grok/806617/",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "YouTube depende de recomendaciones, no de suscripciones.",
+   "dato": "CES, enero de 2018, Neal Mohan: el 70% del tiempo de visualización viene de recomendaciones.",
+   "fuente_titulo": "Quartz: YouTube's recommendations drive 70% of what we watch",
+   "url": "https://qz.com/1178125/youtubes-recommendations-drive-70-of-what-we-watch",
+   "anio": "2018"
+  },
+  {
+   "afirmacion": "Los creadores defendieron el feed cronológico de Suscripciones de YouTube.",
+   "dato": "Mayo de 2018: YouTube confirmó una prueba (desde febrero) de ordenar Suscripciones por algoritmo; Jacksepticeye: 'la gente usa la pestaña de suscripciones justamente para evitar ese comportamiento algorítmico'; Grace Helbig: 'Please don't do this'.",
+   "fuente_titulo": "Variety: YouTube Test to Sort Subscription Feeds in Non-Chronological Order Triggers Creator Backlash",
+   "url": "https://variety.com/2018/digital/news/youtube-video-feeds-non-chronological-creator-backlash-1202821555/",
+   "anio": "2018"
+  },
+  {
+   "afirmacion": "Google Reader: fechas y motivo del cierre.",
+   "dato": "Lanzado el 7 de octubre de 2005; rediseño de septiembre de 2006 con contador de no leídos, 'marcar todo como leído' y carpetas; cierre anunciado el 13 de marzo de 2013 por 'uso en declive' y ejecutado el 1 de julio de 2013.",
+   "fuente_titulo": "Wikipedia: Google Reader",
+   "url": "https://en.wikipedia.org/wiki/Google_Reader",
+   "anio": "2013"
+  },
+  {
+   "afirmacion": "El cierre de Reader movió millones de usuarios a otros lectores RSS en días.",
+   "dato": "Feedly: más de 500.000 usuarios nuevos en 48 horas y 3 millones en dos semanas tras el anuncio.",
+   "fuente_titulo": "NewsBlur Blog: Google Reader announced its shutdown exactly a year ago",
+   "url": "https://blog.newsblur.com/2014/03/13/google-reader-announced-its-shutdown-exactly-a-year-ago/",
+   "anio": "2013"
+  },
+  {
+   "afirmacion": "Hubo reclamo organizado para salvar Reader.",
+   "dato": "La petición 'Keep Google Reader Running' superó las 130.000 firmas (meta elevada sucesivamente de 25.000 a 150.000).",
+   "fuente_titulo": "AndroidPure: Petition to 'Keep Google Reader Running' crosses 130,000 signatures",
+   "url": "https://www.androidpure.com/petition-to-keep-google-reader-running-crosses-130000-signatures/",
+   "anio": "2013"
+  },
+  {
+   "afirmacion": "Reader era grande pero fue sacrificado por Google+.",
+   "dato": "Historia oral de The Verge (30 de junio de 2023): más de 30 millones de usuarios en su pico; equipo de alrededor de una docena de personas que debía justificar su existencia en reuniones periódicas.",
+   "fuente_titulo": "The Verge: Who killed Google Reader? (vía 9to5Google)",
+   "url": "https://www.theverge.com/23778253/google-reader-death-2013-rss-social",
+   "anio": "2023"
+  },
+  {
+   "afirmacion": "El primer gran motín por un feed fue el de Facebook en 2006.",
+   "dato": "Septiembre de 2006: el grupo 'Students Against Facebook News Feed' llegó a más de 700.000 miembros; Zuckerberg respondió con la carta 'Calm down. Breathe. We hear you.'",
+   "fuente_titulo": "Hoadley et al., Electronic Commerce Research and Applications: Privacy as information access and illusory control: The case of the Facebook News Feed privacy outcry",
+   "url": "https://www.sciencedirect.com/science/article/abs/pii/S1567422309000271",
+   "anio": "2006"
+  },
+  {
+   "afirmacion": "Facebook separó 'Top News' de 'Most Recent' hace más de 15 años.",
+   "dato": "Septiembre de 2009: News Feed pasa a mostrar 'Top News' (EdgeRank) y 'Most Recent'; hacia 2011 EdgeRank es reemplazado por machine learning.",
+   "fuente_titulo": "Wikipedia: Feed (Facebook)",
+   "url": "https://en.wikipedia.org/wiki/Feed_(Facebook)",
+   "anio": "2009"
+  },
+  {
+   "afirmacion": "Facebook volvió a ofrecer un feed cronológico como pestaña separada.",
+   "dato": "21 de julio de 2022: pestaña 'Feeds' (Todos, Favoritos, Amigos, Grupos, Páginas), cronológica y sin 'Sugerido para vos'; el inicio algorítmico pasa a llamarse 'Home'.",
+   "fuente_titulo": "TechCrunch: Facebook's new 'Feeds' tab chronologically displays posts",
+   "url": "https://techcrunch.com/2022/07/21/facebooks-feed-tab-chronologically-displays-posts-from-friends/",
+   "anio": "2022"
+  },
+  {
+   "afirmacion": "Threads terminó cediendo a dejar elegir el feed default.",
+   "dato": "25 de noviembre de 2024: prueba para elegir For You, Following o un feed personalizado como default (mantener presionado, 'Edit feeds', reordenar), tras más de un año de pedidos.",
+   "fuente_titulo": "TechCrunch: Threads tests the ability for users to choose their preferred default feed",
+   "url": "https://techcrunch.com/2024/11/25/threads-tests-the-ability-for-users-to-choose-their-preferred-default-feed/",
+   "anio": "2024"
+  },
+  {
+   "afirmacion": "La regulación europea forzó la opción sin perfilado.",
+   "dato": "Agosto de 2023: Meta confirma un 'interruptor' para feeds no personalizados en Facebook e Instagram en la UE por el DSA (cronológico de amigos/seguidos); TikTok lo anunció el 4 de agosto.",
+   "fuente_titulo": "TechCrunch: Meta confirms AI 'off switch' incoming to Facebook, Instagram in Europe",
+   "url": "https://techcrunch.com/2023/08/22/meta-confirms-ai-off-switch-incoming-to-facebook-instagram-in-europe",
+   "anio": "2023"
+  },
+  {
+   "afirmacion": "Bluesky separó el algoritmo de la red y lo abrió a terceros.",
+   "dato": "27 de julio de 2023: 'Algorithmic Choice with Custom Feeds'; el feed Following es cronológico, Discover es el algorítmico propio y cualquier feed de terceros se fija como pestaña.",
+   "fuente_titulo": "Bluesky Blog: Algorithmic Choice with Custom Feeds",
+   "url": "https://bsky.social/about/blog/7-27-2023-custom-feeds",
+   "anio": "2023"
+  },
+  {
+   "afirmacion": "El ecosistema de feeds elegibles creció a escala.",
+   "dato": "Más de 100.000 feeds personalizados en Bluesky; el 85% alojados en la herramienta de terceros SkyFeed; Bluesky llegó a 40 millones de usuarios el 31 de octubre de 2025.",
+   "fuente_titulo": "arXiv: Middleware for Feed Recommendation in Practice: How Feed Creators Build, Maintain, and Sustain Custom Feeds on Bluesky (sep. 2026) / TechCrunch (oct. 2025)",
+   "url": "https://arxiv.org/html/2609.12958v1",
+   "anio": "2026"
+  },
+  {
+   "afirmacion": "Mastodon, cronológico por diseño, es chico y se achicó.",
+   "dato": "Al 31 de diciembre de 2024: 938.000 usuarios activos mensuales (-38% vs 2023), 9,10 millones de cuentas registradas, 8.851 servidores.",
+   "fuente_titulo": "Mastodon Annual Report 2024",
+   "url": "https://joinmastodon.org/reports/Mastodon%20Annual%20Report%202024.pdf",
+   "anio": "2024"
+  },
+  {
+   "afirmacion": "Las suscripciones pagas a newsletters crecen.",
+   "dato": "Substack: 1 millón de suscripciones pagas (nov. 2021), 2 millones (feb. 2023), 4 millones (nov. 2024), 5 millones (marzo 2025).",
+   "fuente_titulo": "The Hill: Substack surpasses 5 million paid subscriptions / Simon Owens: Is Substack's subscription growth slowing down?",
+   "url": "https://thehill.com/homenews/5188965-substack-surpasses-5-million-paid-subscribers/",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "'Suscribirse' suena a pagar; por eso Apple cambió a 'Seguir'.",
+   "dato": "iOS 14.5 (2021): Apple Podcasts reemplaza 'Subscribe' por 'Follow'; Edison Research: 47% asociaba 'subscribe' con contenido pago.",
+   "fuente_titulo": "9to5Mac: Apple adopting the word 'follow' for podcasts as users associate 'subscribe' with paid content",
+   "url": "https://9to5mac.com/2021/03/09/apple-adopting-the-word-follow-for-podcasts-as-users-associate-subscribe-with-paid-content/",
+   "anio": "2021"
+  },
+  {
+   "afirmacion": "Los podcasts (suscripción elegida sobre RSS) están en máximos históricos.",
+   "dato": "Infinite Dial 2025: 55% de los estadounidenses de 12+ consumió un podcast en el último mes; 73% alguna vez.",
+   "fuente_titulo": "Edison Research: The Infinite Dial 2025",
+   "url": "https://www.edisonresearch.com/the-infinite-dial-2025/",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "La gente escucha podcasts para acompañarse y aprender más que para informarse.",
+   "dato": "Pew (dic. 2022, publicado abr. 2023): 49% escuchó un podcast en los últimos 12 meses; razones: entretenimiento 60%, aprender 55%, tener algo de fondo 52%; solo 29% para estar al día.",
+   "fuente_titulo": "Pew Research Center: How Americans use and engage with podcasts",
+   "url": "https://www.pewresearch.org/journalism/2023/04/18/how-americans-use-and-engage-with-podcasts/",
+   "anio": "2023"
+  },
+  {
+   "afirmacion": "El newsletter por email es canal de noticias relevante en EE.UU. y marginal en el Reino Unido.",
+   "dato": "DNR 2022: promedio 17% usa newsletters/alertas por email semanalmente; EE.UU. 22% (10% como vía principal), Reino Unido 9%; en EE.UU. cayó de 27% (2014) a 22%.",
+   "fuente_titulo": "Reuters Institute Digital News Report 2022: Email news: its contribution to engagement and monetisation",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2022/email-news-its-contribution-to-engagement-and-monetisation",
+   "anio": "2022"
+  },
+  {
+   "afirmacion": "El chat con IA empieza a competir como puerta de entrada, sobre todo en jóvenes.",
+   "dato": "DNR 2025 (97.000 encuestados, 48 mercados): 7% usa chatbots de IA para noticias cada semana, 15% entre menores de 25; 54% de los estadounidenses de 18–24 dice que redes/video son su fuente principal.",
+   "fuente_titulo": "Reuters Institute: Overview and key findings of the 2025 Digital News Report",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025/dnr-executive-summary",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Seguir a personas (influencers) es ya una vía de información masiva.",
+   "dato": "Encuesta a >10.000 adultos (jul–ago 2024): 21% se informa regularmente con influencers de noticias; 37% entre 18–29; 77% de esos influencers no tiene vínculo con un medio.",
+   "fuente_titulo": "Pew Research Center: Who gets news from news influencers and what they think of it",
+   "url": "https://www.pewresearch.org/2024/11/18/americans-experiences-with-social-media-news-influencers/",
+   "anio": "2024"
+  },
+  {
+   "afirmacion": "La preferencia declarada por el cronológico es mayoritaria pero se invierte en usuarios intensivos.",
+   "dato": "YouGov, 10–12 de agosto de 2026 (n=1.116): 46% prefiere cronológico vs 26% algorítmico; 65+: 60–15; 18–29: 31–43; quienes usan redes 5+ horas/día: 38 cronológico vs 44 algorítmico.",
+   "fuente_titulo": "YouGov: Frequent social media users are more likely to prefer the algorithm to chronological feeds",
+   "url": "https://yougov.com/en-us/articles/55416-frequent-social-media-users-are-more-likely-to-prefer-the-algorithm-to-chronological-feeds",
+   "anio": "2026"
+  },
+  {
+   "afirmacion": "Los vínculos parasociales con creadores cubren necesidades emocionales, pero menos que un vínculo cercano.",
+   "dato": "Tres estudios, >1.080 participantes: las relaciones parasociales con YouTubers se perciben más eficaces que un conocido y menos que una persona cercana para cubrir necesidades emocionales.",
+   "fuente_titulo": "Lotun, Lamarche, Matran-Fernandez & Sandstrom, Scientific Reports: People perceive parasocial relationships to be effective at fulfilling emotional needs",
+   "url": "https://www.nature.com/articles/s41598-024-58069-9",
+   "anio": "2024"
+  },
+  {
+   "afirmacion": "La parasocialidad se asocia a ansiedad social y uso compulsivo.",
+   "dato": "n=932: la ansiedad social predice relaciones parasociales con YouTubers y estas predicen 'adicción' a YouTube; la relación parasocial media el efecto.",
+   "fuente_titulo": "de Bérail, Guillon & Bungener, Computers in Human Behavior 99: The relations between YouTube addiction, social anxiety and parasocial relationships with YouTubers",
+   "url": "https://www.semanticscholar.org/paper/The-relations-between-YouTube-addiction,-social-and-B%C3%A9rail-Guillon/0b88dee6d9cbe34f4c63527bbee185b5e1e4bad7",
+   "anio": "2019"
+  },
+  {
+   "afirmacion": "En Netflix (modelo de los catálogos) casi todo lo visto sale del recomendador, no de la lista propia.",
+   "dato": "Gomez-Uribe & Hunt (2015): el recomendador influye en ~80% de las horas vistas; el resto viene de búsqueda; valor estimado >US$1.000 millones/año.",
+   "fuente_titulo": "Gomez-Uribe & Hunt, ACM TMIS: The Netflix Recommender System: Algorithms, Business Value, and Innovation",
+   "url": "https://www.researchgate.net/publication/288873080_The_Netflix_Recommender_System_Algorithms_Business_Value_and_Innovation",
+   "anio": "2015"
+  },
+  {
+   "afirmacion": "El scroll infinito sirve para hojear sin meta y estorba cuando se busca algo.",
+   "dato": "NN/g: usarlo para ítems homogéneos sin objetivo (entretenimiento, redes); evitarlo cuando el usuario busca algo específico; alternativas: botón 'cargar más', paginación integrada, páginas.",
+   "fuente_titulo": "Nielsen Norman Group: Infinite Scrolling: When to Use It, When to Avoid It",
+   "url": "https://www.nngroup.com/articles/infinite-scrolling-tips/",
+   "anio": "2022"
+  },
+  {
+   "afirmacion": "La frecuencia no negociable mata suscripciones.",
+   "dato": "Baymard (13 de diciembre de 2022): 51% se desuscribe de newsletters de e-commerce por exceso de frecuencia; 80% de los sitios no permite ajustarla.",
+   "fuente_titulo": "Baymard Institute: Allow Users to Choose the Frequency of Newsletter Emails (80% Don't)",
+   "url": "https://baymard.com/blog/newsletter-frequency",
+   "anio": "2022"
+  },
+  {
+   "afirmacion": "Seguir un tema fue ofrecido y luego retirado por Instagram.",
+   "dato": "Seguir hashtags desde el 12 de diciembre de 2017; eliminado el 13 de diciembre de 2024 ('seguiremos mostrándote posts relevantes vía recomendaciones en Feed, Explorar y Reels').",
+   "fuente_titulo": "Instagram Blog: Follow Hashtags on Instagram / Digital Information World (nov. 2024)",
+   "url": "https://about.instagram.com/blog/announcements/now-you-can-follow-hashtags-on-instagram",
+   "anio": "2017"
+  },
+  {
+   "afirmacion": "Twitter ofreció seguir temas como si fueran cuentas.",
+   "dato": "Topics, noviembre de 2019: más de 300 áreas de interés con botón 'Seguir'.",
+   "fuente_titulo": "Engadget: Twitter now lets you follow topics, not just accounts",
+   "url": "https://www.engadget.com/2019-11-06-twitter-topics-rollout.html",
+   "anio": "2019"
+  },
+  {
+   "afirmacion": "En TikTok la pestaña Siguiendo existe, pero la mayoría consume sin producir y sigue entretenimiento, no noticias.",
+   "dato": "Pew (feb. 2024): 52% de los adultos de EE.UU. en TikTok publicó alguna vez; el 25% más activo produce el 98% de los videos públicos. Pew (oct. 2024): los usuarios siguen muchas más cuentas de cultura pop y entretenimiento que de noticias o política.",
+   "fuente_titulo": "Pew Research Center: How U.S. Adults Use TikTok / Who U.S. Adults Follow on TikTok",
+   "url": "https://www.pewresearch.org/data-labs/2024/10/08/who-u-s-adults-follow-on-tiktok/",
+   "anio": "2024"
+  },
+  {
+   "afirmacion": "Los podcasts son literalmente suscripción RSS.",
+   "dato": "Apple exige un feed RSS 2.0 público con <enclosure> (URL, tamaño, tipo) y GUID único por episodio.",
+   "fuente_titulo": "Apple Podcasts for Creators: Podcast RSS feed requirements",
+   "url": "https://podcasters.apple.com/support/823-podcast-requirements",
+   "anio": "2025"
+  }
+ ],
+ "lecciones_para_catalogo": [
+  {
+   "leccion": "Adaptar: convertir 'Mi lista' en 'Seguidos' de filas y temas, no solo de fichas. Que se pueda seguir una fila entera ('Banderas con animales', 'Top 10 más poblados', 'África', 'Inventos del siglo XIX', 'Arco de Marineford') y que exista una pestaña 'Siguiendo' que muestre, en orden fijo, lo no visto de esas filas. Es el equivalente de Favoritos de Instagram (tope de 50) y de fijar feeds en Bluesky.",
+   "aplicacion_concreta": "En todos los catálogos, botón 'Seguir esta fila' en el encabezado de cada fila horizontal y una pestaña 'Siguiendo' junto a las pestañas de sección; en Pasaporte, por ejemplo, seguir 'Fronteras raras' y 'Oceanía'. Guardado en localStorage como la lista actual.",
+   "costo": "medio: hay que modelar 'fila' como entidad seguible con id estable y recalcular 'no visto' por fila; sin servidor es viable porque el dataset es finito y está en el mismo HTML."
+  },
+  {
+   "leccion": "Copiar tal cual: estado visto/no visto por ficha con contador por fila y final explícito. Google Reader mostraba '(12)' por carpeta y 'Marcar todo como leído'; Instagram muestra 'Ya estás al día'. En un catálogo finito esto es más fuerte que en un feed: el total es conocido.",
+   "aplicacion_concreta": "En Pasaporte, en la fila Top 10 y en cada fila de continente: badge '7 de 54 vistos' en el título de la fila, punto en las tarjetas no abiertas, y al llegar al final de la fila una tarjeta 'Viste los 54 países de África' con botón 'Marcar fila como vista'. Igual en Bestiario y Flora. El estado va al navegador, como Mi lista.",
+   "costo": "bajo: ya existe 'Seguir explorando' (lo último abierto), es la misma tabla de eventos con un contador por fila."
+  },
+  {
+   "leccion": "Adaptar: imitar el 'nuevo del día' con reglas fijas, porque un catálogo sin servidor no tiene novedades reales. El feed cronológico vive de que siempre hay algo nuevo; acá lo nuevo lo puede fabricar el calendario (como 'Los 20 más' de Animal Planet, un tema por día) con cierre: 'Hoy: 1 país, 1 animal, 1 invento. Listo'.",
+   "aplicacion_concreta": "Fila 'Un día como hoy' (ya preparada) y una fila hermana 'Hoy en tus seguidos': una ficha nueva por fila seguida, elegida determinísticamente por fecha (hash de fecha + id de fila), con tilde al abrirla y mensaje de 'Ya estás al día por hoy' cuando se abrieron todas. En Butaca: 'episodio del día' de las series seguidas.",
+   "costo": "bajo: elección determinística por fecha, sin datos externos; el costo real está en cargar los datos de 'Un día como hoy'."
+  },
+  {
+   "leccion": "Copiar tal cual: respetar el default elegido. Twitter (2023) y Threads (2024) tuvieron que ceder y recordar la última pestaña o dejar elegir la pestaña de inicio; Instagram (2022) no lo hace y se percibe como trampa; el 'sparkle' que revertía solo generó desconfianza.",
+   "aplicacion_concreta": "En el inicio de todos los catálogos: recordar en el navegador la última pestaña (Inicio con visor rotativo, Siguiendo, Mi lista, una sección) y ofrecer en ajustes 'Abrir siempre en…'. Nunca volver solo al visor rotativo. También para TV: la pestaña inicial debe ser la elegida, porque navegar con control remoto es caro.",
+   "costo": "bajo: una clave en localStorage y una lectura al arrancar."
+  },
+  {
+   "leccion": "Adaptar: 'bump' de lo propio en el espacio algorítmico. Instagram sube los posts de Favoritos en el feed principal aunque no entres a la pestaña; eso hace que curar tenga efecto visible.",
+   "aplicacion_concreta": "En el visor grande que rota cada 9 segundos: si hay filas seguidas o fichas en Mi lista no vistas, que 1 de cada 3 rotaciones salga de ahí, con una etiqueta chica 'De tus seguidos'. En el botón 'Uno al azar': opción 'Al azar entre mis seguidos'.",
+   "costo": "bajo: cambiar la regla de selección del visor y del azar, sin tocar datos."
+  },
+  {
+   "leccion": "Adaptar: la lógica de 'suscripción a una serie' de YouTube/podcasts para Butaca. La unidad del canal es el episodio con progreso ('visto hasta el ep. 24') y la cola 'A continuación'. Es exactamente la promesa de los anexos de episodios de Wikipedia con qué capítulo del manga adapta cada uno, pero con memoria.",
+   "aplicacion_concreta": "En Butaca, en la ficha de serie: botón 'Seguir', lista completa de episodios en orden (número, título, arco, capítulos del manga que adapta), marcador de 'visto' por episodio, barra de progreso por arco, y en la pestaña 'Siguiendo' una tarjeta por serie con 'Siguiente: ep. 25 – Arco X'. Sin reproductor: es un registro de progreso, no un player.",
+   "costo": "medio: requiere el dataset de episodios completo y consistente (ya en construcción) y un modelo de progreso por serie en el navegador."
+  },
+  {
+   "leccion": "Copiar tal cual: el verbo. Apple cambió 'Suscribirse' por 'Seguir' porque el 47% pensaba que suscribirse era pagar. En un catálogo gratuito y sin cuentas, 'Suscribirse' además sugiere que hay cuenta.",
+   "aplicacion_concreta": "En toda la familia: 'Seguir' para filas/temas/series, 'Guardar' (o el corazón de Mi lista) para fichas; nunca 'Suscribirse' ni 'Notificaciones'. En la ficha modal y en el encabezado de fila.",
+   "costo": "bajo: copy."
+  },
+  {
+   "leccion": "Adaptar: feeds elegibles a la Bluesky como 'catálogo de filas'. Bluesky tiene una página 'Feeds' donde se buscan, previsualizan y fijan feeds; el pin convierte el feed en pestaña y se puede sacar sin culpa. Acá las 'reglas' ya existen: son las filas (rankings, rarezas, continentes).",
+   "aplicacion_concreta": "En todos los catálogos, sección 'Todas las filas': grilla con cada fila disponible (nombre, cuántas fichas tiene, 3 miniaturas de vista previa, cuántas viste) y botón 'Fijar arriba'; las filas fijadas aparecen primero en Inicio y en el orden que la persona elija (arrastrar o flechas para TV). En Pasaporte, por ejemplo, poder fijar 'Cuántas Argentinas entran' arriba de todo.",
+   "costo": "medio: UI nueva de grilla y reordenamiento accesible por teclado/control remoto; los datos ya están."
+  },
+  {
+   "leccion": "Adaptar: cadencia elegible del digest. Baymard: el 51% se va por exceso de frecuencia y el 80% no deja ajustarla. Si el catálogo va a 'traer' algo (día como hoy, novedades de la tanda), que la persona elija cuánto.",
+   "aplicacion_concreta": "En ajustes y en la propia fila 'Un día como hoy': selector 'Diario / Semanal / Nunca' para la cantidad de novedades que aparecen en Inicio y en 'Siguiendo'; en 'Semanal' se agrupan las 7 fichas del día en una sola tarjeta 'La semana en tus seguidos'.",
+   "costo": "bajo: un parámetro y una agrupación de la misma selección determinística."
+  },
+  {
+   "leccion": "Descartar lo cronológico puro como orden de las filas, pero copiar su promesa: orden fijo, completo e inspeccionable. El feed cronológico gusta porque el criterio es transparente (la fecha). Los catálogos pueden ofrecer ese mismo tipo de criterio transparente con órdenes que sí tienen sentido en el dominio.",
+   "aplicacion_concreta": "En Ingenio, una fila 'Línea de tiempo' ordenada por año de invención, de principio a fin, con el año gigante como el número del Top 10; en Pasaporte, 'Países que ya no existen' ordenados por año de desaparición; en Cosmos, por distancia. Cada fila muestra arriba su criterio ('ordenado por año') y 'N de M'.",
+   "costo": "medio: los campos (año, distancia) ya salen de Wikidata; el costo es garantizar que estén completos para que la fila sea realmente 'todo', que es la tesis del autor."
+  }
+ ],
+ "anti_lecciones": [
+  "No copiar el sesgo de frecuencia: en un feed cronológico gana quien publica más (Mosseri 2026: marcas y publishers ahogan a los amigos). En un catálogo el equivalente sería dejar que el visor rotativo o 'Siguiendo' estén dominados por las filas con más fichas (Pasaporte tiene 230 países; una fila de 10 rarezas desaparecería). Repartir por fila, no por volumen.",
+  "No copiar el contador de no leídos como culpa: el 'RSS Zero' y el inbox lleno son la razón por la que mucha gente abandonó Reader y se desuscribe de newsletters (Baymard: 51% por exceso). Mostrar progreso ('7 de 54'), nunca deuda ('47 pendientes'); y ofrecer siempre 'marcar como visto' sin fricción.",
+  "No copiar la reversión silenciosa ni el default que no se puede cambiar (sparkle de Twitter 2018; Instagram 2022; X 2025 rankeando Siguiendo). Cada vez que el sistema deshace una elección la confianza baja; en un producto sin cuentas, la confianza en que el navegador recuerda es todo lo que hay.",
+  "No copiar el scroll infinito para el inicio: NN/g lo recomienda solo para hojear ítems homogéneos sin meta; los catálogos tienen la ventaja de ser finitos y comparables, y el final (la lámina con todas las banderas) es el producto. Que cada fila termine y lo diga.",
+  "No prometer 'nuevo' si no hay nuevo: el feed cronológico vive de novedad constante; un HTML estático no la tiene. Si 'Un día como hoy' o 'Siguiendo' quedan vacíos o repiten, enseñan a no volver. Preferir rotación determinística por fecha y decir honestamente 'rotación diaria' en vez de 'novedades'.",
+  "No usar 'seguir' como único camino: el conjunto cerrado no descubre nada (por eso Instagram sacó los hashtags seguidos y Guess et al. vieron más contenido no confiable en cronológico puro). 'Siguiendo' y 'Mi lista' tienen que convivir con 'Uno al azar', 'Del mismo grupo' y 'Ver también', que son el descubrimiento sin algoritmo.",
+  "No imitar la relación parasocial ni lo social sin red: el canal engancha por personas (21% se informa con influencers según Pew; los YouTubers cubren necesidades emocionales según Lotun et al. 2024), pero eso se asocia a ansiedad social y uso compulsivo (de Bérail et al. 2019). Un catálogo sin cuentas no debe fingir voces, 'autores que te hablan' ni contadores sociales falsos; su compañía es el ritual (el tema del día), no una persona.",
+  "No copiar la pestaña 'Siguiendo' como cumplimiento escondido (la salida del DSA en la UE, de la que nadie publica uso): si existe, tiene que estar a un toque y poder ser el inicio; si no, mejor no tenerla."
+ ],
+ "fuentes": [
+  {
+   "titulo": "Instagram Blog: See the Moments You Care About First (15 de marzo de 2016)",
+   "url": "https://instagram.tumblr.com/post/141107034797/160315-news"
+  },
+  {
+   "titulo": "Techmeme: Instagram starts rolling out its algorithmic feed for all, says users missed 70% of their feeds (junio 2016)",
+   "url": "https://www.techmeme.com/160603/p10"
+  },
+  {
+   "titulo": "Change.org: Keep Instagram Chronological",
+   "url": "https://www.change.org/p/keep-instagram-chronological"
+  },
+  {
+   "titulo": "PetaPixel: 100,000+ Sign Petition to Keep Instagram Chronological",
+   "url": "https://petapixel.com/2016/03/17/100000-sign-petition-keep-instagram-chronological/"
+  },
+  {
+   "titulo": "Twitter Blog: Never miss important Tweets from people you follow (10 de febrero de 2016)",
+   "url": "https://blog.x.com/en_us/a/2016/never-miss-important-tweets-from-people-you-follow"
+  },
+  {
+   "titulo": "TechCrunch: Twitter may introduce an algorithmic timeline and people are losing their minds (#RIPTwitter)",
+   "url": "https://techcrunch.com/2016/02/06/twitter-may-introduce-an-algorithmic-timeline-and-people-are-losing-their-minds"
+  },
+  {
+   "titulo": "Slate: Twitter's algorithmic timeline is increasing engagement, few are opting out, company says",
+   "url": "https://slate.com/technology/2016/03/twitter-s-algorithmic-timeline-is-increasing-engagement-few-are-opting-out-company-says.html"
+  },
+  {
+   "titulo": "Guess et al., Science (2023): How do social media feed algorithms affect attitudes and behavior in an election campaign?",
+   "url": "https://www.science.org/doi/10.1126/science.abp9364"
+  },
+  {
+   "titulo": "Andy Guess, hilo con resultados (27 de julio de 2023)",
+   "url": "https://twitter.com/andyguess/status/1684632245611769856"
+  },
+  {
+   "titulo": "Adam Mosseri en Threads sobre el cronológico como default (marzo 2024)",
+   "url": "https://www.threads.com/@mosseri/post/C4gk87Xvb_d?hl=en"
+  },
+  {
+   "titulo": "ABC News (Australia): Instagram chief Adam Mosseri warns against turning off algorithm as Australia debates opt-out laws",
+   "url": "https://www.abc.net.au/news/2026-09-10/instagram-ceo-adam-mosseri-algorithm-laws/107136992"
+  },
+  {
+   "titulo": "9to5Google: Instagram chief thinks a chronological feed is 'much worse'",
+   "url": "https://9to5google.com/2026/09/11/instagram-chronological-feed-much-worse/"
+  },
+  {
+   "titulo": "Instagram Blog: Control Your Instagram Feed with Favorites & Following (23 de marzo de 2022)",
+   "url": "https://about.instagram.com/blog/announcements/favorites-and-following"
+  },
+  {
+   "titulo": "TechCrunch: Instagram launches chronological and favorites feeds for all users, but they can't be the default",
+   "url": "https://techcrunch.com/2022/03/23/instagram-launches-chronological-and-favorites-feeds-for-all-users-but-they-cant-be-the-default"
+  },
+  {
+   "titulo": "Instagram Blog: Introducing 'You're All Caught Up' in Instagram Feed (2 de julio de 2018)",
+   "url": "https://about.instagram.com/blog/announcements/introducing-youre-all-caught-up-in-feed"
+  },
+  {
+   "titulo": "TechCrunch: Twitter rolls out 'sparkle button' to let users hide the algorithmic feed (18 de diciembre de 2018)",
+   "url": "https://techcrunch.com/2018/12/18/twitter-rolls-out-the-sparkle-button-to-let-users-see-the-latest-tweets-first/"
+  },
+  {
+   "titulo": "TechCrunch: Twitter won't force you to the For You timeline on web anymore (24 de enero de 2023)",
+   "url": "https://techcrunch.com/2023/01/24/twitter-wont-force-you-to-the-for-you-timeline-on-web-anymore"
+  },
+  {
+   "titulo": "Social Media Today: X Now Algorithmically Ranks Posts in Following Feed",
+   "url": "https://www.socialmediatoday.com/news/x-formerly-twitter-sorts-following-feed-algorithm-ai-grok/806617/"
+  },
+  {
+   "titulo": "Quartz: YouTube's recommendations drive 70% of what we watch (CES 2018)",
+   "url": "https://qz.com/1178125/youtubes-recommendations-drive-70-of-what-we-watch"
+  },
+  {
+   "titulo": "Variety: YouTube Test to Sort Subscription Feeds in Non-Chronological Order Triggers Creator Backlash (mayo 2018)",
+   "url": "https://variety.com/2018/digital/news/youtube-video-feeds-non-chronological-creator-backlash-1202821555/"
+  },
+  {
+   "titulo": "Wikipedia: Google Reader",
+   "url": "https://en.wikipedia.org/wiki/Google_Reader"
+  },
+  {
+   "titulo": "CNN: Google Reader shutting down on July 1 (14 de marzo de 2013)",
+   "url": "https://edition.cnn.com/2013/03/14/tech/web/google-reader-discontinued"
+  },
+  {
+   "titulo": "NewsBlur Blog: Google Reader announced its shutdown exactly a year ago (cifras de Feedly)",
+   "url": "https://blog.newsblur.com/2014/03/13/google-reader-announced-its-shutdown-exactly-a-year-ago/"
+  },
+  {
+   "titulo": "AndroidPure: Petition to 'Keep Google Reader Running' crosses 130,000 signatures",
+   "url": "https://www.androidpure.com/petition-to-keep-google-reader-running-crosses-130000-signatures/"
+  },
+  {
+   "titulo": "The Verge: Who killed Google Reader? (David Pierce, 30 de junio de 2023)",
+   "url": "https://www.theverge.com/23778253/google-reader-death-2013-rss-social"
+  },
+  {
+   "titulo": "9to5Google: An interesting look back at why Google Reader was killed 10 years ago",
+   "url": "https://9to5google.com/2023/06/30/google-reader/"
+  },
+  {
+   "titulo": "Dan Q: RSS Zero isn't the path to RSS Joy (2023)",
+   "url": "https://danq.me/2023/07/29/rss-zero/"
+  },
+  {
+   "titulo": "Hoadley et al.: Privacy as information access and illusory control: The case of the Facebook News Feed privacy outcry",
+   "url": "https://www.sciencedirect.com/science/article/abs/pii/S1567422309000271"
+  },
+  {
+   "titulo": "freeCodeCamp: Haters gonna hate: what we can learn from Facebook's 2006 news feed redesign",
+   "url": "https://www.freecodecamp.org/news/everyone-hates-a-redesign-or-do-they-b8a2fec9efbe/"
+  },
+  {
+   "titulo": "Wikipedia: Feed (Facebook) — Top News / Most Recent (2009)",
+   "url": "https://en.wikipedia.org/wiki/Feed_(Facebook)"
+  },
+  {
+   "titulo": "TechCrunch: Facebook's new 'Feeds' tab chronologically displays posts (21 de julio de 2022)",
+   "url": "https://techcrunch.com/2022/07/21/facebooks-feed-tab-chronologically-displays-posts-from-friends/"
+  },
+  {
+   "titulo": "TechCrunch: Meta's Threads app is rolling out a Following feed (25 de julio de 2023)",
+   "url": "https://techcrunch.com/2023/07/25/metas-threads-app-is-rolling-out-a-following-feed/"
+  },
+  {
+   "titulo": "TechCrunch: Threads tests the ability for users to choose their preferred default feed (25 de noviembre de 2024)",
+   "url": "https://techcrunch.com/2024/11/25/threads-tests-the-ability-for-users-to-choose-their-preferred-default-feed/"
+  },
+  {
+   "titulo": "TechCrunch: Meta confirms AI 'off switch' incoming to Facebook, Instagram in Europe (DSA, 22 de agosto de 2023)",
+   "url": "https://techcrunch.com/2023/08/22/meta-confirms-ai-off-switch-incoming-to-facebook-instagram-in-europe"
+  },
+  {
+   "titulo": "TechCrunch: TikTok to let EU users turn off its personalised algorithm (4 de agosto de 2023)",
+   "url": "https://techcrunch.com/2023/08/04/tiktok-algorithm-dsa/amp"
+  },
+  {
+   "titulo": "DSA Observatory: The Regulation of Recommender Systems Under the DSA",
+   "url": "https://dsa-observatory.eu/2024/11/22/the-regulation-of-recommender-systems-under-the-dsa-a-transition-from-default-to-multiple-and-dynamic-controls/"
+  },
+  {
+   "titulo": "arXiv: From Reports to Reality: Testing Consistency in Instagram's DSA Compliance Data (no reporta uptake del feed no personalizado)",
+   "url": "https://arxiv.org/html/2507.01787v1"
+  },
+  {
+   "titulo": "Bluesky Blog: Algorithmic Choice with Custom Feeds (27 de julio de 2023)",
+   "url": "https://bsky.social/about/blog/7-27-2023-custom-feeds"
+  },
+  {
+   "titulo": "TechCrunch: Bluesky hits 40 million users, introduces 'dislikes' beta (31 de octubre de 2025)",
+   "url": "https://techcrunch.com/2025/10/31/bluesky-hits-40-million-users-introduces-dislikes-beta/"
+  },
+  {
+   "titulo": "arXiv: Middleware for Feed Recommendation in Practice: How Feed Creators Build, Maintain, and Sustain Custom Feeds on Bluesky (sep. 2026)",
+   "url": "https://arxiv.org/html/2609.12958v1"
+  },
+  {
+   "titulo": "TechCrunch: Custom feed builder Graze is building a business on Bluesky",
+   "url": "https://techcrunch.com/2025/01/31/custom-feed-builder-graze-is-building-a-business-on-bluesky-and-investors-are-paying-attention/"
+  },
+  {
+   "titulo": "Mastodon Annual Report 2024 (PDF)",
+   "url": "https://joinmastodon.org/reports/Mastodon%20Annual%20Report%202024.pdf"
+  },
+  {
+   "titulo": "The Hill: Substack surpasses 5 million paid subscriptions (marzo 2025)",
+   "url": "https://thehill.com/homenews/5188965-substack-surpasses-5-million-paid-subscribers/"
+  },
+  {
+   "titulo": "Simon Owens: Is Substack's subscription growth slowing down? (hitos 1M/2M/4M/5M)",
+   "url": "https://simonowens.substack.com/p/is-substacks-subscription-growth"
+  },
+  {
+   "titulo": "9to5Mac: Apple adopting the word 'follow' for podcasts as users associate 'subscribe' with paid content (2021)",
+   "url": "https://9to5mac.com/2021/03/09/apple-adopting-the-word-follow-for-podcasts-as-users-associate-subscribe-with-paid-content/"
+  },
+  {
+   "titulo": "Nieman Lab: Apple Podcasts will replace the 'subscribe' button with a 'follow' one",
+   "url": "https://www.niemanlab.org/2021/03/apple-podcasts-will-replace-the-subscribe-button-with-a-follow-one/"
+  },
+  {
+   "titulo": "Apple Podcasts for Creators: Podcast RSS feed requirements",
+   "url": "https://podcasters.apple.com/support/823-podcast-requirements"
+  },
+  {
+   "titulo": "Edison Research: The Infinite Dial 2025",
+   "url": "https://www.edisonresearch.com/the-infinite-dial-2025/"
+  },
+  {
+   "titulo": "Pew Research Center: How Americans use and engage with podcasts (18 de abril de 2023)",
+   "url": "https://www.pewresearch.org/journalism/2023/04/18/how-americans-use-and-engage-with-podcasts/"
+  },
+  {
+   "titulo": "Reuters Institute DNR 2022: Email news: its contribution to engagement and monetisation",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2022/email-news-its-contribution-to-engagement-and-monetisation"
+  },
+  {
+   "titulo": "Reuters Institute: Overview and key findings of the 2025 Digital News Report",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025/dnr-executive-summary"
+  },
+  {
+   "titulo": "Pew Research Center: Who gets news from news influencers and what they think of it (18 de noviembre de 2024)",
+   "url": "https://www.pewresearch.org/2024/11/18/americans-experiences-with-social-media-news-influencers/"
+  },
+  {
+   "titulo": "Pew Research Center: How U.S. Adults Use TikTok (22 de febrero de 2024)",
+   "url": "https://www.pewresearch.org/internet/2024/02/22/how-u-s-adults-use-tiktok/"
+  },
+  {
+   "titulo": "Pew Research Center: Who U.S. Adults Follow on TikTok (8 de octubre de 2024)",
+   "url": "https://www.pewresearch.org/data-labs/2024/10/08/who-u-s-adults-follow-on-tiktok/"
+  },
+  {
+   "titulo": "YouGov: Frequent social media users are more likely to prefer the algorithm to chronological feeds (agosto 2026)",
+   "url": "https://yougov.com/en-us/articles/55416-frequent-social-media-users-are-more-likely-to-prefer-the-algorithm-to-chronological-feeds"
+  },
+  {
+   "titulo": "Lotun et al., Scientific Reports (2024): People perceive parasocial relationships to be effective at fulfilling emotional needs",
+   "url": "https://www.nature.com/articles/s41598-024-58069-9"
+  },
+  {
+   "titulo": "de Bérail et al., Computers in Human Behavior (2019): The relations between YouTube addiction, social anxiety and parasocial relationships with YouTubers",
+   "url": "https://www.semanticscholar.org/paper/The-relations-between-YouTube-addiction,-social-and-B%C3%A9rail-Guillon/0b88dee6d9cbe34f4c63527bbee185b5e1e4bad7"
+  },
+  {
+   "titulo": "Gomez-Uribe & Hunt (2015): The Netflix Recommender System: Algorithms, Business Value, and Innovation",
+   "url": "https://www.researchgate.net/publication/288873080_The_Netflix_Recommender_System_Algorithms_Business_Value_and_Innovation"
+  },
+  {
+   "titulo": "Nielsen Norman Group: Infinite Scrolling: When to Use It, When to Avoid It",
+   "url": "https://www.nngroup.com/articles/infinite-scrolling-tips/"
+  },
+  {
+   "titulo": "Baymard Institute: Allow Users to Choose the Frequency of Newsletter Emails (80% Don't)",
+   "url": "https://baymard.com/blog/newsletter-frequency"
+  },
+  {
+   "titulo": "Instagram Blog: Follow Hashtags on Instagram (12 de diciembre de 2017)",
+   "url": "https://about.instagram.com/blog/announcements/now-you-can-follow-hashtags-on-instagram"
+  },
+  {
+   "titulo": "Digital Information World: Instagram's 'Following Hashtags' Feature Is Going Away (noviembre 2024)",
+   "url": "https://www.digitalinformationworld.com/2024/11/instagram-will-remove-its-following.html"
+  },
+  {
+   "titulo": "Engadget: Twitter now lets you follow topics, not just accounts (noviembre 2019)",
+   "url": "https://www.engadget.com/2019-11-06-twitter-topics-rollout.html"
+  },
+  {
+   "titulo": "Vice: Why 2016 Was the Year of the Algorithmic Timeline",
+   "url": "https://www.vice.com/en/article/why-2016-was-the-year-of-the-algorithmic-timeline/"
+  }
+ ],
+ "no_encontrado": [
+  "Cuánta gente usa de verdad la pestaña 'Siguiendo' en TikTok, Instagram, Threads o X: ninguna plataforma publica el porcentaje de usuarios o de tiempo en esa pestaña. Las únicas señales son indirectas: Twitter dijo en 2016 que ~2% desactivó el ranking; Mosseri dice que como default el uso cae 'mucho' / 'hasta 50%'. Los informes de transparencia del DSA de Meta y TikTok tampoco informan la adopción del feed no personalizado en la UE (un estudio en arXiv buscó 'percent', 'share', 'proportion' en los filings de Instagram sin encontrarlo).",
+  "Porcentaje de usuarios de Bluesky que usan feeds personalizados frente al feed Following: no se encontró dato oficial; solo cantidad de feeds (>100.000) y usuarios totales (40 millones).",
+  "Cifras de uso de newsletters por email para noticias en los Digital News Report 2024 y 2025: solo se pudo confirmar el capítulo de 2022 (17% promedio, 22% EE.UU., 9% Reino Unido).",
+  "Qué porcentaje de lo que se ve en Netflix sale de 'Mi lista': Netflix solo publica que ~80% de las horas vienen del recomendador en general (2015); no hay cifra pública de uso de la lista propia.",
+  "Cifra final de la petición 'Keep Google Reader Running': confirmadas más de 130.000 firmas; la cifra de 150.000 que circula no se pudo verificar.",
+  "Un número oficial de usuarios activos de Google Reader al cierre: solo estimaciones (más de 30 millones en el pico según la historia oral de The Verge; cifras mucho menores según competidores).",
+  "Dato de Edison de que el oyente promedio sigue ~6 podcasts: apareció solo en sitios secundarios de estadísticas, no se pudo confirmar en una fuente primaria, por eso no se incluyó en la evidencia.",
+  "Varias fuentes primarias (blog de Instagram, blog de Google, Science, Pew, Edison, Reuters Institute, Wikipedia) no pudieron abrirse directamente desde este entorno por restricciones de red; las cifras se tomaron de los fragmentos indexados de esas mismas páginas y de coberturas periodísticas que las citan, y las URL que se dan son las de las fuentes originales.",
+  "Datos cuantitativos de TikTok sobre su pestaña Following (cuántos la abren, si es estrictamente cronológica fuera de la UE): no hay publicación oficial; solo la descripción de Pew (se construye directamente con las cuentas seguidas) y la implementación cronológica para la UE bajo el DSA."
+ ]
+}

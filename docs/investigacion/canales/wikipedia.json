@@ -1,0 +1,429 @@
+{
+ "canal": "Wikipedia como forma de explorar: el artículo y sus enlaces internos, la infobox, las categorías, los anexos y \"Lista de…\", los portales, \"Artículo aleatorio\", \"Efemérides / Un día como hoy\", \"Artículo destacado\", \"Lo más leído\", la app con su feed Explorar, Wikidata, la madriguera (rabbit hole), \"llegar a Filosofía\" y las carreras de Wikipedia.",
+ "expectativa_usuario": "Entro a sacarme una duda o a matar el tiempo y espero encontrar, siempre con la misma forma, un panorama completo y confiable del tema, con la libertad de saltar a lo que me llame la atención sin que nadie me empuje ni me esconda el resto.",
+ "modo_humano": "Explorar e investigar, casi en partes iguales, y casi nada de comunicarse o acompañarse. Investigar: la persona llega con una pregunta puntual (un dato, un panorama rápido antes de una conversación o un trabajo) y Wikipedia le da la respuesta en una estructura previsible: resumen inicial, infobox con datos, secciones. Explorar: la persona llega aburrida o por azar (en el estudio \"Why We Read Wikipedia\" de 2017 es una de las motivaciones principales junto con \"aprender por el gusto de aprender\") y lo que la retiene es la madriguera: cada enlace es una puerta barata porque del otro lado la página tiene exactamente la misma forma. Los estudios de curiosidad (Lydon-Staley et al. 2021; Zhou et al. 2024) describen dos estilos de lector: el \"cazador\" que profundiza en un tema conexo y el \"entrometido\" (busybody) que salta entre temas lejanos; Wikipedia sirve a los dos porque no impone un camino. Comunicarse no: las páginas de discusión son para editores, el lector común no habla con nadie. Acompañarse tampoco: no hay voz, no hay \"alguien\" del otro lado; lo más parecido es el ritual diario de la portada o del feed Explorar (destacado, efemérides, imagen del día), que es un hábito, no una relación.",
+ "unidad": "El artículo (la página), con tres sub-unidades que son las que realmente se \"consumen\" al explorar: la infobox (datos comparables de un vistazo), la fila de tabla en los anexos y listas, y el enlace interno. En la app, la unidad del feed Explorar es la tarjeta diaria (destacado del día, los más leídos del día, efemérides del día, imagen del día, aleatorio). En Wikidata la unidad es el ítem con propiedades y valores.",
+ "quien_decide": "La persona, siempre con la última palabra: decide qué enlace tocar, qué sección leer, cuándo parar. Pero el menú lo arma la comunidad de editores de forma manual: qué enlaces existen en el texto, qué va en la infobox, qué artículo es \"destacado\" hoy (lo eligen editores en páginas como \"Wikipedia:Today's featured article/fecha\" y Wikipedia los sirve a la app por la extensión FeaturedFeed), qué efemérides se muestran (una página curada \"Wikipedia:Selected anniversaries/Mes_Día\"; en español \"Plantilla:Efemérides - 6 de octubre\"), qué noticias (\"Template:In the news\"; en español \"Portal:Actualidad\"), qué imagen del día (Commons). \"Lo más leído\" lo decide la agregación de todos los lectores (API de pageviews, top del día, cortado a 50 títulos, filtrado a artículos del espacio principal, sin la portada y con una lista de bloqueo manual de títulos inflados por bots o pornografía). \"Aleatorio\" lo decide el azar, pero con un filtro de calidad (ver mecanismo). No hay ningún algoritmo que aprenda de millones de usuarios para decidir qué ve cada uno: la única tarjeta \"personal\" del feed, \"Because you read\", se calcula en el teléfono a partir de un solo artículo que leíste o guardaste en los últimos 3 días, y la app muestra cuál fue la semilla (\"Because you read: X\"). Todo el feed se puede apagar o reordenar tarjeta por tarjeta y por idioma.",
+ "tiene_final": "Sí y no, y esa mezcla es parte del encanto. El artículo tiene final visible: resumen, secciones, \"Véase también\", \"Referencias\", categorías al pie; uno sabe cuánto falta y cuándo \"terminó\" un tema. La madriguera no tiene final, pero cada salto es una decisión consciente (hay que tocar un enlace), no un deslizar pasivo; por eso la sensación es de haber \"ido lejos\" y no de haber \"perdido el tiempo\". El feed Explorar tiene final por día: cada día es un bloque de tarjetas y para ver más hay que bajar al día anterior; en Android hay una tarjeta explícita \"Llegaste al final del feed\" con un botón \"Cargar más\". \"Lo más leído\" es una lista cerrada de hasta 50; \"Efemérides\" es una lista por año con selector de fecha, y cuando se acaba la app muestra un mensaje de \"viajaste en el tiempo\" y un botón para volver a hoy. El aleatorio es una cadena infinita pero de a uno (\"Cargar otro artículo al azar\"). El efecto: mucha autonomía y poco arrepentimiento; el costo es que nadie te sostiene la mano y el que no sabe qué buscar se puede ir enseguida.",
+ "mecanismo": "Por dentro, Wikipedia es un grafo de páginas con una plantilla social, no técnica: cada artículo tiene resumen inicial, infobox a la derecha (una tabla de pares dato/valor estandarizada por tipo de cosa: país, animal, serie, invento), secciones con los mismos nombres dentro de cada tipo, \"Véase también\", referencias, plantillas de navegación al pie y categorías. Los enlaces internos van dentro del texto corriente (azul si la página existe, rojo si falta), así que cada palabra importante es una puerta y el costo cognitivo de cruzarla es casi cero porque del otro lado está la misma estructura. Esa es la mecánica de la madriguera: enlaces en contexto + estructura idéntica + infobox que permite comparar en dos segundos. \"Llegar a Filosofía\" lo ilustra: siguiendo siempre el primer enlace del texto (sin paréntesis ni cursivas), la gran mayoría de artículos termina en \"Filosofía\", porque el primer enlace casi siempre apunta a la categoría más general (un hiperónimo). Las categorías son listas automáticas de \"hermanos\"; los anexos y \"Lista de…\" son listas hechas a mano, muchas con tablas ordenables, que convierten un tema en algo comparable (todas las banderas, todos los episodios, todos los países por superficie). Wikidata es la base estructurada paralela (ítems con propiedades) que alimenta infoboxes en muchas wikis y la \"descripción corta\" que aparece bajo cada título en la app y en las búsquedas.\n\nPor fuera, la portada y la app Explorar son un \"feed sin algoritmo\": una pila de módulos fijos que cambian de contenido cada día pero no de lugar. Pude verificar en el código oficial del servicio wikifeeds (Wikimedia) cómo se arma cada tarjeta. \"Artículo destacado\": el servicio pide a cada wiki el ítem de la extensión FeaturedFeed para la fecha y toma el título en negrita; sólo funciona en 21 ediciones (bg, bn, bs, cs, de, el, en, fa, he, hu, it, ja, la, no, sco, sd, sv, tr, ur, vi, zh; español no está). \"Efemérides\": parsea la página curada del día (\"Wikipedia:Selected anniversaries/May_20\"; en español \"Plantilla:Efemérides - 22 de mayo\") y además el artículo del día del año (\"22 de mayo\") separando por encabezados Nacimientos, Fallecimientos, Acontecimientos y Celebraciones; cada evento lleva su año y los enlaces a artículos. \"Noticias\": parsea \"Template:In the news\" (en español \"Portal:Actualidad\"). \"Imagen del día\": la plantilla Potd de Commons con descripción localizada. \"¿Sabías que…?\": parsea \"Template:Did you know\" en 7 idiomas. \"Lo más leído\": pide al API de pageviews el top del día anterior (siempre en UTC, nunca el día en curso), corta a 50 títulos, se queda sólo con el espacio de nombres 0, quita la portada, aplica una lista de bloqueo manual (títulos inflados por bots o spam como \"Java (programming language)\", \"ChatGPT\", \"Cleopatra\", \"Lali Espósito\", \"YouTube\", más pornografía) y para cada artículo trae el historial de vistas filtrado a agente \"user\", no bots; la app lo muestra con el número de vistas (\"12 k\", \"1 M\"). \"Aleatorio\" (servicio): pide 12 páginas al azar del espacio principal sin redirecciones, les da puntaje (+2 si tienen imagen, +1 si tienen descripción de Wikidata, −10 si son desambiguación o \"lista\"), y elige al azar entre las de puntaje máximo. La app Android hace lo propio: pide 4 veces más páginas de las que necesita, descarta desambiguaciones y (en inglés) listas, y ordena primero las que tienen miniatura y extracto. El Special:Random de MediaWiki, por debajo, usa una columna page_random (un número al azar fijo por página): genera un número, toma la primera página con page_random mayor o igual en los espacios de contenido y sin redirecciones, y si no hay ninguna da la vuelta a cero.\n\nLa única personalización, \"Because you read\", vive en el dispositivo: la app iOS toma como semilla un solo artículo que leíste \"significativamente\" o guardaste en los últimos 3 días, excluye los ~1000 artículos que ya te sugirió y los que ya leíste, pide artículos relacionados por similitud de texto y arma una tarjeta por día con la semilla a la vista. Las tarjetas se pueden ocultar una por una, por tipo, por idioma, y reordenar (\"Personalizar el feed\", con \"Restaurar vista por defecto\"); si ocultás todas, la pestaña Explorar se reemplaza por Ajustes. El mismo criterio aplica a las novedades de 2024-2025: el \"Year in Review\" y la pestaña Actividad (historial de lectura, tiempo leído, rachas, estadísticas de juegos) se calculan con datos locales, salvo las ediciones que son públicas. También apareció un juego diario, \"Which came first?\" (adivinar qué evento histórico ocurrió antes, armado con las efemérides, con archivo desde junio de 2024), un indicio de que Wikimedia busca \"ganchos\" diarios sin algoritmo.\n\nQué espera la persona y por qué confía: la misma forma en todas partes, citas, punto de vista neutral, y la certeza de que el panorama es completo (si algo falta, falta para todos). Eso es lo que la ubica frente al feed social (te trae cosas pero nunca ves el todo) y frente al chat con IA (tiene todo pero no te trae nada): Wikipedia tiene el todo y lo muestra ordenado, pero sólo te trae algo si vos tocás.",
+ "historia": "Hitos (los que no pude abrir hoy están marcados): 2001: nace Wikipedia (15 de enero) con enlaces internos tipo wiki desde el primer día. 2004: MediaWiki incorpora las categorías; en la portada en inglés se consolidan los módulos diarios \"Today's featured article\", \"Did you know\" y \"Selected anniversaries / On this day\" (fechas exactas por módulo: sin verificar). Mediados de los 2000: se estandarizan las infoboxes por tipo de artículo con plantillas. Marzo de 2006: rediseño de la portada en inglés por votación comunitaria; el diseño en bloques (destacado, ¿sabías?, noticias, efemérides, imagen) que se usa hoy viene de ahí (sin verificar hoy). 2007: la Wikipedia en español crea el espacio de nombres \"Anexo:\" para sacar las listas del espacio principal (sin verificar hoy). 2007-2008: en la Wikipedia en inglés, borrado y fusión masiva de artículos de episodios individuales de series; llega al Comité de Arbitraje (\"Episodes and characters\", 2008); los \"List of episodes\" sobreviven, los artículos por episodio quedan sólo si tienen cobertura externa (sin verificar hoy). 2008-2011: se documenta \"Getting to Philosophy\"; el chiste de xkcd 903 (mayo de 2011) lo populariza; en 2016 el conteo da cerca del 97% de los artículos (sin verificar hoy). 29 de octubre de 2012: nace Wikidata, que con los años alimenta infoboxes y descripciones cortas (sin verificar hoy). 2012-2016: apps oficiales; en 2016 el feed Explorar reemplaza la portada como pantalla de inicio en Android e iOS (sin verificar hoy). 2016-2017: Wikimedia publica \"Why We Read Wikipedia\" (encuesta a ~30.000 lectores en inglés, WWW 2017) y después la versión en 14 idiomas (2019). 2021-2024: estudios de curiosidad con datos de lectura (\"cazadores y entrometidos\", Nature Human Behaviour 2021; estilos de curiosidad en 50 países con la app, Science Advances 2024). 18 de enero de 2023: la piel Vector 2022 pasa a ser la predeterminada en la Wikipedia en inglés (índice lateral fijo, ancho limitado, buscador prominente) (sin verificar hoy). 2024-2025: la app suma \"Year in Review\", pestaña Actividad con datos locales, y el juego diario \"Which came first?\" (verificado en los textos de la app). Abril de 2025: Wikimedia informa que el ancho de banda por descargas multimedia creció 50% desde enero de 2024 por rastreadores de IA y que el 65% del tráfico más caro viene de bots (sin verificar hoy). Octubre de 2025: Wikimedia informa que, tras reclasificar tráfico de bots detectado en mayo, las visitas humanas cayeron cerca de 8% respecto de los mismos meses de 2024, y lo atribuye a los resúmenes con IA de los buscadores y al video social (sin verificar hoy).",
+ "patrones_ux": [
+  {
+   "nombre": "Plantilla idéntica en cada artículo",
+   "descripcion": "Título, descripción corta, resumen de 1-3 párrafos, infobox a la derecha, índice, secciones con nombres previsibles dentro de cada tipo, \"Véase también\", referencias, plantillas de navegación y categorías al pie. Millones de páginas, una sola forma.",
+   "por_que_funciona": "Baja el costo de cada salto: ya sabés dónde va a estar cada cosa antes de llegar. Eso hace posible la madriguera: explorar 20 páginas en 10 minutos sin reaprender nada."
+  },
+  {
+   "nombre": "Infobox: ficha de datos comparable",
+   "descripcion": "Tabla de pares etiqueta/valor arriba a la derecha, con imagen, estandarizada por tipo (país: capital, superficie, población, moneda; animal: clasificación, estado de conservación; serie: episodios, temporadas, emisión).",
+   "por_que_funciona": "Permite responder la pregunta puntual en dos segundos sin leer prosa, y comparar dos cosas del mismo tipo mirando la misma casilla. Es el panorama \"ordenado y comparable\" de la enciclopedia de los 90."
+  },
+  {
+   "nombre": "Enlaces en contexto, con color de estado",
+   "descripcion": "Las palabras clave del texto son enlaces azules (existe) o rojos (falta). No hay una lista aparte de \"relacionados\": el camino está dentro de la lectura.",
+   "por_que_funciona": "La decisión de saltar se toma en el momento en que la curiosidad aparece, con una señal honesta de qué hay del otro lado. El rojo, además, comunica que el mapa tiene bordes."
+  },
+  {
+   "nombre": "Categorías al pie y plantillas de navegación",
+   "descripcion": "Al final de cada artículo, cajas con todos los \"hermanos\" (todos los países de Sudamérica, todos los episodios de la temporada, toda la discografía) y categorías automáticas.",
+   "por_que_funciona": "Convierte un artículo aislado en una pieza de un conjunto: siempre ves cuántos hay y cuáles te faltan. Es lo que da sensación de \"completo\"."
+  },
+  {
+   "nombre": "Anexos y listas con tabla ordenable",
+   "descripcion": "\"Lista de países por superficie\", \"Anexo:Episodios de…\": tablas con columnas fijas, flechitas para ordenar, banderitas, notas al pie; a veces con un mapa o un gráfico arriba.",
+   "por_que_funciona": "Es la lámina de banderas y el libro de récords: elegido, ordenado, completo y comparable. El lector puede reordenar por su criterio sin que nadie decida por él."
+  },
+  {
+   "nombre": "Portada por módulos fijos de contenido diario",
+   "descripcion": "Mismos bloques, mismo lugar cada día: artículo destacado, ¿sabías que…?, noticias, efemérides, imagen del día. Cambia el contenido, no la forma.",
+   "por_que_funciona": "Crea un ritual sin ansiedad: hay \"algo nuevo\" cada día, pero es finito y editado por personas. Se puede ver todo en una pantalla."
+  },
+  {
+   "nombre": "Feed Explorar: pila de tarjetas por día, configurable, sin ranking personal",
+   "descripcion": "En la app: tarjetas \"Destacado\", \"Lo más leído\" (con número de vistas), \"Efemérides\", \"Imagen del día\", \"Aleatorio\", \"Noticias\", \"Because you read: X\", \"Seguir leyendo\", \"Lugares cerca\", \"Ediciones sugeridas\". Cada una se puede ocultar, reordenar y asignar por idioma; al llegar al final hay \"Cargar más\" (el día anterior).",
+   "por_que_funciona": "Tiene la cadencia del feed (bajar, descubrir) sin su trampa (infinito, opaco). Muestra la regla que generó cada tarjeta (\"porque leíste X\", \"lo más leído hoy\"), así que el lector entiende y controla."
+  },
+  {
+   "nombre": "Aleatorio con filtro de calidad y rebote",
+   "descripcion": "Botón \"Artículo aleatorio\" / \"Randomizer\" con \"Cargar otro\". Por detrás, el servicio descarta desambiguaciones y listas y prefiere páginas con imagen y descripción; la app Android pide 4 veces más de lo que muestra y ordena primero las que tienen miniatura y extracto.",
+   "por_que_funciona": "El azar puro aburre (sale un pueblo de 300 habitantes sin foto). El azar \"con dignidad\" mantiene la sorpresa pero garantiza que cada tirada tenga algo para mirar."
+  },
+  {
+   "nombre": "Descripción corta bajo el título",
+   "descripcion": "Cuatro o cinco palabras (de Wikidata) bajo cada título en búsquedas, tarjetas y enlaces: \"Ciudad en Francia\", \"Serie de anime de 2013\", \"Pez de agua dulce\".",
+   "por_que_funciona": "Es la bisagra que permite decidir si saltar sin abrir la página. Hace que una lista de 50 títulos se pueda recorrer de un vistazo."
+  },
+  {
+   "nombre": "Efemérides con línea de tiempo y viaje de fechas",
+   "descripcion": "Lista de eventos ordenada por año con enlaces a los artículos involucrados, selector de día/mes, y al llegar al fondo un mensaje de \"viajaste en el tiempo\" con botón para volver a hoy.",
+   "por_que_funciona": "Da un marco (la fecha) que vuelve interesante cualquier tema por asociación, y marca un final claro con humor en vez de un scroll infinito."
+  }
+ ],
+ "que_funciona": [
+  "La estructura idéntica en todas las páginas hace que explorar 20 artículos cueste tan poco como leer uno: la madriguera es consecuencia del diseño, no de un algoritmo.",
+  "La infobox y las listas resuelven la pregunta puntual sin leer, y permiten comparar: es la forma \"ordenada y comparable\" que el autor identifica en las enciclopedias de los 90, trasladada a millones de temas.",
+  "La persona siempre tiene el control: cada salto es una decisión, no un deslizar, y por eso la sensación es de autonomía y no de haber sido manipulado.",
+  "La confianza viene de la forma: citas, neutralidad, y la certeza de que si algo no está, no está para nadie (completud).",
+  "La portada y el feed Explorar prueban que se puede tener cadencia diaria y descubrimiento sin ranking personalizado: contenido editado por personas, azar filtrado, y agregación transparente (\"lo más leído\" con el número de vistas).",
+  "Las reglas de calidad del azar (descartar desambiguaciones y listas, preferir páginas con imagen y descripción) muestran que el azar necesita curaduría para divertir; eso lo verifiqué en el código de wikifeeds y de la app Android.",
+  "Toda la personalización de la app (\"Because you read\", Year in Review, pestaña Actividad con rachas y tiempo de lectura) se calcula con datos locales del dispositivo y con la semilla a la vista; funciona sin cuentas ni servidor que aprenda del usuario, igual que los catálogos del autor.",
+  "Las efemérides y la imagen del día generan un hábito diario con poca presión: hay algo nuevo cada día pero es finito y se puede ver entero.",
+  "Las descripciones cortas de Wikidata convierten cualquier lista de títulos en algo recorrible de un vistazo."
+ ],
+ "que_falla": [
+  "Nadie te sostiene la mano: el que llega sin pregunta y sin ganas de leer prosa se va. El feed Explorar y el aleatorio son la respuesta tardía (2016) a ese problema.",
+  "El azar puro trae mucho ruido; de ahí que el servicio y la app necesiten filtros (desambiguaciones, listas, páginas sin imagen) y una lista negra manual para \"lo más leído\" (bots, spam, pornografía).",
+  "Las listas y anexos son desparejos: un anexo de episodios puede estar completo con el capítulo del manga adaptado y el de la serie vecina ser un esqueleto; dependen de un fan voluntario.",
+  "La comunidad borra o recorta lo que considera \"fancruft\" (detalle para fans sin cobertura externa): se gana consistencia enciclopédica pero se pierden justo las listas comparables que a los fans les servían; en inglés los artículos por episodio se fusionaron masivamente en 2007-2008 y la correspondencia anime-manga rara vez sobrevive (ver no_encontrado).",
+  "\"Lo más leído\" lo dominan muertes de famosos, estrenos y deportes; es un espejo de la actualidad, no una curaduría del saber, y el servicio sólo puede mostrar el día anterior (UTC).",
+  "El feed Explorar cubre pocos idiomas por módulo: \"Artículo destacado\" sólo en 21 ediciones (español excluido), \"Noticias\" en unas 18 y \"¿Sabías que…?\" en 7; en español sólo hay efemérides, más leídos, imagen del día y aleatorio.",
+  "La prosa es densa en móvil y las infoboxes se alargan hasta volverse ilegibles; Vector 2022 limitó el ancho y fijó el índice, pero el artículo sigue siendo texto largo.",
+  "Dependencia estructural de los buscadores: cuando Google y las IA resumen, la gente no llega; Wikimedia reportó en octubre de 2025 una caída cercana al 8% de visitas humanas respecto de 2024 (sin verificar hoy), y menos lectores significa menos editores y donantes.",
+  "No hay \"camino sugerido\" ni \"tema del día\" para quien quiere ser guiado: el destacado es uno por día y no hay una serie en cuenta regresiva estilo \"los 20 más\"."
+ ],
+ "evidencia": [
+  {
+   "afirmacion": "El servicio oficial que arma el feed de la app (wikifeeds) elige el artículo aleatorio con puntaje de calidad, no al azar puro.",
+   "dato": "Pide 12 páginas al azar del espacio principal sin redirecciones; +2 puntos si tiene imagen, +1 si tiene descripción, −10 si es desambiguación o 'Wikimedia list article'; elige al azar entre las de puntaje máximo (código verificado hoy).",
+   "fuente_titulo": "wikifeeds lib/random.js (Wikimedia, GitHub)",
+   "url": "https://raw.githubusercontent.com/wikimedia/mediawiki-services-wikifeeds/master/lib/random.js",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "El spec oficial describe el aleatorio como 'random (good) article' con preferencia por miniatura y descripción de Wikidata.",
+   "dato": "'Returns the title of a randomly picked article from the main namespace. Preference is given to articles with a thumbnail and an associated Wikidata description.' (verificado hoy)",
+   "fuente_titulo": "wikifeeds spec.yaml",
+   "url": "https://raw.githubusercontent.com/wikimedia/mediawiki-services-wikifeeds/master/spec.yaml",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "'Lo más leído' se corta a 50 títulos, sólo artículos (ns 0), sin portada, con lista de bloqueo manual y vistas de agente 'user' (no bots).",
+   "dato": "MAX_TITLES = 50; DENY_LIST incluye 'Java_(programming_language)', 'ChatGPT', 'Cleopatra', 'Lali_Espósito', 'YouTube', 'XNXX', etc.; el historial por artículo se pide con Agent.USER; la fecha es UTC y sólo días anteriores a hoy (verificado hoy).",
+   "fuente_titulo": "wikifeeds lib/most-read.js y lib/pageviews.js",
+   "url": "https://raw.githubusercontent.com/wikimedia/mediawiki-services-wikifeeds/master/lib/most-read.js",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Las efemérides de la app salen de dos páginas editadas a mano por wiki: la página curada del día y el artículo del día del año.",
+   "dato": "En inglés 'Wikipedia:Selected_anniversaries/May_20' y 'May_20' (encabezados Births, Deaths, Events, Holidays_and_observances); en español 'Plantilla:Efemérides - 22 de mayo' y '22_de_mayo' (Nacimientos, Fallecimientos, Acontecimientos, Celebraciones). Tipos: selected, births, deaths, holidays, events (verificado hoy).",
+   "fuente_titulo": "wikifeeds lib/on-this-day.js y lib/on-this-day.languages.js",
+   "url": "https://raw.githubusercontent.com/wikimedia/mediawiki-services-wikifeeds/master/lib/on-this-day.languages.js",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "El 'Artículo destacado del día' del feed sólo existe en 21 ediciones de Wikipedia; español no está.",
+   "dato": "supportedSubdomains = bg, bn, bs, cs, de, el, en, fa, he, hu, it, ja, la, no, sco, sd, sv, tr, ur, vi, zh; se obtiene vía Special:FeedItem de la extensión FeaturedFeed y se toma el título en negrita (verificado hoy).",
+   "fuente_titulo": "wikifeeds lib/featured.js",
+   "url": "https://raw.githubusercontent.com/wikimedia/mediawiki-services-wikifeeds/master/lib/featured.js",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "'Noticias' y '¿Sabías que…?' se obtienen parseando plantillas de portada editadas por la comunidad, en pocos idiomas.",
+   "dato": "Noticias: 18 sitios (en: 'Template:In_the_news'; es: 'Portal:Actualidad'; de: 'Wikipedia:Hauptseite/Aktuelles'…). DYK: 7 idiomas (ar, de, en, hi, pt, ru, uk; en: 'Template:Did_you_know') (verificado hoy).",
+   "fuente_titulo": "wikifeeds etc/news-sites.js y etc/dyk-sites.js",
+   "url": "https://raw.githubusercontent.com/wikimedia/mediawiki-services-wikifeeds/master/etc/news-sites.js",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Special:Random de MediaWiki usa un número aleatorio fijo por página (page_random).",
+   "dato": "getRandomTitle(): genera wfRandom(), selecciona la primera página con page_random >= ese valor en los espacios de contenido y sin redirecciones (ORDER BY page_random LIMIT 1); si no hay, vuelve a buscar desde 0 (verificado hoy).",
+   "fuente_titulo": "MediaWiki includes/specials/SpecialRandomPage.php",
+   "url": "https://raw.githubusercontent.com/wikimedia/mediawiki/main/includes/specials/SpecialRandomPage.php",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "La app Android filtra el aleatorio antes de mostrarlo.",
+   "dato": "Pide max(count,10)*4 páginas con extracto; descarta desambiguaciones; en inglés descarta descripciones con 'list article' o 'list of'; ordena primero las que tienen miniatura y extracto; toma count (verificado hoy).",
+   "fuente_titulo": "apps-android-wikipedia RandomClient.kt",
+   "url": "https://raw.githubusercontent.com/wikimedia/apps-android-wikipedia/main/app/src/main/java/org/wikipedia/feed/random/RandomClient.kt",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Las descripciones oficiales de cada tarjeta del feed Explorar (Android) son fijas y describen reglas, no un algoritmo.",
+   "dato": "'Daily featured article on Wikipedia'; 'Daily most-viewed articles'; 'Events in history on this day'; 'Daily featured image from Wikimedia Commons'; 'Generate random articles to read'; 'Suggestions based on a recently read article from your history'; 'Nearby articles based on the current location'; onboarding: 'Dive down the Wikipedia rabbit hole with a constantly updating Home feed… rolling the dice with Random'; 'You have reached the bottom of the feed.' / 'Load more' (verificado hoy).",
+   "fuente_titulo": "apps-android-wikipedia strings.xml",
+   "url": "https://raw.githubusercontent.com/wikimedia/apps-android-wikipedia/main/app/src/main/res/values/strings.xml",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "En iOS cada tarjeta se puede ocultar por tipo e idioma y, si se ocultan todas, desaparece la pestaña Explorar.",
+   "dato": "'Hiding a card type will stop this card type from appearing in the Explore feed.'; 'Hiding all Explore feed cards will turn off the Explore tab and replace it with a Settings tab'; descripciones: 'Daily featured article on Wikipedia', 'Daily most read articles', 'Events in history on this day', 'Daily featured image from Commons', 'Generate random articles to read', 'Suggestions based on reading history', 'Wikipedia articles near your location' (verificado hoy).",
+   "fuente_titulo": "wikipedia-ios Localizable.strings (en)",
+   "url": "https://raw.githubusercontent.com/wikimedia/wikipedia-ios/main/Wikipedia/Localizations/en.lproj/Localizable.strings",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "'Because you read' en iOS se calcula en el dispositivo a partir de un solo artículo reciente.",
+   "dato": "WMFMaximumSavedOrReadDaysAgoForRelatedPages = 3; la semilla es un artículo guardado o 'significativamente visto' en los últimos 3 días; excluye hasta ~1000 artículos ya sugeridos y los ya leídos; una tarjeta por día (verificado hoy).",
+   "fuente_titulo": "wikipedia-ios WMFRelatedPagesContentSource.m",
+   "url": "https://raw.githubusercontent.com/wikimedia/wikipedia-ios/main/Wikipedia/Code/WMFRelatedPagesContentSource.m",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Las estadísticas personales de la app (Actividad, Year in Review, rachas de juego) usan datos locales.",
+   "dato": "'Insights leverage local data, with the exception of edits which are public.'; 'Once a year, your reading days come back as a look at where the year took you'; juego diario 'Which came first?' con archivo 'since June 2024' (verificado hoy).",
+   "fuente_titulo": "apps-android-wikipedia strings.xml y wikipedia-ios Localizable.strings",
+   "url": "https://raw.githubusercontent.com/wikimedia/apps-android-wikipedia/main/app/src/main/res/values/strings.xml",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Wikimedia informó una caída cercana al 8% en las visitas humanas respecto de los mismos meses de 2024, tras reclasificar tráfico de bots detectado en mayo de 2025, y la atribuyó a los resúmenes con IA de los buscadores y al video social.",
+   "dato": "≈8% (cifra de memoria; la fuente no se pudo abrir hoy porque el proxy bloquea diff.wikimedia.org; verificar).",
+   "fuente_titulo": "New User Trends on Wikipedia (Marshall Miller, Diff / Wikimedia Foundation)",
+   "url": "https://diff.wikimedia.org/2025/10/17/new-user-trends-on-wikipedia/",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Wikimedia informó que el tráfico de rastreadores de IA disparó el consumo de infraestructura.",
+   "dato": "Ancho de banda por descargas multimedia +50% desde enero de 2024; 65% del tráfico más caro proviene de bots (cifras de memoria; fuente no abierta hoy; verificar).",
+   "fuente_titulo": "How crawlers impact the operations of the Wikimedia projects (Diff)",
+   "url": "https://diff.wikimedia.org/2025/04/01/how-crawlers-impact-the-operations-of-the-wikimedia-projects/",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "'Why We Read Wikipedia' encuestó a lectores de la Wikipedia en inglés y clasificó la lectura en tres ejes: motivación (7 opciones), necesidad de información (dato / panorama / profundidad) y conocimiento previo (familiar / no familiar).",
+   "dato": "Cerca de 30.000 respuestas (junio de 2016), publicado en WWW 2017. Motivaciones con selección múltiple; de memoria y aproximado: aprender por interés propio ≈30%, medios (película, libro, noticia) ≈20-22%, aburrimiento/azar ≈20%, trabajo/estudio ≈16%, conversación ≈15%, evento actual ≈13%, decisión personal ≈9%; las tres necesidades de información quedan en proporciones del orden de un tercio cada una. Porcentajes NO verificados hoy (fuente bloqueada); tomar como orden de magnitud.",
+   "fuente_titulo": "Why We Read Wikipedia (Singer, Lemmerich, West, Strohmaier, Zia, Wulczyn, Leskovec; WWW 2017) y resumen en el blog de Wikimedia",
+   "url": "https://arxiv.org/abs/1702.05379",
+   "anio": "2017"
+  },
+  {
+   "afirmacion": "Siguiendo siempre el primer enlace del texto (sin paréntesis ni cursivas), la gran mayoría de los artículos termina en 'Filosofía'.",
+   "dato": "≈97% de los artículos (conteo de 2016 citado en la página del proyecto; la regla y el chiste de xkcd 903 son de 2011). De memoria; no verificado hoy.",
+   "fuente_titulo": "Wikipedia:Getting to Philosophy",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Getting_to_Philosophy",
+   "anio": "2016"
+  },
+  {
+   "afirmacion": "Los lectores de Wikipedia muestran dos estilos de curiosidad, 'cazador' (profundiza en temas conexos) y 'entrometido' (salta entre temas lejanos), medidos con sus trayectorias de navegación.",
+   "dato": "Estudio con 149 participantes leyendo Wikipedia 15 minutos por día durante 21 días (Nature Human Behaviour, 2021); seguimiento con ~480.000 lectores de la app en 50 países y 14 idiomas que agrega el estilo 'bailarín' (Science Advances, 2024). Cifras de memoria; no verificadas hoy.",
+   "fuente_titulo": "Hunters, busybodies and the knowledge network building associated with deprivation curiosity (Lydon-Staley et al.) / Architectural styles of curiosity in global Wikipedia mobile app readership (Zhou et al.)",
+   "url": "https://www.nature.com/articles/s41562-020-00985-7",
+   "anio": "2021"
+  },
+  {
+   "afirmacion": "En las carreras de Wikipedia (Wikispeedia) la gente navega 'alejándose' primero hacia páginas generales (hubs) y luego 'acercándose' por similitud semántica al objetivo.",
+   "dato": "Hallazgo central de 'Human Wayfinding in Information Networks' (West y Leskovec, WWW 2012), basado en decenas de miles de partidas del juego Wikispeedia. De memoria; no verificado hoy.",
+   "fuente_titulo": "Wikispeedia / Human Wayfinding in Information Networks",
+   "url": "https://snap.stanford.edu/data/wikispeedia.html",
+   "anio": "2012"
+  },
+  {
+   "afirmacion": "Vector 2022 (índice lateral fijo, ancho de texto limitado, buscador prominente) pasó a ser la piel predeterminada de la Wikipedia en inglés.",
+   "dato": "18 de enero de 2023 (fecha de memoria; no verificada hoy).",
+   "fuente_titulo": "Reading/Web/Desktop Improvements (MediaWiki)",
+   "url": "https://www.mediawiki.org/wiki/Reading/Web/Desktop_Improvements",
+   "anio": "2023"
+  }
+ ],
+ "lecciones_para_catalogo": [
+  {
+   "leccion": "Copiar tal cual la plantilla idéntica en toda ficha: el valor de la madriguera viene de que cada salto cueste cero. La ficha modal ya tiene resumen de 3 líneas, 'Tres cosas que no sabías', datos, 'Del mismo grupo' y 'Ver también': hay que garantizar que esos cinco bloques estén SIEMPRE, en el mismo orden y lugar, en los 9 catálogos, aunque en algún caso haya que rellenar con 'sin datos'.",
+   "aplicacion_concreta": "En todos los catálogos, en la ficha modal; y en la cola de revisión humana agregar una regla de 'ficha incompleta' que impida publicar una entrada sin los cinco bloques.",
+   "costo": "bajo: es una regla de contenido y de plantilla, no de código."
+  },
+  {
+   "leccion": "Convertir 'datos' en una infobox comparable por tipo: mismas etiquetas, mismo orden, mismas unidades en todas las fichas de un catálogo, con el valor y su posición relativa ('puesto 14 de 230'). Es el equivalente de la infobox de país/animal, y es lo que permite saltar entre fichas comparando sin leer.",
+   "aplicacion_concreta": "En Pasaporte, bloque 'Datos' de la ficha: superficie, población, densidad, capital, idioma, moneda, cada uno con el puesto en el ranking; en Bestiario: clase, tamaño, peso, dieta, estado de conservación con puesto; en Butaca: episodios, temporadas, años, estudio, capítulos del manga adaptados.",
+   "costo": "medio: requiere normalizar campos y unidades en la tanda de generación y calcular los puestos en el build."
+  },
+  {
+   "leccion": "Hacer que los datos de la infobox sean enlaces: en Wikipedia cada valor de la ficha es una puerta ('Lima' lleva a Lima). En el catálogo, tocar 'continente: África' debería abrir la fila de África; tocar 'estado de conservación: en peligro' debería abrir la lista de todos los en peligro. Así las filas horizontales se vuelven categorías navegables desde cualquier ficha.",
+   "aplicacion_concreta": "En todos los catálogos, en el bloque 'Datos' de la ficha: cada valor categórico es un chip clicable que filtra o salta a la fila correspondiente; en Pasaporte, el chip del continente, del idioma y de la moneda; en Flora, la familia botánica.",
+   "costo": "bajo: ya existe el índice por filas; es cuestión de enlazar el chip al filtro."
+  },
+  {
+   "leccion": "Copiar el 'Aleatorio con dignidad': el botón 'Uno al azar' no debe tirar dados puros. Como wikifeeds (+2 imagen, +1 descripción, −10 lista) y la app Android (descarta sin miniatura), hay que puntuar las entradas: con imagen, con 'Tres cosas que no sabías' completas, no vistas recientemente, y elegir al azar entre las mejores. Y ofrecer 'Otro al azar' a un toque, sin cerrar la ficha.",
+   "aplicacion_concreta": "En todos los catálogos, botón 'Uno al azar' del encabezado y acción 'Otro al azar' dentro de la ficha modal; el puntaje se calcula en el navegador con los campos ya cargados y con el historial local de lo abierto.",
+   "costo": "bajo: unas líneas de JS sobre el JSON ya embebido."
+  },
+  {
+   "leccion": "Adaptar el feed Explorar como 'pila de módulos fijos con contenido del día': en vez de un visor que rota cada 9 segundos sin que nadie lo pida, un bloque de inicio con tarjetas que cambian por fecha, con regla visible y determinista (semilla = fecha): 'El destacado de hoy', 'Un día como hoy', 'Imagen del día', 'Uno al azar', 'Seguir explorando', 'Porque abriste X'. Mismo lugar cada día, contenido nuevo cada día, sin servidor: la fecha del dispositivo elige.",
+   "aplicacion_concreta": "En todos los catálogos, pantalla de inicio: convertir el visor rotativo en 'Hoy' con 4-6 tarjetas elegidas por la fecha (hash de la fecha sobre la lista de entradas con imagen); en Pasaporte, 'País destacado de hoy' + 'Un día como hoy' (independencias, fundaciones) + 'Bandera del día'.",
+   "costo": "medio: hay que armar la lógica de selección por fecha y cargar los datos de 'Un día como hoy' que hoy están vacíos."
+  },
+  {
+   "leccion": "Copiar 'Lo más leído' en versión local: Wikipedia muestra el ranking de lo que la gente lee con el número de vistas. Sin servidor no hay 'la gente', pero sí hay 'vos': una fila 'Lo que más abriste' con el conteo de aperturas guardado en el navegador, y una fila fija 'Lo que más se busca' precalculada en la tanda con pageviews de Wikipedia de los últimos 30 días (snapshot al construir el HTML, con fecha visible).",
+   "aplicacion_concreta": "En todos los catálogos, dos filas: 'Lo que más abriste' (localStorage, con contador tipo '12 veces') y 'Lo más leído en Wikipedia este mes' (precalculada en el build, con el dato de vistas al pie de cada tarjeta y la fecha del snapshot).",
+   "costo": "bajo para la local; medio para la precalculada (hay que agregar el llamado al API de pageviews en la tanda y refrescar al publicar)."
+  },
+  {
+   "leccion": "Adaptar 'Because you read' como regla fija y visible, no como algoritmo: una sola semilla (el último abierto o guardado en 'Mi lista' en los últimos 3 días), relacionados por reglas (mismo grupo, mismo continente, mismo ranking, misma década) y el título de la tarjeta dice la regla: 'Porque abriste Mongolia: otros países sin salida al mar'. Excluir lo ya visto.",
+   "aplicacion_concreta": "En todos los catálogos, fila 'Porque abriste X' debajo de 'Seguir explorando', con la semilla en el título y 6-10 tarjetas; en Bestiario: 'Porque abriste el axolote: otros animales que no envejecen'.",
+   "costo": "bajo: usa los campos de clasificación que ya genera Claude y el historial local."
+  },
+  {
+   "leccion": "Adaptar los anexos y las listas como 'tabla ordenable completa' en cada ranking: el Top 10 con número gigante es el gancho, pero tiene que haber un botón 'Ver los 230' que abra la tabla entera, ordenable por columna, con la banderita y el puesto. La lámina de banderas y el libro de récords funcionaban porque mostraban TODO; Wikipedia mantiene las listas aunque borre el 'fancruft'.",
+   "aplicacion_concreta": "En Pasaporte, al final de cada fila Top 10 (más grandes, más poblados, más apretados): tarjeta 'Ver la lista completa' que abre la tabla de 230 ordenable; en Butaca: 'Anexo de episodios' con número, título, fecha, arco y capítulos del manga adaptados, ordenable y con marcador 'visto' local; en Cosmos: tabla de planetas y lunas ordenable por tamaño y distancia.",
+   "costo": "medio: un componente de tabla reutilizable con teclado y TV."
+  },
+  {
+   "leccion": "Mostrar el final: Wikipedia no tiene scroll infinito y la app dice 'llegaste al final del feed'. En las filas horizontales y en los rankings, la última tarjeta debe decir 'Viste los 54 de África' o 'Fin del Top 10', y ofrecer el siguiente salto ('Seguir con Asia'). Eso da la sensación de panorama completo que el autor busca.",
+   "aplicacion_concreta": "En todos los catálogos, última tarjeta de cada fila horizontal: contador 'X de Y vistos' (con el historial local) y botón al grupo siguiente; en Pasaporte, 'Viste 54 de 54 en África. Seguir con Asia'.",
+   "costo": "bajo: una tarjeta de cierre por fila."
+  },
+  {
+   "leccion": "Copiar la descripción corta bajo el título: cada tarjeta y cada resultado del buscador lleva 4-5 palabras que permiten decidir sin abrir ('Monarquía insular del Pacífico', 'Marsupial nocturno de Australia'). Es la bisagra que hace recorrible una fila de 50.",
+   "aplicacion_concreta": "En todos los catálogos, debajo del título de cada tarjeta en filas, buscador y 'Mi lista'; Claude la genera en la tanda a partir de la descripción de Wikidata, con límite de 40 caracteres.",
+   "costo": "bajo: un campo más en la generación y una línea en la tarjeta."
+  }
+ ],
+ "anti_lecciones": [
+  "No copiar la prosa larga como unidad: el artículo de Wikipedia es texto denso y en móvil/TV eso expulsa; los catálogos ya tienen razón en apostar a ficha corta, imagen y datos. Tomar la estructura, no el formato.",
+  "No copiar la pelea 'fancruft vs. enciclopédico': Wikipedia borra o recorta el detalle que a los fans les sirve (episodios, correspondencia anime-manga) para proteger su definición de enciclopedia. Un catálogo personal no tiene esa obligación: Butaca puede y debe tener la tabla completa de episodios con el capítulo del manga adaptado; el estándar es 'completo y verificable', no 'notable'.",
+  "No copiar la dependencia del buscador como puerta de entrada: Wikipedia perdió visitas humanas cuando los buscadores empezaron a resumir (≈8% según Wikimedia en octubre de 2025, sin verificar hoy). Los catálogos tienen que ser un lugar al que se va, con inicio propio ('Hoy', ritual diario), no una página a la que se llega por una consulta.",
+  "No copiar el azar puro de Special:Random: el propio Wikimedia tuvo que ponerle puntaje de calidad y filtros; sin eso, 'Uno al azar' devuelve una entrada sin imagen y la gente deja de tocarlo.",
+  "No copiar la ausencia de guía: Wikipedia asume una persona con pregunta o con ganas. El autor identifica bien que 'Los 20 más' de Animal Planet funcionaba por la cuenta regresiva, un tema por día: eso Wikipedia no lo tiene y el catálogo sí puede tenerlo con reglas por fecha.",
+  "No copiar la lista negra manual como única defensa de 'lo más leído': en Wikipedia esa lista (porno, bots, spam) la mantiene gente a mano porque el dato viene de millones de usuarios anónimos. Los catálogos no tienen ese problema si el 'más leído' es local (tu propio historial) o un snapshot precalculado y revisado en la tanda.",
+  "No copiar el 'Because you read' como si fuera recomendación aprendida: funciona porque es una regla simple y visible (una semilla, 3 días, similitud). Si el catálogo intenta un 'para vos' opaco con heurísticas acumuladas, pierde la confianza que da la regla explícita.",
+  "Costos para la gente: Wikipedia no tiene los costos documentados de los feeds sociales (sueño, atención, soledad); su costo es el inverso: pide esfuerzo de lectura y de decisión, y por eso pierde frente a reels y resúmenes con IA. La anti-lección es no caer en el otro extremo: ni infinito pasivo ni enciclopedia muda."
+ ],
+ "fuentes": [
+  {
+   "titulo": "wikifeeds spec.yaml (servicio oficial que arma el feed de las apps; endpoints destacado, más leídos, efemérides, imagen del día, noticias, aleatorio, ¿sabías que?, agregado)",
+   "url": "https://raw.githubusercontent.com/wikimedia/mediawiki-services-wikifeeds/master/spec.yaml"
+  },
+  {
+   "titulo": "wikifeeds lib/random.js (puntaje del artículo aleatorio)",
+   "url": "https://raw.githubusercontent.com/wikimedia/mediawiki-services-wikifeeds/master/lib/random.js"
+  },
+  {
+   "titulo": "wikifeeds lib/most-read.js (filtros y lista de bloqueo de 'lo más leído')",
+   "url": "https://raw.githubusercontent.com/wikimedia/mediawiki-services-wikifeeds/master/lib/most-read.js"
+  },
+  {
+   "titulo": "wikifeeds lib/pageviews.js (agentes user/spider/automated, plataforma)",
+   "url": "https://raw.githubusercontent.com/wikimedia/mediawiki-services-wikifeeds/master/lib/pageviews.js"
+  },
+  {
+   "titulo": "wikifeeds lib/on-this-day.js (cómo se parsean las efemérides)",
+   "url": "https://raw.githubusercontent.com/wikimedia/mediawiki-services-wikifeeds/master/lib/on-this-day.js"
+  },
+  {
+   "titulo": "wikifeeds lib/on-this-day.languages.js (páginas y encabezados por idioma, incluido español)",
+   "url": "https://raw.githubusercontent.com/wikimedia/mediawiki-services-wikifeeds/master/lib/on-this-day.languages.js"
+  },
+  {
+   "titulo": "wikifeeds lib/featured.js (artículo destacado del día, 21 idiomas)",
+   "url": "https://raw.githubusercontent.com/wikimedia/mediawiki-services-wikifeeds/master/lib/featured.js"
+  },
+  {
+   "titulo": "wikifeeds lib/news.js y etc/news-sites.js ('In the news' por idioma)",
+   "url": "https://raw.githubusercontent.com/wikimedia/mediawiki-services-wikifeeds/master/etc/news-sites.js"
+  },
+  {
+   "titulo": "wikifeeds lib/did-you-know.js y etc/dyk-sites.js ('¿Sabías que…?')",
+   "url": "https://raw.githubusercontent.com/wikimedia/mediawiki-services-wikifeeds/master/etc/dyk-sites.js"
+  },
+  {
+   "titulo": "MediaWiki SpecialRandomPage.php (cómo funciona Special:Random)",
+   "url": "https://raw.githubusercontent.com/wikimedia/mediawiki/main/includes/specials/SpecialRandomPage.php"
+  },
+  {
+   "titulo": "App Wikipedia Android: RandomClient.kt",
+   "url": "https://raw.githubusercontent.com/wikimedia/apps-android-wikipedia/main/app/src/main/java/org/wikipedia/feed/random/RandomClient.kt"
+  },
+  {
+   "titulo": "App Wikipedia Android: strings.xml (descripciones oficiales de las tarjetas del feed, Year in Review, Actividad, juegos)",
+   "url": "https://raw.githubusercontent.com/wikimedia/apps-android-wikipedia/main/app/src/main/res/values/strings.xml"
+  },
+  {
+   "titulo": "App Wikipedia iOS: Localizable.strings (preferencias del feed Explorar, 'Which came first?')",
+   "url": "https://raw.githubusercontent.com/wikimedia/wikipedia-ios/main/Wikipedia/Localizations/en.lproj/Localizable.strings"
+  },
+  {
+   "titulo": "App Wikipedia iOS: WMFRelatedPagesContentSource.m ('Because you read')",
+   "url": "https://raw.githubusercontent.com/wikimedia/wikipedia-ios/main/Wikipedia/Code/WMFRelatedPagesContentSource.m"
+  },
+  {
+   "titulo": "App Wikipedia iOS: WMFFeedContentSource.m (agregado diario: destacado, más leídos, imagen, noticias)",
+   "url": "https://raw.githubusercontent.com/wikimedia/wikipedia-ios/main/Wikipedia/Code/WMFFeedContentSource.m"
+  },
+  {
+   "titulo": "Repositorio oficial de la app iOS (equipo en MediaWiki.org)",
+   "url": "https://github.com/wikimedia/wikipedia-ios"
+  },
+  {
+   "titulo": "Why We Read Wikipedia (Singer et al., WWW 2017) [no abierto hoy]",
+   "url": "https://arxiv.org/abs/1702.05379"
+  },
+  {
+   "titulo": "Why do we read Wikipedia? (blog de Wikimedia, 15/3/2017) [no abierto hoy]",
+   "url": "https://diff.wikimedia.org/2017/03/15/why-we-read-wikipedia/"
+  },
+  {
+   "titulo": "Research:Characterizing Wikipedia Reader Behaviour (Meta-Wiki) [no abierto hoy]",
+   "url": "https://meta.wikimedia.org/wiki/Research:Characterizing_Wikipedia_Reader_Behaviour"
+  },
+  {
+   "titulo": "New User Trends on Wikipedia (Diff, 17/10/2025) [no abierto hoy]",
+   "url": "https://diff.wikimedia.org/2025/10/17/new-user-trends-on-wikipedia/"
+  },
+  {
+   "titulo": "How crawlers impact the operations of the Wikimedia projects (Diff, 1/4/2025) [no abierto hoy]",
+   "url": "https://diff.wikimedia.org/2025/04/01/how-crawlers-impact-the-operations-of-the-wikimedia-projects/"
+  },
+  {
+   "titulo": "Wikipedia:Getting to Philosophy [no abierto hoy]",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Getting_to_Philosophy"
+  },
+  {
+   "titulo": "Wikipedia:Main Page history [no abierto hoy]",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Main_Page_history"
+  },
+  {
+   "titulo": "Wikipedia:Fancruft [no abierto hoy]",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Fancruft"
+  },
+  {
+   "titulo": "Wikipedia:Anexos (Wikipedia en español) [no abierto hoy]",
+   "url": "https://es.wikipedia.org/wiki/Wikipedia:Anexos"
+  },
+  {
+   "titulo": "Wikipedia:Top 25 Report [no abierto hoy]",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Top_25_Report"
+  },
+  {
+   "titulo": "Wikipedia:Wikirace [no abierto hoy]",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Wikirace"
+  },
+  {
+   "titulo": "Wikispeedia (West y Leskovec) [no abierto hoy]",
+   "url": "https://snap.stanford.edu/data/wikispeedia.html"
+  },
+  {
+   "titulo": "A Large-Scale Characterization of How Readers Browse Wikipedia (Piccardi, Gerlach, Arora, West; ACM TWEB 2023) [no abierto hoy]",
+   "url": "https://arxiv.org/abs/2112.11848"
+  },
+  {
+   "titulo": "Hunters, busybodies and the knowledge network building associated with deprivation curiosity (Lydon-Staley et al., Nature Human Behaviour 2021) [no abierto hoy]",
+   "url": "https://www.nature.com/articles/s41562-020-00985-7"
+  },
+  {
+   "titulo": "Architectural styles of curiosity in global Wikipedia mobile app readership (Zhou et al., Science Advances 2024) [no abierto hoy]",
+   "url": "https://www.science.org/doi/10.1126/sciadv.adn3268"
+  },
+  {
+   "titulo": "Wikidata:Statistics [no abierto hoy]",
+   "url": "https://www.wikidata.org/wiki/Wikidata:Statistics"
+  },
+  {
+   "titulo": "Reading/Web/Desktop Improvements (Vector 2022) [no abierto hoy]",
+   "url": "https://www.mediawiki.org/wiki/Reading/Web/Desktop_Improvements"
+  }
+ ],
+ "no_encontrado": [
+  "Limitación general de esta sesión: la búsqueda web no tuvo presupuesto y el proxy de red bloqueó (403 de política) todos los dominios salvo GitHub: en.wikipedia.org, es.wikipedia.org, meta.wikimedia.org, diff.wikimedia.org, wikimediafoundation.org, mediawiki.org, wikidata.org, arxiv.org, nature.com, science.org, pewresearch.org, dl.acm.org, nngroup.com, theverge.com, nytimes.com. Todo lo marcado 'de memoria' o 'no verificado hoy' hay que confirmarlo abriendo las URL listadas; lo verificado es el código oficial de Wikimedia en GitHub.",
+  "Porcentajes exactos del estudio 'Why We Read Wikipedia' (2017) por motivación, necesidad de información y conocimiento previo: no se pudieron abrir el paper, el blog ni la página de Meta; los valores dados son aproximaciones de memoria.",
+  "Cifra de la caída de editores activos (y su serie histórica) en stats.wikimedia.org: no verificable hoy; se sabe que la Wikipedia en inglés tuvo su pico de editores activos alrededor de 2007 y cayó después, pero no incluyo números.",
+  "Cuánto se leen los anexos y las 'Listas de…' en proporción al total de vistas: no encontré (ni recuerdo) una cifra oficial; sólo el dato indirecto de que el servicio de aleatorio penaliza las listas (−10) y la app Android las descarta en inglés, lo que sugiere que Wikimedia las considera mala 'puerta de entrada' aunque sean muy útiles como destino.",
+  "Detalle de la discusión comunitaria sobre borrar anexos de episodios y la correspondencia anime–manga ('qué capítulo adapta cada episodio'): no pude abrir Wikipedia:Fancruft, WP:EPISODE, el caso de ArbCom 'Episodes and characters' (2008), ni las consultas de borrado en la Wikipedia en español. Lo que sé de memoria: en inglés los artículos por episodio se fusionaron masivamente en 2007-2008 y las listas de episodios se conservan; la correspondencia episodio–capítulo rara vez se incluye porque exige fuentes secundarias y se la considera detalle para fans. Confirmar antes de citar.",
+  "Fecha exacta de lanzamiento del feed Explorar en las apps (creo que 2016, Android e iOS) y la fecha del rediseño de la portada en inglés (marzo de 2006) y de la adopción de Vector 2022 (18/1/2023): no verificadas hoy.",
+  "Verificación del 97% de 'Getting to Philosophy' (2016) y de la mediana de clics del recorrido: no abierta la página.",
+  "Cifras del estudio de navegación a gran escala de Piccardi, Gerlach, Arora y West (ACM TWEB 2023): proporción de sesiones con clics internos, longitud de sesión, posición de los enlaces más clicados; no pude abrir el paper y no las incluyo.",
+  "Cantidad de ítems de Wikidata a 2025 (del orden de 115 millones según recuerdo) y proporción de infoboxes alimentadas por Wikidata en la Wikipedia en español: no verificado hoy.",
+  "Datos de Pew Research sobre uso de Wikipedia en EE. UU. (recuerdo un 53% de internautas adultos en 2011): no verificado hoy, no lo incluí en evidencia.",
+  "Estadísticas de las carreras de Wikipedia (Wikispeedia, The Wiki Game, Six Degrees of Wikipedia: distancia media entre artículos): no verificadas hoy.",
+  "Mecanismo exacto del 'fetcher' de artículos relacionados en iOS (WMFRelatedSearchFetcher) para confirmar que usa la búsqueda 'morelike' de CirrusSearch: el archivo no estaba en la ruta probada; lo que sí se verificó es la semilla de 3 días y la exclusión de ~1000 sugeridos."
+ ]
+}

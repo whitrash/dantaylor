@@ -1,0 +1,516 @@
+{
+ "canal": "El catálogo tipo Netflix: página de filas horizontales con visor arriba (Netflix, Disney+, Prime Video, Max/HBO Max, Apple TV y las interfaces agregadoras de smart TV como Google TV)",
+ "expectativa_usuario": "Quiero elegir algo para ver esta noche en un par de minutos, de a filas, sin tener que pensar demasiado ni leer mucho: que la pantalla me lo ponga adelante y, si no me convence, que aparezca otra cosa.",
+ "modo_humano": "Explorar, pero en una variante pasiva y de corto alcance: la persona no busca algo que ya sabe que quiere (eso es el 20% que va a la lupa, según el propio Netflix), sino que \"pastorea\" filas hasta que una tarjeta la frena; el sistema está diseñado para que eso pase en una o dos pantallas y en 60 a 90 segundos. También acompañarse: el autoplay del siguiente episodio (desde 2012), el Post-Play y el visor que arranca solo convierten al catálogo en compañía de fondo, y Netflix lo dijo sin vueltas en 2017 (\"competimos con el sueño\"). No sirve para investigar: no hay orden total, no hay \"ver todo\", no hay comparación entre ítems ni ficha con datos; la taxonomía fina (los 76.897 altgéneros) existe pero está escondida detrás de códigos de URL. Y casi no sirve para comunicarse: los perfiles (2013) separan gustos dentro de la casa, y la única pieza social es el Top 10 (2020), que es un agregado de conducta, no una conversación.",
+ "unidad": "La fila: un carrusel horizontal con un rótulo que la explica (\"Porque viste…\", \"Top 10 en Argentina hoy\", \"Seguir viendo\") y entre 4 (celular) y 7 (TV) tarjetas visibles a la vez, de unas 75 posibles. Dentro de la fila, la unidad que se juzga es la tarjeta con su artwork (1,8 segundos de atención por título, según Netflix). La unidad que se consume al final es el episodio o la película, pero la unidad con la que la persona navega y decide es la fila; una página típica tiene unas 40.",
+ "quien_decide": "Sobre todo el algoritmo. Netflix describió ocho sistemas que arman la página: el ranker personalizado (PVR), el Top-N, Trending Now, Continue Watching, similitud video-a-video (\"Porque viste\"), la generación de página (qué filas y en qué orden, con un criterio de diversidad), la \"evidencia\" (qué imagen, sinopsis o dato mostrar para justificar cada recomendación) y la búsqueda. Según la empresa, las recomendaciones influyen en cerca del 80% de las horas vistas y la búsqueda en el 20% restante. La persona decide en islas: busca, agrega a Mi lista, elige perfil, decide qué retomar. La comunidad decide indirectamente a través del Top 10 (lo más visto por país, diario desde 2020; semanal y público en Tudum desde 2021). Un editor decide la fila promocional del visor y los \"hubs\" de marca (los cinco mosaicos de Disney+, los hubs de Max). El azar casi no decide: \"Reproducir algo\" (2021) fue el intento explícito de delegar en el azar y se retiró por bajo uso, según se reportó.",
+ "tiene_final": "No tiene final, y eso es deliberado. La página son ~40 filas de hasta 75 títulos cada una, el scroll vertical y el horizontal no terminan, y cuando algo termina de verdad (un episodio) el Post-Play encadena el siguiente con cuenta regresiva (desde agosto de 2012) y el visor arranca previews solo (la opción para apagarlos recién llegó en febrero de 2020, \"tras escuchar el feedback\"). Lo único finito dentro de la interfaz es el Top 10 (diez ítems, un ranking con número gigante) y Mi lista. El efecto documentado es doble: fatiga de decisión antes (Nielsen midió 7 minutos 24 segundos eligiendo en 2019 y 10,5 minutos en 2023; una de cada cinco sesiones se abandona sin ver nada; hay un paper que lo llama \"síndrome Netflix\" y lo asocia a estrés) y falta de freno después (en una muestra de 423 jóvenes, identificarse como binge viewer casi duplicó la probabilidad de dormir mal; sesión promedio de 3 horas 8 minutos). El catálogo nunca te dice \"terminaste\"; la lámina de la enciclopedia sí.",
+ "mecanismo": "Por fuera, la página es una grilla de dos dimensiones: filas apiladas, cada una con un rótulo y tarjetas que se desplazan a los costados. Por dentro, Netflix la describe como el resultado de varios algoritmos que compiten por el espacio. En el paper de 2015 (Gomez-Uribe y Hunt, ACM TMIS) enumeran ocho: un ranker personalizado que ordena todo el catálogo para cada perfil (PVR), un Top-N que elige lo mejor de ese orden, Trending Now (tendencias de minutos a días), Continue Watching (qué vas a retomar), similitud video-a-video (las filas \"Porque viste…\"), la generación de página (qué filas van y en qué orden, cuidando que haya diversidad entre ellas), la \"evidencia\" (qué imagen, sinopsis, actor o premio mostrar para que entiendas por qué te lo recomiendan) y la búsqueda. El post \"Learning a Personalized Homepage\" (Alvino y Basilico, abril de 2015) cuenta por qué filas y no una grilla plana: una fila agrupa títulos que comparten una razón y esa razón se puede escribir en el rótulo, cosa que una grilla no puede hacer; además permite elegir filas candidatas con machine learning a partir de las páginas que ya se mostraron y de lo que se clickeó, y ordenarlas en un espacio que es chico: en una TV se ven 6 o 7 tarjetas por fila y pocas filas por pantalla, y el dato de diseño que gobierna todo es que una persona típica \"pierde interés después de quizás 60 a 90 segundos de elegir, habiendo revisado 10 a 20 títulos (quizás 3 en detalle) en una o dos pantallas\". Por eso la esquina superior izquierda vale oro y el resto de las 40 filas existe más como reserva que como mapa.\n\nLa segunda capa es la imagen. Netflix contó en 2016 que el artwork era el mayor influyente en la decisión de ver algo y concentraba más del 82% del foco mientras se navega, con un promedio de 1,8 segundos de consideración por título; de ahí los tests A/B de pósters. En diciembre de 2017 pasaron a personalizar la imagen por persona con bandits contextuales: a quien ve romances se le muestra \"Good Will Hunting\" con Matt Damon y Minnie Driver, a quien ve comedias se le muestra la de Robin Williams; \"Pulp Fiction\" con Uma Thurman o con John Travolta según a quién sigas. El mismo post admite las tensiones: sólo se puede mostrar una imagen por título y lugar (el problema del huevo y la gallina: si reproducís, fue por la imagen que te tocó), y cambiar la imagen entre sesiones puede hacer que no reconozcas un título que ya habías marcado mentalmente. A esto se suma el movimiento: el visor y las tarjetas arrancan previews solas; la queja fue tan sostenida que en febrero de 2020 Netflix agregó el interruptor para apagarlas.\n\nLa tercera capa es lo editorial y lo social, que corrigen al algoritmo. El Top 10 (febrero de 2020) es una fila por país actualizada a diario, con número gigante y una insignia en la tarjeta; en noviembre de 2021 se volvió un sitio público semanal (Tudum) y en junio de 2023 cambió la métrica de \"horas vistas\" a \"visualizaciones\" (horas divididas por duración), con listas globales en cuatro categorías y por más de 90 países. Disney+ (noviembre de 2019) puso cinco mosaicos de marca (Disney, Pixar, Marvel, Star Wars, National Geographic) arriba de las filas, con hasta siete perfiles; HBO Max (2020) y Max (mayo de 2023) usaron hubs por marca; la app de Apple TV en tvOS tiene una barra lateral (Buscar, Inicio, Apple TV, Deportes, Tienda, Biblioteca, Canales) y una pantalla de inicio que empieza con \"Continuar viendo\" de todos los servicios, luego la lista de deseos, luego rankings y colecciones; Google TV (Chromecast de 2020) reemplazó la interfaz de Android TV por una que prioriza recomendaciones cruzadas entre más de 30 servicios. La taxonomía fina existe pero no se navega: en 2014 The Atlantic contó 76.897 \"altgéneros\" (etiquetados por humanos con un manual) que sólo se alcanzan por URL con un código (netflix.com/browse/genre/1365 es Acción y aventura; hay más de 1.900 códigos catalogados por terceros y la propia Netflix publicó una guía en Tudum).\n\nLa lógica económica explica el resto. Netflix estimó que personalización y recomendaciones le ahorran más de mil millones de dólares al año en retención; en 2012 decía que el 75% de lo que se veía salía de una recomendación, en 2015 lo subió a ~80%. Los perfiles (agosto de 2013, hasta cinco por cuenta) existen para que los gustos de la casa no se mezclen y el modelo aprenda mejor. \"Reproducir algo\" (abril de 2021: un botón bajo el nombre del perfil, en la décima fila y en el menú, que elige una serie nueva, una que ya ves, una de tu lista o una inconclusa, con \"Reproducir otra cosa\" si no te gusta) fue la respuesta a la fatiga de decidir, y según lo reportado se retiró unos dos años después por bajo uso. En mayo de 2025 Netflix rediseñó la TV: navegación arriba, recomendaciones que cambian en tiempo real dentro de la sesión, \"callouts\" en la tarjeta (\"N.º 1 en series\", \"ganadora del Emmy\"), búsqueda con IA generativa en celular y un feed vertical de clips tipo TikTok. Es decir: el catálogo de filas está migrando hacia el feed y hacia el chat, exactamente los dos canales que el autor quiere no imitar.",
+ "historia": "2000: Cinematch, recomendaciones por estrellas para el servicio de DVD por correo. 2006–2009: el Netflix Prize entrena a la industria en predecir estrellas. 2007: arranca el streaming; la \"cola\" de DVD se convierte en la página de filas. Abril de 2012: el blog técnico cuenta que el 75% de lo que se ve viene de una recomendación y que la unidad de la página es la fila con un rótulo. Agosto de 2012: Post-Play, el siguiente episodio arranca solo con cuenta regresiva. 1 de agosto de 2013: perfiles, hasta cinco por cuenta. Enero de 2014: The Atlantic revela los 76.897 altgéneros etiquetados a mano. Abril de 2015: \"Learning a Personalized Homepage\" explica cómo se eligen y ordenan las filas. Diciembre de 2015: el paper de Gomez-Uribe y Hunt publica los 60–90 segundos, el 80/20 y los mil millones anuales. Mayo de 2016: tests A/B de artwork (82% del foco, 1,8 s por título). 2016: previews en autoplay al pasar por una tarjeta. Abril de 2017: adiós estrellas, hola pulgares. Noviembre de 2017: Hastings, \"competimos con el sueño, y vamos ganando\". Diciembre de 2017: artwork personalizado por persona con bandits. Noviembre de 2019: Disney+ con los cinco mosaicos de marca y siete perfiles. 6 de febrero de 2020: interruptor para apagar los previews. Febrero de 2020: fila Top 10 diaria por país. Mayo de 2020: HBO Max con hubs de marca. Octubre de 2020: Chromecast con Google TV, la interfaz agregadora. Abril de 2021: \"Reproducir algo\". Octubre–noviembre de 2021: Netflix cambia la métrica a horas vistas y lanza el sitio Top 10 semanal. 23 de mayo de 2023: Max, interfaz rediseñada. Junio de 2023: la métrica pasa a \"visualizaciones\". Diciembre de 2023: \"What We Watched\", el primer listado completo (18.000 títulos, 99% del consumo, ~100.000 millones de horas), publicado dos veces al año: el único \"ver todo\" que Netflix dio, y lo dio fuera de la app. Mayo de 2025: rediseño de la TV con recomendaciones en tiempo real, búsqueda con IA generativa y feed vertical de clips. Julio de 2025: Max vuelve a llamarse HBO Max. Octubre de 2025: Apple TV+ pasa a llamarse Apple TV.",
+ "patrones_ux": [
+  {
+   "nombre": "Visor (billboard) a pantalla completa con degradado y autoplay",
+   "descripcion": "La primera pantalla es una imagen o video enorme de un solo título, con el logo, dos botones (Reproducir / Más info) y un degradado hacia las filas de abajo. Rota solo o arranca el tráiler a los pocos segundos.",
+   "por_que_funciona": "Da una sola decisión por defecto y reduce el costo de arrancar: si no querés pensar, apretás Reproducir. Funciona como portada de revista. El costo: las cifras clásicas de carruseles (Erik Runyon, 2013: ~1% de clics, 84% de ellos en el primer slide) y la propia marcha atrás de Netflix en 2020 con el interruptor de autoplay muestran que lo que rota solo molesta y casi no se usa más allá del primer ítem."
+  },
+  {
+   "nombre": "Fila con rótulo que explica el porqué",
+   "descripcion": "Cada carrusel lleva un título corto que es una razón: \"Porque viste Dark\", \"Tendencias\", \"Top 10 en Argentina hoy\", \"Series con protagonistas fuertes\". Las tarjetas se desplazan a los costados; en TV se ven 6–7.",
+   "por_que_funciona": "El rótulo es la \"evidencia\" del paper: convierte una recomendación opaca en una frase que se puede aceptar o rechazar en un segundo. Además agrupa cosas que comparten una lógica, algo que una grilla plana no puede comunicar. Es lo más parecido a la enciclopedia que tiene este canal."
+  },
+  {
+   "nombre": "Tarjeta con artwork elegido por contexto y preview al foco",
+   "descripcion": "La tarjeta es casi toda imagen, sin texto o con muy poco; la imagen puede cambiar según quién mira; al detenerte, se agranda y reproduce un adelanto con sonido.",
+   "por_que_funciona": "Netflix midió que la imagen concentra más del 82% del foco y se decide en 1,8 s por título: la tarjeta está diseñada para ese juicio relámpago. La imagen por contexto (Robin Williams para quien ve comedia) sube la tasa de reproducción, a costa de la reconocibilidad entre sesiones, como admite el propio post."
+  },
+  {
+   "nombre": "Top 10 con número gigante e insignia",
+   "descripcion": "Una fila donde cada tarjeta lleva un numeral enorme (1 a 10) a la izquierda, ordenada, por país, actualizada a diario; además las tarjetas en otras filas llevan una insignia roja \"Top 10\".",
+   "por_que_funciona": "Es la única pieza finita, ordenada y compartida: todos en el país ven la misma lista. Reemplaza al \"¿viste lo que ve todo el mundo?\" de la TV abierta y da permiso social para elegir rápido. Diez ítems es un número que se puede recorrer entero."
+  },
+  {
+   "nombre": "Filas de navegación fijas arriba: Seguir viendo y Mi lista",
+   "descripcion": "Las primeras filas no son recomendaciones sino tu propio estado: lo que dejaste a medias (con barra de progreso) y lo que guardaste. Apple TV hace lo mismo cruzando servicios.",
+   "por_que_funciona": "Resuelve el caso más frecuente (retomar) sin que haya que buscar. La barra de progreso es una memoria externa. Netflix tiene un sistema entero dedicado a ordenar esa fila (el post \"To Be Continued\")."
+  },
+  {
+   "nombre": "Pantalla de perfiles al entrar",
+   "descripcion": "Antes de la home, una pantalla con avatares: \"¿Quién está viendo?\". Cada perfil tiene su lista, su historial y su página.",
+   "por_que_funciona": "Separa gustos en una pantalla compartida (la TV del living) y hace que el modelo aprenda de una sola persona por vez. Netflix lo lanzó en 2013 con hasta cinco perfiles; Disney+ con siete."
+  },
+  {
+   "nombre": "Encadenado automático con cuenta regresiva (Post-Play) y freno tardío",
+   "descripcion": "Al terminar un episodio, la pantalla se achica y aparece el siguiente con un contador de segundos; tras varios episodios seguidos, un cartel pregunta \"¿Seguís ahí?\".",
+   "por_que_funciona": "Quita la decisión de parar: la inercia hace el trabajo. Es el patrón que más engagement produce y el que tiene costos documentados en sueño; el cartel \"¿Seguís ahí?\" es el reconocimiento tácito de que la persona puede haberse dormido."
+  },
+  {
+   "nombre": "Hubs de marca o colecciones editoriales",
+   "descripcion": "Mosaicos grandes arriba de las filas (Disney, Pixar, Marvel, Star Wars, National Geographic en Disney+; hubs de HBO, DC, Discovery en Max) que abren una sub-home con sus propias filas.",
+   "por_que_funciona": "Dan un mapa fijo y reconocible cuando el catálogo es heterogéneo: la persona sabe que en Pixar está todo Pixar. Es el único lugar donde la taxonomía es visible y estable en vez de personalizada."
+  },
+  {
+   "nombre": "Botón de azar (Reproducir algo / Shuffle)",
+   "descripcion": "Un botón visible en la pantalla de perfiles y en el menú que arranca directamente un título elegido por el sistema (nuevo, en curso, de tu lista o inconcluso); si no te gusta, \"Reproducir otra cosa\".",
+   "por_que_funciona": "Convierte la fatiga de decidir en una sola acción. Funciona como válvula de escape, pero Netflix lo retiró por bajo uso (según lo reportado): la gente no quiere azar puro, quiere que le acerquen una buena opción y poder rechazarla."
+  },
+  {
+   "nombre": "Categorías por URL y búsqueda que absorbe los géneros",
+   "descripcion": "Miles de categorías accesibles sólo escribiendo netflix.com/browse/genre/NÚMERO; en el rediseño de 2025 el menú de Categorías desaparece de la TV y los géneros pasan a vivir dentro de Buscar, con una grilla de portadas a la derecha del teclado (Prime Video sumó chips de filtro y autocompletado).",
+   "por_que_funciona": "La taxonomía existe y es muy fina (76.897 altgéneros en 2014), pero se oculta porque un menú de miles de ítems rompe la promesa de \"elegí en 90 segundos\". Quien quiere investigar la encuentra por URL; el resto no la ve. Es la renuncia explícita del modelo a ser una enciclopedia."
+  }
+ ],
+ "que_funciona": [
+  "Arrancar con una sola decisión posible (el visor con Reproducir) y recién después abrir el abanico: el orden visor → filas de estado → filas de recomendación respeta cómo se decide en 60–90 segundos.",
+  "El rótulo de fila como explicación: \"Porque viste X\" o \"Top 10 hoy\" se evalúan en un segundo y agrupan cosas que comparten una razón; es la unidad que mejor traduce la idea enciclopédica de \"colección\".",
+  "La tarjeta como imagen pura, pensada para 1,8 segundos: nada de texto que leer antes de decidir si me interesa.",
+  "Seguir viendo con barra de progreso y Mi lista arriba de todo: memoria externa para retomar, lo más usado de la página.",
+  "El Top 10: una lista finita, ordenada y común a todos en el país; el número gigante se lee desde el sillón y da permiso social para elegir rápido.",
+  "Perfiles: una pantalla compartida con gustos separados, sin fricción (un toque al entrar).",
+  "Hubs de marca con lugar fijo (Disney+, Max): el único mapa estable en una interfaz que cambia en cada visita.",
+  "Agregación entre servicios (Apple TV, Google TV): \"Continuar viendo\" de todo en un solo lugar, el único intento de \"ver todo\" del canal.",
+  "La diversidad como criterio de página: la generación de página evita que todas las filas digan lo mismo, para que al bajar siempre aparezca algo distinto.",
+  "Publicar afuera lo que la app no muestra: Tudum (Top 10 semanal, metodología) y \"What We Watched\" (los 18.000 títulos completos) le dan al que investiga lo que la interfaz le niega."
+ ],
+ "que_falla": [
+  "No hay \"ver todo\": una fila de 75 títulos no se puede ver completa ni saber cuántos hay; el catálogo entero (18.000 títulos) sólo se publicó como planilla fuera de la app, en diciembre de 2023.",
+  "No hay orden: fuera del Top 10, ninguna fila dice por qué este título va antes que aquel ni permite ordenar por año, duración, puntaje o país; el PVR ordena para vos, no para el conocimiento.",
+  "No hay comparación: no podés poner dos títulos lado a lado ni ver un atributo a escala (duración, temporadas, año); la ficha es un tráiler y tres líneas.",
+  "No tiene final y lo compensa con fatiga: 7 min 24 s eligiendo en 2019, 10,5 min en 2023 (Nielsen), 20% de sesiones abandonadas sin ver nada; Netflix tuvo que inventar un botón de azar, y no funcionó.",
+  "La página cambia en cada visita: filas que se mueven e imágenes que cambian destruyen la memoria espacial (\"estaba acá\"); el propio post de artwork admite el problema de reconocibilidad.",
+  "La taxonomía está escondida: 76.897 altgéneros y miles de categorías accesibles sólo por código; en la TV de 2025 el menú de Categorías directamente desaparece.",
+  "La fila personalizada tapa la cola larga: lo que no entra en las dos primeras pantallas casi no existe; \"una fila a la que nadie llega es como si no existiera\".",
+  "El autoplay (visor, previews, Post-Play) impone ritmo y sonido: hizo falta un interruptor en 2020 y el cartel \"¿Seguís ahí?\" para contener el daño.",
+  "El ranking de popularidad es maleable: la métrica cambió de \"vieron 2 minutos\" a \"horas\" (2021) a \"visualizaciones\" (2023); un Top 10 no es un dato, es una decisión editorial disfrazada de dato.",
+  "El orden canónico se rompe cuando el catálogo lo ignora: Disney+ lanzó con episodios de Los Simpson, DuckTales y Phineas y Ferb \"casi totalmente fuera de orden\" y faltantes; para series eso es la queja número uno."
+ ],
+ "evidencia": [
+  {
+   "afirmacion": "Una persona típica deja de buscar en Netflix después de 60 a 90 segundos, habiendo revisado 10 a 20 títulos (unos 3 en detalle) en una o dos pantallas.",
+   "dato": "\"a typical Netflix member loses interest after perhaps 60 to 90 seconds of choosing, having reviewed 10 to 20 titles (perhaps 3 in detail) on one or two screens\"",
+   "fuente_titulo": "Gomez-Uribe y Hunt, \"The Netflix Recommender System: Algorithms, Business Value, and Innovation\", ACM TMIS 6(4), art. 13",
+   "url": "https://dl.acm.org/doi/10.1145/2843948",
+   "anio": "2015"
+  },
+  {
+   "afirmacion": "Las recomendaciones influyen en ~80% de las horas vistas; la búsqueda, en el 20% restante; el ahorro estimado por personalización supera los mil millones de dólares anuales.",
+   "dato": "\"influences choice for about 80% of hours streamed at Netflix. The remaining 20% comes from search\"; \"save us more than $1B per year\"",
+   "fuente_titulo": "Gomez-Uribe y Hunt, ACM TMIS",
+   "url": "https://dl.acm.org/doi/10.1145/2843948",
+   "anio": "2015"
+  },
+  {
+   "afirmacion": "La página se arma con ocho sistemas: PVR, Top-N, Trending Now, Continue Watching, similitud video-video, generación de página (filas y orden, con diversidad), evidencia (qué imagen/sinopsis mostrar) y búsqueda; una home tiene unas 40 filas de hasta 75 títulos.",
+   "dato": "\"Page Generation – Selects and ranks rows for personalization and diversity\"; \"homepages of about 40 rows with up to 75 titles each\"",
+   "fuente_titulo": "Gomez-Uribe y Hunt, ACM TMIS (cifra de filas citada vía New America, \"Why Am I Seeing This?\")",
+   "url": "https://dl.acm.org/doi/10.1145/2843948",
+   "anio": "2015"
+  },
+  {
+   "afirmacion": "Netflix elige y ordena las filas con machine learning a partir de las páginas ya mostradas y lo clickeado, en un espacio de pantalla limitado y buscando diversidad entre filas.",
+   "dato": "Post de Chris Alvino y Justin Basilico, abril de 2015: selección de filas candidatas, orden en la página, espacio limitado, un título puede elegirse por el nombre de la fila y no por su posición.",
+   "fuente_titulo": "Netflix Technology Blog, \"Learning a Personalized Homepage\"",
+   "url": "https://netflixtechblog.com/learning-a-personalized-homepage-aa8ec670359a",
+   "anio": "2015"
+  },
+  {
+   "afirmacion": "El artwork es el mayor influyente en la decisión de ver algo, concentra más del 82% del foco al navegar y cada título se considera 1,8 segundos en promedio.",
+   "dato": "\"over 82% of their focus while browsing Netflix\"; \"an average of 1.8 seconds considering each title\" (cifras confirmadas por transcripciones de terceros; no pude abrir el post)",
+   "fuente_titulo": "Netflix Technology Blog, \"Selecting the best artwork for videos through A/B testing\"",
+   "url": "https://netflixtechblog.com/selecting-the-best-artwork-for-videos-through-a-b-testing-f6155c4595f6",
+   "anio": "2016"
+  },
+  {
+   "afirmacion": "Desde diciembre de 2017 la imagen de cada título se personaliza por persona con bandits contextuales; sólo puede mostrarse una imagen por título y lugar, y cambiarla entre sesiones puede hacer que no se reconozca el título.",
+   "dato": "\"Someone who has watched many romantic movies may be interested in Good Will Hunting if we show the artwork containing Matt Damon and Minnie Driver, whereas, a member who has watched many comedies might be drawn to the movie if we use the artwork containing Robin Williams\"; \"we can only select a single piece of artwork to represent each title in each place\"; \"Does changing artwork reduce recognizability of the title…?\"",
+   "fuente_titulo": "Chandrashekar, Amat, Basilico y Jebara, \"Artwork Personalization at Netflix\", Netflix Technology Blog, 7 de diciembre de 2017",
+   "url": "https://netflixtechblog.com/artwork-personalization-c589f074ad76",
+   "anio": "2017"
+  },
+  {
+   "afirmacion": "En 2012 Netflix decía que el 75% de lo que la gente veía venía de alguna recomendación.",
+   "dato": "\"75% of what people watch is from some sort of recommendation\"",
+   "fuente_titulo": "Netflix Technology Blog, \"Netflix Recommendations: Beyond the 5 stars (Part 1)\"",
+   "url": "https://netflixtechblog.com/netflix-recommendations-beyond-the-5-stars-part-1-55838468f429",
+   "anio": "2012"
+  },
+  {
+   "afirmacion": "En enero de 2014 Netflix tenía 76.897 \"altgéneros\" (microgéneros) etiquetados por personas con un manual.",
+   "dato": "76.897 géneros personalizados, generados a partir de etiquetas humanas sobre romanticismo, violencia, moral de personajes, etc.",
+   "fuente_titulo": "Alexis Madrigal, \"How Netflix Reverse-Engineered Hollywood\", The Atlantic",
+   "url": "https://www.theatlantic.com/technology/archive/2014/01/how-netflix-reverse-engineered-hollywood/282679/",
+   "anio": "2014"
+  },
+  {
+   "afirmacion": "Las categorías ocultas se abren por URL con un código numérico; 1365 es Acción y aventura; hay más de 1.900 códigos catalogados por terceros y Netflix publicó su propia guía en Tudum.",
+   "dato": "Formato https://www.netflix.com/browse/genre/CODE; \"1365 is the plain old Action & Adventure aisle\"; \"all 1,900+ codes\"",
+   "fuente_titulo": "Netflix Tudum, \"Netflix secret codes guide\" (guía oficial) y repositorio público coffee-and-fun/website (conteo)",
+   "url": "https://www.netflix.com/tudum/articles/netflix-secret-codes-guide",
+   "anio": "2021"
+  },
+  {
+   "afirmacion": "Los perfiles se lanzaron el 1 de agosto de 2013, hasta cinco por cuenta, para que las sugerencias de cada persona no se mezclen con las de hijos, pareja o invitados.",
+   "dato": "\"Each account can have up to five profiles\"; Neil Hunt: \"No longer will your Netflix suggestions be mixed up with those of your kids, a significant other, roommates, or house guests\" (comunicado de prensa reproducido por Engadget)",
+   "fuente_titulo": "Wikipedia, \"Netflix\" (sección 2013–2017) y comunicado de Netflix del 1/8/2013",
+   "url": "https://en.wikipedia.org/wiki/Netflix",
+   "anio": "2013"
+  },
+  {
+   "afirmacion": "El 6 de febrero de 2020 Netflix agregó la opción de apagar los previews en autoplay \"tras escuchar el feedback\".",
+   "dato": "\"We've heard the feedback loud and clear — members can now control whether or not they see autoplay previews on Netflix.\"",
+   "fuente_titulo": "Cuenta oficial Netflix US en Twitter/X",
+   "url": "https://twitter.com/netflix/status/1225506511184703493",
+   "anio": "2020"
+  },
+  {
+   "afirmacion": "\"Reproducir algo\" se lanzó a fines de abril de 2021 en TVs de todo el mundo: botón bajo el nombre del perfil, en la décima fila y en el menú; elige una serie o película nueva, algo que ya ves, algo de tu lista o algo inconcluso; \"Play Something Else\" si no te gusta; compatible con lectores de pantalla; lo hicieron nueve ingenieros de cinco equipos.",
+   "dato": "Artículo de TechRadar del 29–30 de abril de 2021 citando a Netflix y Variety.",
+   "fuente_titulo": "TechRadar, \"Netflix finally releases Play Something, its shuffle play feature\"",
+   "url": "https://www.techradar.com/news/netflix-finally-releases-play-something-its-shuffle-play-feature",
+   "anio": "2021"
+  },
+  {
+   "afirmacion": "En octubre de 2021 Netflix cambió su métrica pública de \"cuentas que vieron 2 minutos\" a \"horas vistas\" y el 16 de noviembre de 2021 lanzó el sitio Top 10 con listas semanales globales y por país.",
+   "dato": "\"On November 16, Netflix announced the launch of 'Top10 on Netflix.com', a new website with weekly global and country lists of the most popular titles\"",
+   "fuente_titulo": "Wikipedia, \"Netflix\"",
+   "url": "https://en.wikipedia.org/wiki/Netflix",
+   "anio": "2021"
+  },
+  {
+   "afirmacion": "El sitio Top 10 de Tudum tiene datos desde el 28 de junio de 2021; las listas previas al 20 de junio de 2023 se ordenan por horas vistas y desde entonces por \"visualizaciones\" (horas / duración); publica listas globales en cuatro categorías y por más de 90 países, semanalmente.",
+   "dato": "\"Information on the site starts from June 28, 2021 and any lists published before June 20, 2023 are ranked by hours viewed\"; \"global Top 10s in four categories… country-specific Top 10 lists for more than 90 countries\"",
+   "fuente_titulo": "Netflix Tudum, Top 10",
+   "url": "https://www.netflix.com/tudum/top10",
+   "anio": "2023"
+  },
+  {
+   "afirmacion": "En diciembre de 2023 Netflix publicó por primera vez el listado completo de consumo: más de 18.000 títulos, 99% del consumo, casi 100.000 millones de horas en seis meses, con compromiso de publicarlo dos veces al año.",
+   "dato": "\"this report covers more than 18,000 titles — representing 99% of all viewing on Netflix — and nearly 100 billion hours viewed\"",
+   "fuente_titulo": "Netflix, \"What We Watched: A Netflix Engagement Report\"",
+   "url": "https://about.netflix.com/en/news/what-we-watched-a-netflix-engagement-report",
+   "anio": "2023"
+  },
+  {
+   "afirmacion": "El 7 de mayo de 2025 Netflix presentó la nueva interfaz de TV (despliegue global desde el 19 de mayo) con recomendaciones en tiempo real y callouts contextuales, más una búsqueda con IA generativa en iOS (beta opt-in) y un feed vertical de clips.",
+   "dato": "\"generative AI search feature that will let Netflix users search… using conversational language like 'I want to watch something funny and upbeat'\"; \"TikTok-like vertical feed filled with clips\"",
+   "fuente_titulo": "MacRumors, \"Netflix Launching Redesigned TV Experience, AI Search, and Improved Recommendations\"",
+   "url": "https://www.macrumors.com/2025/05/07/netflix-redesigned-tv-experience/",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Reed Hastings, en Summit LA (noviembre de 2017): \"competimos con el sueño, y vamos ganando\".",
+   "dato": "\"so we actually compete with sleep… and we're winning!\"",
+   "fuente_titulo": "Fast Company, \"Netflix CEO Reed Hastings: Sleep Is Our Competition\"",
+   "url": "https://www.fastcompany.com/40491939/netflix-ceo-reed-hastings-sleep-is-our-competition",
+   "anio": "2017"
+  },
+  {
+   "afirmacion": "En 423 adultos de 18 a 25 años, el 80,6% se identificó como binge viewer; quienes lo hacían tenían 98% más probabilidad de dormir mal (OR 1,98); sesión promedio de 3 h 8 min; 52,4% ve 3–4 episodios seguidos; la excitación cognitiva previa al sueño media el efecto.",
+   "dato": "\"Those who identified as a binge viewer had a 98% higher likelihood of having poor sleep quality… (Exp(B) = 1.981, P < .05)\"; \"3 hours and 8 minutes on a binge viewing session on average\"",
+   "fuente_titulo": "Exelmans y Van den Bulck, \"Binge Viewing, Sleep, and the Role of Pre-Sleep Arousal\", Journal of Clinical Sleep Medicine 13(8):1001–1008",
+   "url": "https://jcsm.aasm.org/doi/10.5664/jcsm.6704",
+   "anio": "2017"
+  },
+  {
+   "afirmacion": "En 2019 el espectador promedio tardaba 7 minutos 24 segundos en elegir qué ver en streaming (Nielsen).",
+   "dato": "\"average viewer takes 7 minutes to pick what to watch\" (7 min 24 s)",
+   "fuente_titulo": "Deadline, cobertura del informe de Nielsen",
+   "url": "https://deadline.com/2019/07/streaming-overload-netflix-nielsen-report-average-viewer-takes-7-minutes-to-pick-what-to-watch-1202640213/",
+   "anio": "2019"
+  },
+  {
+   "afirmacion": "En 2023 el promedio subió a 10,5 minutos por sesión eligiendo qué ver, y el 46% dice sentirse abrumado por la cantidad de servicios (Nielsen, State of Play 2023; cifras confirmadas por citas secundarias, no pude abrir el informe).",
+   "dato": "\"viewers spend an average of 10.5 minutes per session choosing what to watch\"; \"Nearly half (46%) feel overwhelmed\"",
+   "fuente_titulo": "Nielsen, \"State of Play\" 2023",
+   "url": "https://www.nielsen.com/insights/2023/state-of-play/",
+   "anio": "2023"
+  },
+  {
+   "afirmacion": "Una de cada cinco personas abandona la sesión de TV sin ver nada porque no logra decidir.",
+   "dato": "\"20% of viewers report abandoning a viewing session entirely when they cannot find something compelling to watch\"",
+   "fuente_titulo": "StreamTV Insider, \"Choice fatigue leads 20% of viewers to ditch their TV session\"",
+   "url": "https://www.streamtvinsider.com/video/choice-fatigue-leads-20-viewers-ditch-their-tv-session",
+   "anio": "2023"
+  },
+  {
+   "afirmacion": "Un estudio académico describe el \"síndrome Netflix\": la postergación de la elección de contenido se asocia a estrés medible.",
+   "dato": "\"Why does Netflix syndrome occur? A study on the effect of content choice deferral on stress\"",
+   "fuente_titulo": "Asian Journal for Public Opinion Research (AJPOR)",
+   "url": "https://www.ajpor.org/article/129993-why-does-netflix-syndrome-occur-a-study-on-the-effect-of-content-choice-deferral-on-stress",
+   "anio": "s/f"
+  },
+  {
+   "afirmacion": "En el estudio de las mermeladas, la mesa con 24 variedades atrajo a más gente (60% vs 40%) pero vendió mucho menos (3% vs 30% de compra) que la de 6.",
+   "dato": "6 vs 24 opciones; 40% vs 60% se detuvo; 30% vs 3% compró",
+   "fuente_titulo": "Iyengar y Lepper, \"When Choice Is Demotivating: Can One Desire Too Much of a Good Thing?\", Journal of Personality and Social Psychology 79(6)",
+   "url": "https://doi.org/10.1037/0022-3514.79.6.995",
+   "anio": "2000"
+  },
+  {
+   "afirmacion": "Un meta-análisis de 50 experimentos (63 condiciones, N = 5.036) encontró un efecto promedio de sobrecarga de opciones prácticamente nulo, con gran variación: aparece sólo cuando no hay preferencias claras, ni estructura, ni una opción dominante.",
+   "dato": "\"The mean effect size of choice overload was virtually zero, with considerable variance between studies\"",
+   "fuente_titulo": "Scheibehenne, Greifeneder y Todd, \"Can There Ever Be Too Many Options? A Meta-Analytic Review of Choice Overload\", Journal of Consumer Research 37(3)",
+   "url": "https://scheibehenne.com/ScheibehenneGreifenederTodd2010.pdf",
+   "anio": "2010"
+  },
+  {
+   "afirmacion": "En un carrusel de homepage (Notre Dame), alrededor del 1% de los visitantes hizo clic en algún slide y el 84% de esos clics fue en el primero.",
+   "dato": "\"~1% slider CTR, 84% of clicks on slide 1\"",
+   "fuente_titulo": "Erik Runyon, \"Carousel Interaction Stats\"",
+   "url": "https://erikrunyon.com/2013/01/carousel-interaction-stats/",
+   "anio": "2013"
+  },
+  {
+   "afirmacion": "Nielsen Norman Group concluye que los carruseles y acordeones que avanzan solos molestan a los usuarios y reducen la visibilidad del contenido.",
+   "dato": "Título del artículo: \"Auto-Forwarding Carousels and Accordions Annoy Users and Reduce Visibility\"",
+   "fuente_titulo": "Nielsen Norman Group",
+   "url": "https://www.nngroup.com/articles/auto-forwarding/",
+   "anio": "2013"
+  },
+  {
+   "afirmacion": "Max se lanzó en EE. UU. el 23 de mayo de 2023 con interfaz rediseñada y más contenido de Discovery; el 9 de julio de 2025 volvió a llamarse HBO Max.",
+   "dato": "\"launched in the United States on May 23, 2023… introducing a redesigned user interface\"; \"reverting to its original name on July 9, 2025\"",
+   "fuente_titulo": "Wikipedia, \"HBO Max\"",
+   "url": "https://en.wikipedia.org/wiki/HBO_Max",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Disney+ permite siete perfiles por cuenta y al lanzarse fue criticado porque episodios de Los Simpson, X-Men, DuckTales, Phineas y Ferb y Kim Possible aparecían \"casi totalmente fuera de orden\" y con capítulos faltantes.",
+   "dato": "\"Disney+ allows seven user profiles per account\"; \"episodes… are presented almost entirely out of order, while some series are missing episodes\"",
+   "fuente_titulo": "Wikipedia, \"Disney+\"",
+   "url": "https://en.wikipedia.org/wiki/Disney%2B",
+   "anio": "2020"
+  },
+  {
+   "afirmacion": "La app Apple TV en tvOS usa una barra lateral (Buscar, Inicio, Apple TV, Deportes, Tienda, Biblioteca, Canales) y su Inicio empieza con \"Continuar viendo\" de todos los servicios, luego la lista de deseos, luego rankings y colecciones.",
+   "dato": "Guía oficial de uso de la app Apple TV en tvOS",
+   "fuente_titulo": "Apple Support, \"Find things to watch in the Apple TV app\"",
+   "url": "https://support.apple.com/guide/tv/find-things-to-watch-atvb7d7bec9f/tvos",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "La interfaz Google TV (Chromecast de 2020) reemplazó la de Android TV por una que prioriza recomendaciones y descubrimiento cruzado entre servicios; más de 30 servicios integrados al lanzamiento.",
+   "dato": "\"The Google TV interface emphasizes content recommendations and discovery across different services and installed apps\"; \"over 30 streaming services were integrated\"",
+   "fuente_titulo": "Wikipedia, \"Chromecast\"",
+   "url": "https://en.wikipedia.org/wiki/Chromecast",
+   "anio": "2020"
+  },
+  {
+   "afirmacion": "Un estudio de Reelgood/Learndipity (2016) estimó que los usuarios de Netflix tardan unos 18 minutos en decidir qué ver.",
+   "dato": "\"Netflix users spend ~18 min deciding\"",
+   "fuente_titulo": "IndieWire, cobertura del estudio",
+   "url": "https://www.indiewire.com/news/general-news/netflix-decide-watch-studies-1201708634/",
+   "anio": "2016"
+  }
+ ],
+ "lecciones_para_catalogo": [
+  {
+   "leccion": "COPIAR la fila con rótulo que explica el porqué, y hacerla reactiva a lo último abierto. Netflix llama a eso \"evidencia\": la razón escrita en el título de la fila vale más que la posición. Sin servidor se imita con reglas fijas sobre atributos de Wikidata.",
+   "aplicacion_concreta": "En Pasaporte, en la home, debajo de \"Seguir explorando\": una fila \"Porque abriste Japón: otras islas-nación\" o \"Porque abriste Bolivia: países sin salida al mar\", generada en el navegador a partir del último ítem guardado y de 3–4 atributos (continente, isla, sin costa, idioma oficial, bandera con animal). Lo mismo en Bestiario (\"Porque abriste el ornitorrinco: otros mamíferos que ponen huevos\"). La ficha ya tiene \"Del mismo grupo\"; esto es llevarlo a la home.",
+   "costo": "bajo: los atributos ya vienen de la tanda; es una regla de 20 líneas sobre localStorage, sin cuentas ni modelo."
+  },
+  {
+   "leccion": "ADAPTAR la regla de las dos pantallas: la persona revisa 10–20 ítems en 60–90 segundos y después se va. Netflix lo resuelve con un modelo entrenado en millones; el catálogo lo resuelve con criterio editorial fijo y una medición local y privada.",
+   "aplicacion_concreta": "En todos los catálogos, en la home: el visor más las dos primeras filas tienen que concentrar lo más \"enganchable\" (en Pasaporte: Top 10 más grandes/más chicos y una rareza como \"banderas casi iguales\"), no los continentes en orden alfabético. Agregar un contador local (localStorage, sin red) de qué filas se abren y cuánto se scrollea, y un panel oculto para el autor que lo muestre; con eso se reordena a mano en la siguiente versión.",
+   "costo": "bajo a medio: el reordenamiento es editorial; el contador local es un día de trabajo y respeta la regla de \"sin cuentas\"."
+  },
+  {
+   "leccion": "ADAPTAR el artwork personalizado: Netflix cambia la imagen por persona; el catálogo puede cambiarla por fila (por contexto), que es lo que de verdad hace que la tarjeta responda al rótulo. Y respetar la advertencia del propio Netflix: la imagen del mismo ítem en la ficha debe ser siempre la misma para que se lo reconozca.",
+   "aplicacion_concreta": "En Bestiario, la tarjeta del guepardo muestra la foto corriendo en la fila \"Los más rápidos\", el mapa de distribución en \"Por continente\" y la silueta a escala junto a un humano en \"Tamaños\". En Pasaporte, la bandera en las filas de banderas, el contorno del país en \"Fronteras raras\", la foto de la capital en \"Capitales raras\". Dos o tres imágenes por ítem desde Commons, elegidas en la tanda.",
+   "costo": "medio: hay que pedir y recortar 2–3 imágenes por ítem en el pipeline; la lógica de \"imagen según fila\" es trivial."
+  },
+  {
+   "leccion": "COPIAR el Top 10 con número gigante, pero COMPLETARLO con lo que Netflix no da: el dato y la escala, y el botón \"ver los 230\". Netflix cambió tres veces la métrica del Top 10 porque es popularidad; en el catálogo el ranking es un hecho (km², población, altura), así que puede y debe ser completo, ordenado y comparable: la lámina.",
+   "aplicacion_concreta": "En Pasaporte, en la fila \"Top 10 más grandes\": cada tarjeta lleva el número gigante y, debajo, el dato (17,1 millones de km²) con una barra proporcional; al final de la fila, una tarjeta \"Ver los 230 ordenados\" que abre una pantalla de ranking completo con barras a escala y un buscador para saltar a \"¿dónde está Argentina?\". Igual en Cosmos (planetas y lunas por tamaño, dibujados a escala) y en Atlas (montañas a escala, como el libro de récords).",
+   "costo": "bajo: los datos ya están; es una vista más del mismo motor (lista ordenada + barra css)."
+  },
+  {
+   "leccion": "COPIAR las filas de navegación fijas arriba (Seguir viendo y Mi lista) tal como hace Netflix y como Apple TV las pone primero: lo propio antes que lo recomendado, con progreso visible.",
+   "aplicacion_concreta": "En todos los catálogos: \"Seguir explorando\" como primera fila después del visor, con la última ficha abierta más grande y un indicador de cuántos ítems de ese grupo ya viste (\"Viste 14 de los 54 países de África\"). \"Mi lista\" segunda, con un botón \"Ver como lámina\" que muestra todas las banderas/animales guardados en una sola grilla imprimible.",
+   "costo": "bajo: ya existen ambas; es orden, tamaño y un contador por grupo en localStorage."
+  },
+  {
+   "leccion": "DESCARTAR el visor que rota solo cada 9 segundos tal como está. Los datos de carruseles automáticos (≈1% de clics, 84% en el primer slide; NN/g: molestan y reducen visibilidad) y la marcha atrás de Netflix en 2020 con el interruptor de autoplay van en la misma dirección. Mantener el visor grande (funciona como portada), pero quitarle la autonomía.",
+   "aplicacion_concreta": "En el visor de todos los catálogos: rotar sólo mientras nadie interactúa, frenar al primer movimiento de foco o del mouse (en TV, al apretar cualquier flecha), mostrar puntos indicadores y flechas, y ofrecer \"Pausar portada\" guardado en el navegador. Mejor aún: que el visor sea \"El de hoy\" (ver la lección siguiente) y no rote.",
+   "costo": "bajo: tres condiciones en el temporizador y una preferencia local."
+  },
+  {
+   "leccion": "ADAPTAR \"Reproducir algo\" y el \"momento compartido\" del Top 10 en una sola pieza: el azar determinista por fecha. Netflix retiró el shuffle puro por bajo uso; lo que sí funciona del Top 10 es que todos ven lo mismo el mismo día. Sin servidor, se logra usando la fecha como semilla: el mismo HTML, en cualquier computadora, elige el mismo ítem hoy.",
+   "aplicacion_concreta": "En todos los catálogos, la fila \"Un día como hoy\" (ya preparada) se alimenta con dos cosas: los ítems con efeméride real (independencias, descubrimientos, estrenos de episodios en Butaca) y, si no hay, \"El país/animal/invento del día\" elegido con semilla = fecha, igual para todos. \"Uno al azar\" se mantiene pero gana una variante \"Uno al azar de esta fila\" en el extremo de cada carrusel, que es el shuffle con contexto que Netflix no tenía.",
+   "costo": "bajo: una función hash de la fecha y una tabla de efemérides en la tanda; la fila ya existe."
+  },
+  {
+   "leccion": "ADAPTAR los códigos de categorías invirtiéndolos: Netflix tiene 76.897 altgéneros y los esconde porque rompen la promesa de elegir en 90 segundos; en una enciclopedia la taxonomía es el producto. Lo que sí vale de Netflix es que cada categoría tiene URL. Hacer visible y direccionable lo que ellos ocultan.",
+   "aplicacion_concreta": "En Pasaporte y en todos los catálogos: cada fila y cada filtro tiene una URL propia (#/pasaporte/banderas-con-animales, #/bestiario/mamiferos-que-ponen-huevos) que se puede compartir y volver a abrir; y una pestaña \"Índice\" que lista TODAS las filas/categorías con su cantidad (\"Banderas con animales · 23\"), ordenadas alfabéticamente y por tamaño: el \"ver todas las filas\" que Netflix nunca da. En Butaca, URL por episodio (#/butaca/one-piece/ep-1015).",
+   "costo": "bajo a medio: el router por hash es una tarde; el índice es una vista automática sobre la clasificación que ya genera la tanda."
+  },
+  {
+   "leccion": "COPIAR la lección en negativo de Disney+: el orden canónico es la columna vertebral de una serie, y lanzarlo desordenado fue la queja número uno. Para series y anime la fila no alcanza; hace falta la vista tabla, completa y en orden, como el anexo de Wikipedia.",
+   "aplicacion_concreta": "En Butaca, en la ficha de cada serie: además de la fila de temporadas, una vista \"Lista de episodios\" en tabla con número, título, fecha, arco y qué capítulo del manga adapta, con filas de relleno marcadas y un salto \"Ir al próximo que no viste\" (guardado en el navegador). La fila horizontal queda para elegir rápido; la tabla para investigar y comparar ritmo de adaptación (capítulos por episodio).",
+   "costo": "medio: los anexos de episodios de Wikipedia dan número, título y fecha; el mapeo episodio→capítulo de manga requiere revisión humana en la cola."
+  },
+  {
+   "leccion": "ADAPTAR el Top 10 \"de lo que ve todo el mundo\" sin red social: usar las visitas públicas de Wikipedia como señal de comunidad. Netflix necesita millones de usuarios propios; Wikimedia publica las vistas por artículo y eso se puede precomputar en la tanda, de modo que el catálogo tenga una fila comunitaria sin cuentas.",
+   "aplicacion_concreta": "En Pasaporte, Bestiario, Cosmos y Creer o no creer: una fila \"Lo que el mundo está mirando esta semana\" con los 10 ítems del catálogo cuyos artículos de Wikipedia más subieron en vistas en los últimos 7 días (pageviews de Wikimedia, calculados en la tanda y embebidos en el HTML con la fecha de corte visible: \"semana del 29/9\"). Insignia \"En alza\" en la tarjeta, como la insignia Top 10 de Netflix.",
+   "costo": "medio: un paso más en el pipeline (API de pageviews) y aceptar que el dato envejece hasta la próxima tanda; declararlo en pantalla."
+  },
+  {
+   "leccion": "DESCARTAR el \"sin final\" y reemplazarlo por cierres explícitos. Netflix nunca te dice que terminaste porque su negocio es que no termines; el catálogo puede hacer lo contrario y convertir el fin de una fila en un logro y una puerta.",
+   "aplicacion_concreta": "En todos los catálogos: al llegar al final de una fila Top 10, una tarjeta final \"Terminaste los 10 · Ver los 230\" (en Pasaporte) o \"Terminaste los 10 · Ver todos los felinos\" (en Bestiario); en la ficha, un marcador \"visto\" opcional y, en cada sección, un contador \"Viste 87 de 230\" con la lámina de banderas que se va coloreando. Es la cuenta regresiva de \"Los 20 más\" de Animal Planet: tiene un final y por eso se vuelve.",
+   "costo": "bajo: una tarjeta terminal por fila y un set de ids vistos en localStorage."
+  }
+ ],
+ "anti_lecciones": [
+  "No copiar el encadenado automático ni la ausencia de final (Post-Play, autoplay, scroll sin fondo). Es la pieza con costos mejor documentados: en 423 jóvenes, ser binge viewer casi duplicó la probabilidad de dormir mal (OR 1,98), con sesiones promedio de 3 h 8 min y la excitación cognitiva previa al sueño como mecanismo (Exelmans y Van den Bulck, JCSM 2017); el propio CEO lo celebró como \"competimos con el sueño, y vamos ganando\" (Fast Company, 2017). Un catálogo de conocimiento tiene que poder terminar.",
+  "No copiar la personalización por persona que exige millones de usuarios y un servidor: el PVR, los bandits de artwork y la generación de página aprenden de la conducta agregada; sin cuentas ni red, imitarlo con un modelito local sería falso y frágil. Lo que sí se puede imitar es el efecto (filas con razón, imagen por contexto, azar del día, lo guardado en el navegador) con reglas fijas y transparentes.",
+  "No copiar la página que cambia en cada visita. Netflix admite en su propio post de artwork que cambiar imágenes destruye la reconocibilidad; sumale filas que se mueven. En una enciclopedia la estabilidad es un valor: la lámina de banderas siempre está en el mismo lugar y por eso se memoriza. Que lo personal (Seguir explorando, Mi lista, El de hoy) cambie; que el mapa no.",
+  "No copiar el ranking de popularidad como único orden. El Top 10 de Netflix cambió de métrica tres veces (cuentas con 2 minutos → horas → \"visualizaciones\") porque la popularidad es una decisión editorial disfrazada de dato. En el catálogo los rankings son hechos (km², habitantes, velocidad); mezclarlos con popularidad sin decirlo confunde. Si se usa una señal de comunidad (vistas de Wikipedia), etiquetarla como tal.",
+  "No copiar la fatiga de decidir disfrazada de abundancia: 7 min 24 s en 2019 y 10,5 min en 2023 eligiendo (Nielsen), una de cada cinco sesiones abandonada, y un estudio que lo llama \"síndrome Netflix\" y lo asocia a estrés. El meta-análisis de Scheibehenne (2010) dice dónde está la salida: la sobrecarga aparece cuando no hay estructura ni una opción dominante; el catálogo tiene que dar estructura (índice, orden, \"ver todo\") y una opción por defecto (El de hoy), no sólo más filas.",
+  "No copiar la taxonomía escondida. Los 76.897 altgéneros y los códigos de URL muestran que Netflix tiene una clasificación finísima y decide que no la veas; en 2025 sacó el menú de Categorías de la TV. Para un catálogo cuya tesis es \"elegido, ordenado, completo y comparable\", esconder la clasificación es traicionar el producto.",
+  "No copiar el autoplay del visor ni los previews con sonido como comportamiento por defecto: Netflix tuvo que agregar el interruptor en 2020 \"tras escuchar el feedback\", y los carruseles automáticos tienen cifras pésimas (≈1% de clics; NN/g: molestan y reducen visibilidad). En TV, además, el movimiento compite con la lectura.",
+  "No seguir a Netflix en su deriva de 2025 hacia el feed vertical de clips y la búsqueda conversacional como puerta principal. Son exactamente los dos canales que la tesis del autor identifica como problema: el feed te trae pero nunca te deja ver el todo; el chat tiene el todo pero no te trae nada. El catálogo puede usar un buscador en lenguaje natural como atajo, no como reemplazo de la lámina."
+ ],
+ "fuentes": [
+  {
+   "titulo": "Gomez-Uribe y Hunt, \"The Netflix Recommender System: Algorithms, Business Value, and Innovation\", ACM TMIS 6(4), 2015",
+   "url": "https://dl.acm.org/doi/10.1145/2843948"
+  },
+  {
+   "titulo": "Netflix Technology Blog, \"Learning a Personalized Homepage\" (Alvino y Basilico, 2015)",
+   "url": "https://netflixtechblog.com/learning-a-personalized-homepage-aa8ec670359a"
+  },
+  {
+   "titulo": "Netflix Technology Blog, \"Artwork Personalization at Netflix\" (2017)",
+   "url": "https://netflixtechblog.com/artwork-personalization-c589f074ad76"
+  },
+  {
+   "titulo": "Netflix Technology Blog, \"Selecting the best artwork for videos through A/B testing\" (2016)",
+   "url": "https://netflixtechblog.com/selecting-the-best-artwork-for-videos-through-a-b-testing-f6155c4595f6"
+  },
+  {
+   "titulo": "Netflix Technology Blog, \"Netflix Recommendations: Beyond the 5 stars (Part 1)\" (2012)",
+   "url": "https://netflixtechblog.com/netflix-recommendations-beyond-the-5-stars-part-1-55838468f429"
+  },
+  {
+   "titulo": "Netflix Technology Blog, \"To Be Continued: Helping you find shows to continue watching on Netflix\" (2016)",
+   "url": "https://netflixtechblog.com/to-be-continued-helping-you-find-shows-to-continue-watching-on-7c0d8ee4dab6"
+  },
+  {
+   "titulo": "The Atlantic, \"How Netflix Reverse-Engineered Hollywood\" (2014)",
+   "url": "https://www.theatlantic.com/technology/archive/2014/01/how-netflix-reverse-engineered-hollywood/282679/"
+  },
+  {
+   "titulo": "Netflix Tudum, Top 10 (metodología y listas semanales)",
+   "url": "https://www.netflix.com/tudum/top10"
+  },
+  {
+   "titulo": "Netflix Tudum, guía oficial de códigos secretos",
+   "url": "https://www.netflix.com/tudum/articles/netflix-secret-codes-guide"
+  },
+  {
+   "titulo": "Netflix, \"What We Watched: A Netflix Engagement Report\" (2023)",
+   "url": "https://about.netflix.com/en/news/what-we-watched-a-netflix-engagement-report"
+  },
+  {
+   "titulo": "Netflix US (Twitter/X), interruptor de autoplay previews, 6/2/2020",
+   "url": "https://twitter.com/netflix/status/1225506511184703493"
+  },
+  {
+   "titulo": "TechRadar, \"Netflix finally releases Play Something, its shuffle play feature\" (2021)",
+   "url": "https://www.techradar.com/news/netflix-finally-releases-play-something-its-shuffle-play-feature"
+  },
+  {
+   "titulo": "MacRumors, \"Netflix Launching Redesigned TV Experience, AI Search, and Improved Recommendations\" (2025)",
+   "url": "https://www.macrumors.com/2025/05/07/netflix-redesigned-tv-experience/"
+  },
+  {
+   "titulo": "Fast Company, \"Netflix CEO Reed Hastings: Sleep Is Our Competition\" (2017)",
+   "url": "https://www.fastcompany.com/40491939/netflix-ceo-reed-hastings-sleep-is-our-competition"
+  },
+  {
+   "titulo": "Exelmans y Van den Bulck, \"Binge Viewing, Sleep, and the Role of Pre-Sleep Arousal\", J Clin Sleep Med 2017",
+   "url": "https://jcsm.aasm.org/doi/10.5664/jcsm.6704"
+  },
+  {
+   "titulo": "Deadline, cobertura del informe Nielsen 2019 (7 minutos para elegir)",
+   "url": "https://deadline.com/2019/07/streaming-overload-netflix-nielsen-report-average-viewer-takes-7-minutes-to-pick-what-to-watch-1202640213/"
+  },
+  {
+   "titulo": "Nielsen, \"State of Play\" 2023",
+   "url": "https://www.nielsen.com/insights/2023/state-of-play/"
+  },
+  {
+   "titulo": "StreamTV Insider, \"Choice fatigue leads 20% of viewers to ditch their TV session\"",
+   "url": "https://www.streamtvinsider.com/video/choice-fatigue-leads-20-viewers-ditch-their-tv-session"
+  },
+  {
+   "titulo": "AJPOR, \"Why does Netflix syndrome occur? A study on the effect of content choice deferral on stress\"",
+   "url": "https://www.ajpor.org/article/129993-why-does-netflix-syndrome-occur-a-study-on-the-effect-of-content-choice-deferral-on-stress"
+  },
+  {
+   "titulo": "IndieWire, estudio Reelgood/Learndipity sobre tiempo para decidir (2016)",
+   "url": "https://www.indiewire.com/news/general-news/netflix-decide-watch-studies-1201708634/"
+  },
+  {
+   "titulo": "Iyengar y Lepper, \"When Choice Is Demotivating\", JPSP 2000",
+   "url": "https://doi.org/10.1037/0022-3514.79.6.995"
+  },
+  {
+   "titulo": "Scheibehenne, Greifeneder y Todd, \"Can There Ever Be Too Many Options?\", JCR 2010",
+   "url": "https://scheibehenne.com/ScheibehenneGreifenederTodd2010.pdf"
+  },
+  {
+   "titulo": "Erik Runyon, \"Carousel Interaction Stats\" (2013)",
+   "url": "https://erikrunyon.com/2013/01/carousel-interaction-stats/"
+  },
+  {
+   "titulo": "Nielsen Norman Group, \"Auto-Forwarding Carousels and Accordions Annoy Users and Reduce Visibility\"",
+   "url": "https://www.nngroup.com/articles/auto-forwarding/"
+  },
+  {
+   "titulo": "Nielsen Norman Group, \"Designing Effective Carousels\"",
+   "url": "https://www.nngroup.com/articles/designing-effective-carousels/"
+  },
+  {
+   "titulo": "Wikipedia, \"Netflix\"",
+   "url": "https://en.wikipedia.org/wiki/Netflix"
+  },
+  {
+   "titulo": "Wikipedia, \"HBO Max\"",
+   "url": "https://en.wikipedia.org/wiki/HBO_Max"
+  },
+  {
+   "titulo": "Wikipedia, \"Disney+\"",
+   "url": "https://en.wikipedia.org/wiki/Disney%2B"
+  },
+  {
+   "titulo": "Wikipedia, \"Chromecast\" (interfaz Google TV)",
+   "url": "https://en.wikipedia.org/wiki/Chromecast"
+  },
+  {
+   "titulo": "Apple Support, \"Find things to watch in the Apple TV app\" (tvOS)",
+   "url": "https://support.apple.com/guide/tv/find-things-to-watch-atvb7d7bec9f/tvos"
+  },
+  {
+   "titulo": "Apple Support, \"Navigate the Apple TV app\" (tvOS)",
+   "url": "https://support.apple.com/guide/tv/navigate-the-apple-tv-app-atvb59b423ba/tvos"
+  },
+  {
+   "titulo": "New America, \"Why Am I Seeing This? Case study: Netflix\" (resumen del paper de 2015)",
+   "url": "https://www.newamerica.org/oti/reports/why-am-i-seeing-this/case-study-netflix/"
+  }
+ ],
+ "no_encontrado": [
+  "Acceso directo a las fuentes: en este entorno el cupo de búsqueda web estaba agotado y el proxy bloqueó netflixtechblog.com, about.netflix.com, help.netflix.com, research.netflix.com, nielsen.com, nngroup.com, baymard.com, dl.acm.org, arxiv.org y wikipedia.org. Cada cifra se confirmó por copias o transcripciones literales en repositorios públicos de GitHub (incluidas transcripciones del paper de 2015, del post de artwork de 2017, del estudio de sueño de 2017, del comunicado de perfiles de 2013 y de la Wikipedia) y se conserva la URL original; conviene re-abrir las fuentes primarias antes de citarlas en público.",
+  "El anuncio oficial del Top 10 (febrero de 2020): no pude abrir el post de about.netflix.com, así que no confirmé el texto exacto sobre el \"momento cultural compartido\" ni los resultados de las pruebas previas en México y Reino Unido. La fecha y la existencia de la fila están en la consigna y en la cronología de Wikipedia (sitio Top 10 en noviembre de 2021).",
+  "El retiro de \"Reproducir algo\" (renombrado \"Surprise Me\") alrededor de 2023 \"por bajo uso\" sólo aparece en una copia de un artículo de How-To Geek; no encontré comunicado de Netflix ni cobertura de un medio grande. Tratarlo como reportado, no confirmado.",
+  "Las cifras \"más del 82% del foco\" y \"1,8 segundos por título\" del post de artwork de 2016 se confirmaron sólo por transcripciones de terceros (incluido un hilo de Twitter de 2021); el post no se pudo abrir.",
+  "Nielsen \"State of Play\" 2023 (10,5 minutos; 46% abrumados): confirmado por varias citas secundarias coincidentes, pero no pude abrir el informe ni verificar la URL exacta; el dato de 2019 (7 min 24 s) sí tiene cobertura de Deadline con URL.",
+  "El post \"Learning a Personalized Homepage\" lo reconstruí a partir de un resumen académico en alemán y de mi conocimiento del texto; la cifra de ~40 filas y hasta 75 títulos la tomé del paper de 2015 (vía New America), no del post.",
+  "No encontré una fuente primaria para Post-Play (agosto de 2012, cuenta regresiva de 15 segundos) ni para el cambio de estrellas a pulgares (abril de 2017); ambos figuran en la cronología por conocimiento previo y una cita secundaria (Neowin 2012), sin URL verificada.",
+  "Sobre Prime Video sólo encontré una nota de terceros sobre el rediseño de 2024 (teclado de 6 columnas, chips de filtro, grilla de 3 columnas); no encontré documentación oficial de Amazon sobre cómo arma su página.",
+  "Sobre Disney+ no encontré una fuente oficial que describa la página de inicio (los cinco mosaicos de marca y la home \"Para ti\"); lo que cito viene de Wikipedia (perfiles, episodios desordenados) y de descripciones de diseño de terceros.",
+  "No encontré evidencia pública de que Netflix mida o publique \"tiempo hasta reproducir\" o la tasa de abandono de sesión; los 60–90 segundos del paper son \"consumer research\" interna sin método detallado.",
+  "No pude verificar el texto del artículo de NN/g sobre carruseles (sólo el título y la URL); la cifra de ~1% de clics es de Erik Runyon (Notre Dame, 2013), no de NN/g.",
+  "Año exacto del paper del \"síndrome Netflix\" (AJPOR) y del artículo de StreamTV Insider: no pude abrirlos; cito título y URL."
+ ]
+}

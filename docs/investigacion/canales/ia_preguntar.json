@@ -1,0 +1,419 @@
+{
+ "canal": "La IA conversacional para preguntar por tus intereses: ChatGPT, Claude, Gemini, Perplexity (y Discover), Copilot, Google AI Overviews y AI Mode, ChatGPT Pulse, prompts sugeridos, memoria entre conversaciones, Deep Research",
+ "expectativa_usuario": "Quiero la respuesta a MI pregunta, ya, dicha en mis palabras y a mi medida, sin tener que saber de antemano dónde está ni abrir diez páginas.",
+ "modo_humano": "Sobre todo INVESTIGAR, y en segundo lugar COMUNICARSE (con la máquina, no con otras personas). El dato más sólido es el estudio de OpenAI con NBER (sept. 2025): el 49% de los mensajes a ChatGPT son \"preguntar\" (buscar información o consejo), el 40% \"hacer\" (que te produzca algo) y solo el 11% \"expresarse\"; las tres categorías más grandes son guía práctica, búsqueda de información y escritura, y \"buscar información\" fue la que más creció. En Claude el patrón es parecido: según el Economic Index (sept. 2025) la educación pasó de 9,3% a 12,4% de las conversaciones y la ciencia de 6,3% a 7,2%, mientras que las conversaciones afectivas son el 2,9% y compañía más roleplay no llegan al 0,5%. ACOMPAÑARSE existe pero es minoritario y está concentrado en adolescentes y en apps de compañía específicas (Common Sense Media, julio 2025: 72% de los adolescentes estadounidenses probó un compañero de IA, 52% lo usa regularmente). EXPLORAR es lo que el canal casi no permite por diseño: es \"pull\" puro. Nada aparece hasta que preguntás, y para preguntar tenés que saber que algo existe. Por eso las propias empresas agregaron capas de \"push\" (Pulse, Discover, Copilot Daily) que reconocen que preguntar no alcanza. En resumen: el chat es una herramienta de investigación dirigida excelente y una herramienta de exploración casi nula.",
+ "unidad": "La respuesta: un bloque de prosa generado para vos (con o sin citas), dentro de un hilo de conversación. En las capas proactivas la unidad cambia: la tarjeta (Pulse: un conjunto finito de tarjetas visuales por día; Discover: notas generadas por IA en un feed por temas). En Google, el resumen que aparece arriba de los resultados (AI Overview) o el hilo de AI Mode.",
+ "quien_decide": "Reparto en dos pasos. La persona decide el QUÉ (dispara con una pregunta; sin pregunta no hay nada) y el modelo decide el CÓMO: qué fuentes consulta, qué incluye, qué omite, cuánto escribe y con qué tono de certeza. No hay editor humano ni comunidad entre medio, y el criterio del modelo no es visible. En Google AI Overviews además decide Google si el resumen aparece o no (según Pew, en marzo de 2025 apareció en cerca del 18% de las búsquedas). En Pulse y Discover decide un algoritmo a partir de tu memoria, tus chats, tu feedback y, si lo conectás, tu Gmail y Calendar; vos corregís con pulgar arriba/abajo o \"curar\". Con la memoria entre conversaciones, una parte de \"quién decide\" se vuelve tu pasado: el sistema infiere intereses y los usa sin que lo pidas (Claude lo muestra como un resumen editable; en ChatGPT es menos visible).",
+ "tiene_final": "Sí, y es una de sus diferencias con el feed: la respuesta termina, y el hilo se cierra cuando dejás de preguntar; no hay scroll infinito ni autoplay. ChatGPT Pulse lo hizo explícito en su lanzamiento (sept. 2025): un conjunto acotado de tarjetas que caducan al día siguiente salvo que las guardes, descripto como diseñado para terminar y no para scrollear. El efecto doble: menos atrapamiento compulsivo que reels, pero también menos descubrimiento, porque nada te lleva más allá de lo que preguntaste. El \"final\" tiene otro costado medido por Pew (julio 2025): cuando aparece un resumen con IA, la gente termina la sesión ahí mismo con mucha más frecuencia (26% vs 16%) y casi no hace clic en las fuentes (8% vs 15% en resultados tradicionales, 1% en los enlaces del propio resumen). La sesión termina en la herramienta, no en la fuente. Perplexity Discover es la excepción: es un feed y no tiene final.",
+ "mecanismo": "POR DENTRO. Un modelo de lenguaje entrenado con enormes volúmenes de texto (Wikipedia incluida) genera la respuesta palabra por palabra eligiendo lo más probable dado tu pregunta y el contexto. No consulta una base de hechos: \"recuerda\" estadísticamente. Por eso en preguntas de dato duro falla seguido: en SimpleQA (4.326 preguntas cortas con una sola respuesta verificable, de OpenAI), el mejor modelo de la tabla oficial del repo simple-evals acierta 62,5% (GPT-4.5), o3 49,4%, GPT-4o 38,8% y o4-mini alrededor del 20%. OpenAI explicó en sept. 2025 que esto pasa porque los benchmarks premian adivinar en vez de abstenerse: o4-mini se abstiene 1% y se equivoca 75% de las veces; gpt-5-thinking-mini se abstiene 52% y se equivoca 26%. Para no depender solo de la memoria estadística, los productos agregaron herramientas: búsqueda web (Claude desde marzo de 2025, global en mayo; ChatGPT Search desde oct. 2024), que trae páginas y las resume con citas; \"query fan-out\" (AI Mode de Google), que descompone tu pregunta en varias subconsultas en paralelo; y Deep Research (Gemini dic. 2024, OpenAI feb. 2025, Perplexity feb. 2025, Claude abr.-mayo 2025), un agente que itera búsquedas durante 5 a 45 minutos y devuelve un informe largo con citas. La memoria entre conversaciones funciona así: el sistema guarda \"memorias\" explícitas y/o resúmenes de chats anteriores y los inyecta en el contexto de cada conversación nueva; Claude lo implementa como un resumen por proyecto que podés leer y editar (lanzado sept.-oct. 2025, con chats de incógnito que no dejan rastro); ChatGPT desde abril de 2025 referencia todo tu historial.\n\nPOR FUERA. La pantalla de inicio es una caja vacía con una pregunta (\"¿En qué puedo ayudarte?\") y 3 o 4 chips de prompts sugeridos, que existen porque la gente no sabe qué pedir ni qué puede hacer el sistema. La respuesta llega en streaming (se escribe sola, lo que da sensación de velocidad) como prosa con citas numeradas o una fila de tarjetas de fuentes arriba (Perplexity, AI Mode, Claude). Debajo, preguntas de seguimiento sugeridas (\"Related\"), que son la única forma de serendipia del canal: te proponen el próximo paso, siempre en la dirección de lo que ya preguntaste. Todo vive en un hilo con historial y, cada vez más, en voz.\n\nLA CAPA PUSH. Como preguntar no alcanza, las empresas agregaron cosas que llegan solas. ChatGPT Pulse (25 sept. 2025, Pro, móvil): cada noche investiga asincrónicamente a partir de tus chats, tu memoria, tu feedback y, si conectás, Gmail y Google Calendar, y a la mañana te deja un conjunto finito de tarjetas visuales que podés abrir, guardar o descartar; con \"curar\" le decís qué querés mañana; las tarjetas caducan al día. Perplexity Discover: un feed por pestañas de temas (Top, Tech y ciencia, Finanzas, Deportes, Entretenimiento...) de notas escritas por IA a partir de varias fuentes citadas, con intereses que elegís; cada nota se puede \"preguntar\" como seguimiento. Copilot Daily (oct. 2024): resumen hablado de noticias y clima al despertar, dentro de la idea de Microsoft de Copilot como \"compañero\". Google AI Overviews (EE.UU., mayo 2024): Google decide mostrar un resumen con IA arriba de los resultados; a mayo de 2025 llegaba a 1.500 millones de usuarios mensuales y en julio de 2025 Pichai dijo 2.000 millones, con AI Mode en 100 millones.\n\nLA ECONOMÍA. El canal consume el conocimiento de la web (Wikipedia, medios) sin devolverle visitas. Pew midió 68.879 búsquedas reales de 900 adultos en marzo de 2025: con resumen de IA, 8% de clics a resultados tradicionales (vs 15% sin resumen), 1% de clics dentro del resumen, y 26% de las sesiones terminan ahí (vs 16%). Las fuentes más citadas en esos resúmenes son Wikipedia, YouTube y Reddit (juntas, 15%). Wikimedia reportó en oct. 2025 una caída de alrededor del 8% en vistas de páginas humanas respecto de 2024, atribuida a resúmenes de IA en buscadores y video social, con el riesgo de perder voluntarios y donantes. Los medios ven lo mismo: según el Digital News Report 2025 del Reuters Institute, 7% usa chatbots de IA para noticias cada semana, 15% entre menores de 25.",
+ "historia": "2022-11-30: lanza ChatGPT; en dos meses, 100 millones de usuarios. 2022-12: Perplexity lanza su buscador conversacional con citas (fundada ago. 2022); Discover, su feed de notas generadas, aparece en 2023. 2023-02: Bing Chat (Microsoft), primer chat con búsqueda web integrado a un buscador masivo. 2023-03: GPT-4. 2023-05: Google muestra Search Generative Experience en Labs. 2024-02-13: OpenAI anuncia Memoria para ChatGPT (controles para ver y borrar). 2024-05-14: Google lanza AI Overviews a todo EE.UU. (tras SGE). 2024-10-01: Microsoft relanza Copilot como \"compañero de IA para todos\" (Suleyman) con Copilot Daily (resumen de noticias y clima al despertar) y Copilot Discover. 2024-10-31: ChatGPT Search. 2024-12-11: Gemini Deep Research, el primer \"investigador\" agente que arma un informe largo con citas. 2025-02-02: OpenAI deep research; 2025-02-14: Perplexity Deep Research gratis. 2025-03-20: Claude agrega búsqueda web (global para todos los planes el 27 de mayo). 2025-04-10: ChatGPT puede referenciar todas tus conversaciones pasadas. 2025-04-15: Claude Research (búsquedas encadenadas con citas); 2025-05-01: Advanced Research, hasta 45 minutos. 2025-04-29: OpenAI revierte una actualización de GPT-4o por \"adulación\" (sycophancy): el modelo había quedado demasiado complaciente. 2025-05-20 (I/O): AI Mode para todo EE.UU.; AI Overviews ya en 1.500 millones de usuarios mensuales. 2025-06-17: Digital News Report 2025: 7% usa chatbots para noticias semanalmente. 2025-07-16: Common Sense Media: 72% de los adolescentes de EE.UU. probó compañeros de IA. 2025-07-22: Pew publica el estudio de clics con y sin AI Overview. 2025-07-23: Pichai: AI Overviews 2.000 millones de usuarios mensuales, AI Mode 100 millones. 2025-09-05: OpenAI publica \"Why language models hallucinate\". 2025-09-11: memoria en Claude para Team y Enterprise (Pro y Max el 23 de octubre). 2025-09-15: paper OpenAI/NBER \"How people use ChatGPT\": 700 millones de usuarios semanales, 73% de los mensajes no laborales. 2025-09-25: ChatGPT Pulse, el primer producto proactivo de OpenAI. 2025-10-06: DevDay, 800 millones de usuarios semanales. 2025-10-17: Wikimedia reporta caída de ~8% en vistas humanas. 2025-10-22: EBU/BBC: 45% de las respuestas de asistentes sobre noticias tiene al menos un problema significativo. 2025-10-23: Copilot Fall Release (memoria y personalización, Mico, grupos). La trayectoria es clara: de 2022 a 2024 el canal fue puro \"pull\" (vos preguntás); desde fines de 2024 se le agregan tres cosas que las enciclopedias ya tenían: fuentes (citas), profundidad (Deep Research) y, por último, que te traiga cosas (Pulse, Discover), es decir, el reconocimiento de que la página en blanco no alcanza.",
+ "patrones_ux": [
+  {
+   "nombre": "Caja vacía con chips de prompts sugeridos",
+   "descripcion": "La pantalla de inicio es una sola caja de texto con una pregunta ('¿En qué puedo ayudarte hoy?') y 3 o 4 chips cliqueables debajo ('Resumí un texto', 'Ayudame a escribir', 'Explicame un tema'), a veces rotando por sesión. Perplexity muestra además preguntas que otros están haciendo. Al tocar un chip se rellena la caja y se dispara.",
+   "por_que_funciona": "Ataca la 'barrera de articulación': la gente no sabe qué puede hacer el sistema ni cómo pedirlo. Los chips muestran capacidades y dan un primer paso sin esfuerzo. Es la mínima concesión a la serendipia dentro de un modelo pull: te sugieren qué preguntar antes de que sepas qué querés."
+  },
+  {
+   "nombre": "Respuesta con fila de fuentes y citas numeradas",
+   "descripcion": "Perplexity y Google AI Mode ponen arriba una fila horizontal de tarjetas con favicon y título de cada fuente; en el texto, superíndices numerados que al pasar el cursor muestran la fuente. Claude y ChatGPT con búsqueda muestran citas inline con enlace directo.",
+   "por_que_funciona": "Da verificabilidad sin obligar a navegar: la confianza sube porque 'podés' chequear, aunque Pew midió que casi nadie lo hace (1% de clics dentro del resumen). Es el equivalente a la bibliografía de la enciclopedia: la presencia de la fuente legitima, aunque no se abra."
+  },
+  {
+   "nombre": "Preguntas de seguimiento sugeridas ('Related')",
+   "descripcion": "Al final de cada respuesta, 3 a 5 preguntas generadas que la continúan ('¿Y cuál es el país menos poblado?', '¿Cómo se compara con Brasil?'). En AI Mode son chips; en Perplexity una lista con el signo '+'. Un toque y se vuelve la próxima pregunta del hilo.",
+   "por_que_funciona": "Convierte una respuesta cerrada en recorrido y resuelve el segundo momento de página en blanco (ya tengo la respuesta, ¿y ahora?). Es serendipia dirigida: siempre en la dirección de lo que preguntaste, nunca lateral. Baja el costo de seguir explorando a un toque."
+  },
+  {
+   "nombre": "Memoria visible y editable",
+   "descripcion": "Claude muestra en Ajustes un resumen en prosa de lo que recuerda de vos, separado por proyecto, que podés editar o corregir conversando ('ignorá esto', 'enfocate en aquello'), más chats de incógnito que no dejan rastro. ChatGPT tiene 'Administrar memorias' con una lista borrable y Chat temporal.",
+   "por_que_funciona": "Lo personal sin red social ni perfil público: el sistema se adapta a vos y vos ves y controlás el modelo que tiene de vos. La visibilidad (poder leer el resumen) es lo que hace tolerable que infiera intereses; cuando la memoria es opaca, genera desconfianza."
+  },
+  {
+   "nombre": "Modo profundo como interruptor con progreso visible",
+   "descripcion": "Deep Research es un toggle o botón al lado de la caja. Al activarlo, la interfaz cambia: muestra un plan, va listando las búsquedas que hace ('Buscando... Leyendo 14 fuentes...'), avisa que tardará minutos y entrega un informe con índice, secciones y decenas de citas (Claude: 5 a 15 minutos típicos, hasta 45).",
+   "por_que_funciona": "Separa dos expectativas distintas (respuesta ya vs. informe completo) y hace visible el trabajo, lo que justifica la espera y aumenta el valor percibido. Es el chat admitiendo que para 'el todo' hace falta otra cosa que una respuesta."
+  },
+  {
+   "nombre": "Tarjetas del día, finitas y con cierre (Pulse)",
+   "descripcion": "A la mañana aparece una fila de tarjetas visuales (imagen, título, dos líneas), entre cinco y diez, generadas de noche a partir de tus chats, memoria y apps conectadas. Cada una se abre a una conversación. Hay un botón 'curar' para pedir temas para mañana y pulgar arriba/abajo. Las tarjetas caducan al día siguiente salvo que las guardes, y la pantalla termina: no hay más para scrollear.",
+   "por_que_funciona": "Resuelve la página en blanco sin convertirse en feed: te traen cosas, pero pocas, elegidas y con final. El cierre explícito respeta la atención y hace que cada tarjeta valga más. La caducidad produce el hábito de volver mañana (como el 'un tema por día' de los 20 más)."
+  },
+  {
+   "nombre": "Feed por temas de notas generadas con fuentes (Discover)",
+   "descripcion": "Pestañas horizontales por tema (Top, Tech y ciencia, Finanzas, Arte y cultura, Deportes). Cada ítem es una nota escrita por IA que sintetiza varias fuentes citadas, con imagen grande, y un botón para seguir preguntando sobre esa nota. Podés elegir intereses; el feed se actualiza a diario.",
+   "por_que_funciona": "Combina la ventaja del feed (te trae) con la del chat (podés preguntar). Pero hereda el problema del feed: nunca ves el todo ni sabés por qué ves lo que ves, y es infinito."
+  },
+  {
+   "nombre": "Resumen arriba de los resultados con 'Mostrar más' (AI Overviews)",
+   "descripcion": "Un bloque con fondo de color aparece sobre los diez enlaces azules, con 3 a 6 líneas, un botón 'Mostrar más' que despliega el resto y enlaces inline a las fuentes en forma de tarjetas a la derecha. Google decide cuándo mostrarlo (más en preguntas largas y formuladas como pregunta).",
+   "por_que_funciona": "Elimina el paso de elegir un resultado: la respuesta está antes de la decisión. Funciona para quien busca un dato puntual y es devastador para las fuentes: la sesión termina ahí (26% vs 16%) y los clics bajan a casi la mitad (8% vs 15%)."
+  },
+  {
+   "nombre": "Abstención explícita y matices de certeza",
+   "descripcion": "Los modelos más recientes responden 'no estoy seguro' o 'no encontré una fuente confiable' en vez de inventar, y marcan los datos disputados. OpenAI publicó en sept. 2025 que gpt-5-thinking-mini se abstiene en 52% de las preguntas difíciles de SimpleQA (con 26% de error) contra o4-mini que se abstiene 1% (y se equivoca 75%).",
+   "por_que_funciona": "La confianza en un catálogo de hechos depende más de que no mienta que de que responda todo. Decir 'no sé' o 'en disputa' es lo que una enciclopedia seria hacía con una nota al pie; el chat recién está aprendiendo a hacerlo."
+  },
+  {
+   "nombre": "Respuesta en streaming",
+   "descripcion": "El texto aparece palabra por palabra, con un cursor parpadeante, en vez de esperar a que esté completa. Mientras tanto se puede leer el principio.",
+   "por_que_funciona": "Reduce la latencia percibida y mantiene la atención; también da la sensación de alguien 'pensando' en vivo, que humaniza el canal. Es un truco de percepción, no de contenido, pero explica parte del enganche."
+  }
+ ],
+ "que_funciona": [
+  "La pregunta exacta en lenguaje natural: 'qué país tiene más husos horarios' o 'cuántas Argentinas entran en Rusia' se resuelve en una línea, sin saber dónde buscar ni cómo se llama la cosa.",
+  "El seguimiento: podés preguntar '¿y el más chico?' sin repetir el contexto; el hilo mantiene el tema. Las preguntas sugeridas convierten una respuesta en recorrido.",
+  "Lo personal: con memoria, el sistema sabe que te interesan las banderas con animales o el anime y adapta ejemplos y tono; Claude lo hace con un resumen que podés leer y editar.",
+  "La síntesis: junta diez fuentes en un párrafo. Deep Research hace en 15 minutos lo que a una persona le llevaría una tarde, con citas.",
+  "La comparación a medida: 'compará Japón y Argentina en población, superficie y PBI' sale en una tabla al instante; es lo que las enciclopedias no podían hacer (comparaciones fijas).",
+  "La disponibilidad y la paciencia: a cualquier hora, cualquier nivel, sin juicio; por eso la educación creció en Claude de 9,3% a 12,4% de las conversaciones en un año.",
+  "Las citas: cuando hay búsqueda web, la fuente está a un clic y eso da confianza (aunque casi nadie la abra).",
+  "Tiene final: la respuesta termina. No hay autoplay ni scroll infinito en el chat puro, a diferencia de reels."
+ ],
+ "que_falla": [
+  "La página en blanco: no te trae nada; si no sabés que existe un país con 'fronteras raras' nunca lo vas a preguntar. Los chips de prompts y Pulse existen justamente porque la mayoría abre el chat y no sabe qué pedir.",
+  "Ausencia de serendipia y de 'el todo': nunca ves la lámina completa con las 230 banderas; ves solo la rebanada que preguntaste. Las preguntas de seguimiento son serendipia dirigida, no lateral.",
+  "Alucinaciones en datos duros: en SimpleQA el mejor modelo acierta 62,5% y o3 49,4%; o4-mini se equivoca 75% de las veces porque casi nunca se abstiene. Para un catálogo de hechos (poblaciones, superficies, capitales, qué capítulo adapta cada episodio) eso es inaceptable sin verificación.",
+  "Citas rotas y fuentes mal atribuidas: el Tow Center de Columbia (marzo 2025) probó ocho buscadores con IA y más del 60% de las respuestas sobre artículos reales fueron incorrectas (Perplexity 37%, Grok 3 94%), con URLs inventadas; EBU/BBC (oct. 2025) encontró problemas significativos en el 45% de las respuestas sobre noticias, con Gemini en 76%.",
+  "Tono de certeza uniforme: una respuesta inventada se lee igual que una correcta. La adulación (sycophancy) empeora esto: OpenAI tuvo que revertir GPT-4o en abril de 2025 por complaciente.",
+  "Las respuestas no son comparables entre sí: cada una es prosa distinta; no hay escala común ni orden (el récord de las montañas dibujadas a escala no sale de un chat).",
+  "Mata a las fuentes que lo alimentan: 8% de clics con AI Overview vs 15% sin; 1% dentro del resumen; Wikipedia perdió ~8% de vistas humanas en un año y teme por voluntarios y donantes. El canal consume Wikipedia y Wikidata, que son también la materia prima de estos catálogos.",
+  "Memoria opaca y personalización sin control (ChatGPT, Discover): no sabés por qué te muestra lo que te muestra ni cómo cambiarlo con precisión.",
+  "Dependencia emocional en la minoría que lo usa para compañía: el estudio MIT Media Lab/OpenAI (marzo 2025, ~1.000 personas, 4 semanas) encontró que más uso diario se asocia con más soledad, más dependencia y menos socialización; Common Sense (2025): 31% de los adolescentes encuentra las charlas con IA tan o más satisfactorias que con amigos reales.",
+  "Costo de cómputo y latencia: Deep Research tarda minutos; cada respuesta se regenera, nada queda 'listo' para la próxima persona."
+ ],
+ "evidencia": [
+  {
+   "afirmacion": "Con resumen de IA en Google, la gente hace clic en resultados tradicionales mucho menos y termina la sesión ahí",
+   "dato": "8% de clics a resultados con AI Overview vs 15% sin; 1% de clics en enlaces dentro del resumen; 26% termina la sesión con resumen vs 16% sin. 68.879 búsquedas de 900 adultos de EE.UU., marzo 2025. Publicado 22 jul 2025. [No se pudo abrir hoy: pewresearch.org bloqueado por el proxy; cifras de conocimiento previo del estudio]",
+   "fuente_titulo": "Pew Research Center: Google users are less likely to click on links when an AI summary appears in the results",
+   "url": "https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Los resúmenes de IA aparecen en una minoría de búsquedas y citan sobre todo Wikipedia, YouTube y Reddit",
+   "dato": "Cerca del 18% de las búsquedas mostró AI Overview en marzo de 2025; Wikipedia, YouTube y Reddit sumaron ~15% de las fuentes citadas (cada una ~5%). [No verificado hoy, dominio bloqueado]",
+   "fuente_titulo": "Pew Research Center: Google users are less likely to click on links when an AI summary appears in the results",
+   "url": "https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Wikipedia pierde visitas humanas por los resúmenes de IA y el video social",
+   "dato": "Caída de aproximadamente 8% en vistas de páginas humanas respecto de los mismos meses de 2024, tras reclasificar como bots tráfico detectado en mayo de 2025; la Fundación cita resúmenes de IA en buscadores y plataformas de video, y advierte riesgo para voluntarios y donantes. Post de Marshall Miller, 17 oct 2025. [No se pudo abrir hoy: diff.wikimedia.org bloqueado]",
+   "fuente_titulo": "Wikimedia Diff: New User Trends on Wikipedia",
+   "url": "https://diff.wikimedia.org/2025/10/17/new-user-trends-on-wikipedia/",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "ChatGPT Pulse: primer producto proactivo de OpenAI, finito y curable",
+   "dato": "Lanzado 25 sep 2025 en vista previa para Pro en móvil. Cada noche investiga asincrónicamente a partir de chats, memoria, feedback y apps conectadas opcionales (Gmail, Google Calendar) y entrega a la mañana tarjetas visuales que se pueden abrir, guardar o descartar; botón para 'curar' temas; las tarjetas duran un día salvo que se guarden; descripto como diseñado para terminar y no como feed infinito. [No se pudo abrir hoy: openai.com bloqueado]",
+   "fuente_titulo": "OpenAI: Introducing ChatGPT Pulse",
+   "url": "https://openai.com/index/introducing-chatgpt-pulse/",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "La gente usa ChatGPT sobre todo para preguntar, y cada vez menos para trabajo",
+   "dato": "700 millones de usuarios semanales; 73% de los mensajes no laborales (53% en jun 2024); 49% 'preguntar', 40% 'hacer', 11% 'expresarse'; guía práctica 29%, búsqueda de información 24%, escritura 24%. Paper OpenAI/NBER, 15 sep 2025. [No se pudo abrir hoy: openai.com y nber.org bloqueados]",
+   "fuente_titulo": "OpenAI / NBER: How People Use ChatGPT (Chatterji, Cunningham, Deming et al.)",
+   "url": "https://openai.com/index/how-people-are-using-chatgpt/",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Los modelos alucinan porque los benchmarks premian adivinar; abstenerse reduce el error",
+   "dato": "En SimpleQA: gpt-5-thinking-mini se abstiene 52%, acierta 22%, se equivoca 26%; o4-mini se abstiene 1%, acierta 24%, se equivoca 75%. Publicado 5 sep 2025. [No se pudo abrir hoy: openai.com bloqueado]",
+   "fuente_titulo": "OpenAI: Why language models hallucinate",
+   "url": "https://openai.com/index/why-language-models-hallucinate/",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Precisión en preguntas de dato duro (SimpleQA) de los modelos de OpenAI y Anthropic",
+   "dato": "Tabla oficial: GPT-4.5-preview 62,5%; o3 49,4%; o1 42,6%; GPT-4.1 41,6%; GPT-4o 38,8%; Claude 3.5 Sonnet 28,9%; o4-mini ~20%; GPT-4.1-nano 7,6%. Repo marcado como no actualizado desde julio 2025. [VERIFICADO HOY en github.com]",
+   "fuente_titulo": "GitHub openai/simple-evals: SimpleQA results",
+   "url": "https://github.com/openai/simple-evals",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Incluso resumiendo un documento dado, los modelos inventan",
+   "dato": "Tasa de alucinación al resumir documentos: desde 1,8% (mejor modelo) hasta 24,2% (peor), última actualización 22 sep 2026. [VERIFICADO HOY en github.com]",
+   "fuente_titulo": "Vectara Hallucination Leaderboard",
+   "url": "https://github.com/vectara/hallucination-leaderboard",
+   "anio": "2026"
+  },
+  {
+   "afirmacion": "Los buscadores con IA citan mal las noticias",
+   "dato": "Ocho buscadores con IA probados con 1.600 consultas sobre artículos reales: más del 60% de respuestas incorrectas en conjunto; Perplexity 37%; Grok 3 94%; URLs inventadas; respuestas erróneas con tono seguro. 6 mar 2025. [No se pudo abrir hoy: cjr.org bloqueado]",
+   "fuente_titulo": "Columbia Journalism Review, Tow Center: AI Search Has A Citation Problem",
+   "url": "https://www.cjr.org/tow_center/we-compared-eight-ai-search-engines-theyre-all-bad-at-citing-news.php",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Los asistentes de IA distorsionan noticias casi la mitad de las veces",
+   "dato": "45% de las respuestas con al menos un problema significativo; 31% con problemas de fuentes; 20% con errores de precisión; Gemini 76%. 22 medios públicos, 18 países, 14 idiomas, ~3.000 respuestas. 22 oct 2025. [No se pudo abrir hoy: ebu.ch bloqueado]",
+   "fuente_titulo": "EBU / BBC: News Integrity in AI Assistants",
+   "url": "https://www.ebu.ch/news/2025/10/new-ebu-research-ai-assistants-misrepresent-news-content-45-of-the-time",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Los chatbots ya son fuente de noticias para una minoría, sobre todo jóvenes",
+   "dato": "7% usa chatbots de IA para noticias semanalmente; 15% entre menores de 25; ChatGPT el más usado. ~97.000 encuestados en 48 mercados. 17 jun 2025. [No se pudo abrir hoy: reutersinstitute.politics.ox.ac.uk bloqueado]",
+   "fuente_titulo": "Reuters Institute: Digital News Report 2025",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Los compañeros de IA están extendidos entre adolescentes",
+   "dato": "72% de los adolescentes de EE.UU. (13-17) usó compañeros de IA; 52% regularmente; 33% para interacción social; 31% encuentra esas charlas tan o más satisfactorias que con amigos reales; 24% compartió información personal. n=1.060. 16 jul 2025. [No se pudo abrir hoy: commonsensemedia.org bloqueado]",
+   "fuente_titulo": "Common Sense Media: Talk, Trust, and Trade-Offs: How and Why Teens Use AI Companions",
+   "url": "https://www.commonsensemedia.org/research/talk-trust-and-trade-offs-how-and-why-teens-use-ai-companions",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "El uso afectivo de Claude es una minoría pequeña",
+   "dato": "2,9% de las conversaciones de Claude.ai son afectivas; compañía y roleplay juntos <0,5%; roleplay romántico/sexual <0,1%. 131.484 conversaciones afectivas analizadas de ~4,5 millones. 27 jun 2025. [VERIFICADO HOY]",
+   "fuente_titulo": "Anthropic: How people use Claude for support, advice, and companionship",
+   "url": "https://www.anthropic.com/news/how-people-use-claude-for-support-advice-and-companionship",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "La memoria de Claude es un resumen visible y editable, separado por proyecto",
+   "dato": "Lanzada 11 sep 2025 (Team/Enterprise) y 23 oct 2025 (Pro/Max); Claude genera resúmenes de conversaciones pasadas que se ven y editan en Ajustes o conversando; memoria separada por proyecto; chats de incógnito; importar/exportar memoria. [VERIFICADO HOY]",
+   "fuente_titulo": "Claude blog: Bringing memory to teams at work",
+   "url": "https://claude.com/blog/memory",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Deep Research en Claude: búsquedas encadenadas que tardan minutos",
+   "dato": "Research lanzado 15 abr 2025 (Max/Team/Enterprise; EE.UU., Japón, Brasil): 'múltiples búsquedas que se construyen una sobre otra'. Advanced Research 1 may 2025 (Pro desde 3 jun): hasta 45 minutos, la mayoría entre 5 y 15, 'cientos de fuentes', citas que enlazan al original. [VERIFICADO HOY]",
+   "fuente_titulo": "Claude blog: Research + Advanced Research and Integrations",
+   "url": "https://claude.com/blog/integrations",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Búsqueda web en Claude",
+   "dato": "Anunciada 20 mar 2025 para planes pagos en EE.UU.; global para todos los planes el 27 may 2025; 'citas directas para chequear fuentes'. [VERIFICADO HOY]",
+   "fuente_titulo": "Claude blog: Claude can now search the web",
+   "url": "https://claude.com/blog/web-search",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "El uso educativo de Claude crece y la gente delega más",
+   "dato": "Educación de 9,3% a 12,4% de las conversaciones; ciencia de 6,3% a 7,2%; conversaciones directivas (delegar la tarea completa) de 27% a 39% entre fines de 2024 y agosto 2025. 15 sep 2025. [VERIFICADO HOY]",
+   "fuente_titulo": "Anthropic Economic Index: September 2025 report",
+   "url": "https://www.anthropic.com/research/anthropic-economic-index-september-2025-report",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Escala de AI Overviews y AI Mode",
+   "dato": "I/O 20 may 2025: AI Overviews con 1.500 millones de usuarios mensuales en 200+ países; AI Mode para todo EE.UU.; en EE.UU. e India, +10% de uso en las consultas que muestran AI Overviews. Llamada de resultados 23 jul 2025 (Pichai): 2.000 millones mensuales en AI Overviews y 100 millones en AI Mode. [No se pudo abrir hoy: blog.google bloqueado]",
+   "fuente_titulo": "Google: AI in Search: Going beyond information to intelligence (I/O 2025)",
+   "url": "https://blog.google/products/search/google-search-ai-mode-update/",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Alcance de ChatGPT entre la población",
+   "dato": "34% de los adultos de EE.UU. usó ChatGPT (18% en 2023); 58% entre menores de 30. 25 jun 2025. [No se pudo abrir hoy: pewresearch.org bloqueado]",
+   "fuente_titulo": "Pew Research Center: 34% of U.S. adults have used ChatGPT, about double the share in 2023",
+   "url": "https://www.pewresearch.org/short-reads/2025/06/25/34-of-us-adults-have-used-chatgpt-about-double-the-share-in-2023/",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Más uso diario del chatbot se asocia con más soledad y dependencia",
+   "dato": "Ensayo controlado de MIT Media Lab y OpenAI, ~1.000 participantes, 4 semanas: mayor uso diario se correlaciona con más soledad, más dependencia emocional, uso problemático y menos socialización; los 'power users' son una minoría pequeña. 21 mar 2025. [No se pudo abrir hoy: openai.com bloqueado]",
+   "fuente_titulo": "OpenAI / MIT Media Lab: Early methods for studying affective use and emotional well-being on ChatGPT",
+   "url": "https://openai.com/index/affective-use-study/",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "El tono complaciente es un riesgo reconocido por las propias empresas",
+   "dato": "OpenAI revirtió una actualización de GPT-4o el 29 abr 2025 por 'adulación' (sycophancy): el modelo validaba en exceso y daba respuestas 'excesivamente halagadoras'. [No se pudo abrir hoy: openai.com bloqueado]",
+   "fuente_titulo": "OpenAI: Sycophancy in GPT-4o: what happened and what we're doing about it",
+   "url": "https://openai.com/index/sycophancy-in-gpt-4o/",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Memoria en ChatGPT",
+   "dato": "Anunciada 13 feb 2024 con controles para ver y borrar memorias y Chat temporal; el 10 abr 2025 pasó a referenciar todas las conversaciones pasadas para Plus y Pro. [No se pudo abrir hoy: openai.com bloqueado]",
+   "fuente_titulo": "OpenAI: Memory and new controls for ChatGPT",
+   "url": "https://openai.com/index/memory-and-new-controls-for-chatgpt/",
+   "anio": "2024"
+  },
+  {
+   "afirmacion": "Deep Research de OpenAI",
+   "dato": "Lanzado 2 feb 2025 para Pro (Plus el 25 feb): agente que navega decenas de fuentes durante 5 a 30 minutos y entrega un informe con citas. [No se pudo abrir hoy: openai.com bloqueado]",
+   "fuente_titulo": "OpenAI: Introducing deep research",
+   "url": "https://openai.com/index/introducing-deep-research/",
+   "anio": "2025"
+  }
+ ],
+ "lecciones_para_catalogo": [
+  {
+   "leccion": "IA DETRÁS, no adelante (adaptar, no copiar). Lo que el chat hace mal (datos duros) es justo lo que un catálogo de hechos no puede permitirse: SimpleQA 49-62% en el mejor caso. Separá dos capas: los NÚMEROS y las CLASIFICACIONES duras (población, superficie, capital, año, qué capítulo adapta cada episodio) vienen de Wikidata con su ID de propiedad y nunca del texto generado; Claude solo REDACTA (el resumen de 3 líneas, las 'Tres cosas que no sabías') a partir de esos datos ya fijados, y la cola de revisión humana prioriza todo texto que contenga una cifra.",
+   "aplicacion_concreta": "Pasaporte: ficha modal (bloque 'Datos') y filas Top 10 (el número gigante sale de Wikidata, con mini-etiqueta 'Wikidata · 2024'); Butaca: anexo de episodios (número de capítulo del manga como dato estructurado, no prosa). En el motor común: validador que rechaza cualquier dígito en 'Tres cosas que no sabías' que no coincida con un campo del registro.",
+   "costo": "medio: cambia el pipeline de generación en tanda (prompt con datos inyectados + validador), pero no toca la interfaz."
+  },
+  {
+   "leccion": "Prompts sugeridos como 'preguntas que podés hacerte' (adaptar). La caja vacía del chat se resuelve con chips que muestran qué se puede preguntar; el catálogo tiene el mismo problema cuando alguien abre Pasaporte sin saber qué buscar. En vez de un buscador vacío, mostrá 4 chips con preguntas concretas que ya tienen respuesta en una fila o ficha, elegidos con el azar del día (semilla por fecha) para que cambien a diario sin servidor.",
+   "aplicacion_concreta": "Pasaporte: debajo del buscador en la pantalla de inicio, chips tipo '¿Qué país tiene más husos horarios?', '¿Qué dos banderas son casi iguales?', '¿Cuántas Argentinas entran en Rusia?'; cada chip abre la fila o ficha que responde. Lo mismo en Cosmos ('¿Qué planeta tiene el día más largo?') y Bestiario. Claude genera en tanda 3 preguntas por entrada; el motor sortea 4 por día.",
+   "costo": "bajo: datos estáticos (pregunta → destino) y un sorteo determinista por fecha."
+  },
+  {
+   "leccion": "'Ver también' como preguntas de seguimiento, no como lista de ítems (adaptar de 'Related' de Perplexity/AI Mode). El seguimiento es lo que mejor hace el chat: después de la respuesta te propone el próximo paso. En la ficha, en lugar de solo 'Ver también: Brasil, Chile', ofrecé 3 preguntas de continuación con verbo ('¿Y cuál es el más chico de Sudamérica?', '¿Con quién comparte frontera más larga?') que llevan a otra ficha o a una fila ya ordenada.",
+   "aplicacion_concreta": "Todos los catálogos: ficha modal, bloque final. Las preguntas se generan en tanda por tipo de relación (mismo grupo, extremo opuesto del ranking, 'parecido pero distinto'), no por ítem, así escalan a 230 países sin trabajo manual. Navegable con flechas para TV.",
+   "costo": "bajo: 3 plantillas de pregunta por tipo de relación, rellenadas con datos que ya existen."
+  },
+  {
+   "leccion": "'Hoy' finito y con cierre, estilo Pulse (adaptar; descartar el feed de Discover). Pulse demostró que se puede 'traer' sin feed: pocas tarjetas, elegidas, que terminan ('eso es todo por hoy') y caducan. El catálogo puede imitar el efecto sin servidor ni modelo: una edición diaria determinista por fecha (5 tarjetas: una efeméride, un Top 10, una rareza, una pareja para comparar, una 'de tu lista') con cierre explícito y sin scroll infinito.",
+   "aplicacion_concreta": "Todos: el visor grande de arriba deja de rotar al azar cada 9 segundos y pasa a mostrar 'La edición de hoy' con 5 tarjetas y un punto final ('Mañana hay otra'). La fila 'Un día como hoy' alimenta la primera tarjeta cuando tenga datos. Lo visto hoy se marca en el navegador para que al volver muestre lo que falta.",
+   "costo": "medio: hace falta llenar 'Un día como hoy' (efemérides por país/animal) y una regla de composición diaria; la interfaz ya existe."
+  },
+  {
+   "leccion": "Memoria visible y editable, no inferencia opaca (copiar el modelo de Claude, descartar el de ChatGPT/Discover). Lo que hace tolerable que un sistema infiera tus intereses es poder leerlos y corregirlos. 'Mi lista' y 'Seguir explorando' ya son memoria en el navegador; agregá una pantalla 'Lo que este catálogo sabe de vos' con los intereses inferidos (continentes más abiertos, tipos de fila más usados) como etiquetas que se pueden borrar, y usá eso para ordenar filas y elegir la tarjeta 'de tu lista' del día.",
+   "aplicacion_concreta": "Motor común: pestaña o botón 'Para vos' junto a 'Mi lista'; muestra 5-8 etiquetas inferidas con 'x' para borrar y un botón 'Olvidar todo'. En Pasaporte reordena las filas por continente según lo abierto; en Bestiario sube la fila del grupo más visitado. Todo en localStorage, exportable como JSON (como la memoria de Claude).",
+   "costo": "medio: conteo de eventos ya disponible; falta la pantalla y la regla de reordenamiento."
+  },
+  {
+   "leccion": "Buscador que entiende preguntas sin modelo en vivo (adaptar). La ventaja del chat es que escribís 'bandera con dragón' o 'el más poblado de África' y funciona. Sin servidor no podés correr un modelo, pero podés precomputar: Claude genera en tanda, por entrada y por fila, una lista de alias, sinónimos y preguntas canónicas, y el buscador hace coincidencia difusa contra eso y lleva directo a la fila ordenada o a la ficha.",
+   "aplicacion_concreta": "Pasaporte: buscador global; 'más poblado de África' abre la fila Top 10 filtrada por África; 'dragón' abre la fila 'Banderas con animales' con Bután y Gales resaltados. Butaca: 'capítulo 100 del manga' abre el episodio que lo adapta.",
+   "costo": "medio: generación en tanda de alias (barata) y un índice de búsqueda difusa en el HTML (unos KB por catálogo)."
+  },
+  {
+   "leccion": "Citas discretas en cada dato (copiar tal cual). La fila de fuentes y los superíndices son lo que le da legitimidad al chat, aunque casi nadie los abra (1% de clics). Un catálogo generado por IA necesita más esa señal, no menos: cada cifra con un indicador pequeño ('Wikidata', 'Wikipedia ES') y, al tocarlo, el enlace. También devuelve algo a las fuentes que el canal está vaciando.",
+   "aplicacion_concreta": "Todos: ficha modal, bloque 'Datos' (un ícono por dato) y pie de ficha con 'Fuentes: Wikipedia · Wikidata · Commons' enlazadas. En Top 10, un pie de fila 'Datos: Wikidata, 2024'.",
+   "costo": "bajo: los IDs de Wikidata y los títulos de Wikipedia ya están en el pipeline."
+  },
+  {
+   "leccion": "Abstención honesta en lo disputado (adaptar de la 'abstención' de los modelos recientes). La confianza de un catálogo depende más de no mentir que de responder todo. Donde el dato está en disputa o no existe (capitales en disputa, superficies con territorios reclamados, mitos con versiones contradictorias, episodios de relleno sin capítulo del manga), mostrá explícitamente 'En disputa' o 'Sin equivalente' con una línea de por qué, en vez de elegir una versión y presentarla con tono seguro.",
+   "aplicacion_concreta": "Pasaporte: fila 'Capitales raras' y ficha (campo capital con estado 'disputada'); Creer o no creer: cada mito con 'versiones' en vez de una sola; Butaca: episodios de relleno marcados 'Original del anime' en el anexo. Regla en la cola de revisión: todo registro con bandera 'disputado' pasa por humano.",
+   "costo": "bajo: un estado más en el esquema de datos y una plantilla de texto."
+  },
+  {
+   "leccion": "El anexo completo es tu Deep Research ya hecho (copiar la ambición, descartar el método). Deep Research tarda 15 minutos y produce un informe distinto cada vez. El catálogo gana si lo que la gente le pediría a Deep Research ('todos los episodios de X con qué capítulo adaptan', 'todas las banderas con animales') ya está armado, verificado, completo y comparable, igual para todos. Es la tesis del autor: elegido, ordenado, completo, comparable.",
+   "aplicacion_concreta": "Butaca: el anexo de episodios como pantalla propia (tabla con número, título, arco, capítulos del manga, relleno sí/no, filtrable y ordenable, navegable con teclado); Pasaporte: 'Todas las banderas' en una sola lámina ordenable por color, por figura, por continente. La IA en tanda llena los huecos y la revisión humana cierra.",
+   "costo": "alto: es trabajo de datos (una temporada larga tiene cientos de episodios) y una vista nueva, pero es el núcleo del valor."
+  },
+  {
+   "leccion": "Lo comparable a escala, que el chat no puede dar (copiar de las enciclopedias, no del chat). El chat devuelve prosa; a lo sumo una tabla. El catálogo puede mostrar la montaña dibujada a escala. 'Cuántas Argentinas entran' es la mejor pantalla de Pasaporte justamente porque es comparación visual fija; extendela como patrón de motor.",
+   "aplicacion_concreta": "Pasaporte: 'Cuántas Argentinas entran' con el país elegible por el usuario (tu país como unidad); Bestiario: 'Cuántos humanos pesa' (ballena azul = 30 personas dibujadas); Cosmos: planetas a escala con la Tierra como unidad; Festín: porciones a escala. Un componente común 'X entran en Y' con siluetas repetidas.",
+   "costo": "medio: un componente visual reutilizable más datos que ya existen (superficie, masa)."
+  }
+ ],
+ "anti_lecciones": [
+  "NO pongas un chat adelante como puerta de entrada principal. La caja vacía es el peor punto de partida para explorar: la gente no sabe qué preguntar (por eso existen los chips y Pulse) y nunca ve el todo. Pew midió que con un resumen de IA el 26% termina la sesión ahí y solo el 8% hace clic: el chat cierra el recorrido en vez de abrirlo. Tu ventaja es la lámina completa; un chat la esconde.",
+  "NO generes datos duros al vuelo con un modelo ni confíes en el texto generado para cifras. En SimpleQA el mejor modelo acierta 62,5% y o3 49,4%; o4-mini se equivoca 75% de las veces porque casi nunca se abstiene; el Tow Center encontró más de 60% de respuestas incorrectas sobre artículos reales y EBU/BBC 45% con problemas significativos. Un catálogo con un 10% de poblaciones mal es peor que ningún catálogo.",
+  "NO copies el tono de certeza uniforme ni la adulación. Una alucinación se lee igual que un hecho, y OpenAI tuvo que revertir GPT-4o en abril de 2025 por complaciente. Las 'Tres cosas que no sabías' no pueden sonar igual de seguras cuando el dato está en disputa.",
+  "NO copies el feed de Discover ni la personalización opaca. Discover hereda lo peor del feed (infinito, sin saber por qué ves lo que ves) con la apariencia de rigor del chat. El propio Pulse de OpenAI se definió contra el feed infinito. Tu 'Un día como hoy' debe tener cinco tarjetas y un punto final, no scroll.",
+  "NO entres en el terreno de la compañía ni de la relación. Common Sense (2025): 72% de los adolescentes probó compañeros de IA, 31% encuentra esas charlas tan o más satisfactorias que con amigos reales, 33% habló de cosas serias con la IA en vez de con personas; el ensayo de MIT Media Lab/OpenAI (2025) asocia más uso diario con más soledad y dependencia; en octubre de 2024 la madre de un adolescente de 14 años demandó a Character.AI tras su suicidio. Un catálogo no tiene que 'acompañar': tiene que ser el libro de récords que se abre entre amigos, no el amigo.",
+  "NO dependas de que el usuario formule. El canal entero descansa en que sepas qué pedir; las enciclopedias enganchaban porque no hacía falta. Si tu buscador es la única entrada, replicaste la página en blanco.",
+  "NO vacíes tus propias fuentes. El chat consume Wikipedia sin devolverle visitas (Wikipedia perdió ~8% de vistas humanas en un año y teme por voluntarios y donantes). Tus catálogos nacen de Wikipedia, Wikidata y Commons: enlazá siempre, acreditá la licencia y pensá en cómo mandar gente de vuelta (botón 'Leer en Wikipedia' en cada ficha).",
+  "NO imites la memoria invisible de ChatGPT. Inferir intereses sin mostrarlos produce desconfianza y efectos raros; si guardás algo en el navegador, que la persona lo pueda ver y borrar en una pantalla, como el resumen de memoria de Claude."
+ ],
+ "fuentes": [
+  {
+   "titulo": "Pew Research Center: Google users are less likely to click on links when an AI summary appears in the results (jul 2025)",
+   "url": "https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/"
+  },
+  {
+   "titulo": "Pew Research Center: 34% of U.S. adults have used ChatGPT (jun 2025)",
+   "url": "https://www.pewresearch.org/short-reads/2025/06/25/34-of-us-adults-have-used-chatgpt-about-double-the-share-in-2023/"
+  },
+  {
+   "titulo": "Wikimedia Diff: New User Trends on Wikipedia (oct 2025)",
+   "url": "https://diff.wikimedia.org/2025/10/17/new-user-trends-on-wikipedia/"
+  },
+  {
+   "titulo": "OpenAI: Introducing ChatGPT Pulse (sep 2025)",
+   "url": "https://openai.com/index/introducing-chatgpt-pulse/"
+  },
+  {
+   "titulo": "OpenAI / NBER: How People Use ChatGPT (sep 2025)",
+   "url": "https://openai.com/index/how-people-are-using-chatgpt/"
+  },
+  {
+   "titulo": "OpenAI: Why language models hallucinate (sep 2025)",
+   "url": "https://openai.com/index/why-language-models-hallucinate/"
+  },
+  {
+   "titulo": "OpenAI: Memory and new controls for ChatGPT (feb 2024)",
+   "url": "https://openai.com/index/memory-and-new-controls-for-chatgpt/"
+  },
+  {
+   "titulo": "OpenAI: Introducing deep research (feb 2025)",
+   "url": "https://openai.com/index/introducing-deep-research/"
+  },
+  {
+   "titulo": "OpenAI: Sycophancy in GPT-4o (abr 2025)",
+   "url": "https://openai.com/index/sycophancy-in-gpt-4o/"
+  },
+  {
+   "titulo": "OpenAI / MIT Media Lab: affective use study (mar 2025)",
+   "url": "https://openai.com/index/affective-use-study/"
+  },
+  {
+   "titulo": "GitHub openai/simple-evals (tabla SimpleQA) [abierto hoy]",
+   "url": "https://github.com/openai/simple-evals"
+  },
+  {
+   "titulo": "Vectara Hallucination Leaderboard [abierto hoy]",
+   "url": "https://github.com/vectara/hallucination-leaderboard"
+  },
+  {
+   "titulo": "Anthropic: How people use Claude for support, advice, and companionship (jun 2025) [abierto hoy]",
+   "url": "https://www.anthropic.com/news/how-people-use-claude-for-support-advice-and-companionship"
+  },
+  {
+   "titulo": "Anthropic Economic Index: September 2025 report [abierto hoy]",
+   "url": "https://www.anthropic.com/research/anthropic-economic-index-september-2025-report"
+  },
+  {
+   "titulo": "Claude blog: memoria (sep-oct 2025) [abierto hoy]",
+   "url": "https://claude.com/blog/memory"
+  },
+  {
+   "titulo": "Claude blog: Research (abr 2025) [abierto hoy]",
+   "url": "https://claude.com/blog/research"
+  },
+  {
+   "titulo": "Claude blog: Advanced Research e Integrations (may 2025) [abierto hoy]",
+   "url": "https://claude.com/blog/integrations"
+  },
+  {
+   "titulo": "Claude blog: búsqueda web (mar 2025) [abierto hoy]",
+   "url": "https://claude.com/blog/web-search"
+  },
+  {
+   "titulo": "Google: AI Mode y AI Overviews en I/O 2025 (may 2025)",
+   "url": "https://blog.google/products/search/google-search-ai-mode-update/"
+  },
+  {
+   "titulo": "Reuters Institute: Digital News Report 2025 (jun 2025)",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025"
+  },
+  {
+   "titulo": "Columbia Journalism Review, Tow Center: AI Search Has A Citation Problem (mar 2025)",
+   "url": "https://www.cjr.org/tow_center/we-compared-eight-ai-search-engines-theyre-all-bad-at-citing-news.php"
+  },
+  {
+   "titulo": "EBU / BBC: News Integrity in AI Assistants (oct 2025)",
+   "url": "https://www.ebu.ch/news/2025/10/new-ebu-research-ai-assistants-misrepresent-news-content-45-of-the-time"
+  },
+  {
+   "titulo": "Common Sense Media: Talk, Trust, and Trade-Offs (jul 2025)",
+   "url": "https://www.commonsensemedia.org/research/talk-trust-and-trade-offs-how-and-why-teens-use-ai-companions"
+  },
+  {
+   "titulo": "Microsoft: An AI companion for everyone (Copilot Daily, oct 2024)",
+   "url": "https://blogs.microsoft.com/blog/2024/10/01/an-ai-companion-for-everyone/"
+  }
+ ],
+ "no_encontrado": [
+  "LIMITACIÓN GENERAL DE ESTA CORRIDA: el presupuesto de WebSearch del turno ya estaba agotado cuando arrancó este agente (0 búsquedas ejecutadas), y el proxy de salida de la organización bloqueó casi todos los dominios primarios del alcance: pewresearch.org, openai.com, help.openai.com, diff.wikimedia.org, wikimediafoundation.org, reutersinstitute.politics.ox.ac.uk, blog.google, support.google.com, gemini.google, nngroup.com, cjr.org, ebu.ch, commonsensemedia.org, similarweb.com, semrush.com, ahrefs.com, nber.org, perplexity.ai, arxiv.org, huggingface.co, en.wikipedia.org, techcrunch.com, theverge.com, reuters.com, blogs.microsoft.com, news.microsoft.com. Solo se pudieron abrir github.com y anthropic.com/claude.com (y la portada de microsoft.com). Las cifras de Pew, Wikimedia, OpenAI, Google, Reuters Institute, CJR, EBU y Common Sense están tomadas de conocimiento previo de esos estudios (hasta mediados de 2026) y marcadas como 'no verificado hoy' en cada ítem de evidencia; conviene abrir las URL antes de citarlas en un texto público.",
+  "Perplexity Discover: no se pudo confirmar la fecha exacta en que el feed pasó a ser personalizable por intereses ni el mecanismo interno (si usa el historial de búsqueda además de los intereses elegidos). La descripción del feed por pestañas y notas con fuentes es de observación de producto, no de documentación oficial abierta hoy.",
+  "ChatGPT Pulse: no se pudo confirmar si se extendió a Plus o al plan gratuito después del lanzamiento para Pro (sep 2025) ni cuándo, ni si llegó a la web además del móvil.",
+  "Similarweb/Press Gazette (jul 2025): el dato de que las búsquedas de noticias sin clic pasaron de 56% a 69% tras AI Overviews y de que el tráfico orgánico a medios cayó de ~2.300 a ~1.700 millones de visitas no pudo verificarse ni se encontró la URL exacta; no se incluyó en evidencia.",
+  "Google: la afirmación de Liz Reid (ago 2025) de que el volumen total de clics orgánicos se mantuvo estable año contra año no pudo verificarse; tampoco la proporción de consultas que muestran AI Overviews según Semrush o Ahrefs (~13% de consultas en EE.UU.; caída de CTR del ~34% para el primer resultado).",
+  "Nielsen Norman Group: no se pudo abrir ningún artículo sobre prompts sugeridos / 'articulation barrier'; la explicación de la barrera de articulación se basa en el concepto conocido de Jakob Nielsen (2023), sin URL verificada.",
+  "Gemini: no se pudieron confirmar las fechas de la memoria de Gemini (recordar intereses en Gemini Advanced, nov 2024; 'contexto personal' automático, ago 2025) ni de los chats temporales.",
+  "Copilot: microsoft.com era accesible pero las URL probadas del anuncio 'An AI companion for everyone' (oct 2024) y del Copilot Fall Release (23 oct 2025, Mico, memoria y personalización, Groups) redirigieron a portadas; los detalles de Copilot Daily y Copilot Discover quedaron sin verificar.",
+  "Cifras 2026: no se pudo buscar ningún dato posterior a octubre de 2025 (usuarios semanales de ChatGPT, nuevas mediciones de Pew o Wikimedia, evolución de Pulse o AI Mode), así que la foto del canal está fechada a fines de 2025 aunque hoy sea 2026-10-06.",
+  "Demanda contra Character.AI (Megan Garcia, oct 2024): mencionada en anti-lecciones por conocimiento del caso; no se pudo abrir una fuente periodística hoy."
+ ]
+}

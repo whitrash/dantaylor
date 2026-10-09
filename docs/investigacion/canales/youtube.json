@@ -1,0 +1,477 @@
+{
+ "canal": "YouTube como forma de llegar a información (Inicio recomendado, Suscripciones, Shorts, Tendencias/Charts, listas, capítulos, autoplay y \"Siguiente\", Mix, miniaturas y títulos, canales-enciclopedia, Top 10, video ensayo, \"Ver más tarde\", historial)",
+ "expectativa_usuario": "\"Que alguien me explique algo con ganas, o que me entretengan sin tener que elegir: abro, miro la miniatura que más me llama y me dejo llevar.\"",
+ "modo_humano": "Los cuatro modos conviven, pero con pesos muy distintos. EXPLORAR es el modo dominante y el que YouTube optimiza: más del 70 % del tiempo de visualización llega por recomendación (Mohan, CES 2018), Inicio y Shorts te traen cosas que no pediste. INVESTIGAR es el segundo: según Pew (2018), el 51 % de los usuarios adultos de EE. UU. dice que YouTube es \"muy importante\" para aprender a hacer cosas que nunca hizo, y el buscador más los canales-enciclopedia (Kurzgesagt, Vsauce, Veritasium) y los capítulos (2020) son las herramientas de ese modo; el video ensayo es la forma larga de \"investigar entreteniéndose\". COMUNICARSE existe (comentarios, compartir, comunidad del canal) pero es secundario y asimétrico: uno habla, millones miran. ACOMPAÑARSE es el modo silencioso y creciente: autoplay de fondo, vlogs, YouTube en la TV del living (12,5 % de todo el tiempo de TV en EE. UU. según Nielsen, mayo de 2025), listas y Mix que suenan solos. YouTube es exploración asistida por máquina con una capa de investigación encima.",
+ "unidad": "El video, envuelto en su \"carátula\" (miniatura + título + duración + canal + antigüedad), que es lo que realmente se elige. Debajo del video aparecieron sub-unidades: el capítulo (2020, índice interno con timestamps) y el Short (vertical, hasta 3 minutos desde octubre de 2024). Encima del video hay super-unidades: la lista de reproducción (colección ordenada con \"siguiente\"), el Mix (lista infinita generada desde una semilla) y el canal (la \"colección del autor\"). El historial y \"Ver más tarde\" son unidades de intención personal: lo visto y lo pendiente.",
+ "quien_decide": "Sobre todo el algoritmo: desde 2018 YouTube reconoce que más del 70 % del tiempo de visualización viene de sus recomendaciones. La persona decide en el margen restante: buscador, suscripciones (feed cronológico de canales que eligió), listas, historial, \"Ver más tarde\", y controles (\"No me interesa\", \"No recomendar canal\") que, según Mozilla (2022), apenas funcionan. El creador decide el envase (miniatura, título, capítulos, pantalla final) y compite por el clic y por la retención. El editor casi desapareció: en julio de 2025 YouTube eliminó la página Tendencias (la única vitrina común, lanzada en 2015) y la reemplazó por YouTube Charts automáticos por categoría. La comunidad influye por señales agregadas (likes, encuestas, suscripciones), no por curaduría. El azar no existe como botón; el \"Mix\" es lo más cercano, y es azar dirigido.",
+ "tiene_final": "No. Inicio es una grilla infinita, Shorts es un feed vertical sin fondo, y el autoplay encadena un video con \"Siguiente\" y una cuenta regresiva. Los únicos finales reales son el último video de una lista de reproducción (y aun ahí aparecen sugerencias) y la pantalla final de un video (los últimos 5 a 20 segundos, que el creador usa para derivar a otro video propio). El efecto: sesiones largas y la sensación de \"nunca ver el todo\"; YouTube mismo reconoció el costo cuando en 2021 apagó el autoplay por defecto para menores de 18 y activó por defecto los recordatorios de descanso y de hora de dormir. Un catálogo puede, al contrario, ofrecer finales: la lámina completa de banderas se termina de ver, y eso es parte del placer.",
+ "mecanismo": "POR DENTRO. El sistema de recomendación que YouTube describió en RecSys 2016 (Covington, Adams y Sargin, \"Deep Neural Networks for YouTube Recommendations\") es un embudo de dos etapas: una red de \"generación de candidatos\" toma el historial de la persona (videos vistos, búsquedas, datos demográficos) y reduce el corpus entero a unos cientos de videos; una segunda red de \"ranking\" puntúa esos cientos con muchas más señales y entrega decenas, ordenados. El objetivo del ranking no es el clic: el paper dice textualmente que \"ordenar por tasa de clics suele promover videos engañosos que la persona no termina (clickbait), mientras que el tiempo de visualización captura mejor el interés\", y que la función final es \"una función simple del tiempo de visualización esperado por impresión\". El paper también incluye la \"edad del ejemplo\" para empujar contenido fresco (se suben \"muchas horas de video por segundo\") y reconoce que la elección de miniatura cambia la probabilidad de clic de un mismo video. En RecSys 2019 (Zhao et al., \"Recommending What Video to Watch Next\") YouTube mostró el paso siguiente: un modelo multitarea que separa \"objetivos de engagement\" (clics, cuánto se mira) de \"objetivos de satisfacción\" (likes, dejar una calificación en la recomendación) y agrega una \"torre\" aparte para descontar el sesgo de posición (la gente hace clic en lo que está arriba porque está arriba). El post oficial de Cristos Goodrow (15/9/2021) lo traduce a lenguaje de producto: las señales son clics, tiempo de visualización, respuestas a encuestas, compartidos, likes y dislikes; miden \"valued watchtime\", el tiempo que la persona misma califica con 4 o 5 estrellas en encuestas de 1 a 5, y un modelo predice esas respuestas para todos los que no contestaron.\n\nPOR FUERA. Lo que la persona ve es una grilla de \"carátulas\": miniatura, título, canal, vistas, antigüedad, duración en la esquina. En Inicio hay chips de filtro arriba (Todo, Música, Subidos recientemente, Nuevo para ti) y filas temáticas; en la página de un video, una columna lateral con \"Siguiente\" y recomendaciones relacionadas, el autoplay encendido por defecto para adultos, y la pantalla final del creador. La pestaña Suscripciones es lo único cronológico y elegido por la persona. Shorts es otro régimen: pantalla completa vertical, un video por pantalla, se desliza sin leer título ni elegir, y el algoritmo decide el siguiente sin mostrarte alternativas. Los capítulos (2020) dividen la barra de progreso en segmentos con nombre: la descripción lleva una lista de timestamps que empieza en 00:00, con al menos tres marcas en orden y capítulos de 10 segundos como mínimo; si el creador no los pone, YouTube los genera automáticamente. Las listas de reproducción muestran un panel \"3/12\" con autoplay, mezcla y bucle; el Mix es una lista sin fin generada desde un video semilla. Historial, \"Ver más tarde\" y la barra roja de progreso sobre la miniatura (\"seguir viendo\") son la memoria personal del sistema.\n\nEL MERCADO DE LA ATENCIÓN. Como el ranking premia que la gente abra y se quede, el creador optimiza la carátula para que la toquen y el contenido para que no se vayan. YouTube cerró el circuito con \"Test & Compare\" (2024): el creador sube hasta tres miniaturas, YouTube las muestra a públicos parejos y elige la ganadora por \"watch time share\", no por tasa de clics, para no premiar miniaturas que engañan; en 2025 agregó la prueba de títulos. Derek Muller (Veritasium) lo explicó desde adentro en \"Clickbait is Unreasonably Effective\" (17/8/2021): un título y una miniatura que prometen algo concreto describen mejor el video que una etiqueta de tema, y por eso funcionan incluso para contenido serio. El riesgo documentado es la deriva: en el \"random walk\" de Pew (2018), siguiendo 174.117 veces la recomendación \"Siguiente\" durante cinco pasos, el video promedio pasó de 9:31 a 14:50 minutos y se volvió cada vez más popular; el sistema converge hacia lo largo y lo masivo.\n\nQUÉ PASÓ CON LO COMÚN. En julio de 2025 YouTube eliminó la página Tendencias y la lista \"Trending Now\". Su argumento textual: \"cuando lanzamos Tendencias en 2015, la respuesta a 'qué es tendencia' era mucho más simple de capturar con una sola lista de videos virales de los que todos hablaban; hoy las tendencias son muchos videos creados por muchos fandoms, y hay más micro-tendencias disfrutadas por comunidades diversas que nunca\". Dijo además que el tráfico a Tendencias había caído \"significativamente\" en cinco años. Lo reemplazó por YouTube Charts por categoría (videos musicales, podcasts semanales, tráilers de películas) y por las recomendaciones personalizadas. Es la rendición de lo editorial-común frente a lo personal-algorítmico: ya no hay una vitrina que todos vean igual.",
+ "historia": "2005: nace YouTube; 2006: lo compra Google. 2010: el paper \"The YouTube Video Recommendation System\" (Davidson et al., RecSys 2010) describe el primer recomendador, basado en co-visitas (\"quien vio esto vio aquello\"). 2010: Vsauce (Michael Stevens, 24/6/2010) y, en 2011, Veritasium (Derek Muller, canal creado 21/7/2010, primeros videos en 2011) inauguran el canal-enciclopedia con títulos-pregunta. 2012 (marzo): YouTube cambia el ranking de recomendaciones de clics/vistas a tiempo de visualización; 10/8/2012 lo hace público el post \"YouTube Now: Why We Focus on Watch Time\"; 12/10/2012 el buscador sigue el mismo criterio. 2013: nace Kurzgesagt (Philipp Dettmer, Múnich). 2014: \"Every Frame a Painting\" populariza el video ensayo. 2015: se lanza la página Tendencias; el autoplay \"Siguiente\" se vuelve estándar. 2016: Covington et al. publican la arquitectura de dos etapas con redes neuronales (RecSys 2016), optimizando tiempo de visualización esperado. Enero de 2018: Neal Mohan dice en CES que más del 70 % del tiempo de visualización viene de recomendaciones y que se miran más de mil millones de horas por día; febrero-marzo de 2018: Guillaume Chaslot (The Guardian), Jack Nicas (WSJ) y Zeynep Tufekci (NYT, \"YouTube, the Great Radicalizer\") denuncian la deriva del autoplay hacia lo extremo; noviembre de 2018: Pew publica el \"random walk\" (los videos recomendados se alargan y se vuelven más populares). 2019: paper multitarea de RecSys 2019 con objetivos de satisfacción además de engagement; YouTube anuncia reducción de recomendaciones de \"contenido límite\" (las \"Cuatro R\"). Marzo de 2019: Kurzgesagt borra dos videos propios y publica \"¿Podés confiar en Kurzgesagt?\", fijando el estándar de fuentes publicadas por video. Mayo de 2020: llegan los capítulos de video; septiembre de 2020: Shorts en beta en India, marzo de 2021 en EE. UU., 13/7/2021 beta global. 2021: Mozilla \"YouTube Regrets\" (71 % de los videos lamentados fueron recomendados); agosto de 2021: autoplay apagado por defecto para menores de 18; 15/9/2021: Goodrow explica \"valued watchtime\" y las encuestas. Septiembre de 2022: Mozilla \"Does This Button Work?\" con ~20.000 voluntarios muestra que los controles de la persona casi no cambian las recomendaciones. 2023: Science Advances (Chen et al.) encuentra que en 2020 el algoritmo ya no mandaba a \"madrigueras\" y que la exposición extrema llega por suscripciones y links externos. Febrero de 2023: Neal Mohan CEO. 2024: \"Test & Compare\" de miniaturas por watch time share; 15/10/2024: Shorts hasta 3 minutos. Mayo de 2025: Nielsen informa que el streaming supera a TV abierta y cable juntos por primera vez, con YouTube en 12,5 % de todo el tiempo de TV en EE. UU.; junio de 2025: Shorts supera 200 mil millones de vistas diarias. 10/7/2025: YouTube anuncia el fin de Tendencias y la lista \"Trending Now\", reemplazadas por YouTube Charts; 21/7/2025 cambia también el chart \"mostPopular\" de la API.",
+ "patrones_ux": [
+  {
+   "nombre": "La carátula: miniatura + título + duración + canal + antigüedad",
+   "descripcion": "Cada video se presenta como una tarjeta 16:9 con imagen elegida por el autor (no un fotograma al azar), título de una línea, nombre del canal con avatar, cifra de vistas, antigüedad y la duración en la esquina inferior derecha. En la grilla todas las tarjetas tienen el mismo tamaño; la jerarquía la da la imagen.",
+   "por_que_funciona": "Se elige con la vista, no leyendo. La miniatura promete y la duración fija la expectativa de inversión (\"son 12 minutos\"). Veritasium (2021) lo resume: una carátula que promete algo concreto describe mejor el contenido que una etiqueta de tema. YouTube cerró el circuito con Test & Compare (2024), que elige la miniatura ganadora por watch time share, no por clics, para que la promesa se cumpla."
+  },
+  {
+   "nombre": "Grilla infinita con chips de filtro arriba",
+   "descripcion": "Inicio es una grilla de 3 a 5 columnas que se carga sin fin al bajar. Arriba, una fila horizontal de chips (\"Todo\", \"Música\", \"Subidos recientemente\", \"Nuevo para ti\", temas detectados en tu historial) filtra la misma grilla sin cambiar de página.",
+   "por_que_funciona": "El chip es una decisión barata (un toque, reversible) que le da a la persona la sensación de dirigir sin que tenga que escribir ni elegir una sección. \"Nuevo para ti\" es el escape explícito del filtro burbuja. El costo: no hay final ni mapa del total."
+  },
+  {
+   "nombre": "\"Siguiente\" con autoplay y cuenta regresiva",
+   "descripcion": "Al terminar un video aparece una tarjeta grande del siguiente con un anillo de cuenta regresiva (unos segundos) y el botón Cancelar; el interruptor de autoplay vive en la barra del reproductor. En la columna lateral, el primer ítem es siempre \"Siguiente\" y debajo los relacionados.",
+   "por_que_funciona": "Convierte el final de cada unidad en el principio de la próxima y traslada el esfuerzo de elegir al de interrumpir. Es el patrón que explica el tiempo de sesión y también la deriva hacia lo largo y lo popular medida por Pew (2018). YouTube lo apagó por defecto para menores de 18 (2021): reconocimiento de que el patrón tiene costo."
+  },
+  {
+   "nombre": "Capítulos: barra de progreso segmentada con índice",
+   "descripcion": "Desde 2020 la barra roja se divide en segmentos con nombre; al pasar el cursor se ve el título del capítulo y una miniatura; en escritorio un panel lateral lista los capítulos como un índice y en celular se abre con un toque sobre el nombre del capítulo actual. Se crean con timestamps en la descripción (empiezan en 00:00, mínimo tres, mínimo 10 segundos cada uno) o los genera YouTube automáticamente.",
+   "por_que_funciona": "Hace del video un documento consultable: se puede saltar a \"la parte que me interesa\" y ver de antemano la estructura, como el índice de un libro. Reduce el abandono porque la persona ve que lo que busca está más adelante."
+  },
+  {
+   "nombre": "Lista de reproducción con panel \"3 / 12\"",
+   "descripcion": "Una colección ordenada por el autor (o la persona) se reproduce con un panel lateral que muestra el título de la lista, la posición actual sobre el total, los próximos ítems, y botones de mezclar, repetir y guardar. Al terminar un ítem pasa al siguiente sin cuenta regresiva.",
+   "por_que_funciona": "Es la única estructura de YouTube con principio, orden y final visibles: la persona sabe cuánto falta y puede completar algo. Convierte videos sueltos en un curso, una serie o un recorrido curado. Es lo más parecido a la enciclopedia que el autor describe."
+  },
+  {
+   "nombre": "Shorts: un ítem por pantalla, deslizar, sin elegir",
+   "descripcion": "Feed vertical a pantalla completa; cada deslizamiento trae un video nuevo que empieza solo; no hay grilla, ni títulos legibles de antemano, ni \"ver todo\". Los botones (like, comentar, compartir) están a la derecha y el audio y el canal abajo.",
+   "por_que_funciona": "Elimina el costo de decidir por completo: el único gesto es \"otro\". Es el formato de más escala (200 mil millones de vistas diarias en 2025) y el que más tensiona la tesis del autor: nunca se ve el todo, no hay orden ni comparación, solo flujo."
+  },
+  {
+   "nombre": "Suscripciones: el único feed cronológico, con campana",
+   "descripcion": "Pestaña aparte con los videos de los canales elegidos, ordenados por fecha, con la opción de ver en lista o grilla; la campana por canal pide notificación de cada subida.",
+   "por_que_funciona": "Es el contrato explícito persona-fuente: \"esto lo pedí yo\". Da previsibilidad y sensación de control en un sistema que, por lo demás, decide solo. YouTube admite que las recomendaciones mueven más visualización que las suscripciones, pero mantiene la pestaña porque sostiene la confianza."
+  },
+  {
+   "nombre": "Historial, \"Ver más tarde\" y barra roja de \"seguir viendo\"",
+   "descripcion": "La Biblioteca separa lo visto (historial, con buscador y botón de pausar/borrar), lo pendiente (\"Ver más tarde\", guardado desde la tarjeta sin abrir el video) y lo empezado (miniaturas con una barra roja de progreso). Todo se guarda en la cuenta.",
+   "por_que_funciona": "Distingue tres intenciones distintas que suelen mezclarse: recordar, postergar y retomar. El guardado desde la tarjeta (menú de tres puntos) permite decidir sin interrumpir la exploración."
+  },
+  {
+   "nombre": "Controles de recomendación en el menú de tres puntos",
+   "descripcion": "Cada tarjeta tiene un menú con \"No me interesa\", \"No recomendar este canal\", \"Guardar en Ver más tarde\" y \"Compartir\". El pulgar abajo del video también se presenta como señal de ajuste.",
+   "por_que_funciona": "Da la sensación de ajuste fino sin salir del flujo. Pero Mozilla (2022), con ~20.000 voluntarios, concluyó que estos controles \"en gran medida no logran\" frenar recomendaciones no deseadas: el patrón funciona como válvula de frustración más que como mando real. Lección: si ofrecés un control, tiene que cambiar lo que se ve de verdad."
+  },
+  {
+   "nombre": "Cuenta regresiva Top 10 (WatchMojo, herencia de la TV)",
+   "descripcion": "Un video de 10 a 15 minutos cuenta de atrás para adelante (10, 9, 8... 1) ítems de un tema, con el número gigante en pantalla, un criterio enunciado al principio, \"menciones honoríficas\" antes del 10 y el #1 reservado como clímax. WatchMojo se define como \"productor de contenido de referencia en formato Top 10\" y tiene una página donde el público sugiere y vota temas.",
+   "por_que_funciona": "La cuenta regresiva da orden, comparación y final: tres de las cuatro cualidades de la enciclopedia de los 90. El número grande se lee desde la miniatura y el #1 retenido mantiene a la gente hasta el final; el tema por video (\"los 10 animales más veloces\") es exactamente \"un tema por día\" de Animal Planet."
+  }
+ ],
+ "que_funciona": [
+  "La carátula como unidad de elección: una imagen pensada más una promesa concreta en el título; la gente decide con la vista y la duración visible fija la expectativa.",
+  "La corrección de 2012: optimizar por tiempo de visualización en vez de clics mató al clickbait puro; la de 2018-2021 (encuestas, \"valued watchtime\", objetivos de satisfacción separados del engagement) muestra que medir satisfacción declarada es posible a escala.",
+  "Los capítulos (2020): el video deja de ser una caja negra y se vuelve consultable como un índice; es la función que más acerca YouTube a \"investigar\".",
+  "Las listas de reproducción: la única estructura con orden y final visibles; convierten lo suelto en recorrido y permiten completar.",
+  "La pestaña Suscripciones, cronológica y elegida: sostiene la confianza aunque mueva menos visualización que las recomendaciones.",
+  "Los canales-enciclopedia (Kurzgesagt, Vsauce, Veritasium): títulos-pregunta, un tema por video, fuentes publicadas (Kurzgesagt desde 2019), y la figura de \"alguien que te explica con ganas\"; Kurzgesagt supera los 24 millones de suscriptores (nov. 2025) con unos 310 videos, prueba de que menos y mejor funciona.",
+  "El formato cuenta regresiva (WatchMojo, \"The Most Extreme\"): orden, comparación, final y clímax en el #1; el público sugiere temas.",
+  "El video ensayo: la forma larga de aprender entreteniéndose; demuestra que hay demanda de 20 a 60 minutos de argumento sostenido si la carátula promete bien.",
+  "\"Ver más tarde\", historial y la barra de progreso: separar recordar, postergar y retomar, y guardar desde la tarjeta sin abrir.",
+  "Test & Compare (2024): decidir la portada por \"abren y se quedan\" y no por \"abren\"; alinea el incentivo del autor con la satisfacción de la persona."
+ ],
+ "que_falla": [
+  "No hay final ni mapa del total: Inicio y Shorts son infinitos; nunca se ve \"la lámina completa\". Es exactamente lo contrario de la enciclopedia ordenada y comparable.",
+  "Deriva hacia lo largo y lo popular: en el \"random walk\" de Pew (2018), siguiendo \"Siguiente\" cinco veces el video promedio pasó de 9:31 a 14:50 minutos y se volvió más masivo. El sistema converge y empobrece la cola larga.",
+  "Los controles de la persona casi no funcionan: Mozilla (2022, ~20.000 voluntarios) concluyó que \"No me interesa\", \"No recomendar canal\", el dislike y borrar del historial \"en gran medida no logran\" frenar recomendaciones no deseadas; y en 2021 el 71 % de los videos que los voluntarios lamentaron habían sido recomendados por YouTube.",
+  "Lo común desapareció: al eliminar Tendencias (2025) ya no hay una vitrina compartida; cada persona ve un YouTube distinto y pierde la referencia de \"lo que todos vieron\".",
+  "El clickbait no murió, se profesionalizó: la carátula se optimiza con A/B testing; títulos y caras exageradas siguen siendo la norma, incluso en divulgación.",
+  "Shorts fragmenta: sin títulos legibles, sin orden ni comparación; es consumo sin estructura. YouTube sostiene que no canibaliza lo largo, pero la discusión entre creadores sigue abierta y no hay cifra pública independiente.",
+  "Exposición a falsedades: en 2018 el 63 % de los usuarios adultos de EE. UU. decía ver \"frecuentemente\" o \"a veces\" videos que parecen obviamente falsos (Pew).",
+  "Opacidad: el ranking es una función que \"se ajusta constantemente con pruebas A/B\" (Covington 2016); nadie fuera de YouTube puede explicar por qué ve lo que ve.",
+  "El autoplay como default: tuvo que apagarse para menores de 18 (2021) y acompañarse de recordatorios de descanso y de hora de dormir; el patrón admite costo de atención y sueño."
+ ],
+ "evidencia": [
+  {
+   "afirmacion": "Más del 70 % del tiempo de visualización en YouTube viene de recomendaciones; se miran más de mil millones de horas por día.",
+   "dato": "Neal Mohan, entonces CPO, en CES, 10 de enero de 2018: \"more than 70 percent of the time you spend watching\" (cita verificada vía referencias que la reproducen en GitHub; la URL de CNET no se pudo abrir en esta corrida).",
+   "fuente_titulo": "CNET, Joan E. Solsman: \"YouTube's AI is the puppet master over most of what you watch\" / \"CES 2018: YouTube's AI recommendations drive 70 percent of viewing\"",
+   "url": "https://www.cnet.com/tech/services-and-software/youtube-ces-2018-neal-mohan/",
+   "anio": "2018"
+  },
+  {
+   "afirmacion": "YouTube pasó de optimizar por clics/vistas a optimizar por tiempo de visualización en 2012.",
+   "dato": "Post \"YouTube Now: Why We Focus on Watch Time\" (Eric Meyerson), 10 de agosto de 2012; el re-ranking de recomendaciones ya estaba activo (~marzo 2012) y el buscador siguió el 12 de octubre de 2012 (fecha del buscador vía línea de tiempo secundaria; URL no abierta en esta corrida).",
+   "fuente_titulo": "YouTube Creator Blog: \"YouTube Now: Why We Focus on Watch Time\"",
+   "url": "https://youtube-creators.googleblog.com/2012/08/youtube-now-why-we-focus-on-watch-time.html",
+   "anio": "2012"
+  },
+  {
+   "afirmacion": "El ranking de YouTube predice tiempo de visualización esperado y no probabilidad de clic, para evitar clickbait.",
+   "dato": "Texto verificado en el PDF: \"Ranking by click-through rate often promotes deceptive videos that the user does not complete ('clickbait') whereas watch time better captures engagement\"; \"Our final ranking objective ... is generally a simple function of expected watch time per impression\". Arquitectura de dos etapas: candidatos (cientos) y ranking (decenas).",
+   "fuente_titulo": "Covington, Adams, Sargin: \"Deep Neural Networks for YouTube Recommendations\", RecSys 2016 (PDF leído desde una copia en GitHub)",
+   "url": "https://research.google/pubs/deep-neural-networks-for-youtube-recommendations/",
+   "anio": "2016"
+  },
+  {
+   "afirmacion": "Desde 2019 el ranking separa objetivos de engagement y de satisfacción (encuestas, likes) y corrige el sesgo de posición.",
+   "dato": "Texto verificado en el PDF: \"1) engagement objectives, such as user clicks, and degree of engagement with recommended videos; 2) satisfaction objectives, such as user liking a video on YouTube, and leaving a rating on the recommendation\"; \"shallow tower to model and remove selection bias\" (position bias). RecSys '19, Copenhague, 16-20 de septiembre de 2019, DOI 10.1145/3298689.3346997.",
+   "fuente_titulo": "Zhao et al.: \"Recommending What Video to Watch Next: A Multitask Ranking System\", RecSys 2019 (PDF leído desde una copia en GitHub)",
+   "url": "https://research.google/pubs/recommending-what-video-to-watch-next-a-multitask-ranking-system/",
+   "anio": "2019"
+  },
+  {
+   "afirmacion": "YouTube mide \"valued watchtime\" con encuestas de 1 a 5 estrellas y usa clics, tiempo, encuestas, compartidos, likes y dislikes como señales.",
+   "dato": "Cristos Goodrow, VP de Ingeniería, 15 de septiembre de 2021: \"we measure what we call 'valued watchtime'... through user surveys that ask you to rate the video you watched from one to five stars... Only videos that you rate highly with four or five stars are counted as valued watchtime\" (citas verificadas en copias de GitHub; URL bloqueada en esta corrida).",
+   "fuente_titulo": "YouTube Official Blog: \"On YouTube's recommendation system\"",
+   "url": "https://blog.youtube/inside-youtube/on-youtubes-recommendation-system/",
+   "anio": "2021"
+  },
+  {
+   "afirmacion": "YouTube eliminó la página Tendencias y la lista Trending Now en julio de 2025 y las reemplazó por YouTube Charts por categoría.",
+   "dato": "Anunciado el jueves 10 de julio de 2025; Tendencias había sido lanzada en 2015; YouTube dijo que su tráfico cayó \"significativamente\" en los últimos cinco años; Charts: Trending Music Videos, Weekly Top Podcast Shows, Trending Movie Trailers (texto del artículo verificado en una copia archivada en GitHub).",
+   "fuente_titulo": "TechCrunch: \"YouTube is getting rid of its Trending page and Trending Now list\"",
+   "url": "https://techcrunch.com/2025/07/10/youtube-is-getting-rid-of-its-trending-page-and-trending-now-list/",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Justificación oficial del fin de Tendencias: lo editorial-común frente a lo personal.",
+   "dato": "Cita del anuncio de YouTube: \"Back when we first launched the Trending page in 2015, the answer to 'What's trending?' was a lot simpler to capture with a singular list of viral videos that everyone was talking about. But today, trends consist of many videos created by many fandoms, and there are more micro-trends enjoyed by diverse communities than ever before.\" Publicado 10 de julio de 2025.",
+   "fuente_titulo": "The Verge: \"YouTube is removing its Trending page\" (Emma Roth)",
+   "url": "https://www.theverge.com/news/704222/youtube-trending-page-removal-charts",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Siguiendo \"Siguiente\" cinco veces, los videos recomendados se alargan y se vuelven más populares.",
+   "dato": "174.117 \"random walks\" de cinco pasos desde videos de canales en inglés con al menos 250.000 suscriptores, vía API pública, 18 de julio al 29 de agosto de 2018; duración promedio: inicio 9:31, 1.ª recomendación 12:18, 2.ª 13:28, 3.ª 14:12, 4.ª 14:50 (datos del gráfico verificados en un dataset de GitHub que reproduce las figuras de Pew).",
+   "fuente_titulo": "Pew Research Center: \"Many Turn to YouTube for Children's Content, News, How-To Lessons\"",
+   "url": "https://www.pewresearch.org/internet/2018/11/07/many-turn-to-youtube-for-childrens-content-news-how-to-lessons/",
+   "anio": "2018"
+  },
+  {
+   "afirmacion": "YouTube se usa sobre todo para aprender a hacer cosas; además, la mayoría ve videos que parecen falsos.",
+   "dato": "Encuesta a adultos de EE. UU., 29 de mayo al 11 de junio de 2018: 51 % de los usuarios dice que YouTube es \"muy importante\" para aprender a hacer cosas que nunca hizo; 28 % para pasar el tiempo; 19 % para decidir una compra; 19 % para entender lo que pasa en el mundo. 63 % ve \"frecuentemente\" (15 %) o \"a veces\" (48 %) videos que parecen obviamente falsos.",
+   "fuente_titulo": "Pew Research Center: \"Many Turn to YouTube for Children's Content, News, How-To Lessons\"",
+   "url": "https://www.pewresearch.org/internet/2018/11/07/many-turn-to-youtube-for-childrens-content-news-how-to-lessons/",
+   "anio": "2018"
+  },
+  {
+   "afirmacion": "La mayoría de los videos que la gente lamenta haber visto fueron recomendados por YouTube.",
+   "dato": "\"71% of all Regret reports came from videos recommended to our volunteers and recommended videos were 40% more likely to be regretted than videos searched for\" (texto verificado en el repositorio de localización de Mozilla).",
+   "fuente_titulo": "Mozilla Foundation: \"YouTube Regrets: A crowdsourced investigation into YouTube's recommendation algorithm\"",
+   "url": "https://foundation.mozilla.org/en/youtube/findings/",
+   "anio": "2021"
+  },
+  {
+   "afirmacion": "Los controles de la persona (dislike, \"No me interesa\", \"No recomendar canal\", borrar del historial) casi no cambian las recomendaciones.",
+   "dato": "Estudio con \"20.000 seguidores de Mozilla\" (RegretsReporter), informe \"Does This Button Work? Investigating YouTube's ineffective user controls\", septiembre de 2022; el título del comunicado de Mozilla dice que los controles \"largely fail to stop unwanted recommendations\" (títulos y cifra de participantes verificados en repositorios de Mozilla; los porcentajes por botón no se pudieron verificar en esta corrida).",
+   "fuente_titulo": "Mozilla Foundation: \"Mozilla Investigation: YouTube's Dislike Button, Other User Controls Largely Fail to Stop Unwanted Recommendations\"",
+   "url": "https://www.mozillafoundation.org/en/blog/mozilla-investigation-youtubes-dislike-button-other-user-controls-largely-fail-to-stop-unwanted-recommendations/",
+   "anio": "2022"
+  },
+  {
+   "afirmacion": "En 2020 el algoritmo ya no empujaba a \"madrigueras\"; la exposición a canales extremistas llega por suscripciones y links externos y se concentra en pocos usuarios.",
+   "dato": "Datos conductuales + encuesta, muestra representativa 2020, n = 1.181: \"exposure to alternative and extremist channel videos on YouTube is heavily concentrated among a small group of people with high prior levels of gender and racial resentment... Our findings suggest YouTube's algorithms were not sending people down 'rabbit holes' during our observation window in 2020, possibly due to changes that the company made to its recommender system in 2019\" (abstract verificado).",
+   "fuente_titulo": "Chen, Nyhan, Reifler, Robertson, Wilson: \"Subscriptions and external links help drive resentful users to alternative and extremist YouTube channels\", Science Advances 9(35)",
+   "url": "https://www.science.org/doi/10.1126/sciadv.add8080",
+   "anio": "2023"
+  },
+  {
+   "afirmacion": "Un estudio a gran escala del consumo de contenido radical en YouTube.",
+   "dato": "Datos de navegación de 309.813 usuarios de EE. UU. (2016-2019); concluye que el consumo de contenido de extrema derecha se concentra en un grupo chico y que la recomendación no es el principal camino de entrada (cifra de muestra tomada de un resumen secundario; artículo no abierto en esta corrida).",
+   "fuente_titulo": "Hosseinmardi, Ghasemian, Clauset, Mobius, Rothschild, Watts: \"Examining the consumption of radical content on YouTube\", PNAS 118(32)",
+   "url": "https://www.pnas.org/doi/10.1073/pnas.2101967118",
+   "anio": "2021"
+  },
+  {
+   "afirmacion": "Reglas de los capítulos de video.",
+   "dato": "La lista de capítulos empieza en 00:00, tiene al menos tres marcas de tiempo en orden ascendente y cada capítulo dura al menos 10 segundos; una lista manual reemplaza a los capítulos automáticos (reglas verificadas en una referencia que cita la página de ayuda; lanzamiento de la función: mayo de 2020, de memoria, no verificado hoy).",
+   "fuente_titulo": "YouTube Help: \"Video chapters\"",
+   "url": "https://support.google.com/youtube/answer/9884579",
+   "anio": "2020"
+  },
+  {
+   "afirmacion": "Veritasium explica por qué la carátula (título + miniatura) decide el éxito de un video, incluso en divulgación.",
+   "dato": "Video \"Clickbait is Unreasonably Effective\", publicado el 17 de agosto de 2021, 19:25 min, ~8 millones de vistas; canal creado el 21 de julio de 2010; Derek Muller tiene un doctorado (Sídney, 2008) sobre diseño de multimedia para enseñar física.",
+   "fuente_titulo": "Veritasium (Derek Muller): \"Clickbait is Unreasonably Effective\"",
+   "url": "https://www.youtube.com/watch?v=S2xHZPH5Sng",
+   "anio": "2021"
+  },
+  {
+   "afirmacion": "Shorts: fechas y escala.",
+   "dato": "Anunciado en septiembre de 2020 (beta en India), EE. UU. en marzo de 2021, beta global el 13 de julio de 2021; duración extendida a 3 minutos el 15 de octubre de 2024; más de 200 mil millones de vistas diarias (Neal Mohan, junio de 2025) y más de 20 millones de videos subidos por día según la página de prensa de YouTube (fechas verificadas en copias del artículo de Wikipedia; cifra de vistas verificada en notas que citan la página de prensa).",
+   "fuente_titulo": "Wikipedia: \"YouTube Shorts\" y YouTube Press",
+   "url": "https://en.wikipedia.org/wiki/YouTube_Shorts",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "YouTube es la plataforma de streaming más vista en la TV de EE. UU.",
+   "dato": "Nielsen The Gauge, mayo de 2025: el streaming superó por primera vez a TV abierta y cable juntos (~45 % del tiempo de TV); YouTube pasó de 6 % del tiempo total de TV (primavera 2021) a 12,5 %; Netflix 7,5 % (cifras tomadas de una nota que resume el informe de Nielsen; página de Nielsen bloqueada en esta corrida).",
+   "fuente_titulo": "Nielsen: \"The Gauge\"",
+   "url": "https://www.nielsen.com/data-center/the-gauge/",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "El video social se volvió la vía principal de noticias.",
+   "dato": "Digital News Report 2025: el consumo de noticias por video social pasó de 52 % (2020) a 65 % (2025) a nivel global; en EE. UU. las redes y el video superaron por primera vez a la TV como fuente de noticias (54 % vs 50 %); 44 % de los 18-24 cita redes como fuente principal (cifras tomadas de notas que citan el informe; sitio bloqueado en esta corrida).",
+   "fuente_titulo": "Reuters Institute: \"Digital News Report 2025\"",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Kurzgesagt: un canal-enciclopedia con pocos videos y enorme alcance.",
+   "dato": "Estudio de animación fundado por Philipp Dettmer (Múnich, 2013); a noviembre de 2025, más de 24 millones de suscriptores y unos 310 videos; versión en español \"En Pocas Palabras – Kurzgesagt\" (texto verificado en una copia del artículo de Wikipedia; año de fundación de memoria).",
+   "fuente_titulo": "Wikipedia: \"Kurzgesagt\"",
+   "url": "https://en.wikipedia.org/wiki/Kurzgesagt",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Vsauce: el formato de título-pregunta.",
+   "dato": "Canal creado por Michael Stevens el 24 de junio de 2010; desde el 9 de septiembre de 2012 solo publica el segmento educativo (DOT); llegó al millón de suscriptores en septiembre de 2012; \"Mind Field\" estrenó en enero de 2017 en YouTube Red (textos verificados en copias de Wikipedia alojadas en GitHub).",
+   "fuente_titulo": "Wikipedia: \"Vsauce\"",
+   "url": "https://en.wikipedia.org/wiki/Vsauce",
+   "anio": "2010"
+  },
+  {
+   "afirmacion": "Autoplay apagado por defecto para menores y recordatorios de descanso.",
+   "dato": "\"YouTube: Autoplay is off by default, and bedtime and Take a Break reminders, appearing as a full-screen takeover, are on by default for all users under 18\" (texto verificado en un documento de políticas copiado en GitHub; medida anunciada por YouTube en agosto de 2021, fecha de memoria).",
+   "fuente_titulo": "YouTube Help: \"Autoplay videos\"",
+   "url": "https://support.google.com/youtube/answer/6327615",
+   "anio": "2021"
+  },
+  {
+   "afirmacion": "Las denuncias periodísticas de 2018 sobre la deriva del autoplay.",
+   "dato": "Guillaume Chaslot (ex ingeniero de YouTube) en The Guardian, 2 de febrero de 2018; Zeynep Tufekci, \"YouTube, the Great Radicalizer\", NYT, 10 de marzo de 2018 (\"YouTube may be one of the most powerful radicalizing instruments of the 21st century\"); Jack Nicas, WSJ, 7 de febrero de 2018 (URLs verificadas en listas de referencias; artículos no abiertos hoy).",
+   "fuente_titulo": "The New York Times: \"YouTube, the Great Radicalizer\"",
+   "url": "https://www.nytimes.com/2018/03/10/opinion/sunday/youtube-politics-radical.html",
+   "anio": "2018"
+  }
+ ],
+ "lecciones_para_catalogo": [
+  {
+   "leccion": "La tarjeta es una carátula, no una etiqueta: imagen elegida + una promesa concreta que la ficha cumple (lo que Veritasium llama clickbait legítimo y lo que YouTube premia con watch time share). ADAPTAR, no copiar: nada de caras ni flechas rojas; la promesa es un dato (\"La bandera que tiene un AK-47\", \"El país que cabe 7 veces en Buenos Aires\").",
+   "aplicacion_concreta": "En todos los catálogos, en la tarjeta de las filas horizontales: debajo del nombre, una línea \"gancho\" generada por Claude a partir de la primera de las \"Tres cosas que no sabías\". En Pasaporte, la fila \"Banderas con animales\" muestra la bandera recortada al animal (la miniatura como detalle, no como todo). Regla de la cola de revisión: el gancho tiene que estar respaldado por un dato de la ficha.",
+   "costo": "bajo: ya existen las \"Tres cosas que no sabías\"; es elegir una y mostrarla en la tarjeta, más una pasada de revisión."
+  },
+  {
+   "leccion": "Capítulos = índice dentro de la unidad larga. Un contenido largo se vuelve consultable si su estructura se ve antes de entrar y se puede saltar con teclado. COPIAR TAL CUAL el concepto (barra segmentada con nombres), adaptado a texto.",
+   "aplicacion_concreta": "En Butaca, en la ficha de una serie: una barra segmentada por temporada > arco > episodio, con el nombre del segmento al pasar y teclas izquierda/derecha para saltar; cada episodio con \"qué capítulo del manga adapta\" como dato del segmento. En Pasaporte y Bestiario, en la ficha modal larga: índice de anclas (Resumen, Tres cosas, Datos, Del mismo grupo, Ver también) como chips arriba, navegables con 1-5 en el teclado.",
+   "costo": "medio: requiere datos estructurados por episodio/arco en Butaca (ya previstos) y una barra segmentada en el motor compartido."
+  },
+  {
+   "leccion": "La lista de reproducción es la enciclopedia de YouTube: colección con orden, posición \"3/12\" y final. COPIAR el panel de posición y el \"siguiente\" dentro de la colección; DESCARTAR el salto a recomendaciones al terminar.",
+   "aplicacion_concreta": "En Pasaporte, en la fila Top 10 (más grandes, más poblados, etc.): al abrir un ítem, la ficha muestra \"7 de 10\" y botones Anterior/Siguiente que recorren SOLO ese Top 10, con barra de progreso; al llegar al #1 aparece \"Terminaste: los 10 más grandes\" con el resumen comparativo (todos a escala) y, recién ahí, \"Otro Top 10\". Guardar la posición en localStorage para \"Seguir explorando\".",
+   "costo": "bajo: las filas ya son colecciones ordenadas; es agregar contexto de posición a la ficha modal."
+  },
+  {
+   "leccion": "La cuenta regresiva Top 10 (WatchMojo, \"The Most Extreme\"): revelar de a uno del 10 al 1, con número gigante y el #1 como clímax, un tema por día. ADAPTAR: es la herencia de TV que el autor ya quiere; la novedad es el ritmo de revelado y el \"tema del día\".",
+   "aplicacion_concreta": "En Bestiario y Pasaporte, en la fila \"Un día como hoy\" (hoy vacía) o en una nueva fila \"El Top de hoy\": un Top 10 elegido de forma determinística por la fecha (semilla = día del año), presentado en modo cuenta regresiva con el número gigante que ya existe, un ítem por pantalla, Siguiente con teclado, y el #1 oculto hasta el final. En TV funciona como un programa de 3 minutos.",
+   "costo": "bajo: datos de Top 10 ya existen; la semilla por fecha reemplaza al servidor; el modo revelado es una variante del visor."
+  },
+  {
+   "leccion": "Autoplay con freno, nunca por defecto infinito. YouTube tuvo que apagarlo para menores y agregar recordatorios de descanso. ADAPTAR: el \"Siguiente\" con cuenta regresiva es útil dentro de una colección finita; DESCARTAR el encadenado sin fin.",
+   "aplicacion_concreta": "En el motor compartido, en el visor grande que rota cada 9 segundos: pausar al pasar el cursor o al enfocar con teclado, mostrar el anillo de cuenta regresiva y un botón de pausa visible; en la ficha modal, un \"Siguiente en 5 s\" cancelable SOLO cuando se entró desde una fila/colección, y nunca desde el buscador o \"Uno al azar\". Preferencia \"Autoplay\" guardada en el navegador, apagada por defecto en modo TV.",
+   "costo": "bajo: cambios de interacción sobre componentes existentes."
+  },
+  {
+   "leccion": "Suscripciones = lo que la persona eligió, cronológico y previsible. Sin cuentas no hay canales, pero sí temas: imitar el efecto con \"temas seguidos\" guardados en el navegador y la fecha de generación de cada ficha como cronología.",
+   "aplicacion_concreta": "En todos los catálogos, en la pestaña \"Mi lista\": agregar \"Temas que seguís\" (botón Seguir en el encabezado de cada fila: \"Fronteras raras\", \"Arcos de One Piece\", \"Instrumentos raros\") y una fila \"Nuevo en lo que seguís\" que lista fichas con fecha de alta posterior a la última visita (campo created_at que ya puede emitir la tanda de generación).",
+   "costo": "medio: requiere timestamp por ficha en la tanda y una estructura de temas seguidos en localStorage."
+  },
+  {
+   "leccion": "Separar las tres memorias: lo visto (historial), lo pendiente (Ver más tarde) y lo empezado (barra de progreso). Y permitir guardar desde la tarjeta sin abrirla. COPIAR TAL CUAL.",
+   "aplicacion_concreta": "En el motor compartido: tecla S o icono de marcador sobre la tarjeta enfocada para \"Ver más tarde\" sin abrir la ficha; \"Seguir explorando\" muestra solo fichas abiertas y no terminadas (p. ej., un Top 10 al 6/10) con una barra de progreso fina en la tarjeta; \"Mi lista\" queda para lo guardado a propósito. Botón \"Pausar historial\" en Ajustes, como YouTube.",
+   "costo": "bajo: todo vive en localStorage; son tres claves y un indicador visual."
+  },
+  {
+   "leccion": "Medir satisfacción, no permanencia. YouTube pasó de clics (2011) a tiempo (2012) a encuestas de 1-5 estrellas (\"valued watchtime\", 2021). Sin servidor no hay modelo, pero sí se puede preguntar y guardar local, y exportar para la cola de revisión.",
+   "aplicacion_concreta": "En la ficha modal de todos los catálogos, al cerrar: un micro \"¿Te sirvió?\" con dos opciones (sí / no mucho) que se guarda en el navegador y (a) baja de prioridad en \"Ver también\" las fichas marcadas \"no mucho\", (b) se puede exportar como JSON desde Ajustes para alimentar la cola de revisión humana. Nunca medir tiempo en la ficha como señal de calidad.",
+   "costo": "bajo-medio: la UI es trivial; el uso en \"Ver también\" pide una regla simple de reordenamiento."
+  },
+  {
+   "leccion": "Diversidad por regla fija, contra la deriva hacia lo popular. El random walk de Pew muestra que la recomendación encadenada converge a lo largo y lo masivo; un catálogo sin modelo puede imponer cuotas de cola larga.",
+   "aplicacion_concreta": "En Pasaporte, en \"Ver también\" y \"Del mismo grupo\" de la ficha: de cada 3 sugerencias, al menos 1 debe ser un país o territorio de la cola larga (menos de 1 millón de habitantes o nunca abierto en este navegador), y \"Uno al azar\" debe ponderar por inverso de aperturas locales. En Bestiario, idem con especies poco conocidas. Es la lámina completa defendiéndose del algoritmo.",
+   "costo": "bajo: una regla de selección sobre datos que ya existen (población, aperturas en localStorage)."
+  },
+  {
+   "leccion": "Lo editorial-común vale más que nunca porque YouTube lo abandonó (Tendencias, 2025). Un catálogo puede ofrecer la vitrina compartida que las plataformas ya no dan: todos ven lo mismo hoy. DESCARTAR la personalización total; COPIAR los \"Charts por categoría\" como filas fijas por sección.",
+   "aplicacion_concreta": "En cada catálogo, en la portada: una fila \"Hoy en Pasaporte\" / \"Hoy en Cosmos\" calculada solo con la fecha (misma para todos los que abran el archivo ese día), con 10 fichas y un tema, en lugar de un \"Para vos\" que nadie puede compartir. En el visor grande, la primera diapositiva del día es siempre la de esa fila, así dos personas pueden hablar de \"lo de hoy\".",
+   "costo": "bajo: semilla por fecha, sin servidor."
+  },
+  {
+   "leccion": "Dos velocidades, pero el short al servicio del largo. Shorts demuestra la demanda de consumo en 10 segundos; el riesgo es fragmentar hasta perder el todo. ADAPTAR: ofrecer un modo rápido que siempre lleve a la ficha completa y a su colección.",
+   "aplicacion_concreta": "En el motor compartido, un modo \"Rápidas\" (tecla R, también para TV): pantalla completa con una sola \"cosa que no sabías\" por pantalla, imagen grande, Siguiente/Anterior con flechas, y en cada pantalla el enlace \"Ver la ficha completa\" y \"Ver todo el grupo\". El modo es finito (p. ej., las 20 rarezas de hoy) y termina con \"Viste las 20\". Nunca es la pantalla de inicio.",
+   "costo": "medio: nueva vista en el motor, reutilizando datos existentes."
+  }
+ ],
+ "anti_lecciones": [
+  "No optimizar por tiempo de permanencia ni por clics. Es la lección que YouTube aprendió dos veces: el clic produjo clickbait (2012) y el tiempo produjo deriva hacia lo largo y lo extremo (denuncias de 2018, random walk de Pew). En un catálogo, medir cuánto tiempo pasa alguien en una ficha dice poco: a veces la mejor ficha es la que se entiende en 10 segundos.",
+  "No copiar el feed infinito ni el autoplay encadenado sin final. YouTube tuvo que apagar el autoplay por defecto para menores de 18 y activar recordatorios de descanso y de hora de dormir (2021); eso es admitir el costo de atención y de sueño del patrón. La tesis del autor es la contraria: el valor está en ver el todo y terminar.",
+  "No copiar la estética de miniatura exagerada (caras de sorpresa, flechas, mayúsculas). Funciona para el clic, pero la propia YouTube tuvo que inventar Test & Compare por watch time share para desalentar miniaturas que engañan. En un catálogo enciclopédico, la promesa de la tarjeta debe ser un dato verificable.",
+  "No ofrecer controles que no cambian nada. Mozilla (2022, ~20.000 voluntarios) mostró que \"No me interesa\", \"No recomendar canal\" y el dislike \"en gran medida no logran\" frenar recomendaciones; eso erosiona la confianza. Si un catálogo tiene \"Mi lista\" o \"Temas seguidos\", lo guardado tiene que gobernar visiblemente lo que se muestra.",
+  "No personalizar hasta destruir lo común. Al eliminar Tendencias (2025) YouTube renunció a la vitrina compartida; cada persona ve un YouTube distinto y no hay \"lo que todos vieron\". La lámina de banderas y \"Los 20 más\" eran valiosos justamente porque eran los mismos para todos.",
+  "No fragmentar el conocimiento en Shorts sin camino de vuelta al todo. Shorts (200 mil millones de vistas diarias en 2025) prueba la demanda, pero su formato elimina orden, comparación y fin; un catálogo que copie solo eso pierde su razón de ser.",
+  "No confiar en la señal popular para decidir qué mostrar: el random walk de Pew (2018) muestra que la recomendación encadenada converge hacia lo más visto. En un catálogo de 230 países eso significaría ver siempre Francia, Japón y Brasil; la cola larga (Tuvalu, Nauru) necesita cuotas por regla.",
+  "No imitar la opacidad. El ranking de YouTube \"se ajusta constantemente con pruebas A/B\" (Covington 2016) y nadie afuera puede explicar por qué ve lo que ve; en 2018 el 63 % de los usuarios adultos de EE. UU. decía ver videos que parecen obviamente falsos (Pew). Un catálogo generado por IA desde Wikipedia tiene que mostrar de dónde sale cada dato (como Kurzgesagt publica sus fuentes desde 2019) y por qué aparece cada fila (\"porque abriste X\", \"porque es el Top de hoy\")."
+ ],
+ "fuentes": [
+  {
+   "titulo": "Covington, Adams, Sargin - Deep Neural Networks for YouTube Recommendations (RecSys 2016)",
+   "url": "https://research.google/pubs/deep-neural-networks-for-youtube-recommendations/"
+  },
+  {
+   "titulo": "PDF del paper de 2016 (Google)",
+   "url": "https://storage.googleapis.com/pub-tools-public-publication-data/pdf/45530.pdf"
+  },
+  {
+   "titulo": "Zhao et al. - Recommending What Video to Watch Next: A Multitask Ranking System (RecSys 2019)",
+   "url": "https://research.google/pubs/recommending-what-video-to-watch-next-a-multitask-ranking-system/"
+  },
+  {
+   "titulo": "Davidson et al. - The YouTube Video Recommendation System (RecSys 2010)",
+   "url": "https://dl.acm.org/doi/10.1145/1864708.1864770"
+  },
+  {
+   "titulo": "YouTube Official Blog - On YouTube's recommendation system (Goodrow, 2021)",
+   "url": "https://blog.youtube/inside-youtube/on-youtubes-recommendation-system/"
+  },
+  {
+   "titulo": "YouTube Creator Blog - YouTube Now: Why We Focus on Watch Time (2012)",
+   "url": "https://youtube-creators.googleblog.com/2012/08/youtube-now-why-we-focus-on-watch-time.html"
+  },
+  {
+   "titulo": "How YouTube Works - Recommendations",
+   "url": "https://www.youtube.com/howyoutubeworks/product-features/recommendations/"
+  },
+  {
+   "titulo": "CNET - CES 2018: YouTube's AI recommendations drive 70 percent of viewing",
+   "url": "https://www.cnet.com/tech/services-and-software/youtube-ces-2018-neal-mohan/"
+  },
+  {
+   "titulo": "Tubefilter - YouTube Says 70% Of All Watch Time Is Driven By Its Own Recommendations (2018)",
+   "url": "https://www.tubefilter.com/2018/01/11/youtube-most-watch-time-driven-by-recommendations/"
+  },
+  {
+   "titulo": "TechCrunch - YouTube is getting rid of its Trending page and Trending Now list (2025)",
+   "url": "https://techcrunch.com/2025/07/10/youtube-is-getting-rid-of-its-trending-page-and-trending-now-list/"
+  },
+  {
+   "titulo": "The Verge - YouTube is removing its Trending page (2025)",
+   "url": "https://www.theverge.com/news/704222/youtube-trending-page-removal-charts"
+  },
+  {
+   "titulo": "YouTube Charts",
+   "url": "https://charts.youtube.com/"
+  },
+  {
+   "titulo": "Pew Research Center - Many Turn to YouTube for Children's Content, News, How-To Lessons (2018)",
+   "url": "https://www.pewresearch.org/internet/2018/11/07/many-turn-to-youtube-for-childrens-content-news-how-to-lessons/"
+  },
+  {
+   "titulo": "Pew Research Center - Teens, Social Media and Technology 2024",
+   "url": "https://www.pewresearch.org/internet/2024/12/12/teens-social-media-and-technology-2024/"
+  },
+  {
+   "titulo": "Mozilla Foundation - YouTube Regrets (2021)",
+   "url": "https://foundation.mozilla.org/en/youtube/findings/"
+  },
+  {
+   "titulo": "Mozilla Foundation - Does This Button Work? Investigating YouTube's ineffective user controls (2022)",
+   "url": "https://foundation.mozilla.org/en/research/library/user-controls/report/"
+  },
+  {
+   "titulo": "Mozilla Foundation - comunicado sobre controles de usuario (2022)",
+   "url": "https://www.mozillafoundation.org/en/blog/mozilla-investigation-youtubes-dislike-button-other-user-controls-largely-fail-to-stop-unwanted-recommendations/"
+  },
+  {
+   "titulo": "Chen et al. - Subscriptions and external links help drive resentful users to alternative and extremist YouTube channels (Science Advances, 2023)",
+   "url": "https://www.science.org/doi/10.1126/sciadv.add8080"
+  },
+  {
+   "titulo": "Hosseinmardi et al. - Examining the consumption of radical content on YouTube (PNAS, 2021)",
+   "url": "https://www.pnas.org/doi/10.1073/pnas.2101967118"
+  },
+  {
+   "titulo": "Ribeiro et al. - Auditing Radicalization Pathways on YouTube (FAT* 2020)",
+   "url": "https://dl.acm.org/doi/10.1145/3351095.3372879"
+  },
+  {
+   "titulo": "The Guardian - 'Fiction is outperforming reality': how YouTube's algorithm distorts truth (Chaslot, 2018)",
+   "url": "https://www.theguardian.com/technology/2018/feb/02/how-youtubes-algorithm-distorts-truth"
+  },
+  {
+   "titulo": "The New York Times - YouTube, the Great Radicalizer (Tufekci, 2018)",
+   "url": "https://www.nytimes.com/2018/03/10/opinion/sunday/youtube-politics-radical.html"
+  },
+  {
+   "titulo": "Wall Street Journal - How YouTube Drives People to the Internet's Darkest Corners (Nicas, 2018)",
+   "url": "https://www.wsj.com/articles/how-youtube-drives-viewers-to-the-internets-darkest-corners-1518020478"
+  },
+  {
+   "titulo": "YouTube Help - Video chapters",
+   "url": "https://support.google.com/youtube/answer/9884579"
+  },
+  {
+   "titulo": "YouTube Help - Autoplay videos",
+   "url": "https://support.google.com/youtube/answer/6327615"
+  },
+  {
+   "titulo": "YouTube Help - Manage your recommendations & search results",
+   "url": "https://support.google.com/youtube/answer/6342839"
+  },
+  {
+   "titulo": "YouTube Help - View, delete, or turn on or off watch history",
+   "url": "https://support.google.com/youtube/answer/95725"
+  },
+  {
+   "titulo": "Veritasium - Clickbait is Unreasonably Effective (2021)",
+   "url": "https://www.youtube.com/watch?v=S2xHZPH5Sng"
+  },
+  {
+   "titulo": "Wikipedia - YouTube Shorts",
+   "url": "https://en.wikipedia.org/wiki/YouTube_Shorts"
+  },
+  {
+   "titulo": "Wikipedia - Kurzgesagt",
+   "url": "https://en.wikipedia.org/wiki/Kurzgesagt"
+  },
+  {
+   "titulo": "Wikipedia - Vsauce",
+   "url": "https://en.wikipedia.org/wiki/Vsauce"
+  },
+  {
+   "titulo": "Wikipedia - Veritasium",
+   "url": "https://en.wikipedia.org/wiki/Veritasium"
+  },
+  {
+   "titulo": "Wikipedia - WatchMojo",
+   "url": "https://en.wikipedia.org/wiki/WatchMojo"
+  },
+  {
+   "titulo": "Wikipedia - Video essay",
+   "url": "https://en.wikipedia.org/wiki/Video_essay"
+  },
+  {
+   "titulo": "Wikipedia - The Most Extreme (Animal Planet)",
+   "url": "https://en.wikipedia.org/wiki/The_Most_Extreme"
+  },
+  {
+   "titulo": "Nielsen - The Gauge",
+   "url": "https://www.nielsen.com/data-center/the-gauge/"
+  },
+  {
+   "titulo": "Reuters Institute - Digital News Report 2025",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025"
+  },
+  {
+   "titulo": "YouTube Press (cifras oficiales: subidas diarias, vistas de Shorts)",
+   "url": "https://blog.youtube/press/"
+  }
+ ],
+ "no_encontrado": [
+  "LIMITACIÓN DE ESTA CORRIDA: el presupuesto de WebSearch estaba agotado (compartido por todos los agentes) y el proxy de salida bloqueó todos los dominios externos salvo GitHub (blog.youtube, support.google.com, Wikipedia, Pew, Mozilla, Nielsen, Reuters Institute, TechCrunch, The Verge, Guardian, NYT, PNAS, Science, arXiv, ACM, NN/g). La verificación se hizo leyendo dos PDFs completos (Covington 2016 y Zhao 2019) descargados desde repositorios de GitHub y citas textuales de las demás fuentes reproducidas en repositorios públicos (copias de artículos, datasets de Pew, repos de localización de Mozilla, listas de referencias académicas). Las URLs de 'evidencia' y 'fuentes' son las canónicas y fueron confirmadas como citadas por terceros, pero conviene abrirlas antes de publicar.",
+  "Porcentajes por botón del informe de Mozilla 2022 ('Does This Button Work?'): recuerdo 43 % para 'No recomendar canal', 29 % para borrar del historial, 12 % para dislike y 11 % para 'No me interesa', pero no pude verificarlos en esta corrida; solo verifiqué el título, la cifra de ~20.000 voluntarios y la conclusión de que los controles 'en gran medida no logran' frenar recomendaciones.",
+  "El año exacto en que YouTube empezó las encuestas de satisfacción: la consigna dice 2018; verifiqué que el paper de RecSys 2019 ya usa 'satisfaction objectives' con calificaciones y que Goodrow (2021) describe las encuestas de 1 a 5 estrellas, pero no encontré una fuente primaria abierta que fije 2018 como inicio.",
+  "La afirmación de Mohan en CES 2018 de que la sesión promedio en móvil supera los 60 minutos: la recuerdo del mismo evento, pero no la verifiqué hoy; por eso no está en 'evidencia'.",
+  "Página de ayuda exacta de 'Test & Compare' (prueba A/B de miniaturas): verifiqué por fuentes secundarias que elige por watch time share, se lanzó en 2024 y agregó títulos en 2025, pero no pude abrir ni confirmar la URL de ayuda de YouTube.",
+  "Fecha precisa del lanzamiento de capítulos (recuerdo 28 de mayo de 2020, tras una prueba en abril) y del autoplay 'Siguiente' (2015): no abiertas hoy; las reglas de los capítulos sí están verificadas.",
+  "Cifras de canibalización Shorts vs. videos largos: no existe una cifra pública independiente; YouTube ha dicho en llamadas de resultados que no observa canibalización y que la monetización de Shorts se acerca a la de in-stream, pero no pude abrir esas transcripciones. Lo marco como discusión abierta.",
+  "'Los 20 más' de Animal Planet: no pude confirmar un programa con ese nombre; el formato que describe el autor coincide con 'The Most Extreme' (Animal Planet, 2002-2007, cuenta regresiva de 10 animales por tema y episodio), cuyo artículo de Wikipedia no pude abrir hoy.",
+  "Datos duros de WatchMojo (fundación en 2006 en Montreal por Ashkan Karbasfrooshan, ~25 millones de suscriptores, varios videos por día en su pico): de memoria; solo verifiqué su autodefinición como 'productor de contenido de referencia en formato Top 10' y la existencia de la página de sugerencias del público.",
+  "Pew 2024: el 90 % de los adolescentes de EE. UU. usa YouTube (y el 83 % de los adultos en el informe de enero de 2024): confirmé que el informe existe, no la cifra; no la incluí en 'evidencia'.",
+  "Costos de sueño atribuibles específicamente a YouTube: no encontré un estudio primario abierto en esta corrida; la evidencia indirecta es que YouTube activó por defecto recordatorios de 'hora de dormir' para menores (2021).",
+  "Cuota de visualización de YouTube Mix y de las listas de reproducción, y datos de uso de 'Ver más tarde' e historial: YouTube no publica estas cifras.",
+  "Fecha de la retractación de Kurzgesagt ('Can You Trust Kurzgesagt Videos?', marzo de 2019) y la cifra de horas por video: de memoria; no abiertas hoy."
+ ]
+}

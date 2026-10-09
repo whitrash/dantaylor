@@ -1,0 +1,728 @@
+{
+ "canal": "El feed algorítmico de inicio: Facebook News Feed/Feed (2006–), Instagram Inicio (algorítmico desde 2016), X/Twitter \"Para ti\", TikTok \"Para ti\" como feed, LinkedIn, Threads. La pantalla a la que se llega sin decidir nada.",
+ "expectativa_usuario": "Abro y que ya haya algo nuevo para mí, sin tener que buscar ni elegir nada; en diez segundos quiero saber \"qué pasó\" desde la última vez.",
+ "modo_humano": "Principalmente ACOMPAÑARSE y, de forma degradada, EXPLORAR. Acompañarse: el feed llena los tiempos muertos y da sensación de presencia social ambiente (ver qué hacen los conocidos sin hablarles); Meta mismo describió en 2018 el objetivo como \"interacciones sociales significativas\" y Facebook encontró internamente que 1 de cada 8 usuarios reporta uso compulsivo que afecta sueño, trabajo o relaciones (WSJ, 2021), lo que indica que el modo dominante es ocupar el tiempo, no cumplir una tarea. Explorar: desde 2020–2023 los feeds mezclan contenido de cuentas que no seguís (Twitter apunta a 50/50; Instagram llegó a ~40% de contenido recomendado en 2023), o sea que hay descubrimiento, pero es exploración pasiva: la persona no elige el rumbo ni ve el mapa, le traen piezas sueltas una a una. Comunicarse es secundario y periférico: likes, comentarios y, cada vez más, \"enviar por mensaje\" (Mosseri dijo en 2025 que los envíos por DM son una de las tres señales principales): el feed funciona como cantera de cosas para mandarle a alguien, no como lugar de conversación. INVESTIGAR casi nunca: no hay orden, no hay completitud, no hay comparabilidad ni forma de volver a un punto; NN/g y Baymard documentan que el scroll infinito es malo para encontrar algo específico o comparar.",
+ "unidad": "La tarjeta/post individual (texto, foto, carrusel, video corto o Reel), homogénea e intercambiable, puntuada una por una y consumida en secuencia vertical. En la práctica la unidad real es la impresión de 1 a 3 segundos: el sistema mide si pasaste de largo, cuánto te quedaste (dwell time, LinkedIn 2020; watch time, Instagram/TikTok), si tocaste, si enviaste. Nunca hay una unidad \"colección\": no existe la lámina ni la lista completa.",
+ "quien_decide": "El algoritmo, con la función objetivo fijada por la empresa. Un modelo de aprendizaje automático predice para cada candidato la probabilidad de cada acción (like, comentario, reshare, envío, tiempo de permanencia, denuncia) y las suma con pesos definidos por producto: en el código abierto de Twitter 2023 un like valía 0,5, un retweet 1, una respuesta 13,5 y una denuncia −369; en Facebook las reacciones valieron 5 veces un like desde 2017 y la reacción \"me enoja\" bajó a 4x en 2018 y luego a 0. La persona decide solo en el margen: a quién seguir, \"No me interesa\", \"Por qué veo esto\", la pestaña \"Siguiendo\"/\"Favoritos\" (Instagram 2022, hasta 50 cuentas), que además no puede ser la vista por defecto y en Facebook se resetea al cerrar la app. El editor humano no existe; la comunidad decide indirectamente vía señales agregadas de engagement; el azar entra como exploración controlada (contenido fuera de red para probar gustos nuevos). En la UE, desde agosto de 2023 la DSA (art. 38) obliga a ofrecer al menos una opción sin perfilado, pero las plataformas la esconden y no la hacen persistente (DSA Observatory 2024–2025; denuncia de ONG contra Meta, abril 2025).",
+ "tiene_final": "No, y es por diseño. El scroll infinito (Aza Raskin, 2006) quitó la señal de parada del pie de página; Tristan Harris lo describe como \"el bol sin fondo\" (2016). Instagram probó un final en 2018 con \"Ya estás al día – viste todos los posts de los últimos 2 días\", pero en agosto de 2020 puso debajo \"Publicaciones sugeridas\" infinitas (mezcla de orgánico y anuncios), con lo que el final volvió a ser un cartel decorativo. El efecto medido de quitar el ranking: en el experimento Guess et al. (Science, 2023, >23.000 usuarios de Facebook y >21.000 de Instagram), el feed cronológico redujo el tiempo en Facebook ~20% y en Instagram ~11%; la ausencia de final es parte del motor de tiempo de uso. Costo para la persona: nunca sabe cuánto falta, nunca vio el todo (Facebook mostraba 300 de ~1.500 historias posibles por día ya en 2013; Instagram justificó el algoritmo en 2016 diciendo que la gente se perdía el 70% del feed, y el algoritmo no lo arregló: eligió qué 70% perderte).",
+ "mecanismo": "Por dentro, todos los feeds de inicio comparten la misma tubería en tres etapas. (1) Generación de candidatos: de un inventario enorme se toman unos pocos miles. Facebook en 2013 decía tener ~1.500 historias posibles por persona por día y mostrar ~300; Twitter en 2023 explicó que por cada carga extrae ~1.500 tuits de cientos de millones, mitad de cuentas que seguís (\"in-network\", vía índice de búsqueda) y mitad de cuentas que no seguís (vía embeddings de comunidades SimClusters y grafo TwHIN). (2) Ranking: un modelo multitarea (\"heavy ranker\") predice la probabilidad de cada acción y las combina con pesos de producto. Instagram enumera las señales en cuatro grupos (Mosseri, junio 2021): información del post (popularidad, hora, duración, lugar), información del autor, tu actividad previa (qué tipo de cosas te gustaron) y tu historial con esa cuenta; en 2025 Mosseri nombró watch time, likes y envíos por mensaje como las tres señales principales. TikTok (junio 2020) agrupa: interacciones del usuario, información del video y configuración de dispositivo/cuenta, y aclara que la cantidad de seguidores no es señal directa. LinkedIn (mayo 2020) agregó el \"dwell time\": empieza a contar cuando al menos la mitad de la tarjeta está visible. (3) Filtros y heurísticas: sacar lo ya visto, lo bloqueado, limitar autores repetidos, diversidad, integridad; intercalar anuncios.\n\nLa función objetivo es una decisión de negocio que cambió con el tiempo y cambió lo que la gente ve. Facebook pasó de cronológico (2006) a EdgeRank (Afinidad × Peso × Decaimiento temporal, presentado en f8 2010) a un modelo con ~100.000 factores (2013), a \"amigos y familia primero\" (junio 2016) y a \"interacciones sociales significativas\" (enero 2018), donde comentarios y reshares valían más que la lectura pasiva. Los documentos de Frances Haugen (2021) mostraron el reverso: la reacción \"me enoja\" valía 5 veces un like desde 2017 y los propios científicos de datos confirmaron en 2019 que los posts con esa reacción tenían desproporcionadamente desinformación y toxicidad; Facebook la bajó a 4x en 2018 y a 0 después. En 2022 Zuckerberg anunció el giro a \"motor de descubrimiento\": 15% del contenido del feed recomendado por IA de cuentas no seguidas, a duplicar en 2023; en abril de 2023 ya era más del 20% en Facebook y cerca del 40% en Instagram, y Reels había subido 24% el tiempo en Instagram.\n\nPor fuera, la interfaz hace tres cosas: elimina el costo de empezar (la pantalla ya está llena al abrir, el video arranca solo), elimina la señal de terminar (scroll infinito, 2006) y convierte el acto de actualizar en una recompensa variable (tirar para refrescar, Tweetie 2008: tirás la palanca y recibís algo bueno o nada, el esquema de refuerzo intermitente de Skinner que Harris comparó con una tragamonedas en 2016). El bucle se cierra solo: cada microacción (quedarte 2 segundos más, pasar de largo, enviar) vuelve como dato al ranking siguiente, sin que la persona declare nada. Las concesiones a la autonomía (\"Ya estás al día\" 2018, \"Por qué veo esto\" 2019, \"Tómate un descanso\" 2021, pestañas \"Siguiendo\" 2022–2023, feeds sin perfilado en la UE 2023) existen pero están todas fuera del camino por defecto, y la evidencia es que el defecto gana: Facebook vuelve al feed perfilado al reabrir la app.",
+ "historia": "2006: Facebook lanza News Feed (5 de septiembre), cronológico y agregando actividad de amigos; en un día el grupo \"Students Against Facebook News Feed\" supera los 100.000 miembros (llegaría a ~750.000) y Zuckerberg responde \"Calm down. Breathe. We hear you.\" y agrega controles de privacidad. El mismo año Aza Raskin (Humanized) inventa el scroll infinito. 2008: Loren Brichter inventa tirar-para-refrescar en Tweetie. 2010: Facebook presenta EdgeRank en f8 (Afinidad × Peso × Decaimiento). 2011–2013: lo reemplaza un modelo de ML; en agosto de 2013 explica \"Story Bumping\" y la cifra 1.500 historias posibles → 300 mostradas. 2016: Instagram anuncia el feed algorítmico el 15 de marzo (\"la gente se pierde en promedio el 70% de su feed\") y lo despliega a todos en junio; Facebook publica sus \"News Feed Values\" y \"amigos y familia primero\" (29 de junio); Harris publica \"How Technology is Hijacking Your Mind\" (18 de mayo). 2017: la reacción \"me enoja\" pasa a valer 5 likes; Brichter dice en The Guardian \"pull-to-refresh is addictive\". 2018: Zuckerberg anuncia \"interacciones sociales significativas\" (11 de enero; \"el tiempo que la gente pasa en Facebook va a bajar\"; la acción cae 4%); BBC Panorama (4 de julio) con Raskin: \"cocaína conductual\"; Instagram lanza \"Ya estás al día\" (2 de julio) y \"Tu actividad\"/límite diario (agosto). 2019: Facebook \"¿Por qué veo esta publicación?\" (31 de marzo); LinkedIn formula \"gente que conocés hablando de cosas que te importan\" (enero). 2020: LinkedIn incorpora dwell time (12 de mayo); TikTok explica su \"Para ti\" (18 de junio); Instagram agrega \"Publicaciones sugeridas\" debajo de \"Ya estás al día\" (19–20 de agosto). 2021: WSJ \"Facebook Files\" (desde el 14 de septiembre: 32% de las adolescentes dice que Instagram las hace sentir peor con su cuerpo; 1 de cada 8 usuarios con uso problemático); Haugen testifica; Washington Post publica los pesos de las reacciones (26 de octubre); Instagram \"Tómate un descanso\" (7 de diciembre); Mosseri publica \"Shedding More Light on How Instagram Works\" (8 de junio). 2022: Instagram devuelve lo cronológico como \"Siguiendo\" y \"Favoritos\" (23 de marzo), sin poder ser por defecto; Facebook agrega la pestaña \"Feeds\" cronológica y renombra \"Home\" (21 de julio); Zuckerberg: 15% de contenido recomendado por IA, a duplicar (27 de julio). 2023: Twitter hace \"Para ti\" la pestaña por defecto (10–11 de enero) y tras la protesta vuelve a abrir en la última pestaña usada (24 de enero); TikTok fija 60 minutos diarios por defecto para menores de 18 (1 de marzo); Twitter abre el código del algoritmo (31 de marzo); Zuckerberg: >20% recomendado en Facebook, ~40% en Instagram, Reels +24% de tiempo (abril); la Comisión Europea designa 17 VLOP + 2 VLOSE (25 de abril); Threads lanza (5 de julio) y agrega feed \"Siguiendo\" cronológico (25 de julio); Guess et al. publican el experimento del feed cronológico en Science (27 de julio); la DSA se vuelve aplicable a las VLOP (25 de agosto) y Meta y TikTok anuncian opciones sin perfilado en la UE (4 y 22 de agosto). 2024: la DSA rige para todas las plataformas (17 de febrero); Allcott et al. publican el experimento de desactivación 2020 en PNAS (13 de mayo); Pew: 46% de los adolescentes de EE.UU. está online \"casi constantemente\" (12 de diciembre). 2025: Mosseri nombra watch time, likes y envíos como señales principales (enero); ONG denuncian a Meta ante la DSA por esconder el feed sin perfilado (abril); Reuters Institute: 44% de los 18–24 dice que las redes son su fuente principal de noticias; TikTok 16% semanal para noticias.",
+ "patrones_ux": [
+  {
+   "nombre": "Scroll infinito sin pie de página",
+   "descripcion": "La lista se recarga sola al acercarse al final; nunca aparece un borde, un total ni un 'fin'. Inventado por Aza Raskin en 2006.",
+   "por_que_funciona": "Elimina la señal de parada: no hay un momento natural para decidir si seguir. Raskin: 'si no le das tiempo al cerebro de alcanzar a tus impulsos, seguís scrolleando'. Baymard midió que la gente ve muchos más ítems que con paginación, pero pasados 50–150 deja de mirar con atención."
+  },
+  {
+   "nombre": "Tirar para refrescar con espera animada",
+   "descripcion": "Arrastrás la lista hacia abajo, aparece un spinner medio segundo y cae contenido nuevo (o nada). Tweetie, 2008; hoy en todos los feeds.",
+   "por_que_funciona": "Es refuerzo intermitente variable: la misma acción produce premio o vacío de forma impredecible, el esquema que más engancha según Skinner; Harris lo comparó con la palanca de una tragamonedas (2016). La latencia artificial aumenta la anticipación."
+  },
+  {
+   "nombre": "Tarjeta homogénea con acciones fijas",
+   "descripcion": "Cada ítem tiene el mismo tamaño y la misma botonera en el mismo lugar (me gusta, comentar, enviar, guardar), sea un texto, una foto o un video.",
+   "por_que_funciona": "Permite un ritmo con un solo pulgar sin releer la interfaz; cada acción barata es a la vez expresión y dato de entrenamiento. NN/g: el scroll infinito solo funciona con contenido homogéneo y sin objetivo."
+  },
+  {
+   "nombre": "Autoplay silencioso y arranque lleno",
+   "descripcion": "La pantalla ya viene con contenido al abrir; los videos arrancan solos sin sonido; en Reels/TikTok ocupan toda la pantalla y el siguiente se precarga.",
+   "por_que_funciona": "Costo de empezar igual a cero: no hay decisión inicial. TikTok mide 'ver hasta el final' como señal fuerte; cada video es una apuesta de 2 segundos."
+  },
+  {
+   "nombre": "Mezcla de conocido y desconocido",
+   "descripcion": "Entre posts de gente que seguís se intercalan 'Sugerido para ti' de cuentas que no seguís. Twitter apunta a 50/50; Instagram llegó a ~40% recomendado en 2023; Facebook agregó 'Publicaciones sugeridas' debajo de 'Ya estás al día' en 2020.",
+   "por_que_funciona": "Explotación/exploración: lo conocido da confianza y lo nuevo da sorpresa, y el sistema aprende de cómo reaccionás a lo nuevo. Zuckerberg atribuyó a esto un 24% más de tiempo en Instagram."
+  },
+  {
+   "nombre": "Señal de 'hay nuevo' arriba y cierre 'Ya estás al día'",
+   "descripcion": "Punto o burbuja 'N publicaciones nuevas' al tope; el ícono de inicio salta arriba al tocarlo; en Instagram el cartel 'Ya estás al día – viste todos los posts de los últimos 2 días'.",
+   "por_que_funciona": "Da sensación de lugar y de tarea cumplible: 'ponerse al día' es un premio en sí mismo. Es el único patrón del feed que respeta la autonomía… y se neutralizó al poner sugeridos infinitos debajo (2020)."
+  },
+  {
+   "nombre": "Pestañas 'Para ti' / 'Siguiendo' con deslizar",
+   "descripcion": "Dos (o más) feeds en pestañas arriba, se cambia deslizando. Twitter enero 2023, Threads julio 2023, Instagram desde 2022 en un menú.",
+   "por_que_funciona": "Da una vía de escape visible a lo cronológico sin tocar el defecto. El defecto decide: Instagram no permite fijar 'Siguiendo' como inicio y Facebook vuelve al perfilado al reabrir; Twitter tuvo que ceder y abrir en la última pestaña usada tras la protesta de enero 2023."
+  },
+  {
+   "nombre": "Controles por post: 'No me interesa', 'Por qué veo esto', silenciar, Favoritos",
+   "descripcion": "Menú de tres puntos en cada tarjeta con razones ('porque interactuás con X', 'porque es popular') y atajos (dejar de seguir, ver primero). Instagram Favoritos: hasta 50 cuentas elegidas a mano.",
+   "por_que_funciona": "Da sensación de control con costo mínimo y alimenta el modelo con señales negativas explícitas. El 'por qué' en una línea legible reduce la sensación de caja negra aunque el modelo real tenga 100.000 factores."
+  },
+  {
+   "nombre": "Fila de Historias arriba del feed con anillo 'no visto'",
+   "descripcion": "Círculos con avatar en una fila horizontal al tope; el anillo de color marca lo no visto y desaparece al verlo; el contenido expira a las 24 horas.",
+   "por_que_funciona": "Combina urgencia (expira), completitud (anillos que se apagan uno a uno) y un orden personal; es el patrón de 'lista con fin' que convive con el feed sin fin."
+  },
+  {
+   "nombre": "Reacciones graduadas como señal barata",
+   "descripcion": "Mantener apretado 'me gusta' despliega 5–6 emociones; cada una pesa distinto en el ranking (reacciones 5x un like en Facebook 2017; 'me enoja' luego a 0).",
+   "por_que_funciona": "Una microacción expresiva de medio segundo se convierte en dato de entrenamiento con peso diferencial; el caso 'me enoja' muestra que el peso define qué prospera."
+  }
+ ],
+ "que_funciona": [
+  "Cero decisión al entrar: la pantalla de inicio ya está llena y ordenada por lo que probablemente te importe; es la razón por la que gana en tiempo de uso frente a cualquier interfaz que te pida elegir primero.",
+  "La personalización sí aumenta el uso: en el experimento Guess et al. (Science 2023) pasar a cronológico bajó el tiempo ~20% en Facebook y ~11% en Instagram; Instagram reportó en 2016 que con el nuevo orden la gente daba más likes y comentaba más.",
+  "Aprende de señales implícitas sin preguntar: tiempo de permanencia (LinkedIn 2020), watch time y envíos (Instagram 2025), ver hasta el final (TikTok 2020). La persona no tiene que declarar gustos ni configurar nada.",
+  "Descubrimiento real de lo que no seguías: la mezcla in-network/out-of-network (50/50 en Twitter; ~40% recomendado en Instagram 2023) trae cosas que uno no habría buscado; Reels subió 24% el tiempo en Instagram.",
+  "Arranque en frío rápido: TikTok muestra un feed genérico popular y en una sesión ya ajusta; no hay formulario inicial.",
+  "Homogeneidad de formato: una sola unidad, una sola botonera, un solo gesto (pulgar). Permite ritmo y hace que el contenido más dispar parezca una misma cosa.",
+  "Sensación de presencia social ambiente: ver qué hacen conocidos sin interactuar cubre una necesidad de compañía de bajo costo (Facebook lo midió internamente como uso 'problemático' en 1 de cada 8 usuarios, lo que confirma la fuerza del enganche).",
+  "Los pocos cierres que existen funcionan: 'Ya estás al día' (2018) fue bien recibido y los anillos de Historias dan micro-completitud; cuando hay final visible, la gente lo valora."
+ ],
+ "que_falla": [
+  "Nunca se ve el todo ni se sabe qué se perdió: Facebook mostraba ~300 de ~1.500 historias posibles por día (2013); Instagram vendió el algoritmo con 'te perdés el 70%' y lo que hizo fue elegir qué 70% perderte. No hay contador, no hay mapa, no hay lámina.",
+  "No tiene final: el scroll infinito quitó la señal de parada (Raskin 2006, Harris 2016) y el único final honesto, 'Ya estás al día' (2018), quedó anulado por 'Publicaciones sugeridas' infinitas debajo (agosto 2020).",
+  "La función objetivo premia lo que engancha, no lo que sirve: el cambio 'interacciones sociales significativas' (2018) terminó premiando indignación y reshares; 'me enoja' valió 5 likes durante años mientras los propios científicos de Facebook confirmaban (2019) que esos posts tenían más desinformación y toxicidad.",
+  "Las alternativas a lo algorítmico existen pero están escondidas y no persisten: Instagram no deja fijar 'Siguiendo' como inicio (2022); Facebook vuelve al feed perfilado al cerrar la app (DSA Observatory 2024); ONG denunciaron a Meta ante la DSA por esto (abril 2025).",
+  "No sirve para investigar ni comparar: no hay orden estable, no se puede volver a un punto, no hay pie de página; NN/g desaconseja el scroll infinito para encontrar algo específico y Baymard midió que pasados 50–150 ítems la gente sigue scrolleando sin mirar.",
+  "Costos de bienestar documentados: 32% de las adolescentes dijo que Instagram las hace sentir peor con su cuerpo (investigación interna de Meta, WSJ 2021); 1 de cada 8 usuarios con uso compulsivo que afecta sueño, trabajo o relaciones (WSJ 2021); desactivar Facebook 4 semanas liberó ~60 min/día y mejoró el bienestar subjetivo (Allcott et al. 2020); limitar a ~30 min/día bajó soledad y depresión en 3 semanas (Hunt et al. 2018); usuarios de 5+ horas tienen 2,1 veces más probabilidad de dormirse tarde en días de clase (BMJ Open 2019).",
+  "Opacidad estructural: el modelo tiene ~100.000 factores (2013) y 'Por qué veo esto' (2019) muestra dos o tres razones genéricas; nadie, ni adentro, puede explicar un orden concreto.",
+  "Cuando importa la actualidad, falla: los feeds 'Para ti' de Threads mostraron información desactualizada la noche de la elección de EE.UU. de noviembre 2024 (TechCrunch), porque el ranking por engagement no es un orden por tiempo.",
+  "Fragmenta la atención con notificaciones y badges: adolescentes reciben una mediana de 237 notificaciones por día (Common Sense Media 2023), un cuarto en horario escolar."
+ ],
+ "evidencia": [
+  {
+   "afirmacion": "Facebook News Feed se lanzó en septiembre de 2006 y un grupo de protesta superó los 100.000 miembros en un día; Zuckerberg respondió 'Calm down. Breathe. We hear you.'",
+   "dato": "Lanzamiento septiembre 2006; >100.000 miembros en 24 h (llegó a ~750.000); carta del 8 de septiembre de 2006",
+   "fuente_titulo": "Haters gonna hate: what we can learn from Facebook's 2006 news feed redesign (freeCodeCamp) / Students speak up against Facebook 'News Feed' (Whitman Wire)",
+   "url": "https://www.freecodecamp.org/news/everyone-hates-a-redesign-or-do-they-b8a2fec9efbe/",
+   "anio": "2006"
+  },
+  {
+   "afirmacion": "EdgeRank se presentó en f8 2010 con la fórmula Afinidad × Peso × Decaimiento temporal; para 2013 el ranking usaba ~100.000 factores",
+   "dato": "f8 2010; ~100.000 factores de peso en 2013",
+   "fuente_titulo": "EdgeRank Is Dead: Facebook's News Feed Algorithm Now Has Close To 100K Weight Factors (MarTech)",
+   "url": "https://martech.org/edgerank-is-dead-facebooks-news-feed-algorithm-now-has-close-to-100k-weight-factors/",
+   "anio": "2013"
+  },
+  {
+   "afirmacion": "Facebook tenía en promedio 1.500 historias posibles por persona por visita y mostraba ~300",
+   "dato": "1.500 posibles → 300 mostradas por día (Lars Backstrom, agosto 2013)",
+   "fuente_titulo": "Facebook To Publicize News Feed Algorithm Changes, Starting With New 'Story Bumping' (TechCrunch)",
+   "url": "https://techcrunch.com/2013/08/06/facebook-story-bumping/",
+   "anio": "2013"
+  },
+  {
+   "afirmacion": "Instagram justificó el feed algorítmico diciendo que la gente se perdía el 70% de su feed",
+   "dato": "'people miss on average 70 percent of their feeds'; anuncio 15 de marzo de 2016; despliegue a todos en junio 2016",
+   "fuente_titulo": "Instagram is switching its feed from chronological to best posts first (TechCrunch) / Instagram's new algorithm that puts the best posts first goes live (TechCrunch)",
+   "url": "https://techcrunch.com/2016/06/03/instagrams-new-algorithm-that-puts-the-best-posts-first-goes-live-for-all/",
+   "anio": "2016"
+  },
+  {
+   "afirmacion": "Facebook publicó sus 'News Feed Values' con 'amigos y familia primero'",
+   "dato": "29 de junio de 2016, memo de Adam Mosseri",
+   "fuente_titulo": "Building a Better News Feed for You (Meta Newsroom)",
+   "url": "https://about.fb.com/news/2016/06/building-a-better-news-feed-for-you/",
+   "anio": "2016"
+  },
+  {
+   "afirmacion": "Zuckerberg anunció el giro a 'interacciones sociales significativas' y predijo que el tiempo en Facebook bajaría; la acción cayó 4%",
+   "dato": "11 de enero de 2018; 'the time people spend on Facebook will go down'; −4% en la apertura del 12 de enero",
+   "fuente_titulo": "Facebook shares fall 4% after it announces big changes to the News Feed (CNBC)",
+   "url": "https://www.cnbc.com/2018/01/12/facebook-announces-news-feed-changes-shares-fall-over-4-percent-pre-market.html",
+   "anio": "2018"
+  },
+  {
+   "afirmacion": "La reacción 'me enoja' valió 5 veces un like desde 2017, bajó a 4x en 2018 y luego a 0; los científicos de datos confirmaron en 2019 que esos posts tenían más desinformación y toxicidad",
+   "dato": "5x (2017) → 4x (2018) → 0; 'love' y 'sad' quedaron en 2x",
+   "fuente_titulo": "Five points for 'angry,' one for 'like': How Facebook's formula fostered rage and misinformation (Washington Post, vía Sun Journal, 26 oct 2021)",
+   "url": "https://www.sunjournal.com/2021/10/26/five-points-for-angry-one-for-like-how-facebooks-formula-fostered-rage-and-misinformation/",
+   "anio": "2021"
+  },
+  {
+   "afirmacion": "Aza Raskin inventó el scroll infinito en 2006 y en BBC Panorama (2018) lo describió como 'cocaína conductual' esparcida por la interfaz",
+   "dato": "Panorama 'Smartphones: The Dark Side', 4 de julio de 2018; 'If you don't give your brain time to catch up with your impulses, you just keep scrolling'",
+   "fuente_titulo": "Facebook, Snapchat, Twitter like 'behavioural cocaine', say Silicon Valley insiders (Mobile Marketing Magazine)",
+   "url": "https://mobilemarketingmagazine.com/facebook-snapchat-twitter-social-media-addiction-bbc-panorama",
+   "anio": "2018"
+  },
+  {
+   "afirmacion": "Raskin dice explícitamente que se arrepiente y estima que se gastan medio millón de vidas humanas por mes scrolleando",
+   "dato": "'I regret it'; ~500.000 vidas humanas por mes",
+   "fuente_titulo": "I regret it: the founder of infinite scroll was blind to how it would be used (Masters of Scale)",
+   "url": "https://mastersofscale.com/video/he-invented-infinite-scroll-and-says-he-regrets-it/",
+   "anio": "2024"
+  },
+  {
+   "afirmacion": "Loren Brichter inventó tirar-para-refrescar en Tweetie (2008) y dijo en 2017 que es adictivo",
+   "dato": "Tweetie 2008; The Guardian, 6 de octubre de 2017: 'Pull-to-refresh is addictive. Twitter is addictive. These are not good things.'",
+   "fuente_titulo": "Pull-to-refresh (Wikipedia, cita a The Guardian)",
+   "url": "https://en.wikipedia.org/wiki/Pull-to-refresh",
+   "anio": "2017"
+  },
+  {
+   "afirmacion": "Tristan Harris comparó el feed con una tragamonedas y describió el 'bol sin fondo' de los feeds infinitos",
+   "dato": "Ensayo publicado el 18 de mayo de 2016; 'Hijack #6: Bottomless bowls, Infinite Feeds, and Autoplay'",
+   "fuente_titulo": "How Technology is Hijacking Your Mind — from a Magician and Google Design Ethicist (Medium)",
+   "url": "https://medium.com/thrive-global/how-technology-hijacks-peoples-minds-from-a-magician-and-google-s-design-ethicist-56d62ef5edf3",
+   "anio": "2016"
+  },
+  {
+   "afirmacion": "Instagram lanzó 'Ya estás al día' cuando viste todos los posts de los últimos 2 días",
+   "dato": "2 de julio de 2018 (detectado por TechCrunch en mayo 2018)",
+   "fuente_titulo": "Introducing 'You're All Caught Up' in Instagram Feed (Instagram blog)",
+   "url": "https://about.instagram.com/blog/announcements/introducing-youre-all-caught-up-in-feed",
+   "anio": "2018"
+  },
+  {
+   "afirmacion": "Instagram puso 'Publicaciones sugeridas' infinitas debajo de 'Ya estás al día', mezcla de orgánico y anuncios de cuentas que no seguís",
+   "dato": "19–20 de agosto de 2020",
+   "fuente_titulo": "Instagram's suggested posts will keep you scrolling forever (Engadget)",
+   "url": "https://www.engadget.com/instagram-suggested-posts-155416413.html",
+   "anio": "2020"
+  },
+  {
+   "afirmacion": "Instagram devolvió el orden cronológico como 'Siguiendo' y 'Favoritos' (hasta 50 cuentas), pero no pueden ser el feed por defecto",
+   "dato": "23 de marzo de 2022; 50 cuentas; la app vuelve a Inicio",
+   "fuente_titulo": "Instagram launches chronological and favorites feeds for all users, but they can't be the default (TechCrunch)",
+   "url": "https://techcrunch.com/2022/03/23/instagram-launches-chronological-and-favorites-feeds-for-all-users-but-they-cant-be-the-default",
+   "anio": "2022"
+  },
+  {
+   "afirmacion": "Facebook agregó la pestaña 'Feeds' cronológica y renombró la portada como 'Home' (motor de descubrimiento)",
+   "dato": "21 de julio de 2022",
+   "fuente_titulo": "Facebook launches 'Feeds' tab that shows users newest posts first (CNBC)",
+   "url": "https://www.cnbc.com/2022/07/21/facebook-launches-feeds-tab-that-shows-users-newest-posts-first.html",
+   "anio": "2022"
+  },
+  {
+   "afirmacion": "Zuckerberg: ~15% del contenido del feed de Facebook (algo más en Instagram) era recomendado por IA de cuentas no seguidas, y se duplicaría para fin de 2023",
+   "dato": "Llamada de resultados del 27 de julio de 2022",
+   "fuente_titulo": "Mark Zuckerberg says Instagram will double AI-recommended content by 2023 (Fortune)",
+   "url": "https://fortune.com/2022/07/28/mark-zuckerberg-instagram-double-ai-recommended-content-2023",
+   "anio": "2022"
+  },
+  {
+   "afirmacion": "Zuckerberg: más del 20% del contenido en Facebook y cerca del 40% en Instagram es recomendado por IA; Reels aumentó 24% el tiempo en Instagram desde su lanzamiento",
+   "dato": ">20% Facebook, ~40% Instagram; +24% tiempo en Instagram desde septiembre 2021 (llamada Q1 2023, 26 de abril de 2023)",
+   "fuente_titulo": "People spent 24% more time on Instagram after launch of AI-powered Reels, Zuckerberg says (FOX 29)",
+   "url": "https://www.fox29.com/news/people-spent-24-more-time-on-instagram-after-launch-of-ai-powered-reels-zuckerberg-says",
+   "anio": "2023"
+  },
+  {
+   "afirmacion": "Twitter abrió su algoritmo: ~1.500 candidatos por carga, objetivo 50% in-network / 50% out-of-network, ranking con red neuronal ('heavy ranker')",
+   "dato": "31 de marzo de 2023; README: '~50% of posts come from this candidate source'",
+   "fuente_titulo": "GitHub twitter/the-algorithm (README) / Twitter reveals some of its source code (TechCrunch)",
+   "url": "https://github.com/twitter/the-algorithm",
+   "anio": "2023"
+  },
+  {
+   "afirmacion": "Pesos del heavy ranker de Twitter 2023: like 0,5; retweet 1,0; respuesta 13,5; denuncia −369",
+   "dato": "Like=0.5, Retweet=1.0, Reply=13.5, Report=−369.0 (configuración 2023)",
+   "fuente_titulo": "X gives copy-link shares a feed weight of 20, against 0.5 for likes (PPC Land)",
+   "url": "https://ppc.land/x-gives-copy-link-shares-a-feed-weight-of-20-against-0-5-for-likes/",
+   "anio": "2023"
+  },
+  {
+   "afirmacion": "Twitter hizo 'Para ti' la pestaña por defecto y, tras la protesta, pasó a abrir en la última pestaña usada",
+   "dato": "Default 'For You' en iOS 10–11 de enero de 2023; cambio a 'última pestaña vista' 24 de enero de 2023",
+   "fuente_titulo": "Twitter's Algorithmic 'For You' Feed Becomes Default Timeline on iOS (MacRumors)",
+   "url": "https://www.macrumors.com/2023/01/11/twitter-algorithmic-feed-default-ios/",
+   "anio": "2023"
+  },
+  {
+   "afirmacion": "Threads agregó un feed cronológico 'Siguiendo' tres semanas después de lanzar",
+   "dato": "25 de julio de 2023 (lanzamiento 5 de julio de 2023)",
+   "fuente_titulo": "Meta Threads gets chronological feed for people you follow (CNBC)",
+   "url": "https://www.cnbc.com/2023/07/25/meta-threads-gets-chronological-feed-for-people-you-follow.html",
+   "anio": "2023"
+  },
+  {
+   "afirmacion": "Mosseri explicó que Feed, Stories, Explore y Reels tienen rankings distintos y enumeró las señales del Feed: información del post, del autor, tu actividad y tu historial con esa cuenta",
+   "dato": "8 de junio de 2021",
+   "fuente_titulo": "Shedding More Light on How Instagram Works (Instagram blog)",
+   "url": "https://about.instagram.com/blog/announcements/shedding-more-light-on-how-instagram-works",
+   "anio": "2021"
+  },
+  {
+   "afirmacion": "TikTok explicó su 'Para ti': interacciones del usuario, información del video y configuración de dispositivo/cuenta; los seguidores no son señal directa",
+   "dato": "18 de junio de 2020",
+   "fuente_titulo": "How TikTok recommends videos #ForYou (TikTok Newsroom)",
+   "url": "https://newsroom.tiktok.com/how-tiktok-recommends-videos-for-you?lang=en",
+   "anio": "2020"
+  },
+  {
+   "afirmacion": "LinkedIn incorporó el 'dwell time' al ranking del feed: empieza a contar cuando al menos la mitad de la tarjeta está visible",
+   "dato": "12 de mayo de 2020",
+   "fuente_titulo": "LinkedIn Now Factors 'Dwell Time' Into its Algorithm (Search Engine Journal)",
+   "url": "https://www.searchenginejournal.com/linkedin-now-factors-dwell-time-into-its-algorithm/368158/",
+   "anio": "2020"
+  },
+  {
+   "afirmacion": "Experimento Guess et al.: el feed cronológico redujo el tiempo en Facebook ~20% y en Instagram ~11%, más que duplicó el contenido de fuentes no confiables en Facebook y no cambió la polarización",
+   "dato": "3 meses, elección 2020, >23.000 usuarios Facebook y >21.000 Instagram; −20% / −11% tiempo; Science 27 de julio de 2023",
+   "fuente_titulo": "How do social media feed algorithms affect attitudes and behavior in an election campaign? (Science) / hilo de Andy Guess",
+   "url": "https://www.science.org/doi/10.1126/science.abp9364",
+   "anio": "2023"
+  },
+  {
+   "afirmacion": "Investigación interna de Meta: 32% de las adolescentes dijo que cuando se sentían mal con su cuerpo Instagram las hacía sentir peor",
+   "dato": "32% (investigación 2020); publicado por WSJ el 14 de septiembre de 2021",
+   "fuente_titulo": "Facebook documents show how toxic Instagram is for teens, Wall Street Journal reports (CNBC)",
+   "url": "https://www.cnbc.com/2021/09/14/facebook-documents-show-how-toxic-instagram-is-for-teens-wsj.html",
+   "anio": "2021"
+  },
+  {
+   "afirmacion": "Facebook encontró que 1 de cada 8 usuarios reporta uso compulsivo que afecta sueño, trabajo, crianza o relaciones",
+   "dato": "1 de 8 (~12,5%), documentos internos vía WSJ 2021",
+   "fuente_titulo": "2021 Facebook leak (Wikipedia) / Facebook Broke Up Research Team Studying Problematic Social Media Use (Screen Rant)",
+   "url": "https://en.wikipedia.org/wiki/2021_Facebook_leak",
+   "anio": "2021"
+  },
+  {
+   "afirmacion": "Limitar Facebook, Instagram y Snapchat a 10 min por plataforma por día durante 3 semanas redujo soledad y depresión",
+   "dato": "143 estudiantes de Penn; ~30 min/día total; Journal of Social and Clinical Psychology, 2018",
+   "fuente_titulo": "Social media use increases depression and loneliness, study finds (ScienceDaily)",
+   "url": "https://www.sciencedaily.com/releases/2018/11/181108164316.htm",
+   "anio": "2018"
+  },
+  {
+   "afirmacion": "Desactivar Facebook 4 semanas liberó ~60 min/día, aumentó el bienestar subjetivo y 80% dijo que fue bueno para ellos",
+   "dato": "Experimento antes de las elecciones de medio término 2018; American Economic Review 110(3), marzo 2020",
+   "fuente_titulo": "The Welfare Effects of Social Media (American Economic Association)",
+   "url": "https://www.aeaweb.org/articles?id=10.1257%2Faer.20190658",
+   "anio": "2020"
+  },
+  {
+   "afirmacion": "La llegada escalonada de Facebook a universidades de EE.UU. empeoró la salud mental estudiantil, vía comparación social desfavorable",
+   "dato": "17 oleadas del National College Health Assessment; aumentos reportados de ~7–9% en depresión y ~12–20% en ansiedad según la medida (las cifras exactas varían entre resúmenes; ver no_encontrado); AER 2022",
+   "fuente_titulo": "Social Media and Mental Health (VoxEU/CEPR)",
+   "url": "https://cepr.org/voxeu/columns/social-media-and-mental-health",
+   "anio": "2022"
+  },
+  {
+   "afirmacion": "Adolescentes con 5+ horas diarias de redes tienen más del doble de probabilidad de dormirse tarde en días de clase",
+   "dato": "OR 2,14 (IC 95% 1,83–2,50) para inicio de sueño tardío; 20,8% eran usuarios 'muy altos'; BMJ Open, octubre 2019, cohorte Millennium del Reino Unido",
+   "fuente_titulo": "Social media use and adolescent sleep patterns: cross-sectional findings from the UK millennium cohort study (PubMed)",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/31641035/",
+   "anio": "2019"
+  },
+  {
+   "afirmacion": "46% de los adolescentes de EE.UU. dice estar online 'casi constantemente'; 16% usa TikTok y 12% Instagram casi constantemente",
+   "dato": "Encuesta 18 sep–10 oct 2024, n=1.391, publicada 12 de diciembre de 2024",
+   "fuente_titulo": "Teens, Social Media and Technology 2024 (Pew Research Center)",
+   "url": "https://www.pewresearch.org/internet/2024/12/12/teens-social-media-and-technology-2024/",
+   "anio": "2024"
+  },
+  {
+   "afirmacion": "83% de los adultos de EE.UU. usa YouTube, 68% Facebook, ~47% Instagram, 33% TikTok",
+   "dato": "Encuesta 19 may–5 sep 2023, n=5.733, publicada 31 de enero de 2024",
+   "fuente_titulo": "How Americans Use Social Media (Pew Research Center)",
+   "url": "https://www.pewresearch.org/internet/2024/01/31/americans-social-media-use/",
+   "anio": "2024"
+  },
+  {
+   "afirmacion": "Adolescentes reciben una mediana de 237 notificaciones por día; un cuarto en horario escolar",
+   "dato": "~200 jóvenes de 11 a 17 años con Android, 2023",
+   "fuente_titulo": "Constant Companion: A Week in the Life of a Young Person's Smartphone Use (Common Sense Media)",
+   "url": "https://www.commonsensemedia.org/sites/default/files/research/report/2023-cs-smartphone-research-report_final-for-web.pdf",
+   "anio": "2023"
+  },
+  {
+   "afirmacion": "TikTok 16% y X 12% de uso semanal para noticias a nivel global; Facebook 36%, YouTube 30%; el consumo de video social pasó de 52% (2020) a 65% (2025); 44% de los 18–24 dice que las redes son su fuente principal",
+   "dato": "Digital News Report 2025 (junio 2025)",
+   "fuente_titulo": "Overview and key findings of the 2025 Digital News Report (Reuters Institute)",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025/dnr-executive-summary",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Tiempo promedio diario por usuario: TikTok ~96 min, YouTube ~79, Instagram ~63, Facebook ~52 (Sensor Tower Q2 2024, citado por agregador; ver no_encontrado)",
+   "dato": "96 / 79 / 63 / 52 minutos por día, Q2 2024",
+   "fuente_titulo": "Average Time Spent on TikTok Statistics (Exploding Topics, citando Sensor Tower)",
+   "url": "https://explodingtopics.com/blog/time-spent-on-tiktok",
+   "anio": "2024"
+  },
+  {
+   "afirmacion": "La Comisión Europea designó 17 plataformas muy grandes (Facebook, Instagram, TikTok, Twitter, LinkedIn, YouTube, Wikipedia, etc.) y 2 buscadores; umbral 45 millones de usuarios mensuales",
+   "dato": "25 de abril de 2023; obligaciones aplicables desde el 25 de agosto de 2023",
+   "fuente_titulo": "Digital Services Act: Commission designates first set of Very Large Online Platforms and Search Engines (Comisión Europea)",
+   "url": "https://ec.europa.eu/commission/presscorner/api/files/document/print/en/ip_23_2413/IP_23_2413_EN.pdf",
+   "anio": "2023"
+  },
+  {
+   "afirmacion": "DSA art. 27 obliga a explicar los parámetros principales del recomendador y permitir cambiarlos; art. 38 obliga a las VLOP a ofrecer al menos una opción no basada en perfilado",
+   "dato": "Reglamento (UE) 2022/2065; aplicable a VLOP desde 25/8/2023 y a todas desde 17/2/2024",
+   "fuente_titulo": "The Regulation of Recommender Systems Under the DSA (DSA Observatory)",
+   "url": "https://dsa-observatory.eu/2024/11/22/the-regulation-of-recommender-systems-under-the-dsa-a-transition-from-default-to-multiple-and-dynamic-controls/",
+   "anio": "2024"
+  },
+  {
+   "afirmacion": "Meta anunció para la UE Reels y Stories solo de cuentas seguidas en orden cronológico y búsqueda sin personalización, como opción no por defecto",
+   "dato": "22 de agosto de 2023 (Nick Clegg)",
+   "fuente_titulo": "Meta confirms AI 'off switch' incoming to Facebook, Instagram in Europe (TechCrunch)",
+   "url": "https://techcrunch.com/2023/08/22/meta-confirms-ai-off-switch-incoming-to-facebook-instagram-in-europe",
+   "anio": "2023"
+  },
+  {
+   "afirmacion": "En Facebook la opción sin perfilado no persiste: al cerrar y reabrir la app vuelve al feed perfilado; TikTok y Snapchat sí la recuerdan. ONG denunciaron a Meta ante la DSA en abril 2025",
+   "dato": "Investigación DSA Observatory 2024–2025; denuncia abril 2025",
+   "fuente_titulo": "Investigation: Platforms still use manipulative design despite DSA rules (DSA Observatory)",
+   "url": "https://dsa-observatory.eu/2025/08/07/investigation-platforms-still-use-manipulative-design-despite-dsa-rules/",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "TikTok fijó un límite diario de 60 minutos por defecto para menores de 18 (se puede saltar con contraseña)",
+   "dato": "1 de marzo de 2023",
+   "fuente_titulo": "TikTok sets a new default screen-time limit for teen users (NPR)",
+   "url": "https://www.npr.org/2023/03/01/1160317717/tiktok-teens-screen-time-limit-mental-health",
+   "anio": "2023"
+  },
+  {
+   "afirmacion": "Instagram lanzó 'Tómate un descanso' (recordatorios opt-in a 10, 20 o 30 minutos) sobre las herramientas 'Tu actividad' y límite diario de 2018",
+   "dato": "7 de diciembre de 2021",
+   "fuente_titulo": "New Teen Safety Features and 'Take a Break' on Instagram (Meta Newsroom)",
+   "url": "https://about.fb.com/news/2021/12/new-teen-safety-tools-on-instagram/",
+   "anio": "2021"
+  },
+  {
+   "afirmacion": "Facebook agregó '¿Por qué veo esta publicación?' con razones y atajos a controles; primera vez que explicaba el ranking dentro de la app",
+   "dato": "31 de marzo de 2019",
+   "fuente_titulo": "Facebook gives you more control over what you see in your News Feed (Engadget)",
+   "url": "https://www.engadget.com/2019/03/31/facebook-why-am-i-seeing-this-post-news-feed/",
+   "anio": "2019"
+  },
+  {
+   "afirmacion": "NN/g: el scroll infinito solo conviene para flujos homogéneos sin objetivo (redes, noticias); no para encontrar algo específico; alternativas: botón 'cargar más', paginación integrada, páginas",
+   "dato": "Guía de NN/g (artículo y video 2022–2023)",
+   "fuente_titulo": "Infinite Scrolling: When to Use It, When to Avoid It (Nielsen Norman Group)",
+   "url": "https://www.nngroup.com/articles/infinite-scrolling-tips/",
+   "anio": "2023"
+  },
+  {
+   "afirmacion": "Baymard: con scroll infinito la gente ve muchos más productos pero pasados 50–150 sigue scrolleando sin mirar; 'Cargar más' + lazy load es la implementación superior",
+   "dato": "Hallazgos de tests de usabilidad de Baymard (resumen en Smashing Magazine, 2016; actualizaciones 2024–2025)",
+   "fuente_titulo": "Infinite Scrolling, Pagination Or 'Load More' Buttons? Usability Findings In eCommerce (Smashing Magazine, sobre Baymard)",
+   "url": "https://www.smashingmagazine.com/2016/03/pagination-infinite-scrolling-load-more-buttons/",
+   "anio": "2016"
+  },
+  {
+   "afirmacion": "Experimento de desactivación 2020: 19.857 usuarios de Facebook y 15.585 de Instagram; 6 semanas sin la plataforma tuvo poco o ningún efecto en opiniones políticas y redujo la participación online",
+   "dato": "PNAS, 13 de mayo de 2024",
+   "fuente_titulo": "The effects of Facebook and Instagram on the 2020 election: A deactivation experiment (PNAS)",
+   "url": "https://www.pnas.org/doi/10.1073/pnas.2321584121",
+   "anio": "2024"
+  }
+ ],
+ "lecciones_para_catalogo": [
+  {
+   "leccion": "ADAPTAR 'Ya estás al día' como final honesto y visible, pero sin sugeridos infinitos debajo. El cierre existe en el feed y la gente lo valoró; lo que lo arruinó fue anularlo. En un catálogo el final es una virtud: es la prueba de que viste el todo.",
+   "aplicacion_concreta": "En Pasaporte, al final de cada fila horizontal (por ejemplo 'África') un último mosaico fijo que diga 'Viste las 54 de África' con el contador 'x de 54' que sube con lo abierto en este navegador; en la ficha modal, 'Del mismo grupo' muestra '12 de 54 vistos'. Lo mismo en Bestiario por clase y en Butaca por temporada ('Terminaste la temporada 2: 24/24').",
+   "costo": "bajo: el total es un dato fijo del JSON y lo visto ya se guarda en el navegador para 'Seguir explorando'."
+  },
+  {
+   "leccion": "ADAPTAR la señal implícita de dwell time. LinkedIn e Instagram aprenden de cuánto te quedás, no de lo que declarás. Sin servidor, el navegador puede medir lo mismo para una sola persona.",
+   "aplicacion_concreta": "En todos los catálogos, la fila 'Seguir explorando' ordena por tiempo de permanencia acumulado en la ficha modal (ms guardados en localStorage) y no solo por 'último abierto'; una ficha abierta y cerrada en 1 segundo no debería desplazar a una leída 40 segundos. Además, un tema con mucho dwell puede promover su fila a la segunda posición de la pantalla de inicio.",
+   "costo": "bajo-medio: un timer en abrir/cerrar la modal y una regla de orden; cuidar que el visor que rota solo cada 9 segundos no cuente como dwell."
+  },
+  {
+   "leccion": "ADAPTAR la mezcla 50/50 conocido/desconocido de Twitter, pero con reglas fijas en vez de modelo. Es lo que da sorpresa sin perder confianza.",
+   "aplicacion_concreta": "En el visor grande que rota cada 9 segundos: alternar una diapositiva 'cerca de lo que ya abriste' (mismo grupo/continente/familia de lo último visto) y una de una sección que este navegador nunca abrió (Cosmos si solo viste Pasaporte). Cada diapositiva lleva una etiqueta chica 'Porque abriste Nepal' / 'Nunca entraste a Flora'.",
+   "costo": "bajo: la clasificación por grupo ya existe; la lista de secciones no visitadas sale de localStorage."
+  },
+  {
+   "leccion": "COPIAR las pestañas 'Para vos / Todo' pero invertir el defecto y hacerlo persistente. La lección de Twitter (enero 2023) y de la denuncia DSA contra Facebook es que el defecto decide y que resetear la elección enoja.",
+   "aplicacion_concreta": "En la pantalla de inicio de cada catálogo, dos modos arriba: 'Todo, ordenado' (la lámina completa: todas las banderas por continente, todos los animales por clase) como casa, y 'Para vos' (visor + Seguir explorando + Un día como hoy) como alternativa. El modo elegido se guarda y se respeta al reabrir, incluso en TV.",
+   "costo": "bajo: un switch y una clave en localStorage."
+  },
+  {
+   "leccion": "ADAPTAR '¿Por qué veo esto?' como etiqueta de una línea en cada recomendación. En el feed es cosmético porque el modelo es opaco; en el catálogo puede ser verdadero porque las reglas son fijas y legibles.",
+   "aplicacion_concreta": "En la ficha modal, 'Ver también' y 'Del mismo grupo' muestran bajo cada mosaico la razón: 'comparte frontera con Argentina', 'bandera casi igual', 'misma familia (félidos)', 'adapta el mismo arco del manga'. En 'Uno al azar' decir 'Elegido al azar entre los 230; nada lo recomendó'.",
+   "costo": "bajo: las relaciones ya están en la clasificación generada por Claude; solo falta mostrar el nombre de la relación."
+  },
+  {
+   "leccion": "ADAPTAR el azar como 'azar del día', determinista e igual para todos, en lugar de la recompensa variable del tirar-para-refrescar. Imita el efecto de novedad diaria de 'Los 20 más' de Animal Planet y da tema de conversación ('¿viste el de hoy?') sin tragamonedas.",
+   "aplicacion_concreta": "En Cosmos, Ingenio y Bestiario, una tarjeta fija 'El de hoy' en la portada, elegida con semilla = fecha (mismo ítem para cualquiera que abra el HTML ese día). 'Un día como hoy' usa la fecha real cuando haya datos y, mientras no los haya, cae en 'El de hoy'. 'Uno al azar' sigue existiendo pero sin animación de ruleta ni contador.",
+   "costo": "bajo-medio: una función hash(fecha) ya alcanza; 'Un día como hoy' real necesita cargar fechas desde Wikidata."
+  },
+  {
+   "leccion": "DESCARTAR el scroll infinito; COPIAR 'cargar más' / 'ver todas' con total visible (NN/g y Baymard). El catálogo es para comparar y encontrar, los dos casos donde el scroll infinito falla.",
+   "aplicacion_concreta": "Las filas horizontales muestran 10–12 mosaicos y terminan en un mosaico '+218 más: ver la lámina completa' que abre la grilla de todo el grupo (todas las banderas juntas, como la lámina de los 90), con paginación integrada y pie de página alcanzable. En TV, ese último mosaico es foco de teclado natural.",
+   "costo": "bajo: ya existe la grilla por pestaña; es cambiar el último mosaico de la fila."
+  },
+  {
+   "leccion": "ADAPTAR el anillo 'no visto' de las Historias a listas finitas con cierre. Es el único patrón del feed que combina completitud y orden personal.",
+   "aplicacion_concreta": "En Butaca, la fila de episodios de un arco con anillo de color en los no abiertos y tilde en los abiertos (guardado en el navegador); al abrir el último, un cierre 'Terminaste el arco Marineford: 33/33 episodios · capítulos 550–580 del manga'. En Pasaporte, lo mismo para 'Banderas casi iguales' (parejas vistas/pendientes).",
+   "costo": "medio: requiere los datos de episodios y arcos que están en construcción; la marca de visto es trivial."
+  },
+  {
+   "leccion": "ADAPTAR 'Favoritos' (tope de 50) para que 'Mi lista' sirva para comparar, no solo para acumular. El valor de la enciclopedia era la comparabilidad.",
+   "aplicacion_concreta": "En Pasaporte, 'Mi lista' muestra un tope visible ('7 de 30') y un botón 'Comparar estos' que arma una lámina con las banderas lado a lado y una tabla de superficie, población y densidad, con 'Cuántas Argentinas entran' en cada uno. En Bestiario, lo mismo con tamaño, peso y velocidad dibujados a escala.",
+   "costo": "medio: nueva vista de comparación; los datos ya están en las fichas."
+  },
+  {
+   "leccion": "ADAPTAR las reacciones como señal barata, con un solo botón y sin sesgo a la emoción. Facebook mostró que el peso de la reacción define qué prospera; acá el peso lo fija el autor y alimenta la revisión humana.",
+   "aplicacion_concreta": "En la ficha modal, cada ítem de 'Tres cosas que no sabías' tiene un único botón 'No lo sabía'. Localmente reordena las tres cosas (la más sorprendente primero) y marca el dato; un botón 'Exportar mis marcas' genera un JSON que el autor puede sumar a la cola de revisión para pulir textos. Nunca un 'me enoja' ni contadores públicos.",
+   "costo": "bajo: un contador en localStorage y una exportación; sin red."
+  }
+ ],
+ "anti_lecciones": [
+  "No copiar el scroll infinito ni filas que se recargan solas sin fin. Quita la señal de parada (Raskin 2006; Harris 2016) y pasados 50–150 ítems la gente sigue sin mirar (Baymard). El catálogo compite con la enciclopedia, no con TikTok: su virtud es que termina.",
+  "No copiar tirar-para-refrescar ni ninguna recompensa variable: 'Uno al azar' no debe tener animación de ruleta, racha ni 'probá otra vez'. Es el esquema de refuerzo intermitente que Harris comparó con una tragamonedas y que su propio inventor (Brichter, 2017) llama adictivo.",
+  "No optimizar por 'interacción' ni por tiempo de uso. El objetivo 'interacciones sociales significativas' de 2018 terminó premiando la indignación ('me enoja' = 5 likes hasta 2018); cualquier métrica de engagement como objetivo deforma el contenido. La métrica del catálogo tiene que ser completitud: cuántos ítems del grupo viste, cuántas comparaciones hiciste.",
+  "No esconder el orden completo detrás de un menú ni resetearlo. Instagram no permite fijar 'Siguiendo' como inicio; Facebook vuelve al feed perfilado al reabrir y fue denunciado ante la DSA (2025). La lámina completa ordenada es la casa, y la preferencia se guarda.",
+  "No imitar el 'no sabés qué te perdiste'. Facebook mostraba 300 de 1.500 (2013) e Instagram eligió qué 70% perderte (2016). Toda fila, visor o recomendación lleva su 'x de N' y un camino a la lista entera; nada aparece sin que se pueda saber de dónde salió.",
+  "No simular 'Ya estás al día' con sugeridos infinitos debajo (Instagram, agosto 2020): si un cartel de fin tiene más contenido abajo, deja de significar algo. El final es final; lo que sigue es una elección explícita ('abrir otra sección').",
+  "No agregar badges de 'nuevo', notificaciones ni urgencia artificial. Un HTML sin servidor no puede notificar, y eso es una ventaja: los adolescentes reciben 237 notificaciones por día (Common Sense 2023). Que el catálogo sea un lugar al que uno va, no uno que te llama.",
+  "No prometer personalización que no se puede sostener. El feed aprende de millones; el catálogo aprende de una persona en un navegador. Las reglas fijas, el azar del día y lo guardado localmente alcanzan; fingir un 'para vos' inteligente que en realidad es ruido destruye la confianza (y la DSA ya obliga a explicar los parámetros; acá se pueden explicar de verdad).",
+  "Costos documentados del canal que no hay que importar: 32% de las adolescentes dice que Instagram las hace sentir peor con su cuerpo (Meta interno, WSJ 2021); 1 de cada 8 usuarios con uso compulsivo que afecta sueño, trabajo y relaciones (WSJ 2021); 5+ horas diarias duplican la probabilidad de dormirse tarde (BMJ Open 2019); desactivar Facebook 4 semanas liberó 60 min/día y mejoró el bienestar (Allcott 2020); limitar a ~30 min/día bajó soledad y depresión en 3 semanas (Hunt 2018)."
+ ],
+ "fuentes": [
+  {
+   "titulo": "Facebook shares fall 4% after it announces big changes to the News Feed (CNBC, 12 ene 2018)",
+   "url": "https://www.cnbc.com/2018/01/12/facebook-announces-news-feed-changes-shares-fall-over-4-percent-pre-market.html"
+  },
+  {
+   "titulo": "News Feed FYI: Bringing People Closer Together (Meta Newsroom, 11 ene 2018)",
+   "url": "https://about.fb.com/news/2018/01/news-feed-fyi-bringing-people-closer-together/"
+  },
+  {
+   "titulo": "Building a Better News Feed for You (Meta Newsroom, 29 jun 2016)",
+   "url": "https://about.fb.com/news/2016/06/building-a-better-news-feed-for-you/"
+  },
+  {
+   "titulo": "Control Your Instagram Feed with Favorites & Following (Instagram, 23 mar 2022)",
+   "url": "https://about.instagram.com/blog/announcements/favorites-and-following"
+  },
+  {
+   "titulo": "Instagram launches chronological and favorites feeds for all users, but they can't be the default (TechCrunch)",
+   "url": "https://techcrunch.com/2022/03/23/instagram-launches-chronological-and-favorites-feeds-for-all-users-but-they-cant-be-the-default"
+  },
+  {
+   "titulo": "Introducing 'You're All Caught Up' in Instagram Feed (Instagram, 2 jul 2018)",
+   "url": "https://about.instagram.com/blog/announcements/introducing-youre-all-caught-up-in-feed"
+  },
+  {
+   "titulo": "Instagram says 'you're all caught up' in first time-well-spent feature (TechCrunch, may 2018)",
+   "url": "https://techcrunch.com/2018/05/21/scroll-responsibly/"
+  },
+  {
+   "titulo": "Instagram's suggested posts will keep you scrolling forever (Engadget, ago 2020)",
+   "url": "https://www.engadget.com/instagram-suggested-posts-155416413.html"
+  },
+  {
+   "titulo": "Instagram's new algorithm that puts the best posts first goes live for all (TechCrunch, 3 jun 2016)",
+   "url": "https://techcrunch.com/2016/06/03/instagrams-new-algorithm-that-puts-the-best-posts-first-goes-live-for-all/"
+  },
+  {
+   "titulo": "Shedding More Light on How Instagram Works (Instagram, 8 jun 2021)",
+   "url": "https://about.instagram.com/blog/announcements/shedding-more-light-on-how-instagram-works"
+  },
+  {
+   "titulo": "Instagram ranking signals: what Instagram has published, and what it has not (RecurPost)",
+   "url": "https://blog.recurpost.com/instagram-ranking-signals-published-vs-invented/"
+  },
+  {
+   "titulo": "How TikTok recommends videos #ForYou (TikTok Newsroom, 18 jun 2020)",
+   "url": "https://newsroom.tiktok.com/how-tiktok-recommends-videos-for-you?lang=en"
+  },
+  {
+   "titulo": "GitHub: twitter/the-algorithm (README)",
+   "url": "https://github.com/twitter/the-algorithm"
+  },
+  {
+   "titulo": "Twitter reveals some of its source code, including its recommendation algorithm (TechCrunch, 31 mar 2023)",
+   "url": "https://techcrunch.com/2023/03/31/twitter-reveals-some-of-its-source-code-including-its-recommendation-algorithm/"
+  },
+  {
+   "titulo": "X gives copy-link shares a feed weight of 20, against 0.5 for likes (PPC Land)",
+   "url": "https://ppc.land/x-gives-copy-link-shares-a-feed-weight-of-20-against-0-5-for-likes/"
+  },
+  {
+   "titulo": "Twitter's Algorithmic 'For You' Feed Becomes Default Timeline on iOS (MacRumors, 11 ene 2023)",
+   "url": "https://www.macrumors.com/2023/01/11/twitter-algorithmic-feed-default-ios/"
+  },
+  {
+   "titulo": "Meta Threads gets chronological feed for people you follow (CNBC, 25 jul 2023)",
+   "url": "https://www.cnbc.com/2023/07/25/meta-threads-gets-chronological-feed-for-people-you-follow.html"
+  },
+  {
+   "titulo": "For You feeds fail on election night, offering outdated information, angering users (TechCrunch, 6 nov 2024)",
+   "url": "https://techcrunch.com/2024/11/06/for-you-feeds-fail-on-election-night-offering-outdated-information-angering-users"
+  },
+  {
+   "titulo": "Facebook launches 'Feeds' tab that shows users newest posts first (CNBC, 21 jul 2022)",
+   "url": "https://www.cnbc.com/2022/07/21/facebook-launches-feeds-tab-that-shows-users-newest-posts-first.html"
+  },
+  {
+   "titulo": "Mark Zuckerberg says Instagram will double AI-recommended content by 2023 (Fortune, 28 jul 2022)",
+   "url": "https://fortune.com/2022/07/28/mark-zuckerberg-instagram-double-ai-recommended-content-2023"
+  },
+  {
+   "titulo": "People spent 24% more time on Instagram after launch of AI-powered Reels, Zuckerberg says (FOX 29, abr 2023)",
+   "url": "https://www.fox29.com/news/people-spent-24-more-time-on-instagram-after-launch-of-ai-powered-reels-zuckerberg-says"
+  },
+  {
+   "titulo": "Facebook To Publicize News Feed Algorithm Changes, Starting With New 'Story Bumping' (TechCrunch, 6 ago 2013)",
+   "url": "https://techcrunch.com/2013/08/06/facebook-story-bumping/"
+  },
+  {
+   "titulo": "EdgeRank Is Dead: Facebook's News Feed Algorithm Now Has Close To 100K Weight Factors (MarTech, 2013)",
+   "url": "https://martech.org/edgerank-is-dead-facebooks-news-feed-algorithm-now-has-close-to-100k-weight-factors/"
+  },
+  {
+   "titulo": "Haters gonna hate: what we can learn from Facebook's 2006 news feed redesign (freeCodeCamp)",
+   "url": "https://www.freecodecamp.org/news/everyone-hates-a-redesign-or-do-they-b8a2fec9efbe/"
+  },
+  {
+   "titulo": "Students speak up against Facebook 'News Feed' (Whitman Wire, 21 sep 2006)",
+   "url": "https://whitmanwire.com/news/2006/09/21/students-speak-up-against-facebook-%E2%80%98news-feed%E2%80%99/"
+  },
+  {
+   "titulo": "Facebook gives you more control over what you see in your News Feed (Engadget, 31 mar 2019)",
+   "url": "https://www.engadget.com/2019/03/31/facebook-why-am-i-seeing-this-post-news-feed/"
+  },
+  {
+   "titulo": "What's in your LinkedIn feed: People You Know, Talking About Things You Care About (LinkedIn, ene 2019)",
+   "url": "https://news.linkedin.com/2019/January/what-s-in-your-linkedin-feed--people-you-know--talking-about-thi"
+  },
+  {
+   "titulo": "LinkedIn Now Factors 'Dwell Time' Into its Algorithm (Search Engine Journal, may 2020)",
+   "url": "https://www.searchenginejournal.com/linkedin-now-factors-dwell-time-into-its-algorithm/368158/"
+  },
+  {
+   "titulo": "Facebook, Snapchat, Twitter like 'behavioural cocaine', say Silicon Valley insiders (Mobile Marketing Magazine, sobre BBC Panorama, jul 2018)",
+   "url": "https://mobilemarketingmagazine.com/facebook-snapchat-twitter-social-media-addiction-bbc-panorama"
+  },
+  {
+   "titulo": "I regret it: the founder of infinite scroll was blind to how it would be used (Masters of Scale)",
+   "url": "https://mastersofscale.com/video/he-invented-infinite-scroll-and-says-he-regrets-it/"
+  },
+  {
+   "titulo": "Infinite scrolling (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Infinite_scrolling"
+  },
+  {
+   "titulo": "Pull-to-refresh (Wikipedia; cita The Guardian 2017 con Brichter)",
+   "url": "https://en.wikipedia.org/wiki/Pull-to-refresh"
+  },
+  {
+   "titulo": "How Technology is Hijacking Your Mind — from a Magician and Google Design Ethicist (Tristan Harris, Medium, 18 may 2016)",
+   "url": "https://medium.com/thrive-global/how-technology-hijacks-peoples-minds-from-a-magician-and-google-s-design-ethicist-56d62ef5edf3"
+  },
+  {
+   "titulo": "Five points for 'angry,' one for 'like': How Facebook's formula fostered rage and misinformation (Washington Post vía Sun Journal, 26 oct 2021)",
+   "url": "https://www.sunjournal.com/2021/10/26/five-points-for-angry-one-for-like-how-facebooks-formula-fostered-rage-and-misinformation/"
+  },
+  {
+   "titulo": "Likes, anger emojis and RSVPs: the math behind Facebook's News Feed — and how it backfired (CNN, 27 oct 2021)",
+   "url": "https://www.cnn.com/2021/10/27/tech/facebook-papers-meaningful-social-interaction-news-feed-math"
+  },
+  {
+   "titulo": "Facebook documents show how toxic Instagram is for teens, Wall Street Journal reports (CNBC, 14 sep 2021)",
+   "url": "https://www.cnbc.com/2021/09/14/facebook-documents-show-how-toxic-instagram-is-for-teens-wsj.html"
+  },
+  {
+   "titulo": "2021 Facebook leak (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/2021_Facebook_leak"
+  },
+  {
+   "titulo": "How do social media feed algorithms affect attitudes and behavior in an election campaign? (Guess et al., Science, 2023)",
+   "url": "https://www.science.org/doi/10.1126/science.abp9364"
+  },
+  {
+   "titulo": "Hilo de Andy Guess con los resultados (−20% FB, −11% IG)",
+   "url": "https://twitter.com/andyguess/status/1684632245611769856"
+  },
+  {
+   "titulo": "The Welfare Effects of Social Media (Allcott et al., AER 2020)",
+   "url": "https://www.aeaweb.org/articles?id=10.1257%2Faer.20190658"
+  },
+  {
+   "titulo": "The effects of Facebook and Instagram on the 2020 election: A deactivation experiment (PNAS, 2024)",
+   "url": "https://www.pnas.org/doi/10.1073/pnas.2321584121"
+  },
+  {
+   "titulo": "Social Media and Mental Health (Braghieri, Levy, Makarin; VoxEU/CEPR)",
+   "url": "https://cepr.org/voxeu/columns/social-media-and-mental-health"
+  },
+  {
+   "titulo": "Social media use increases depression and loneliness, study finds (ScienceDaily sobre Hunt et al. 2018)",
+   "url": "https://www.sciencedaily.com/releases/2018/11/181108164316.htm"
+  },
+  {
+   "titulo": "Social media use and adolescent sleep patterns (Scott, Biello, Woods; BMJ Open 2019)",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/31641035/"
+  },
+  {
+   "titulo": "Teens, Social Media and Technology 2024 (Pew Research Center)",
+   "url": "https://www.pewresearch.org/internet/2024/12/12/teens-social-media-and-technology-2024/"
+  },
+  {
+   "titulo": "How Americans Use Social Media (Pew Research Center, 31 ene 2024)",
+   "url": "https://www.pewresearch.org/internet/2024/01/31/americans-social-media-use/"
+  },
+  {
+   "titulo": "Constant Companion: A Week in the Life of a Young Person's Smartphone Use (Common Sense Media, 2023)",
+   "url": "https://www.commonsensemedia.org/sites/default/files/research/report/2023-cs-smartphone-research-report_final-for-web.pdf"
+  },
+  {
+   "titulo": "Digital News Report 2025: Overview and key findings (Reuters Institute)",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025/dnr-executive-summary"
+  },
+  {
+   "titulo": "Average Time Spent on TikTok Statistics (Exploding Topics, citando Sensor Tower Q2 2024)",
+   "url": "https://explodingtopics.com/blog/time-spent-on-tiktok"
+  },
+  {
+   "titulo": "Commission designates first set of Very Large Online Platforms and Search Engines (Comisión Europea, 25 abr 2023)",
+   "url": "https://ec.europa.eu/commission/presscorner/api/files/document/print/en/ip_23_2413/IP_23_2413_EN.pdf"
+  },
+  {
+   "titulo": "The Regulation of Recommender Systems Under the DSA (DSA Observatory, nov 2024)",
+   "url": "https://dsa-observatory.eu/2024/11/22/the-regulation-of-recommender-systems-under-the-dsa-a-transition-from-default-to-multiple-and-dynamic-controls/"
+  },
+  {
+   "titulo": "Investigation: Platforms still use manipulative design despite DSA rules (DSA Observatory, ago 2025)",
+   "url": "https://dsa-observatory.eu/2025/08/07/investigation-platforms-still-use-manipulative-design-despite-dsa-rules/"
+  },
+  {
+   "titulo": "Meta confirms AI 'off switch' incoming to Facebook, Instagram in Europe (TechCrunch, 22 ago 2023)",
+   "url": "https://techcrunch.com/2023/08/22/meta-confirms-ai-off-switch-incoming-to-facebook-instagram-in-europe"
+  },
+  {
+   "titulo": "Coming soon to TikTok in Europe: A 'For You' feed without the TikTok algorithm (TechCrunch, 4 ago 2023)",
+   "url": "https://techcrunch.com/2023/08/04/tiktok-algorithm-dsa/"
+  },
+  {
+   "titulo": "Action Recommended: How the Digital Services Act Addresses Platform Recommender Systems (Mozilla Foundation)",
+   "url": "https://www.mozillafoundation.org/en/blog/action-recommended-how-the-digital-services-act-addresses-platform-recommender-systems/"
+  },
+  {
+   "titulo": "TikTok sets a new default screen-time limit for teen users (NPR, 1 mar 2023)",
+   "url": "https://www.npr.org/2023/03/01/1160317717/tiktok-teens-screen-time-limit-mental-health"
+  },
+  {
+   "titulo": "New Teen Safety Features and 'Take a Break' on Instagram (Meta Newsroom, dic 2021)",
+   "url": "https://about.fb.com/news/2021/12/new-teen-safety-tools-on-instagram/"
+  },
+  {
+   "titulo": "Infinite Scrolling: When to Use It, When to Avoid It (Nielsen Norman Group)",
+   "url": "https://www.nngroup.com/articles/infinite-scrolling-tips/"
+  },
+  {
+   "titulo": "Infinite Scrolling Is Not for Every Website (Nielsen Norman Group)",
+   "url": "https://www.nngroup.com/articles/infinite-scrolling/"
+  },
+  {
+   "titulo": "Infinite Scrolling, Pagination Or 'Load More' Buttons? Usability Findings In eCommerce (Smashing Magazine, sobre Baymard)",
+   "url": "https://www.smashingmagazine.com/2016/03/pagination-infinite-scrolling-load-more-buttons/"
+  },
+  {
+   "titulo": "Product List UX: Number of Products to Load (Baymard Institute)",
+   "url": "https://baymard.com/blog/number-of-items-loaded-by-default"
+  }
+ ],
+ "no_encontrado": [
+  "Las fuentes primarias no se pudieron abrir directamente desde este entorno (el proxy bloquea about.fb.com, about.instagram.com, newsroom.tiktok.com, science.org, pewresearch.org, reutersinstitute.politics.ox.ac.uk, aeaweb.org, cepr.org, techcrunch.com, wikipedia.org, nngroup.com, dsa-observatory.eu). Las cifras se verificaron por los resúmenes del buscador que citan esas URL y por cobertura secundaria (CNBC, Engadget, MacRumors, PPC Land). Conviene abrir las URL listadas antes de publicar un dato en los catálogos.",
+  "Cifras exactas de Braghieri, Levy y Makarin (AER 2022): distintos resúmenes reportan '7% más depresión severa y 20% más ansiedad' y otros '9% y 12%'. No pude abrir el paper ni la columna de VoxEU para fijar la medida correcta; dejé el rango y la advertencia.",
+  "Uso real de las opciones sin perfilado de la DSA (qué porcentaje de usuarios europeos elige el feed cronológico de Meta o TikTok): no encontré ningún número público; solo hallazgos cualitativos de que la opción está escondida y en Facebook no persiste.",
+  "Porcentaje de usuarios de Instagram que usan 'Siguiendo' o 'Favoritos' desde 2022: no publicado.",
+  "El dato de 2018 de que con el algoritmo la gente ve '90% de los posts de amigos y familia frente a 50% antes' (atribuido a Instagram en TechCrunch, 1 jun 2018): no pude abrir la nota para confirmarlo y lo dejé fuera.",
+  "El dato de Reuters Institute 2025 de que en EE.UU. las redes/video superaron a la TV como fuente semanal de noticias (54% vs 50%) aparece en títulos de cobertura pero no pude abrir el informe para confirmar los porcentajes; incluí solo las cifras globales que sí aparecieron.",
+  "Minutos diarios por plataforma (Sensor Tower Q2 2024): solo accesibles vía agregadores (Exploding Topics); no pude abrir el informe original de Sensor Tower.",
+  "Cita textual de arrepentimiento de Raskin en 2018: en BBC Panorama expresó culpa (paráfrasis de la periodista y la frase sobre 'cocaína conductual'); el 'I regret it' literal verificable es de la entrevista posterior en Masters of Scale.",
+  "La cifra '700 posts elegibles → ~500 puntuados' del Feed de Instagram aparece en resúmenes de la industria atribuida a Mosseri (mayo 2023) pero no pude confirmarla en la fuente; no la usé.",
+  "Datos sobre qué pasó con 'Ya estás al día' después de 2020 más allá de que sigue existiendo con sugeridos debajo: no encontré anuncios oficiales posteriores ni métricas de uso."
+ ]
+}

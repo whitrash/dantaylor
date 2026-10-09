@@ -1,0 +1,429 @@
+{
+ "canal": "Secciones, categorías y hashtags: del diario y Dewey al directorio de Yahoo!, el hashtag, las etiquetas de Tumblr/Instagram/Threads, los subreddits, los canales de Discord y las categorías de YouTube",
+ "expectativa_usuario": "Entro a la sección y quiero ver TODO lo que hay de ese tema, ordenado por un criterio que entienda, saber en qué parte del todo estoy parado y poder volver un nivel arriba sin perderme.",
+ "modo_humano": "Sobre todo EXPLORAR e INVESTIGAR: la sección (diario, Dewey, directorio, subreddit, categoría) es el lugar al que vas cuando ya sabés el tema pero no el ítem; prometé un conjunto cerrado y recorrible. El hashtag nació para COMUNICARSE (Messina lo propuso en 2007 como \"canal\" para coordinar grupos, inspirado en los canales # de IRC) y derivó en un mecanismo de búsqueda; hoy las plataformas lo degradaron porque clasifican solas. El subreddit es el único formato que suma las tres cosas: tema + comunidad que conversa + reglas + archivo ordenado (\"Top of all time\"). Nada de este canal sirve para acompañarse; sirve para orientarse.",
+ "unidad": "La LISTA de una sección: una página, pestaña o fila con todos los ítems del mismo tema bajo un criterio de orden explícito. El ítem cambia según el canal (artículo, libro en el estante, sitio del directorio, post con etiqueta, hilo de subreddit, video de una categoría), pero lo que la persona consume es \"la sección entera\" y su posición dentro de ella.",
+ "quien_decide": "Depende del extremo del espectro. Taxonomía (Dewey, secciones del diario, Yahoo! Directory): decide un editor o catalogador de antemano, y la persona elige el estante. Folksonomía (del.icio.us, Flickr, hashtags, tags de Tumblr): decide la multitud que etiqueta, sin coordinación, y el sistema solo agrega (\"la semántica está en los usuarios, no en el sistema\", Shirky 2005). Subreddit: decide la comunidad con votos (fórmulas públicas: hot = log10(votos) + segundos/45000; Best = intervalo de Wilson) dentro de reglas que fijan moderadores voluntarios; la persona elige el orden y la ventana de tiempo. Hashtag hoy: decide el algoritmo (Instagram eliminó la pestaña \"Recientes\" en abril de 2023 y solo muestra \"populares\" curados; X pide dejar de usarlos y los prohibió en avisos en 2025). En todos los casos la persona conserva algo clave que el feed le quita: elegir la sección y el orden.",
+ "tiene_final": "Sí, y ese es su valor. Una sección de diario, un estante Dewey, una categoría del directorio y un \"Top de siempre\" de un subreddit son listas cerradas: se terminan, y terminar da la sensación de haber visto el todo (la tesis de las enciclopedias de los 90). El hashtag y los ordenamientos \"Hot/New\" no tienen final: son flujos; por eso el hashtag se parece más al feed que a una sección. Reddit resuelve la tensión con dos ejes: criterio (hot, new, top, controversial) y ventana de tiempo (hora, día, semana, mes, año, todo). \"Top de todos los tiempos\" es la única vista que convierte una comunidad viva en un canon recorrible.",
+ "mecanismo": "Una taxonomía es un árbol decidido de antemano: Dewey (1876) parte el conocimiento en 10 clases, 100 divisiones y 1000 secciones, y cada libro vive en UN solo lugar porque el objeto físico no puede estar en dos estantes. Shirky mostró en 2005 que esa restricción se coló en la web sin necesidad: Yahoo!, que nació en enero de 1994 como \"Jerry and David's Guide to the World Wide Web\" (\"un directorio de otros sitios organizado en jerarquía, no un índice buscable\"; el nombre es un acrónimo de \"Yet Another Hierarchically Organized Oracle\"), \"volvió a agregar el estante\" y tuvo que inventar enlaces \"@\" para decir que \"Books and Literature\" estaba 'realmente' en otra rama. Los costos de la taxonomía son conocidos: sesgo (Shirky: la clase 200 de religión, \"¿cuánto no es esta la categorización que querés en el siglo XXI?\"), rigidez (la Library of Congress mantuvo \"Former Soviet Union\" porque no tenía personal para reubicar libros) y escala (hay que leer la mente del usuario y adivinar el futuro). Funciona bien, dice Shirky, cuando el corpus es chico, las categorías son formales y estables, los bordes son claros y hay una fuente autoritativa (la tabla periódica). Un catálogo de 230 países o de episodios de una serie cumple esas condiciones; la web no.\n\nLa folksonomía es lo opuesto: etiquetas libres que cada persona pone para sí (\"tags are simply labels for URLs... there is no fixed set of categories\"), y un sistema que no entiende nada pero cuenta coincidencias (\"muchos usuarios que etiquetan foobar también etiquetan frobnitz; le digo al usuario que están relacionados\"). Shirky pide \"filtrar a la salida, no a la entrada\", y advierte que las variantes (Mac/Apple/OSX) son señal, no ruido. Golder y Huberman (HP Labs, 2006) encontraron que en del.icio.us la proporción de etiquetas de un ítem se estabiliza con el uso: la multitud converge sin coordinarse. El hashtag es la folksonomía llevada al texto: un string tipeado dentro de la prosa que la plataforma convierte en un enlace a una búsqueda. Messina lo propuso el 23/8/2007 (\"how do you feel about using # (pound) for groups. As in #barcamp [msg]?\"), eligió # porque así se nombran los canales de IRC, y dos días después publicó la propuesta de \"tag channels\"; Twitter lo hiperenlazó recién en 2009. No tiene dueño, reglas ni fin; por eso se llena de spam y por eso las plataformas, que hoy clasifican el contenido con modelos, dejaron de necesitar que el usuario etiquete.\n\nEl subreddit es la síntesis que sobrevivió: un espacio con nombre (r/tema), descripción, reglas propias (el código abierto de Reddit fijaba MAX_RULES_PER_SUBREDDIT = 10), moderadores voluntarios, wiki, \"flair\" por post, y un archivo ordenado con fórmulas públicas. \"Hot\" suma log10 del puntaje más segundos/45000 desde una época fija (1134028003): multiplicar por 10 los votos equivale a 12,5 horas de antigüedad, así que lo viejo se hunde; \"Top\" ordena por puntaje dentro de una ventana (hora, día, semana, mes, año, \"all\"); \"Best\" en comentarios usa el límite inferior del intervalo de Wilson al 80 % (z = 1,2816) para no premiar al que tiene pocos votos y suerte. La persona entra sabiendo qué va a ver, con qué orden y bajo qué reglas; eso es exactamente lo que una sección promete. Tumblr formalizó la página de etiqueta como API (/tagged?tag=..., con paginación por timestamp y hasta cuatro etiquetas combinadas). Discord, en cambio, organiza por servidor › categoría › canal pero el contenido es un chat sin índice: la sección existe, el \"ver el todo\" no.\n\nLas piezas de navegación que hacen funcionar cualquiera de estos sistemas son tres y son viejas: la miga de pan (dónde estoy, un nivel arriba con un clic), la navegación por facetas (filtrar por atributos ortogonales sin perder la sección; el propio motor del autor ya define Dominio.facetas) y el índice (la lista completa, con conteo, que confirma que no falta nada). Cuando una plataforma las quita, la sección degenera en feed: Instagram eliminó \"Recientes\" de los hashtags (abril 2023) y YouTube retiró la página única de \"Trending\" (21/7/2025) para reemplazarla por charts por categoría, reconociendo que una sola lista ya no representa lo que se mira.",
+ "historia": "1876: Melvil Dewey publica su clasificación decimal; para 2009 OCLC la contaba en 200.000 bibliotecas de más de 135 países. Siglo XIX-XX: los diarios se parten en secciones (deportes, espectáculos, clasificados, suplementos) a medida que crece el volumen; es la primera \"pestaña\" de consumo masivo (sin fecha verificada en esta sesión). Enero 1994: Jerry Yang y David Filo crean \"Jerry and David's Guide to the World Wide Web\", un directorio jerárquico editado por humanos; en marzo de 1994 lo renombran Yahoo!. 2000: Yahoo! adopta Google como buscador y desarrolla el suyo en 2004; el directorio deja de ser el centro. 2003-2004: del.icio.us y Flickr popularizan las etiquetas libres; Thomas Vander Wal acuña \"folksonomy\" (2004, atribución no verificada acá). 2005: Clay Shirky da \"Ontology is Overrated\" en la conferencia ETech de O'Reilly. Junio 2005: nace Reddit; hacia 2008 cualquier usuario puede crear subreddits (fecha no verificada acá). 2006: Golder y Huberman publican \"Usage patterns of collaborative tagging systems\". 23/8/2007: Chris Messina propone el # en Twitter; 25/8 publica \"Groups for Twitter; or A Proposal for Twitter Tag Channels\"; 26/8 sube un mockup de Twitter con hashtags populares como canales. Junio 2007: la Perry Branch Library (Gilbert, Arizona, Maricopa County) abre con 24.000 ítems clasificados con 50 encabezados BISAC tipo librería en lugar de Dewey; para agosto de 2011, 8 de las 17 bibliotecas de Maricopa usaban BISAC. 2009: Twitter hiperenlaza los hashtags. 2011 y 2013: Instagram y Facebook los adoptan (fechas no verificadas acá). 26/9/2014: Yahoo! anuncia el cierre del Directory; 31/12/2014 cierra. 2015: YouTube lanza la página \"Trending\". Diciembre 2017: Instagram permite seguir hashtags. 2019-2021: Twitter lanza \"Topics\" (fecha exacta no verificada); en la llamada de resultados del Q4 2020 Dorsey dice que \"poder seguir temas e intereses es tan crítico\" porque la gente \"pierde mucho tiempo buscando las cuentas correctas\". 2020: Instagram desactiva \"Recientes\" en hashtags durante las elecciones de EE. UU.; abril 2023: lo elimina del todo y solo muestra \"populares\". 7/12/2023: Threads lanza sus etiquetas de tema, en azul y sin el símbolo #. 2024: Musk: \"Please stop using hashtags. The system doesn't need them anymore and they look ugly\". Diciembre 2024: Instagram deja de permitir seguir hashtags (según fuentes secundarias). 27/6/2025: X prohíbe hashtags en avisos (\"the esthetic nightmare that is hashtags\"). 10/7/2025 (efectivo 21/7): YouTube retira \"Trending\" y lo reemplaza por charts por categoría (Trending Music Videos, Weekly Top Podcast Shows, Trending Movie Trailers). 2025-2026: Reddit, el formato que mejor sobrevivió, reporta 121,4 millones de usuarios activos diarios en el Q4 2025 y 126,8 millones en el Q1 2026 (493,1 millones semanales), con 25.000 millones de posts y comentarios acumulados.",
+ "patrones_ux": [
+  {
+   "nombre": "Miga de pan por ubicación (breadcrumb)",
+   "descripcion": "Una línea arriba de la ficha: 'Inicio › Mamíferos › Felinos › Yaguareté'. Cada nivel es clickeable y abre la lista de ese nivel; el último no es enlace.",
+   "por_que_funciona": "Responde 'dónde estoy' y 'cómo subo' con un solo elemento y casi sin espacio. Es imprescindible cuando la persona cae en una ficha sin haber pasado por la sección (desde el buscador, 'Uno al azar' o un enlace). Es la versión visible del estante de Dewey: un camino canónico aunque el ítem aparezca en varias filas."
+  },
+  {
+   "nombre": "Pestaña con conteo y final visible",
+   "descripcion": "La pestaña dice 'Felinos · 41'; la fila termina con una tarjeta 'Viste los 41'. Nada de scroll infinito dentro de una sección.",
+   "por_que_funciona": "Es la promesa de la sección de diario y del índice: el conjunto es cerrado y se puede terminar. Da la sensación de completitud que el feed nunca da (la tesis del autor sobre la lámina con todas las banderas)."
+  },
+  {
+   "nombre": "Dos ejes de orden: criterio × ventana de tiempo",
+   "descripcion": "Reddit: Hot / New / Top / Controversial, y para Top un selector hora / día / semana / mes / año / todo. Un menú elige el criterio, otro la ventana.",
+   "por_que_funciona": "Separa dos preguntas distintas ('¿qué es lo mejor?' y '¿de cuándo?'). 'Top of all time' es el canon; 'Top del día' es la novedad controlada. Con fórmulas públicas la persona entiende por qué ve lo que ve."
+  },
+  {
+   "nombre": "La sección se presenta a sí misma (sidebar de subreddit)",
+   "descripcion": "Al costado o arriba de la lista: qué incluye, cuántos ítems, cuál es el criterio de orden, las reglas, enlaces a comunidades hermanas y un wiki/FAQ.",
+   "por_que_funciona": "Baja la incertidumbre de entrada: antes de recorrer ya sabés el alcance y el orden. Convierte la sección en un lugar con identidad y no en un resultado de búsqueda."
+  },
+  {
+   "nombre": "Facetas con conteo y chips removibles",
+   "descripcion": "Filtros ortogonales (continente, dieta, estado de conservación) con el número de ítems que quedan al lado de cada valor; los filtros aplicados aparecen como chips arriba con una X. Los valores que darían cero resultados se atenúan u ocultan.",
+   "por_que_funciona": "Permite achicar el todo sin perder la sección ni caer en 'sin resultados'. Es el patrón de e-commerce que el motor del autor ya modela como Dominio.facetas."
+  },
+  {
+   "nombre": "Un objeto, varios lugares: el '@' de Yahoo! como 'Ver también'",
+   "descripcion": "El ítem tiene UNA rama canónica en el árbol, pero aparece en filas transversales (Banderas con animales, Países sin salida al mar). En la ficha, un bloque 'También está en:' lista esas filas.",
+   "por_que_funciona": "Resuelve el problema del estante sin romper la orientación: hay un camino principal (la miga de pan) y caminos laterales explícitos. Es lo que Shirky critica en Yahoo! (los enlaces '@') pero bien hecho: en digital no hay estante, los enlaces alcanzan."
+  },
+  {
+   "nombre": "Chips de tema arriba del feed (YouTube / Threads)",
+   "descripcion": "Una fila horizontal de botones de tema arriba de la grilla ('Todo · Música · Gaming · Noticias'); un toque filtra. Threads muestra la etiqueta en azul, sin #, una por post.",
+   "por_que_funciona": "La clasificación la hace el sistema, no el usuario; el usuario solo elige. Quita la fealdad y el spam del hashtag en el texto y conserva lo útil: un toque para ver el tema."
+  },
+  {
+   "nombre": "Página de etiqueta con dos vistas: 'Populares' y 'Recientes'",
+   "descripcion": "Instagram la tuvo hasta 2023; Tumblr la expone como /tagged con paginación por timestamp. Dos pestañas dentro de la misma etiqueta: lo mejor (canon) y lo último (flujo).",
+   "por_que_funciona": "Hace visible la diferencia entre sección y feed. Cuando Instagram eliminó 'Recientes', el hashtag dejó de servir para 'ver todo' y quedó solo lo que el algoritmo elige: la etiqueta pasó de sección a feed."
+  },
+  {
+   "nombre": "Charts por categoría en vez de un único 'Trending'",
+   "descripcion": "YouTube reemplazó la lista única por rankings separados (música, podcasts, trailers). Cada chart es una lista cerrada, actualizada semanalmente, con su propio criterio.",
+   "por_que_funciona": "Cuando el corpus es diverso, un solo top no representa a nadie. Varios tops chicos y comparables son más legibles y más justos; es el 'Los 20 más' de Animal Planet, un tema por vez."
+  },
+  {
+   "nombre": "Flair: subetiqueta controlada dentro de la sección",
+   "descripcion": "Cada post del subreddit lleva una etiqueta de un conjunto fijo que definen los moderadores ('Pregunta', 'Noticia', 'Spoiler'); se puede filtrar por flair sin salir de la comunidad.",
+   "por_que_funciona": "Es un vocabulario controlado de segundo nivel: ni árbol rígido ni etiqueta libre. Mantiene la sección unida y permite recortes rápidos."
+  }
+ ],
+ "que_funciona": [
+  "La sección promete un conjunto cerrado y lo cumple: la persona puede terminar de verlo y saber que no falta nada.",
+  "El orden explícito y público (alfabético, por tamaño, por votos con fórmula conocida) hace que el 'por qué veo esto' sea obvio; en el feed es opaco.",
+  "Reddit combina tema + comunidad + reglas + archivo: 126,8 millones de usuarios diarios en el Q1 2026 y 493,1 millones semanales, con 25.000 millones de posts y comentarios; el formato de 'sección con gente' envejeció mejor que el hashtag.",
+  "'Top de todos los tiempos' convierte un flujo en canon: es la vista que la gente usa para entrar a una comunidad nueva y ver 'lo mejor de siempre'.",
+  "Las migas de pan y el índice permiten llegar por cualquier puerta (búsqueda, azar, enlace) y recuperar la orientación en un segundo.",
+  "Las facetas con conteo permiten achicar sin perder la sección y evitan el callejón de 'sin resultados'.",
+  "El 'estante' canónico más 'Ver también' (Yahoo! con '@', 'Del mismo grupo') da un camino principal y caminos laterales sin romper el árbol.",
+  "Los vocabularios controlados funcionan muy bien donde Shirky dice que funcionan: corpus chico, categorías formales, bordes claros, fuente autoritativa; justo el caso de 230 países, especies con nombre científico o episodios numerados.",
+  "El hashtag sigue siendo útil como coordinación improvisada (un evento, una emergencia, una campaña) y como atajo de búsqueda; por eso Threads y Mastodon lo mantuvieron aunque Instagram y X lo degradaran.",
+  "La folksonomía agrega señal sin que nadie coordine: las variantes de etiqueta ('Mac', 'Apple', 'OSX') revelan públicos distintos y se pueden sugerir como relacionadas sin forzar sinónimos."
+ ],
+ "que_falla": [
+  "El hashtag como sistema de clasificación: sin dueño ni reglas se llena de spam y 'secuestros'; Instagram eliminó 'Recientes' (abril 2023) y dejó de permitir seguirlos (diciembre 2024, según fuentes secundarias); Musk pidió dejar de usarlos (2024) y X los prohibió en avisos (junio 2025).",
+  "La taxonomía rígida envejece y sesga: Dewey dedica la mayor parte de la clase 200 al cristianismo; la Library of Congress mantuvo 'Former Soviet Union' por falta de personal para reubicar; Yahoo! Directory no escaló con la web y cerró el 31/12/2014.",
+  "Los directorios editados por humanos pierden contra el buscador cuando el corpus explota: Yahoo! adoptó Google en 2000 y su propio directorio quedó como pieza de museo.",
+  "'Hot' entierra lo canónico: la fórmula de Reddit hace que 10 veces más votos equivalgan a 12,5 horas; sin la vista 'Top / all' una comunidad vieja es ilegible.",
+  "Un único 'Trending' global deja de representar a nadie cuando el corpus se diversifica: YouTube lo retiró en julio de 2025 y lo partió en charts por categoría.",
+  "Discord organiza por categoría y canal pero el contenido es chat: no hay índice, no se puede 'ver el todo', y el conocimiento se pierde en el scroll.",
+  "Las categorías de subida de YouTube (15 fijas, de 'Film & Animation' a 'Nonprofits & Activism') existen para el creador y la API, no para el que mira: la navegación real la hacen chips generados por el sistema.",
+  "Seguir un hashtag mezcló sección con feed: lo que llegaba era una selección algorítmica del tema, nunca el tema entero; por eso la gente no notó mucho cuando lo sacaron.",
+  "Muchas reglas y moderación fragmentan: cada subreddit tiene sus reglas (el código abierto permitía 10 por comunidad) y la persona nueva no sabe qué se puede publicar dónde.",
+  "La etiqueta libre generada en masa (por usuarios o por un modelo) produce variantes y sinónimos que, si se usan como navegación principal, rompen la promesa de 'ver todo lo del tema'."
+ ],
+ "evidencia": [
+  {
+   "afirmacion": "Shirky: la única forma de clasificar todo es que lo haga todo el mundo; Yahoo! 'volvió a agregar el estante'; en digital 'no hay estante'.",
+   "dato": "\"The Only Group That Can Categorize Everything Is Everybody\"; \"Yahoo, faced with the possibility that they could organize things with no physical constraints, added the shelf back\"; \"There is no shelf. There is no file system. The links alone are enough.\" (leído en una copia del ensayo alojada en GitHub: raw.githubusercontent.com/dodger487/scrape_hn/master/stories/14286692.txt)",
+   "fuente_titulo": "Clay Shirky, Ontology is Overrated: Categories, Links, and Tags",
+   "url": "https://www.shirky.com/writings/ontology_overrated.html",
+   "anio": "2005"
+  },
+  {
+   "afirmacion": "Shirky: cuándo funciona la clasificación jerárquica y por qué la web es el peor caso.",
+   "dato": "Funciona con corpus chico, categorías formales y estables, bordes claros, catalogadores expertos y fuente autoritativa (\"The periodic table of the elements has all of these things\"); \"The list of factors making ontology a bad fit is, also, an almost perfect description of the Web\"; sobre Dewey 200: \"How much is this not the categorization you want in the 21st century?\"",
+   "fuente_titulo": "Clay Shirky, Ontology is Overrated",
+   "url": "https://www.shirky.com/writings/ontology_overrated.html",
+   "anio": "2005"
+  },
+  {
+   "afirmacion": "Primer hashtag: tweet de Chris Messina y motivo del símbolo.",
+   "dato": "\"how do you feel about using # (pound) for groups. As in #barcamp [msg]?\", 23 de agosto de 2007; eligió # porque los canales de IRC empiezan con # (confirmado en la documentación de Misskey y en la wiki de IndieWeb, que enlazan al tweet)",
+   "fuente_titulo": "Tweet de @chrismessina, 23/8/2007",
+   "url": "https://twitter.com/chrismessina/status/223115412",
+   "anio": "2007"
+  },
+  {
+   "afirmacion": "Propuesta formal de 'tag channels' y mockup; Twitter hiperenlaza hashtags en 2009.",
+   "dato": "2007-08-25: 'Groups for Twitter; or A Proposal for Twitter Tag Channels'; 2007-08-26: mockup de la interfaz de Twitter con hashtags populares como canales; 2009: Twitter empieza a hiperenlazar hashtags (leído en el archivo fuente de la wiki en GitHub: indieweb/wiki, data/h/hashtags.txt)",
+   "fuente_titulo": "IndieWeb wiki: hashtag",
+   "url": "https://indieweb.org/hashtag",
+   "anio": "2007-2009"
+  },
+  {
+   "afirmacion": "Yahoo! nació como directorio jerárquico editado por humanos y terminó adoptando Google.",
+   "dato": "Enero 1994: 'Jerry and David's guide to the World Wide Web', \"a directory of other websites, organized in a hierarchy, as opposed to a searchable index of pages\"; marzo 1994 renombrado Yahoo!, backronym \"Yet Another Hierarchically Organized Oracle\"; \"Yahoo began using Google for search in 2000\" (leído en una copia del artículo alojada en GitHub: hide27k/java-searchengine)",
+   "fuente_titulo": "Wikipedia: Yahoo!",
+   "url": "https://en.wikipedia.org/wiki/Yahoo!",
+   "anio": "1994-2000"
+  },
+  {
+   "afirmacion": "Cierre de Yahoo! Directory.",
+   "dato": "Anuncio reportado por Search Engine Land el 26/9/2014 (\"The Yahoo Directory — Once The Internet's Most Important Search Engine — Is To Close\"); cierre el 31 de diciembre de 2014 (misma copia del artículo de Wikipedia)",
+   "fuente_titulo": "Wikipedia: Yahoo! (sección de servicios cerrados)",
+   "url": "https://en.wikipedia.org/wiki/Yahoo!",
+   "anio": "2014"
+  },
+  {
+   "afirmacion": "Alcance del sistema Dewey.",
+   "dato": "Publicado por Melvil Dewey en 1876; según OCLC (2009) se usa en 200.000 bibliotecas y en más de 135 países (leído en una copia del artículo alojada en GitHub: cabosanlucas/document_similarity_using_tfidf)",
+   "fuente_titulo": "Wikipedia: Dewey Decimal Classification (citando OCLC Dewey Services 2009)",
+   "url": "https://en.wikipedia.org/wiki/Dewey_Decimal_Classification",
+   "anio": "1876 / 2009"
+  },
+  {
+   "afirmacion": "Bibliotecas que abandonaron Dewey por un sistema tipo librería (BISAC).",
+   "dato": "Perry Branch Library (Gilbert, Arizona, Maricopa County) abrió en junio de 2007 con una colección de 24.000 ítems organizada con 50 encabezados BISAC en lugar de Dewey; para el 5/8/2011, 8 de las 17 bibliotecas de Maricopa usaban BISAC (leído en una copia del artículo alojada en GitHub: jamieadams-nerd/umrs-project)",
+   "fuente_titulo": "ISKO Encyclopedia of Knowledge Organization: BISAC",
+   "url": "https://www.isko.org/cyclo/bisac",
+   "anio": "2007-2011"
+  },
+  {
+   "afirmacion": "Fórmula pública del orden 'hot' de Reddit.",
+   "dato": "order = log10(max(|score|,1)); hot = sign·order + seconds/45000, con seconds contados desde la época 1134028003 (es decir, multiplicar por 10 los votos equivale a 45000·1 = 12,5 horas de antigüedad)",
+   "fuente_titulo": "Código fuente abierto de Reddit, r2/r2/lib/db/_sorts.pyx",
+   "url": "https://github.com/reddit-archive/reddit/blob/master/r2/r2/lib/db/_sorts.pyx",
+   "anio": "código publicado 2008-2017"
+  },
+  {
+   "afirmacion": "Orden 'Best' de comentarios de Reddit.",
+   "dato": "Intervalo de Wilson al 80 % de confianza, z = 1.281551565545; fórmula (left - right) / under; precalculado para menos de 400 votos positivos y 100 negativos",
+   "fuente_titulo": "Código fuente abierto de Reddit, _sorts.pyx (función confidence)",
+   "url": "https://github.com/reddit-archive/reddit/blob/master/r2/r2/lib/db/_sorts.pyx",
+   "anio": "código publicado 2008-2017"
+  },
+  {
+   "afirmacion": "Reglas por subreddit y ordenamientos como controladores separados.",
+   "dato": "MAX_RULES_PER_SUBREDDIT = 10 (\"If kind is empty, then all the rules apply\"); HotController, NewController, RisingController y BrowseController (\"'sort' is forced to top/controversial by routing.py\") con menú de tiempo (TimeMenu) para top y controversial",
+   "fuente_titulo": "Código fuente abierto de Reddit: r2/r2/models/rules.py y r2/r2/controllers/listingcontroller.py",
+   "url": "https://github.com/reddit-archive/reddit/blob/master/r2/r2/models/rules.py",
+   "anio": "código publicado 2008-2017"
+  },
+  {
+   "afirmacion": "Escala actual de Reddit.",
+   "dato": "Q1 2026 (30/4/2026): DAUq 126,8 millones (+17 % interanual); WAUq 493,1 millones (+23 %); logged-out 74,8 millones (+26 %) vs logged-in 52,0 millones (+7 %); ingresos 663 millones USD (+69 %); \"25+ billion posts and comments\" (leído en una copia del comunicado alojada en GitHub: juniqlim/note)",
+   "fuente_titulo": "Reddit, Inc. — Q1 2026 earnings press release (8-K)",
+   "url": "https://investor.redditinc.com",
+   "anio": "2026"
+  },
+  {
+   "afirmacion": "Crecimiento de Reddit en los años anteriores.",
+   "dato": "DAUq 121,4 millones en el Q4 2025 (+19 %); 101,7 millones en el Q4 2024 (+39 %); 97,2 millones en el Q3 2024 (+47 %) (citas del 10-K FY2025 y del Q3 2024 reproducidas en notas alojadas en GitHub: dadachundan/financial_agent y jackraines30/jackraines.blog)",
+   "fuente_titulo": "Reddit, Inc. Form 10-K FY2025 (SEC)",
+   "url": "https://www.sec.gov/Archives/edgar/data/1713445/000171344526000022/rddt-20251231.htm",
+   "anio": "2024-2025"
+  },
+  {
+   "afirmacion": "Uso de Reddit y otras plataformas entre adultos de EE. UU. (Pew).",
+   "dato": "Encuesta de septiembre de 2023: YouTube 83 %, Facebook 68 %, Instagram 47 %, Pinterest 35 %, TikTok 33 %, Twitter 22 %, Reddit 22 %; Reddit venía de 11 % (2019) y 18 % (2021) (leído en el CSV de datos de Pew replicado en GitHub: heyyyjiaming/DSS5201-SocialMediaUsage-Dashboard)",
+   "fuente_titulo": "Pew Research Center, Americans' Social Media Use (31/1/2024)",
+   "url": "https://www.pewresearch.org/internet/2024/01/31/americans-social-media-use/",
+   "anio": "2024"
+  },
+  {
+   "afirmacion": "Cómo llega hoy la noticia: redes y video superan por primera vez a la TV y a los sitios en EE. UU.",
+   "dato": "\"the proportion accessing news via social media and video networks in the United States (54%) is sharply up – overtaking both TV news (50%) and news websites/apps (48%) for the first time\"; AI chatbots 7 % semanal; podcasts de noticias 15 %; 54 % de los 18-24 dicen que redes/video son su fuente principal (leído en una copia del resumen ejecutivo alojada en GitHub: AramZS/aramzs.xyz)",
+   "fuente_titulo": "Reuters Institute, Digital News Report 2025 — Executive Summary",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025/dnr-executive-summary",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Instagram: seguir hashtags (2017) y eliminación de la pestaña 'Recientes'.",
+   "dato": "\"In December 2017, Instagram began to allow users to follow hashtags\"; 'Recientes' se desactivó durante las elecciones de EE. UU. de 2020 y \"in April 2023 the ability to search recent hashtags was removed entirely. Now, users are only able to see a curated selection of 'popular' posts\" (leído en una copia del artículo alojada en GitHub: usamaahmedsh/synthetic-data-langchain-rag)",
+   "fuente_titulo": "Wikipedia: Instagram (sección hashtags)",
+   "url": "https://en.wikipedia.org/wiki/Instagram",
+   "anio": "2017-2023"
+  },
+  {
+   "afirmacion": "Threads lanza etiquetas de tema sin el símbolo #.",
+   "dato": "Lanzamiento el 7 de diciembre de 2023 (fecha del artículo de The Verge); la etiqueta aparece en azul, sin #, y se elige con '+ Tag new topic' (descripción tomada de una nota secundaria en GitHub: dot-do/notes; The Verge no se pudo abrir)",
+   "fuente_titulo": "The Verge: Threads is getting hashtags, but without the pound sign",
+   "url": "https://www.theverge.com/2023/12/7/23992357/threads-hashtags-tags",
+   "anio": "2023"
+  },
+  {
+   "afirmacion": "X desincentiva y luego prohíbe hashtags en avisos.",
+   "dato": "Musk, 2024: \"Please stop using hashtags. The system doesn't need them anymore and they look ugly\"; 26-27/6/2025: \"Starting tomorrow, the esthetic nightmare that is hashtags will be banned from ads on X\" (citas reproducidas en un compilado de noticias alojado en GitHub: Luke-mc-157/Current-News-v3, que enlaza a Hindustan Times e Indiatimes)",
+   "fuente_titulo": "Hindustan Times: Elon Musk declares this 'aesthetic nightmare' will be banned from X starting tomorrow",
+   "url": "https://www.hindustantimes.com/trending/elon-musk-declares-this-aesthetic-nightmare-will-be-banned-from-x-starting-tomorrow-101750930219391.html",
+   "anio": "2024-2025"
+  },
+  {
+   "afirmacion": "YouTube retira la página única 'Trending' y la reemplaza por charts por categoría.",
+   "dato": "Anunciado el 10/7/2025; Trending había nacido en 2015 \"cuando era mucho más simple capturar los videos virales con una sola lista\"; nuevos charts: Trending Music Videos, Weekly Top Podcast Shows, Trending Movie Trailers; desde el 21/7/2025 la API videos.list chart=mostPopular devuelve videos de charts por categoría (leído en una copia del artículo de TechCrunch alojada en GitHub: AramZS/aramzs.xyz, y en el README de parsauliantoras/youtube-trending-dataset)",
+   "fuente_titulo": "TechCrunch: YouTube is getting rid of its Trending page and Trending Now list",
+   "url": "https://techcrunch.com/2025/07/10/youtube-is-getting-rid-of-its-trending-page-and-trending-now-list/",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "YouTube tiene 15 categorías fijas de subida, con IDs numéricos.",
+   "dato": "1 Film & Animation, 2 Autos & Vehicles, 10 Music, 15 Pets & Animals, 17 Sports, 19 Travel & Events, 20 Gaming, 22 People & Blogs, 23 Comedy, 24 Entertainment, 25 News & Politics, 26 Howto & Style, 27 Education, 28 Science & Technology, 29 Nonprofits & Activism (mapeo de la YouTube Data API reproducido en código abierto)",
+   "fuente_titulo": "tokland/youtube-upload, categories.py (mapeo de videoCategoryId)",
+   "url": "https://github.com/tokland/youtube-upload/blob/master/youtube_upload/categories.py",
+   "anio": "API v3"
+  },
+  {
+   "afirmacion": "Tumblr formaliza la página de etiqueta como endpoint.",
+   "dato": "GET /v2/tagged?tag={tag} con parámetros before (timestamp), limit (1-20) y filter; \"a maximum of four tags can be provided\" para combinar etiquetas; objetos tag con campos is_tracked y featured",
+   "fuente_titulo": "Tumblr API v2 documentation (tumblr/docs, api.md)",
+   "url": "https://github.com/tumblr/docs/blob/master/api.md",
+   "anio": "vigente"
+  },
+  {
+   "afirmacion": "Twitter apostó a 'seguir temas' además de cuentas.",
+   "dato": "Jack Dorsey, llamada de resultados Q4 2020 (febrero 2021): \"being able to follow topics and interest is so critical and so important... People just spend so much time trying to find the right accounts instead of really being able to focus on what topics they're interested in\" (transcripción alojada en GitHub)",
+   "fuente_titulo": "Transcripción de la llamada de resultados Q4 2020 de Twitter (copia en GitHub: personal-coding/Stock-Earnings-Call-Transcript-Natural-Language-Processing)",
+   "url": "https://github.com/personal-coding/Stock-Earnings-Call-Transcript-Natural-Language-Processing",
+   "anio": "2021"
+  }
+ ],
+ "lecciones_para_catalogo": [
+  {
+   "leccion": "COPIAR TAL CUAL la pestaña con conteo y final visible. La sección promete un conjunto cerrado: decí cuántos hay y marcá el final.",
+   "aplicacion_concreta": "En todos los catálogos, en la barra de pestañas: 'Felinos · 41', 'África · 54'. Al final de cada fila horizontal, una última tarjeta fija: 'Viste los 54 países de África' con botón 'Volver al inicio de la fila'. En Pasaporte, la pestaña principal debe decir '230 países y territorios' y explicar la cuenta (193 de la ONU + observadores + territorios) en el encabezado.",
+   "costo": "bajo: el árbol y los conteos ya salen de catalogo.json; es solo render."
+  },
+  {
+   "leccion": "COPIAR TAL CUAL la miga de pan en la ficha. Quien llega por buscador, 'Uno al azar' o 'Ver también' necesita saber dónde cayó y subir un nivel.",
+   "aplicacion_concreta": "En la ficha modal de todos los catálogos, primera línea: 'Bestiario › Mamíferos › Felinos › Yaguareté'; cada nivel abre la fila de ese nivel y cierra la modal. En Pasaporte: 'Pasaporte › América › América del Sur › Argentina'. En Butaca: 'Butaca › One Piece › Arco de Alabasta › Episodio 92'. Navegable por teclado (flechas izquierda/derecha entre niveles) para TV.",
+   "costo": "bajo: la ruta canónica es la hoja del árbol que el modelo eligió por enum en taxonomia.py."
+  },
+  {
+   "leccion": "ADAPTAR los dos ejes de Reddit (criterio × ventana de tiempo) sin votos: criterio fijo + azar del día.",
+   "aplicacion_concreta": "En Pasaporte, en las filas Top 10: un selector de criterio (más grandes / más chicos / más poblados / más apretados) y, al lado, un conmutador 'De siempre | Hoy': 'De siempre' es el ranking real y cerrado; 'Hoy' es un Top 10 sorteado con semilla = fecha (p. ej. 'los 10 países con más fronteras... elegidos hoy entre los que empiezan con M'). En Butaca: 'Mejores episodios de siempre' (ranking fijo tomado de la fuente) vs 'Arco del día'. La fila 'Un día como hoy' es la misma idea con efemérides.",
+   "costo": "medio: hay que definir los criterios canónicos por catálogo y un generador determinista por fecha en el HTML."
+  },
+  {
+   "leccion": "COPIAR el sidebar del subreddit: cada sección se presenta a sí misma (alcance, criterio de orden, cuántos, 'reglas' de inclusión).",
+   "aplicacion_concreta": "Encabezado de dos líneas en cada fila y pestaña. Pasaporte, fila 'Países que ya no existen': 'Estados reconocidos que dejaron de existir después de 1900 · 23 · ordenados por fecha de disolución'. Bestiario, pestaña 'Felinos': '41 especies vivas según la taxonomía de Wikipedia · ordenadas por peso'. Creer o no creer: 'Mitos con al menos una fuente que los desmiente · 60 · ordenados por antigüedad'.",
+   "costo": "bajo: texto fijo por nodo del árbol, lo puede generar Claude en la misma tanda y pasar por la cola de revisión."
+  },
+  {
+   "leccion": "ADAPTAR las facetas de e-commerce: filtros ortogonales con conteo, chips removibles y sin combinaciones vacías.",
+   "aplicacion_concreta": "En el buscador de Bestiario: facetas continente, dieta, estado de conservación, con el número que queda al lado de cada valor y los valores que darían 0 atenuados; los filtros aplicados como chips arriba de la grilla con X. En Flora: clima y uso; en Festín: país y tipo de plato; en Pasaporte: continente, sin salida al mar, isla, monarquía. Mantener la pestaña activa como primer chip (la faceta no saca a la persona de la sección).",
+   "costo": "medio: la lógica es local (un solo HTML, filtrar un array), pero el diseño de facetas por dominio y la UI de chips con teclado lleva trabajo."
+  },
+  {
+   "leccion": "COPIAR el concepto del '@' de Yahoo! bien hecho: un ítem tiene UNA rama canónica y aparece en varias filas transversales, y la ficha lo dice.",
+   "aplicacion_concreta": "En la ficha, debajo de 'Del mismo grupo', un bloque 'También está en:' con las filas transversales donde aparece el ítem: Argentina → 'Fronteras raras', 'Banderas con sol', 'Países más grandes'. En Bestiario: Yaguareté → 'Animales de América', 'En peligro', 'Animales en banderas' (enlace cruzado a Pasaporte). Esto reemplaza al hashtag: enlaces curados, no etiquetas libres.",
+   "costo": "bajo: es la inversa del índice fila → ítems que ya existe."
+  },
+  {
+   "leccion": "COPIAR la lección de YouTube 2025: no un único 'destacado global', sino un destacado por sección.",
+   "aplicacion_concreta": "En el visor grande que rota cada 9 segundos, cada tarjeta debe venir etiquetada con su sección ('De Pasaporte: Fronteras raras', 'De Cosmos: Lunas') y rotar entre secciones, no entre ítems sueltos; al clickear, abre la fila de esa sección con el ítem resaltado, no solo la ficha. Así el visor funciona como índice de charts por categoría y no como un trending opaco.",
+   "costo": "bajo: cambia la regla de rotación y el rótulo."
+  },
+  {
+   "leccion": "ADAPTAR el flair de Reddit: una subetiqueta controlada por sección, elegible por enum y filtrable.",
+   "aplicacion_concreta": "En Butaca, cada episodio lleva un flair de un conjunto fijo: 'Canon', 'Relleno', 'Recap', 'Película', más 'Adapta cap. N-M del manga'; la fila del arco permite filtrar 'solo canon'. En Creer o no creer: 'Confirmado', 'Desmentido', 'Sin pruebas'. En Ingenio: 'Invento disputado', 'Descubrimiento accidental'. El flair se define por dominio (como Dominio.facetas) y el modelo solo elige entre valores permitidos.",
+   "costo": "medio: requiere definir los conjuntos por catálogo y que la tanda de Claude los asigne; la revisión humana ya existe."
+  },
+  {
+   "leccion": "DESCARTAR el hashtag libre como navegación principal; usar etiquetas libres solo como sugerencia filtrada a la salida (Shirky).",
+   "aplicacion_concreta": "Si la tanda de Claude genera palabras clave libres por ficha, no mostrarlas como chips clickeables en la grilla. Normalizarlas (texto.py) y usarlas solo para alimentar 'Ver también' y el buscador (sinónimos: 'puma' encuentra 'león de montaña'). La navegación visible usa exclusivamente el árbol y las facetas controladas.",
+   "costo": "bajo: es una decisión de no hacer, más una normalización que el motor ya tiene."
+  },
+  {
+   "leccion": "ADAPTAR 'seguir un hashtag' como 'seguir una sección' guardada en el navegador, con progreso.",
+   "aplicacion_concreta": "En 'Mi lista' permitir guardar secciones enteras además de ítems ('Seguir Felinos'). La fila 'Seguir explorando' muestra las secciones seguidas con progreso: 'Felinos: 12 de 41 vistos' y un botón 'Seguir donde dejé' que abre la fila en el primer ítem no visto. Sin cuentas: todo en localStorage. Esto imita el efecto de seguir un tema sin el feed algorítmico que Instagram terminó eliminando.",
+   "costo": "medio: ya existe 'Mi lista' y el registro de 'lo último abierto'; falta el modelo 'sección seguida' y el cálculo de visto/no visto por sección."
+  }
+ ],
+ "anti_lecciones": [
+  "No copiar el hashtag como sistema abierto de clasificación: sin dueño ni reglas se llena de spam y secuestros, y las propias plataformas lo abandonaron (Instagram eliminó 'Recientes' en abril de 2023 y dejó de permitir seguirlos en diciembre de 2024; Musk en 2024: 'the system doesn't need them anymore and they look ugly'; X los prohibió en avisos el 27/6/2025). En un catálogo sin red, una etiqueta libre generada en tanda es solo ruido con apariencia de navegación.",
+  "No copiar el orden 'hot' ni ningún orden por 'engagement' como vista por defecto: la fórmula de Reddit (10 veces más votos = 12,5 horas) está pensada para un flujo con miles de posts por día; en un catálogo entierra lo canónico y premia lo reciente. El catálogo no tiene votos: su orden debe ser explicable (tamaño, fecha, alfabeto, ranking de fuente).",
+  "No copiar un único 'Trending' global: YouTube lo retiró en julio de 2025 porque 'una sola lista' dejó de representar lo que la gente mira. Un visor que rota 'lo destacado' sin decir de qué sección es repite ese error.",
+  "No copiar la jerarquía rígida como ÚNICO camino (Dewey/Yahoo!): Shirky documenta el sesgo (la clase 200 de religión), la rigidez ('Former Soviet Union') y el costo de 'leer la mente' del usuario. Mantené el árbol porque el corpus es chico y estable (justo el caso en que Shirky dice que funciona), pero sumá caminos laterales ('También está en', facetas, azar).",
+  "No copiar el chat de Discord como forma de organizar conocimiento: categorías y canales dan la ilusión de sección, pero el contenido es un scroll sin índice ni final, no indexable desde afuera. Es lo contrario de 'ver el todo'.",
+  "No copiar 'seguir un hashtag' tal como lo hizo Instagram (2017-2024): mezclaba sección con feed, entregaba una selección algorítmica del tema y nunca el tema entero; por eso su eliminación pasó casi desapercibida. Si se imita, que sea 'seguir una sección' con progreso visible.",
+  "No copiar la dependencia del buscador externo como puerta principal: Reddit tiene 74,8 millones de usuarios diarios deslogueados (+26 %) contra 52,0 millones logueados (+7 %) en el Q1 2026; la mayoría entra desde Google a un hilo suelto. Un catálogo que se abre con doble clic no tiene ese tráfico: la miga de pan y el índice tienen que estar en cada ficha porque nadie llega 'por la puerta'.",
+  "Costo documentado del canal para la gente: el Digital News Report 2025 muestra que en EE. UU. las redes y el video (54 %) superaron por primera vez a la TV (50 %) y a los sitios de noticias (48 %) como vía de acceso, con 54 % de los 18-24 declarándolas fuente principal; la información llega cada vez más por personalidades y algoritmo y menos por secciones elegidas. El catálogo no debe imitar ese flujo: su ventaja competitiva es exactamente la sección con final.",
+  "No copiar la fragmentación de reglas por comunidad (cada subreddit con hasta 10 reglas propias): en un catálogo, las 'reglas de inclusión' deben ser una línea por sección, legible, y consistentes entre catálogos (misma gramática: qué incluye · cuántos · cómo está ordenado)."
+ ],
+ "fuentes": [
+  {
+   "titulo": "Clay Shirky — Ontology is Overrated: Categories, Links, and Tags (2005)",
+   "url": "https://www.shirky.com/writings/ontology_overrated.html"
+  },
+  {
+   "titulo": "Copia del ensayo de Shirky leída en esta sesión (scrape de Hacker News en GitHub)",
+   "url": "https://raw.githubusercontent.com/dodger487/scrape_hn/master/stories/14286692.txt"
+  },
+  {
+   "titulo": "Chris Messina — primer tweet con hashtag (23/8/2007)",
+   "url": "https://twitter.com/chrismessina/status/223115412"
+  },
+  {
+   "titulo": "Chris Messina — Groups for Twitter; or A Proposal for Twitter Tag Channels (25/8/2007)",
+   "url": "https://factoryjoe.com/2007/08/25/groups-for-twitter-or-a-proposal-for-twitter-tag-channels/"
+  },
+  {
+   "titulo": "IndieWeb wiki — hashtag (historia con fechas; archivo fuente en GitHub indieweb/wiki)",
+   "url": "https://indieweb.org/hashtag"
+  },
+  {
+   "titulo": "Misskey Hub — documentación de hashtags (cita el tweet y el motivo IRC)",
+   "url": "https://github.com/misskey-dev/misskey-hub-next/blob/master/content/ca/docs/2.for-users/3.features/hashtag.md"
+  },
+  {
+   "titulo": "Código fuente abierto de Reddit — _sorts.pyx (hot, controversy, confidence)",
+   "url": "https://github.com/reddit-archive/reddit/blob/master/r2/r2/lib/db/_sorts.pyx"
+  },
+  {
+   "titulo": "Código fuente abierto de Reddit — rules.py (MAX_RULES_PER_SUBREDDIT)",
+   "url": "https://github.com/reddit-archive/reddit/blob/master/r2/r2/models/rules.py"
+  },
+  {
+   "titulo": "Código fuente abierto de Reddit — listingcontroller.py (Hot/New/Rising/Browse)",
+   "url": "https://github.com/reddit-archive/reddit/blob/master/r2/r2/controllers/listingcontroller.py"
+  },
+  {
+   "titulo": "Reddit, Inc. — Investor Relations (comunicado Q1 2026, 30/4/2026)",
+   "url": "https://investor.redditinc.com"
+  },
+  {
+   "titulo": "Copia del comunicado Q1 2026 de Reddit leída en esta sesión",
+   "url": "https://raw.githubusercontent.com/juniqlim/note/master/investment/Reddit/report/8K_Q1_2026_earnings_press_release.txt"
+  },
+  {
+   "titulo": "Reddit, Inc. — Form 10-K FY2025 (SEC)",
+   "url": "https://www.sec.gov/Archives/edgar/data/1713445/000171344526000022/rddt-20251231.htm"
+  },
+  {
+   "titulo": "Pew Research Center — Americans' Social Media Use (31/1/2024)",
+   "url": "https://www.pewresearch.org/internet/2024/01/31/americans-social-media-use/"
+  },
+  {
+   "titulo": "Reuters Institute — Digital News Report 2025, Executive Summary",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025/dnr-executive-summary"
+  },
+  {
+   "titulo": "Wikipedia — Yahoo! (copia leída en GitHub: hide27k/java-searchengine)",
+   "url": "https://en.wikipedia.org/wiki/Yahoo!"
+  },
+  {
+   "titulo": "Wikipedia — Dewey Decimal Classification (copia leída en GitHub)",
+   "url": "https://en.wikipedia.org/wiki/Dewey_Decimal_Classification"
+  },
+  {
+   "titulo": "ISKO Encyclopedia of Knowledge Organization — BISAC (uso en bibliotecas, Perry Branch)",
+   "url": "https://www.isko.org/cyclo/bisac"
+  },
+  {
+   "titulo": "Wikipedia — Instagram (hashtags: seguir 2017, 'Recientes' eliminado 2023; copia leída en GitHub)",
+   "url": "https://en.wikipedia.org/wiki/Instagram"
+  },
+  {
+   "titulo": "The Verge — Threads is getting hashtags, but without the pound sign (7/12/2023)",
+   "url": "https://www.theverge.com/2023/12/7/23992357/threads-hashtags-tags"
+  },
+  {
+   "titulo": "Hindustan Times — Musk prohíbe hashtags en avisos de X (junio 2025)",
+   "url": "https://www.hindustantimes.com/trending/elon-musk-declares-this-aesthetic-nightmare-will-be-banned-from-x-starting-tomorrow-101750930219391.html"
+  },
+  {
+   "titulo": "TechCrunch — YouTube is getting rid of its Trending page and Trending Now list (10/7/2025)",
+   "url": "https://techcrunch.com/2025/07/10/youtube-is-getting-rid-of-its-trending-page-and-trending-now-list/"
+  },
+  {
+   "titulo": "parsauliantoras/youtube-trending-dataset — README sobre el cambio del 21/7/2025 en chart=mostPopular",
+   "url": "https://github.com/parsauliantoras/youtube-trending-dataset"
+  },
+  {
+   "titulo": "tokland/youtube-upload — categories.py (15 categorías de YouTube con IDs)",
+   "url": "https://github.com/tokland/youtube-upload/blob/master/youtube_upload/categories.py"
+  },
+  {
+   "titulo": "Tumblr — API v2 documentation (endpoint /tagged)",
+   "url": "https://github.com/tumblr/docs/blob/master/api.md"
+  },
+  {
+   "titulo": "Transcripción llamada de resultados Q4 2020 de Twitter (Dorsey sobre seguir temas)",
+   "url": "https://github.com/personal-coding/Stock-Earnings-Call-Transcript-Natural-Language-Processing"
+  },
+  {
+   "titulo": "Golder & Huberman — Usage patterns of collaborative tagging systems (2006; solo referencia bibliográfica confirmada)",
+   "url": "https://arxiv.org/abs/cs/0508082"
+  }
+ ],
+ "no_encontrado": [
+  "Método: la cuota de WebSearch de este turno estaba agotada (compartida entre agentes) y el proxy de egreso bloqueó casi todos los dominios (Wikipedia, shirky.com, factoryjoe.com, Meta/Instagram, X, Reddit, Pew, Reuters Institute, NN/g, Baymard, Discord, Google/YouTube, TechCrunch, The Verge, NYT, SEC, OCLC, ISKO, arXiv). Solo respondieron github.com y raw.githubusercontent.com, así que las fuentes primarias se leyeron en copias alojadas en GitHub (scrapes, datasets, notas) y en el código abierto de las plataformas; cada entrada de 'evidencia' dice qué copia se leyó. Conviene reabrir las URL canónicas para confirmar.",
+  "Fuente primaria de Meta sobre el fin de la función 'seguir hashtags' en Instagram (diciembre 2024): solo se encontró una nota secundaria ('Users can no longer follow hashtags (Dec 2024)'); no se pudo abrir el anuncio ni la cobertura de prensa.",
+  "Cifras de alcance o declive del hashtag en Instagram y X (porcentaje de posts con hashtags, caída de alcance): no hay datos públicos de las empresas; no se encontró ningún estudio con cifra verificable.",
+  "Fecha exacta de lanzamiento de 'Topics' en Twitter (se cree noviembre de 2019) y si la función sigue existiendo en X.",
+  "La respuesta de Twitter a Messina ('too nerdy') y el texto completo de su propuesta: factoryjoe.com y medium.com estaban bloqueados; solo se confirmaron las fechas por la wiki de IndieWeb y la documentación de Misskey.",
+  "Cantidad de comunidades activas de Reddit en fuente primaria (la cifra '100.000+ active communities' del S-1/IR no apareció en las copias leídas); sí se confirmó '25+ billion posts and comments'.",
+  "Distribución exacta de los números de la clase 200 de Dewey (Shirky la cita en la charla; la copia leída no reproduce la tabla).",
+  "Yahoo! Directory: cantidad de sitios y categorías en su pico, y la tarifa de inclusión comercial (Yahoo Express, 299 USD).",
+  "Documentación de la API de Discord (tipos de canal, límite de 500 canales por servidor y 50 por categoría, 20 etiquetas por foro) y cifras de usuarios de Discord: las rutas del repo discord-api-docs devolvieron 404 y discord.com estaba bloqueado.",
+  "Nielsen Norman Group (migas de pan, filtros vs facetas) y Baymard Institute (facetas en e-commerce): bloqueados; los patrones se describen sin sus cifras de usabilidad.",
+  "Threads: si el límite es efectivamente una sola etiqueta de tema por post (no confirmado).",
+  "Tumblr: la regla de que solo las primeras 20 etiquetas de un post se indexan en las páginas de etiqueta (no confirmada en la documentación leída).",
+  "Golder y Huberman (2006): solo se confirmó la referencia bibliográfica, no el texto ni las cifras del estudio.",
+  "Historia de las secciones del diario con fechas concretas: no se abrió ninguna fuente; se describe en términos generales.",
+  "Fechas de adopción del hashtag por Instagram (2011) y Facebook (2013), y de la creación de subreddits por usuarios (2008): se mencionan de memoria y no se verificaron en esta sesión.",
+  "Reuters Digital News Report 2026 (cifras globales: redes/video 54 %, chatbots 10 % semanal, 1 % como fuente principal): solo se vio citado en una nota secundaria; no se incluyó en 'evidencia'."
+ ]
+}

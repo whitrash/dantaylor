@@ -1,0 +1,692 @@
+{
+ "canal": "Explorar / Descubrir (Instagram Explore, Pinterest, Spotify Discover Weekly y Browse, App Store Today, Google Discover, Apple Music, Netflix \"Novedades y populares\", Steam Discovery Queue)",
+ "expectativa_usuario": "\"No sé qué quiero, pero quiero que me sorprendan con algo que igual sea para mí, y que no me cueste nada mirarlo.\"",
+ "modo_humano": "Sobre todo EXPLORAR: la persona entra sin pregunta formulada y sin meta concreta; NN/g describe el browsing justamente como una actividad exploratoria sin plan, cuyo resultado depende de la serendipia. En segundo lugar INVESTIGAR en forma blanda, lo que Pinterest llama \"planear\": el 96% de las búsquedas de texto en Pinterest no mencionan marca (SEC, Q2 2025), o sea que la gente llega con una intención vaga (\"ideas para el living\") y va cerrando el foco a medida que ve; en Steam, la cola de descubrimiento es investigar qué comprar sin saber qué existe. COMUNICARSE casi nada: Explore y Pinterest son solitarios por diseño (no hay conversación, solo guardar y a lo sumo compartir afuera). ACOMPAÑARSE sí, en forma de ritual: Discover Weekly cada lunes, el App Store cada día, el Top 10 de Netflix; la gente vuelve por la cita más que por el contenido. En síntesis: es el canal del \"deambular con dirección\", el equivalente digital de hojear una enciclopedia abierta al azar, con la diferencia de que acá alguien (un algoritmo o un editor) eligió la página.",
+ "unidad": "La ficha visual (tile): una imagen sin texto en una grilla (Explore, Pinterest), una tarjeta con imagen grande + título (Google Discover, App Store Today), o un ítem dentro de una lista cerrada (una canción de las 30 de Discover Weekly, un juego de los 12 de la cola de Steam, un título de los 10 del Top 10 de Netflix). La unidad de SESIÓN cambia según el producto: en Explore y Pinterest es la grilla infinita (no hay unidad de sesión, se corta cuando te cansás); en Discover Weekly es la playlist de la semana; en App Store Today es \"el día\"; en Steam es \"la cola de hoy\".",
+ "quien_decide": "Casi siempre el algoritmo, con una capa editorial encima y un control mínimo de la persona. Instagram Explore: un embudo de modelos (retrieval por \"cuentas semilla\" parecidas a vos, luego 150 → 50 → 25 candidatos para la primera pantalla, según Meta 2023) decide todo; la persona solo elige un carril con las fichas de tema de arriba o silencia uno. Pinterest: el inicio es algorítmico, pero \"Más como esto\" (Related Pins, más del 40% del engagement) está disparado por lo que la persona tocó, y Lens por lo que fotografió; la pestaña \"Today\" (2020) la curaba el equipo de Pinterest. Spotify: Discover Weekly es filtrado colaborativo sobre miles de millones de playlists hechas por personas, o sea \"la comunidad decide, el algoritmo compila\"; Browse y los destacados son editoriales. App Store Today: editores humanos (Apple habla de más de 120 editores y 40 mil historias), una historia por día igual para todos en cada país. Google Discover: algoritmo sobre tu historial de búsqueda, con botones \"Más/Menos\" y \"Seguir tema\". Netflix Top 10: la audiencia agregada (cuentas que vieron 2 minutos en 24 h), sin personalizar la lista pero sí la posición de la fila. Steam: mezcla reglada (recomendados por tus juegos + novedades + más vendidos) de 12 por día, y el botón \"No me interesa\" como voto explícito. Apple Music nació en 2015 con la bandera opuesta (\"los algoritmos no entienden la sutileza\", Jimmy Iovine, cientos de curadores humanos).",
+ "tiene_final": "Los productos del canal se dividen exactamente por esta línea, y los que tienen final son los que la gente recuerda con cariño. SIN FINAL: la grilla de Explore, el inicio de Pinterest y Google Discover son scroll infinito; no hay \"ya viste todo\", la sesión termina por agotamiento o interrupción (Instagram puso un cartel \"You're All Caught Up\" en 2018, pero en el Feed de seguidos, no en Explore). CON FINAL: Discover Weekly son 30 canciones (unas 2 horas) que se renuevan el lunes y desaparecen; la cola de Steam son 12 juegos, uno por vez, y al terminar te dice que volvás mañana; App Store Today es \"la historia de hoy\", App del día y Juego del día; el Top 10 son diez. Efecto del final: convierte el consumo en ritual (cita semanal o diaria) y en logro (\"terminé la cola\", \"escuché toda la lista\"); la escasez da valor a cada ítem (si son 30, cada una importa; si son infinitas, ninguna). Spotify midió que más de la mitad de los oyentes mensuales volvía y escuchaba al menos 10 de las 30 cada semana, y guardaba al menos una. Efecto de la falta de final: es lo que Aza Raskin, inventor del scroll infinito, llamó \"cocaína conductual rociada sobre la interfaz\" (BBC Panorama, 2018), y es lo que aparece en los costos documentados (WSJ 2021, inquest de Molly Russell 2022).",
+ "mecanismo": "Por fuera, todos comparten un gesto: entrás sin escribir nada y la pantalla ya está llena. Instagram Explore muestra una barra horizontal de fichas de tema arriba (desde junio de 2018: \"Para vos\", Arte, Deportes, Belleza; desde mayo de 2019 con accesos a IGTV y Compras adelante) y debajo una grilla de tres columnas de imágenes sin texto, con tiles de tamaño distinto (uno de doble alto cada tanto, usualmente video), que se extiende para abajo sin fin. Pinterest usa desde 2010 su grilla \"masonry\" (columnas de alturas variables, diseñada y programada por Evan Sharp para el lanzamiento de marzo de 2010): no hay filas, cada imagen conserva su proporción, y al tocar una se abre la ficha con una segunda grilla de \"Más como esto\" debajo; Lens (beta febrero 2017) permite apuntar la cámara o recortar una zona de una imagen para buscar por semejanza visual (600 millones de búsquedas visuales por mes ya en febrero de 2018). Google Discover (ex Google Feed, 2017; renombrado septiembre de 2018 con más de 800 millones de usuarios mensuales) es una columna de tarjetas con imagen grande, titular, medio y fecha, encabezados de tema, un botón \"Seguir\" y un control \"Más/Menos\" en cada tarjeta; mezcla noticias con contenido \"evergreen\" que Google define como \"nuevo para vos\" aunque no sea nuevo para la web. App Store Today (iOS 11, septiembre de 2017) es una pila vertical de tarjetas a pantalla completa con arte a sangre, cada una una \"historia\" (Apple las llama así: mini posts con personalidad) escrita por editores, más App del día, Juego del día y \"La lista diaria\"; se renueva cada día, cuando antes el App Store cambiaba sus destacados una vez por semana. Netflix \"Novedades y populares\" (pestaña global en TV desde octubre de 2020) junta filas de \"Nuevo en Netflix\", \"Próximamente\", el Top 10 diario por país (desde febrero de 2020, con sello \"Top 10\" que viaja con el título a cualquier fila donde aparezca) y \"Vale la pena esperar\" (títulos a 15-365 días, con recordatorio). Steam Discovery Queue (23 de septiembre de 2014) muestra UN juego por vez, con una ficha grande y cuatro acciones (Siguiente, Lista de deseos, Seguir, No me interesa); son 12 por día y luego se cierra.\n\nPor dentro, la lógica es un embudo que va de millones de ítems a una pantalla. Instagram lo describió en 2019 (\"Powered by AI\"): primero elige \"cuentas semilla\" (cuentas parecidas a las que interactuaste, con embeddings de cuentas tipo word2vec, \"ig2vec\"), de ahí saca candidatos, y los pasa por tres etapas de ranking cada vez más caras; en 2023 Meta detalló que de miles de candidatos un primer modelo deja 150, un segundo 50 y el último 25, que son la primera pantalla de la grilla. El modelo no predice \"te va a gustar\" sino acciones concretas (like, guardar, compartir, \"ver menos de esto\") y las pondera en un \"value model\"; en 2019 hablaban de 65 mil millones de features y 90 millones de predicciones por segundo. Esto solo existe porque hay cientos de millones de personas dejando señales; no se puede copiar en un HTML sin servidor.\n\nDiscover Weekly funciona distinto y por eso es más imitable: toma los más de 2 mil millones de playlists que armaron los usuarios, busca las canciones que aparecen junto a las que vos escuchás y que a vos te faltan, y arma 30 cada lunes. La inteligencia está en el trabajo previo de millones de personas que ya ordenaron música en listas (como las láminas de la enciclopedia), no en un modelo de atención. Y hay una decisión de diseño documentada: la versión original debía incluir solo canciones desconocidas; un bug dejó pasar canciones conocidas, lo \"arreglaron\" y el uso bajó, porque un poco de familiaridad genera confianza (anécdota de Matt Ogle recogida en \"Hit Makers\"). La capa editorial funciona al revés del embudo: pocas personas eligen poco para todos (Apple: una historia por día; Pinterest Today en 2020: temas del día curados por el equipo; Spotify Browse). Y la capa de control de la persona es mínima pero importante: las fichas de tema (elegir un carril), \"Más/Menos\", \"No me interesa\", silenciar un tema; son votos explícitos que corrigen al algoritmo y dan sensación de dominio.\n\nLo que hace volver no es el contenido sino la combinación de tres cosas: la promesa de que siempre hay algo nuevo sin pedirlo, el ritual (lunes, hoy, la cola diaria) y la seguridad de que lo nuevo va a estar en tu zona (relevancia). La serendipia buscada acá no es azar puro: Kotkov y otros (2016) la definen como relevancia + novedad + inesperado, las tres a la vez. Si falta relevancia es ruido; si falta novedad es el Feed; si falta lo inesperado es una búsqueda.",
+ "historia": "2010: Pinterest lanza en marzo con la grilla masonry de Evan Sharp; Instagram nace con una pestaña \"Popular\" (lo más gustado de todos, sin personalizar). 2012: Instagram reemplaza \"Popular\" por \"Explore\" a mediados de año; Spotify anuncia su pestaña Discover (diciembre). 2014: Valve lanza el Steam Discovery Update (23 de septiembre) con la Discovery Queue, curadores y etiquetas; meses después informa que las vistas de páginas de producto subieron 30% (el 75% de esa suba por la cola), que los ingresos de los títulos fuera del top 500 subieron 18% y que las altas a listas de deseos se duplicaron; Instagram empieza a personalizar Explore. 2015: Apple Music sale el 30 de junio con la bandera de la curaduría humana y la sección \"For You\" (Iovine: \"los algoritmos no entienden la sutileza, contratamos cientos de personas\"); Spotify lanza Discover Weekly en julio (idea de un hack interno de Edward Newett de 2014, producto de Matt Ogle: \"una cinta que te arma tu mejor amigo cada semana\"). 2016: Instagram agrega canales temáticos de video en Explore (abril); Discover Weekly llega a 40 millones de usuarios y casi 5 mil millones de reproducciones (mayo); Steam Discovery Update 2.0 (7 de noviembre). 2017: Pinterest publica el paper de Related Pins (más del 40% del engagement) y lanza Lens en beta (febrero); Apple presenta el App Store rediseñado en la WWDC (5 de junio) con la pestaña Today y 500 millones de visitantes semanales, disponible con iOS 11 en septiembre; Google lanza el Feed (19 de julio). 2018: Pinterest informa 600 millones de búsquedas visuales por mes (febrero); Sensor Tower mide que ser App del día multiplica las descargas (+685% mediana) (abril); Instagram lanza las fichas de tema en Explore (26 de junio) y el cartel \"You're All Caught Up\" en el Feed (2 de julio); Google renombra el Feed como Discover (24 de septiembre), con más de 800 millones de usuarios mensuales. 2019: Instagram rediseña Explore (mayo; más de la mitad de las cuentas lo usa cada mes, 200 millones por día) y publica cómo funciona su recomendador (noviembre); las historias del App Store pasan a la web (agosto). 2020: Netflix lanza el Top 10 diario por país (24 de febrero); Pinterest lanza la pestaña Today curada (24 de marzo, adelantada por la pandemia); Netflix lleva \"New & Popular\" con \"Worth the Wait\" a todos los TV (octubre). 2021: el Wall Street Journal publica los Facebook Files (septiembre). 2022: el inquest de Molly Russell concluye que el contenido de Instagram y Pinterest contribuyó a su muerte (30 de septiembre). 2023: Meta publica la arquitectura actual de ranking de Explore (agosto). 2024: Harper's publica \"The Ghosts in the Machine\" de Liz Pelly sobre el programa \"Perfect Fit Content\" de Spotify (diciembre). 2025: Netflix rediseña su app de TV y quita el acceso directo a \"New & Popular\" y a Categorías (desde el 19 de mayo); Discover Weekly cumple 10 años con más de 100 mil millones de reproducciones (30 de junio); Pinterest llega a 578 millones de usuarios mensuales (Q2).",
+ "patrones_ux": [
+  {
+   "nombre": "Grilla mosaico de tamaños mixtos (Explore / masonry de Pinterest)",
+   "descripcion": "Tres columnas de imágenes cuadradas sin texto, con un tile de doble alto cada dos filas (Explore), o columnas de alturas variables donde cada imagen conserva su proporción (Pinterest). Sin títulos a la vista: hay que tocar para saber qué es.",
+   "por_que_funciona": "La irregularidad rompe la lectura lineal de izquierda a derecha: el ojo salta, compara tamaños y se detiene en lo que destaca. La ausencia de texto convierte cada tile en una pequeña incógnita que se resuelve con un toque, y la jerarquía de tamaño sugiere 'esto vale más' sin decirlo. Pinterest llama a esta grilla su marca desde el día uno (2010)."
+  },
+  {
+   "nombre": "Fichas de tema arriba (topic channels / topic headers)",
+   "descripcion": "Una barra horizontal deslizable de píldoras con nombre de tema ('Para vos', Arte, Viajes, Comida) sobre la grilla; tocar una filtra el carril; mantener apretada permite silenciarla y mandarla al final (Instagram, 2018). Google Discover usa encabezados de tema con botón 'Seguir'.",
+   "por_que_funciona": "Le ponen nombre a lo que vas a ver y dan un control barato: elegir un carril sin tener que buscar ni escribir. Reducen la sensación de caja negra ('¿por qué me muestra esto?') y permiten saltar de tema cuando uno se agota. Instagram las achicó en 2019 para que no compitieran con el contenido."
+  },
+  {
+   "nombre": "La lista cerrada con fecha (30 canciones el lunes, 12 juegos hoy, Top 10)",
+   "descripcion": "Un conjunto pequeño, numerado y con fecha de renovación visible: Discover Weekly son 30 pistas que se reemplazan cada lunes; la cola de Steam son 12 fichas que se agotan y dicen 'volvé mañana'; el Top 10 son diez con número grande.",
+   "por_que_funciona": "El final crea ritual y logro, y la escasez da valor a cada ítem. Spotify midió en 2016 que más de la mitad de los oyentes mensuales volvía cada semana y escuchaba al menos 10 de las 30. Es la antítesis del scroll infinito, y es lo que la gente recuerda con cariño del canal."
+  },
+  {
+   "nombre": "Historia editorial de pantalla completa (App Store Today)",
+   "descripcion": "Tarjetas verticales a sangre con arte grande, un rótulo pequeño arriba ('APP DEL DÍA', 'JUEGO DEL DÍA', 'LA LISTA DIARIA'), un título de nota y, al abrir, un texto corto con personalidad y un solo botón de acción. Una tanda nueva por día, igual para todos en cada país.",
+   "por_que_funciona": "Cuenta por qué algo importa, no solo qué es; convierte el catálogo en revista. La cadencia diaria da motivo para volver sin saturar. Sensor Tower midió que ser App del día multiplicaba las descargas de la semana (mediana +685% en EE. UU.), señal de que la gente confía en la elección editorial."
+  },
+  {
+   "nombre": "'Más como esto' y zoom visual (Related Pins, Lens)",
+   "descripcion": "Al abrir una ficha, debajo aparece otra grilla de ítems parecidos; en Pinterest se puede recortar una zona de la imagen (la lámpara dentro de la foto del living) y buscar solo eso. Related Pins generaba más del 40% del engagement de Pinterest ya en 2017.",
+   "por_que_funciona": "Cada ficha se vuelve una puerta a cincuenta más, y la navegación es por semejanza, sin palabras: no hace falta saber cómo se llama lo que te gustó. Es el 'ver también' llevado al extremo visual, y mantiene a la persona dentro del catálogo sin volver al inicio."
+  },
+  {
+   "nombre": "Voto negativo explícito ('No me interesa', 'Menos de esto', silenciar tema)",
+   "descripcion": "Un botón visible en cada ficha o tarjeta para decir que no: Steam lo puso en cada página de producto en 2014; Google Discover tiene 'Más/Menos' en cada tarjeta; Instagram deja silenciar fichas de tema.",
+   "por_que_funciona": "Da control real y una señal mucho más limpia que el silencio: el sistema deja de insistir y la persona siente que doma la herramienta. Instagram incluso lo modela como acción negativa ('ver menos posts como este') en su ranking."
+  },
+  {
+   "nombre": "Una ficha por vez con decisión binaria (Steam Discovery Queue)",
+   "descripcion": "En vez de grilla, una sola ficha grande (video, capturas, etiquetas, precio) y una fila de botones: Siguiente, Lista de deseos, Seguir, No me interesa. Un contador de progreso y un cierre al llegar a 12.",
+   "por_que_funciona": "Concentra toda la atención en un ítem y baja el costo de decidir a un gesto. Valve reportó que el 75% del aumento de 30% en vistas de producto venía de la cola, y que las altas a listas de deseos se duplicaron: la gente mira más cuando mira de a uno."
+  },
+  {
+   "nombre": "Sello que viaja con el ítem ('Top 10' de Netflix)",
+   "descripcion": "Una insignia 'Top 10' sobre la miniatura, visible en cualquier fila donde aparezca el título (por género, en Mi lista, en resultados de búsqueda), además de la fila propia con números gigantes del 1 al 10.",
+   "por_que_funciona": "El contexto social ('esto lo está viendo todo el mundo') acompaña al ítem adonde vaya, en vez de quedar encerrado en una fila. Netflix lo explicó así: para 'ver qué está en el zeitgeist' mientras navegás por otro lado."
+  },
+  {
+   "nombre": "Lo conocido como ancla de lo nuevo",
+   "descripcion": "Discover Weekly incluye algunas canciones que ya conocés entre las 30 nuevas; Google Discover mezcla contenido viejo marcado como 'nuevo para vos'; Explore muestra algo de las cuentas que seguís.",
+   "por_que_funciona": "La anécdota del bug de Spotify lo demuestra: cuando la lista fue 100% desconocida el uso bajó, porque un par de caras conocidas dan confianza para probar el resto. La serendipia necesita relevancia percibida, no solo novedad."
+  },
+  {
+   "nombre": "Horizonte hacia adelante ('Próximamente', 'Vale la pena esperar' con recordatorio)",
+   "descripcion": "Filas con lo que viene (una o dos semanas; o de 15 a 365 días en 'Worth the Wait') y un botón 'Recordarme' por título (Netflix, 2020).",
+   "por_que_funciona": "Le da al catálogo una dimensión temporal: no es un depósito cerrado sino algo que crece, y la promesa concreta ('el 12 llega esto') fabrica una razón para volver que no depende del algoritmo."
+  }
+ ],
+ "que_funciona": [
+  "El ritual con final: Discover Weekly (30 canciones, lunes) llegó a 40 millones de usuarios en 10 meses y a más de 100 mil millones de reproducciones en 10 años; la gente lo trata como una cita, no como un feed.",
+  "La curaduría humana diaria visible: el App Store Today convirtió un catálogo de millones de apps en una historia por día; Sensor Tower midió saltos de descargas de 200% a 800% para lo destacado, y 29% de los editores destacados tenía menos de 10 mil descargas, o sea que la vidriera sirve para lo chico.",
+  "El descubrimiento por semejanza visual sin palabras: Related Pins es más del 40% del engagement de Pinterest; Lens procesaba 600 millones de búsquedas visuales por mes en 2018; la gente encuentra lo que no sabe nombrar.",
+  "La grilla sin texto como invitación: Explore llegó a más de la mitad de las cuentas de Instagram cada mes y 200 millones de visitas diarias (2019) mostrando solo imágenes que piden un toque.",
+  "Las fichas de tema como control barato: dan nombre a los carriles y dejan elegir o silenciar sin buscar.",
+  "El voto negativo explícito ('No me interesa') y la ficha de a una (Steam): más vistas de producto (+30%), más listas de deseos (x2) y más ingresos para lo que no está en el top 500 (+18%).",
+  "La insignia que viaja (Top 10): el ranking como contexto social sin red social.",
+  "Mezclar algo conocido entre lo nuevo: baja la desconfianza y sube la exploración (bug de Discover Weekly).",
+  "Aprovechar el orden que ya hicieron otros: Discover Weekly no entiende música, lee 2 mil millones de playlists armadas por personas; es la lámina de la enciclopedia hecha por la multitud."
+ ],
+ "que_falla": [
+  "Nunca se ve el todo: Explore, Pinterest y Discover son infinitos y no tienen índice; no podés saber cuánto hay ni dónde estás. Es exactamente lo que el autor identifica como pérdida respecto de la enciclopedia.",
+  "La relevancia se come a la serendipia: Anderson et al. (WWW 2020) midieron en Spotify que escuchar por recomendación algorítmica se asocia con menos diversidad, y que quienes se vuelven más diversos lo hacen alejándose del algoritmo; a la vez, la diversidad se asocia con retención.",
+  "La volatilidad para quien produce: Google Discover es una fuente 'crítica pero volátil' para los medios (Reuters Institute, 2025) y en 2025 cayó 15% mientras la búsqueda caía 34% (Chartbeat vía Press Gazette); lo que Explore o Discover muestran hoy puede desaparecer mañana sin explicación.",
+  "La fila con rotación automática no la mira nadie: en el estudio de Notre Dame (2013) solo el 1% hacía clic en el carrusel y el 84% de ese 1% solo en la primera diapositiva.",
+  "La capa editorial desaparece bajo la algorítmica: Netflix quitó en 2025 el acceso directo a 'New & Popular' y a Categorías y te manda a buscar la fila en el inicio; Apple Music arrancó con 'humanos, no algoritmos' y hoy su inicio es mayormente personalizado.",
+  "El relleno de bajo costo: Spotify llenó playlists de ambiente y foco con 'Perfect Fit Content' de artistas fantasma (Harper's, diciembre 2024); cuando el objetivo es llenar la grilla, la calidad cede.",
+  "Costos de salud documentados: el 32% de las adolescentes que se sentían mal con su cuerpo se sentían peor en Instagram (investigación interna revelada por WSJ, 2021); el forense británico concluyó en 2022 que el contenido de Instagram y Pinterest contribuyó 'de modo más que mínimo' a la muerte de Molly Russell (14 años), con más de 2.000 posts de Instagram y cientos de imágenes de Pinterest sobre autolesión.",
+  "La grilla puramente visual esconde el dato: en Explore no sabés qué es nada hasta tocar; para información comparable (población, altura, año) la imagen sola no alcanza."
+ ],
+ "evidencia": [
+  {
+   "afirmacion": "Discover Weekly se lanzó en julio de 2015 como playlist semanal personalizada; Matt Ogle quería que se sintiera como 'tu mejor amigo armándote una cinta cada semana'.",
+   "dato": "Lanzamiento julio 2015; 30 canciones nuevas cada lunes; cita de Ogle sobre la cinta del mejor amigo",
+   "fuente_titulo": "Spotify launches Discover Weekly personalised 'mixtape' playlist (Music Ally)",
+   "url": "https://musically.com/2015/07/20/spotify-discover-weekly-personalised-mixtape-playlist/",
+   "anio": "2015"
+  },
+  {
+   "afirmacion": "A los diez meses, Discover Weekly tenía 40 millones de usuarios y casi 5 mil millones de reproducciones; más de la mitad de los oyentes mensuales volvía y escuchaba al menos 10 pistas por semana y guardaba al menos una de las 30; para más de 8.000 artistas, más de la mitad de sus oyentes del mes venía de la lista.",
+   "dato": "40 millones de usuarios; ~5.000 millones de pistas; >50% vuelve y escucha ≥10; 8.000 artistas",
+   "fuente_titulo": "Spotify's Discover Weekly Hits 40 Million Users, 5 Billion Tracks Streamed (Paste)",
+   "url": "https://www.pastemagazine.com/music/spotifys-discover-weekly-hits-40-million-users",
+   "anio": "2016"
+  },
+  {
+   "afirmacion": "A los diez años, Discover Weekly supera los 100 mil millones de pistas reproducidas y genera más de 56 millones de descubrimientos de artistas nuevos por semana, 77% de artistas emergentes.",
+   "dato": "100.000 millones de pistas; 56 millones de descubrimientos semanales; 77% emergentes",
+   "fuente_titulo": "Discover Weekly Turns 10 (Spotify Newsroom, 30 de junio de 2025)",
+   "url": "https://newsroom.spotify.com/2025-06-30/discover-weekly-turns-10-celebrating-100-billion-tracks-streamed-and-a-decade-of-personalized-discovery/",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "La primera versión de Discover Weekly debía tener solo canciones desconocidas; un bug dejó pasar canciones conocidas, al corregirlo el uso bajó, y el equipo entendió que la familiaridad genera confianza (anécdota de Ogle recogida en 'Hit Makers').",
+   "dato": "Bug → canciones conocidas → al arreglarlo cayó el engagement",
+   "fuente_titulo": "Spotify bugs bite back (Anecdote, podcast 35, con la historia de Hit Makers)",
+   "url": "https://www.anecdote.com/2018/11/spotify-bugs-bite-back-35/",
+   "anio": "2018"
+  },
+  {
+   "afirmacion": "Discover Weekly nació de un prototipo que el ingeniero Edward Newett armó con un colega en 2014 como hack interno.",
+   "dato": "Prototipo 2014, hack interno",
+   "fuente_titulo": "The Little Hack That Could: The Story of Spotify's Discover Weekly Recommendation Engine (IEEE Spectrum)",
+   "url": "https://spectrum.ieee.org/the-little-hack-that-could-the-story-of-spotifys-discover-weekly-recommendation-engine-2650274671",
+   "anio": "2017"
+  },
+  {
+   "afirmacion": "En Spotify, el consumo guiado por recomendaciones algorítmicas se asocia con menor diversidad de consumo; los usuarios que se vuelven más diversos lo hacen alejándose del consumo algorítmico; la diversidad alta se asocia con conversión y retención.",
+   "dato": "Estudio con datos de Spotify, WWW 2020 (Anderson, Maystre, Anderson, Mehrotra, Lalmas)",
+   "fuente_titulo": "Algorithmic Effects on the Diversity of Consumption on Spotify (PDF)",
+   "url": "https://www.cs.toronto.edu/~ashton/pubs/alg-effects-spotify-www2020.pdf",
+   "anio": "2020"
+  },
+  {
+   "afirmacion": "Apple presentó el App Store rediseñado el 5 de junio de 2017 con la pestaña Today: historias editoriales diarias, entrevistas, App del día y Juego del día, escritas por su equipo global de editores.",
+   "dato": "5 de junio de 2017; Today con contenido editorial actualizado a diario",
+   "fuente_titulo": "Apple unveils all-new App Store (Apple Newsroom)",
+   "url": "https://www.apple.com/newsroom/2017/06/apple-unveils-all-new-app-store/",
+   "anio": "2017"
+  },
+  {
+   "afirmacion": "El App Store recibía más de 500 millones de visitantes únicos por semana.",
+   "dato": "500 millones de visitantes/semana",
+   "fuente_titulo": "App Store hits 20M registered developers and $100B in revenues, 500M visitors per week (TechCrunch)",
+   "url": "https://techcrunch.com/2018/06/04/app-store-hits-20m-registered-developers-at-100b-in-revenues-500m-visitors-per-week/",
+   "anio": "2018"
+  },
+  {
+   "afirmacion": "Ser App del día en el App Store de iOS 11 subió la mediana de descargas semanales en EE. UU. un 685%; Juego del día más de 800%; las historias y listas, alrededor de 200%; el 29% de los editores destacados tenía menos de 10.000 descargas.",
+   "dato": "+685% App del día; +800% Juego del día; ~+200% historias/listas; 29% editores chicos",
+   "fuente_titulo": "iOS 11's App Store Increases Downloads of Featured Apps up to 800% (Sensor Tower)",
+   "url": "https://sensortower.com/blog/ios-11-featuring-impact",
+   "anio": "2018"
+  },
+  {
+   "afirmacion": "Desde iOS 11, la navegación (browse) dentro del App Store pasó a generar el 15% de las descargas.",
+   "dato": "15% de descargas por browsing",
+   "fuente_titulo": "App Store Browsing Has Grown to Drive 15% of Downloads Since iOS 11's Launch (Sensor Tower)",
+   "url": "https://sensortower.com/blog/app-store-download-sources",
+   "anio": "2018"
+  },
+  {
+   "afirmacion": "Apple describe el Today tab como 'historias': tarjetas con arte a sangre, capturas grandes y medios embebidos; App y Juego del día son los módulos más ricos.",
+   "dato": "Descripción de la interfaz: pila de tarjetas, 'stories' como mini posts",
+   "fuente_titulo": "iOS 11: The MacStories Review, página 21 (App Store)",
+   "url": "https://www.macstories.net/stories/ios-11-the-macstories-review/21/",
+   "anio": "2017"
+  },
+  {
+   "afirmacion": "Apple dice tener más de 40.000 historias publicadas y más de 120 editores expertos en todo el mundo.",
+   "dato": "40K historias; 120 editores",
+   "fuente_titulo": "App Store (página oficial de Apple)",
+   "url": "https://www.apple.com/app-store/",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Instagram lanzó las fichas de tema (topic channels) en Explore el 26 de junio de 2018, con un canal 'For You' y temas como Arte, Deportes, Belleza; mantener apretado un canal permite silenciarlo.",
+   "dato": "26 de junio de 2018; canal For You; silenciar manteniendo apretado",
+   "fuente_titulo": "Instagram begins rolling out redesigned Explore tab with topic channels (9to5Mac)",
+   "url": "https://9to5mac.com/2018/06/25/instagram-topic-channels/",
+   "anio": "2018"
+  },
+  {
+   "afirmacion": "En el rediseño de Explore de mayo de 2019, Instagram dijo que más del 50% de las cuentas usa Explore cada mes y que más de 200 millones de personas lo visitan por día; la barra superior sumó accesos a IGTV y Compras seguidos de fichas de tema (Comida, Arte, Viajes).",
+   "dato": ">50% de cuentas por mes; 200 millones por día",
+   "fuente_titulo": "Making Instagram Explore Better for Your Interests (Instagram blog)",
+   "url": "https://about.instagram.com/blog/announcements/making-explore-an-even-better-home-for-your-interests",
+   "anio": "2019"
+  },
+  {
+   "afirmacion": "Instagram publicó cómo funciona el recomendador de Explore: 'cuentas semilla' parecidas a las que interactuaste, embeddings de cuentas (ig2vec), un embudo de ranking en tres partes, 65 mil millones de features y 90 millones de predicciones por segundo; más de la mitad de la comunidad visita Explore cada mes.",
+   "dato": "26 de noviembre de 2019; 65.000 millones de features; 90 millones de predicciones/segundo",
+   "fuente_titulo": "Powered by AI: Instagram's Explore recommender system (Instagram Engineering)",
+   "url": "https://instagram-engineering.com/powered-by-ai-instagrams-explore-recommender-system-7ca901d2a882",
+   "anio": "2019"
+  },
+  {
+   "afirmacion": "El ranking de Explore es multietapa: un primer modelo de destilación deja 150 candidatos, una red liviana 50, y una red profunda elige los 25 de la primera página de la grilla; el modelo predice acciones positivas (like, guardar) y negativas ('ver menos posts como este').",
+   "dato": "150 → 50 → 25 candidatos; 9 de agosto de 2023",
+   "fuente_titulo": "Scaling the Instagram Explore recommendations system (Engineering at Meta)",
+   "url": "https://engineering.fb.com/2023/08/09/ml-applications/scaling-instagram-explore-recommendations-system/",
+   "anio": "2023"
+  },
+  {
+   "afirmacion": "Explore empezó como la pestaña 'Popular' y fue reemplazada por Explore a mediados de 2012; en abril de 2016 sumó un feed personalizado de videos y canales temáticos curados a mano.",
+   "dato": "Popular → Explore 2012; canales de video abril 2016",
+   "fuente_titulo": "Instagram launches personalized video feed and themed channels in Explore (TechCrunch)",
+   "url": "https://techcrunch.com/2016/04/14/instagram-videos-you-might-like/",
+   "anio": "2016"
+  },
+  {
+   "afirmacion": "El 2 de julio de 2018 Instagram agregó al Feed el cartel 'You're All Caught Up' cuando viste todos los posts de los últimos dos días.",
+   "dato": "2 de julio de 2018; dos días",
+   "fuente_titulo": "Introducing 'You're All Caught Up' in Instagram Feed (Instagram blog)",
+   "url": "https://about.instagram.com/blog/announcements/introducing-youre-all-caught-up-in-feed",
+   "anio": "2018"
+  },
+  {
+   "afirmacion": "Related Pins ('Más como esto') es el recomendador que genera más del 40% del engagement de Pinterest.",
+   "dato": ">40% del engagement; paper de febrero de 2017",
+   "fuente_titulo": "Related Pins at Pinterest: The Evolution of a Real-World Recommender System (arXiv 1702.07969)",
+   "url": "https://arxiv.org/abs/1702.07969",
+   "anio": "2017"
+  },
+  {
+   "afirmacion": "Pinterest Lens salió en beta en febrero de 2017; un año después procesaba 600 millones de búsquedas visuales por mes, las búsquedas visuales crecieron 140% interanual y el doble de usuarios usaba Lens a diario que seis meses antes.",
+   "dato": "600 millones/mes; +140% interanual; febrero 2018",
+   "fuente_titulo": "Celebrating one year of Pinterest Lens (Pinterest Newsroom archive)",
+   "url": "https://newsroom-archive.pinterest.com/celebrating-one-year-of-pinterest-lens",
+   "anio": "2018"
+  },
+  {
+   "afirmacion": "Pinterest lanzó la pestaña 'Today' el 24 de marzo de 2020 con temas del día curados por su equipo y tendencias (no personalizada, a diferencia del inicio), adelantada por la pandemia; en abril se extendió a 13 países más.",
+   "dato": "24 de marzo de 2020; curada por el equipo; 13 países más en abril",
+   "fuente_titulo": "Pinterest launches a Today tab featuring daily recommendations and trending topics (TechCrunch)",
+   "url": "https://techcrunch.com/2020/03/24/pinterest-launches-a-today-tab-featuring-daily-recommendations-and-trending-topics",
+   "anio": "2020"
+  },
+  {
+   "afirmacion": "Pinterest tenía 578 millones de usuarios activos mensuales en el segundo trimestre de 2025 (+11% interanual) y más del 96% de sus búsquedas de texto no mencionan marca.",
+   "dato": "578 millones MAU; >96% búsquedas sin marca; ingresos US$998 millones",
+   "fuente_titulo": "Pinterest, Inc. Form 8-K, Q2 2025 press release (SEC)",
+   "url": "https://www.sec.gov/Archives/edgar/data/1506293/000150629325000195/q2-25xpressrelease.htm",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Evan Sharp diseñó y programó la grilla de Pinterest para el lanzamiento de marzo de 2010; la grilla masonry es la marca del producto desde el día uno.",
+   "dato": "Marzo de 2010",
+   "fuente_titulo": "Evan Sharp (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Evan_Sharp",
+   "anio": "2010"
+  },
+  {
+   "afirmacion": "Google lanzó el Feed el 19 de julio de 2017 y lo renombró Discover el 24 de septiembre de 2018, cuando tenía más de 800 millones de usuarios mensuales; sumó encabezados de tema, botón de seguir, control 'Más/Menos' en cada tarjeta y contenido 'evergreen' que es 'nuevo para vos'.",
+   "dato": "19/7/2017 Feed; 24/9/2018 Discover; 800 millones de usuarios mensuales",
+   "fuente_titulo": "Google Feed rebranded to 'Google Discover' and coming to mobile web, Search (9to5Google)",
+   "url": "https://9to5google.com/2018/09/24/google-discover-feed-search/",
+   "anio": "2018"
+  },
+  {
+   "afirmacion": "Google describió Discover como descubrir información e inspiración 'sin necesidad de consulta' (no query required).",
+   "dato": "Anuncio oficial, septiembre 2018",
+   "fuente_titulo": "Introducing Google Discover: Discover new information and inspiration with Search, no query required (Google blog)",
+   "url": "https://blog.google/products/search/introducing-google-discover/",
+   "anio": "2018"
+  },
+  {
+   "afirmacion": "Para los medios, Google Discover se volvió una fuente de tráfico cada vez más importante pero volátil (saldo neto +27 entre editores encuestados), y esperan que el tráfico de buscadores caiga 43% en tres años.",
+   "dato": "+27 Discover; −43% esperado en búsqueda a tres años",
+   "fuente_titulo": "Journalism, Media, and Technology Trends and Predictions 2025 (Reuters Institute, PDF)",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/sites/default/files/2025-01/Trends_and_Predictions_2025.pdf",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Entre diciembre de 2024 y diciembre de 2025, las páginas vistas referidas por Google Search a medios cayeron 34% y las de Google Discover 15% (datos de Chartbeat sobre más de 2.500 sitios).",
+   "dato": "−34% Search; −15% Discover",
+   "fuente_titulo": "Global publisher Google traffic dropped by a third in 2025 (Press Gazette)",
+   "url": "https://pressgazette.co.uk/media-audience-and-business-data/google-traffic-down-2025-trends-report-2026/",
+   "anio": "2026"
+  },
+  {
+   "afirmacion": "Netflix lanzó el 24 de febrero de 2020 la fila Top 10 diaria por país (general, series y películas), con sello 'Top 10' sobre los títulos; se calcula con las cuentas que vieron al menos 2 minutos en 24 horas; la posición de la fila varía según relevancia para cada persona.",
+   "dato": "24 de febrero de 2020; 2 minutos/24 h",
+   "fuente_titulo": "Netflix Launches Top 10 Daily Rankings of Most Popular Titles by Country (Variety)",
+   "url": "https://variety.com/2020/digital/news/netflix-top-10-daily-rankings-popular-titles-1203513514/",
+   "anio": "2020"
+  },
+  {
+   "afirmacion": "Netflix llevó la pestaña 'New & Popular' a todos los televisores en octubre de 2020 (tras probarla desde abril), con 'Nuevo en Netflix', 'Próximamente', el Top 10 y una fila 'Worth the Wait' con títulos a entre 15 y 365 días y recordatorio.",
+   "dato": "Octubre 2020; 15 a 365 días",
+   "fuente_titulo": "Netflix New & Popular TV Tab Shows Titles Coming in the Next 365 Days (Variety)",
+   "url": "https://variety.com/2020/digital/news/netflix-will-show-connected-tv-users-titles-coming-in-the-next-365-days-1234793136/",
+   "anio": "2020"
+  },
+  {
+   "afirmacion": "El rediseño de la app de TV de Netflix que empezó a desplegarse el 19 de mayo de 2025 (primero desde 2018) quitó los accesos directos a 'New & Popular' y a Categorías; ahora hay que buscar las filas 'New on Netflix' y 'Top 10' en el inicio.",
+   "dato": "19 de mayo de 2025; se eliminan dos accesos",
+   "fuente_titulo": "Netflix's New UI Overhaul Will Remove Two Popular Features (What's on Netflix)",
+   "url": "https://www.whats-on-netflix.com/news/netflixs-upcoming-ui-overhaul-will-remove-two-popular-features-new-popular-categories/",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Valve lanzó el Steam Discovery Update el 23 de septiembre de 2014 (cola de descubrimiento, curadores, etiquetas) y luego informó que las vistas de páginas de producto subieron 30% (75% de la suba por la cola), que los ingresos de los títulos fuera del top 500 subieron 18% y que las altas a listas de deseos se duplicaron.",
+   "dato": "+30% vistas; 75% por la cola; +18% ingresos fuera del top 500; listas de deseos x2",
+   "fuente_titulo": "Valve says the Steam 'Discovery Update' is working (PC Gamer)",
+   "url": "https://www.pcgamer.com/valve-says-the-steam-discovery-update-is-working/",
+   "anio": "2014"
+  },
+  {
+   "afirmacion": "La Discovery Queue de Steam es una cola de 12 títulos personalizada (recomendados, nuevos y populares), se renueva cada día, y en cada uno podés seguir, agregar a lista de deseos, comprar o marcar 'No me interesa', y siempre saltar al siguiente.",
+   "dato": "12 títulos; renovación diaria; botón No me interesa",
+   "fuente_titulo": "Steam Discovery Update (Steam, página oficial)",
+   "url": "https://store.steampowered.com/about/newstore",
+   "anio": "2014"
+  },
+  {
+   "afirmacion": "Steam Discovery Update 2.0 salió el 7 de noviembre de 2016 con más preferencias de usuario, más soporte para curadores y acceso a la actividad de amigos.",
+   "dato": "7 de noviembre de 2016",
+   "fuente_titulo": "Steam Discovery Update 2.0 Available Now (Steam News)",
+   "url": "https://store.steampowered.com/oldnews/25475",
+   "anio": "2016"
+  },
+  {
+   "afirmacion": "Apple Music se lanzó el 30 de junio de 2015 con playlists curadas por personas y una sección 'For You'; Jimmy Iovine: 'los algoritmos no entienden la sutileza ni la mezcla de géneros, así que contratamos a los mejores, cientos de ellos'.",
+   "dato": "30 de junio de 2015; 'cientos' de curadores",
+   "fuente_titulo": "Jimmy Iovine Talks Apple Music, Competing Services (MacRumors)",
+   "url": "https://www.macrumors.com/2015/08/06/jimmy-iovine-talks-apple-music/",
+   "anio": "2015"
+  },
+  {
+   "afirmacion": "Spotify anunció su pestaña Discover (recomendación de artistas) en diciembre de 2012.",
+   "dato": "Diciembre 2012",
+   "fuente_titulo": "Spotify reveals Discover tab, Collections and Follow social feature (Engadget)",
+   "url": "https://www.engadget.com/2012-12-06-spotify-reveals-discover-tab-collections-and-follow-social-feat.html",
+   "anio": "2012"
+  },
+  {
+   "afirmacion": "En el carrusel de la portada de Notre Dame (datos publicados por Erik Runyon, 2013), solo el 1% de los visitantes hizo clic, y de ese 1% el 84% solo en la primera diapositiva.",
+   "dato": "1% clic; 84% primera diapositiva",
+   "fuente_titulo": "Home Page Carousels: Good or Bad? The Ultimate Guide to Existing Studies With Real Data (Website Optimizers)",
+   "url": "http://www.websiteoptimizers.com/blog/home-page-carousels-good-ultimate-guide-existing-studies-real-data/",
+   "anio": "2013"
+  },
+  {
+   "afirmacion": "Nielsen Norman Group distingue usuarios 'dominados por links' (siguen enlaces y solo buscan cuando se pierden) de los 'dominados por búsqueda' y los mixtos, y sostiene que toda página debe dejar claro dónde está dentro de la estructura.",
+   "dato": "Tipología de usuarios link-dominant / search-dominant / mixed",
+   "fuente_titulo": "Search and You May Find (NN/g)",
+   "url": "https://www.nngroup.com/articles/search-and-you-may-find/",
+   "anio": "1997"
+  },
+  {
+   "afirmacion": "La serendipia en sistemas de recomendación se define como la combinación de relevancia, novedad e inesperado; es distinta de la mera novedad.",
+   "dato": "Definición de Kotkov, Veijalainen y Wang (2016)",
+   "fuente_titulo": "A Survey of Serendipity in Recommender Systems (ResearchGate)",
+   "url": "https://www.researchgate.net/publication/306075233_A_Survey_of_Serendipity_in_Recommender_Systems",
+   "anio": "2016"
+  },
+  {
+   "afirmacion": "Investigación interna de Instagram revelada por el Wall Street Journal: el 32% de las adolescentes que se sentían mal con su cuerpo dijeron que Instagram las hacía sentir peor; entre adolescentes con pensamientos suicidas, 13% en Reino Unido y 6% en EE. UU. los atribuían a Instagram.",
+   "dato": "32%; 13% UK; 6% EE. UU.; presentaciones internas de 2019 y 2020",
+   "fuente_titulo": "Wall Street Journal's Facebook Files: Here's What to Know (Time)",
+   "url": "https://time.com/6097704/facebook-instagram-wall-street-journal/",
+   "anio": "2021"
+  },
+  {
+   "afirmacion": "El forense Andrew Walker concluyó el 30 de septiembre de 2022 que el contenido que Molly Russell (14) vio en Instagram y Pinterest afectó su salud mental y 'contribuyó a su muerte de un modo más que mínimo'; había interactuado con más de 2.000 posts de Instagram sobre suicidio, autolesión o depresión y tenía cientos de imágenes de autolesión en Pinterest.",
+   "dato": "30 de septiembre de 2022; >2.000 posts; cientos de imágenes",
+   "fuente_titulo": "Social media a factor in death of UK schoolgirl, inquest finds (TechCrunch)",
+   "url": "https://techcrunch.com/2022/09/30/molly-russell-inquest-verdict/",
+   "anio": "2022"
+  },
+  {
+   "afirmacion": "Aza Raskin, inventor del scroll infinito, dijo en BBC Panorama que las redes 'rocían cocaína conductual sobre la interfaz' y que 'si no le das tiempo al cerebro para alcanzar a tus impulsos, seguís scrolleando'.",
+   "dato": "Cita en BBC Panorama, 2018",
+   "fuente_titulo": "Facebook, Snapchat, Twitter like 'behavioural cocaine', say Silicon Valley insiders (Mobile Marketing Magazine)",
+   "url": "https://mobilemarketingmagazine.com/facebook-snapchat-twitter-social-media-addiction-bbc-panorama",
+   "anio": "2018"
+  },
+  {
+   "afirmacion": "Liz Pelly reveló en Harper's (diciembre 2024) el programa interno 'Perfect Fit Content' de Spotify: música encargada a bajo costo a productoras, firmada por artistas fantasma, para llenar playlists de ambiente, jazz, clásica, lo-fi, sueño y foco con mejor margen.",
+   "dato": "Diciembre 2024; playlists de ambiente/foco/sueño",
+   "fuente_titulo": "Spotify is filling playlists with ghost artists to minimize royalty costs, new report alleges (Consequence)",
+   "url": "https://consequence.net/2024/12/spotify-perfect-fit-content-report/",
+   "anio": "2024"
+  }
+ ],
+ "lecciones_para_catalogo": [
+  {
+   "leccion": "COPIAR TAL CUAL el 'App del día': una sola ficha editorial por día, igual para todos, con título de nota y texto con personalidad. Reemplaza al visor que rota cada 9 segundos, que es el patrón que menos mira la gente (1% de clics en carruseles, 84% solo la primera diapositiva).",
+   "aplicacion_concreta": "En todos los catálogos, en el visor grande de arriba: convertirlo en 'La ficha de hoy' estática (fecha → índice determinista sobre la tanda, así todos ven la misma el mismo día y da tema de conversación), con rótulo pequeño ('PAÍS DEL DÍA', 'BICHO DEL DÍA'), título tipo App Store ('El país que entra tres veces en la provincia de Buenos Aires') y un botón 'Otra' para quien quiera más. Si el visor rota, que rote solo por acción de la persona o con flechas, nunca solo.",
+   "costo": "bajo: los textos ya están generados por la tanda; solo hace falta un hash de la fecha y un título de nota por ficha (campo nuevo en la cola de revisión)."
+  },
+  {
+   "leccion": "ADAPTAR la lista cerrada con fecha de Discover Weekly: 30 fichas que cambian cada lunes, con final, y con 2 o 3 'conocidas' mezcladas para dar confianza (lección del bug: 100% desconocido bajó el uso).",
+   "aplicacion_concreta": "En Pasaporte y en Cosmos, nueva fila 'Los 30 de esta semana' (semana ISO como semilla del generador aleatorio, misma lista para todos esa semana): 27 países poco conocidos + 3 famosos; contador 'viste 12 de 30' guardado en el navegador y pantalla final 'Listo, la próxima lista llega el lunes'. En Butaca: 'Los 30 episodios de la semana'.",
+   "costo": "bajo: PRNG con semilla, dos listas (famosos y resto) marcadas en los datos, y localStorage para el progreso."
+  },
+  {
+   "leccion": "ADAPTAR la cola de Steam: una ficha por vez, 12 por día, botones 'Siguiente / Guardar en Mi lista / No me interesa', y un cierre. Es el 'Uno al azar' con ritual, memoria y final.",
+   "aplicacion_concreta": "En todos los catálogos, el botón 'Uno al azar' pasa a ser 'Cola de hoy (12)': semilla = fecha, excluye lo ya abierto (fila 'Seguir explorando') y lo marcado 'No me interesa' (localStorage), barra de progreso 3/12, y al terminar: 'Listo por hoy. Volvé mañana o seguí por continentes →'. En TV, la ficha ocupa toda la pantalla y las cuatro acciones van a los cuatro botones de dirección.",
+   "costo": "bajo: reusa la ficha modal y Mi lista; solo agrega la cola, el contador y la lista de descartes."
+  },
+  {
+   "leccion": "ADAPTAR la grilla mosaico con fichas de tema arriba (Explore/Pinterest) como pestaña 'Explorar', pero con fin: la grilla termina y te dice qué viste y qué falta. La enciclopedia tenía todas las banderas en una lámina; Explore nunca te deja ver el todo.",
+   "aplicacion_concreta": "En todos los catálogos, nueva pestaña 'Explorar': arriba, píldoras con los grupos que ya existen (continentes, Top 10, rarezas, 'banderas con animales'); abajo, grilla CSS de 3 columnas (5 en TV) con un tile de doble alto cada dos filas elegido por regla (el que tiene imagen vertical o el 'destacado del grupo'). Al llegar al final del grupo, cartel 'Viste los 54 países de África' con botón 'Pasar a Asia →'. Mantener apretado (o tecla) una píldora la oculta y se guarda en el navegador.",
+   "costo": "medio: CSS grid con grid-row span y manejo de foco por teclado en grilla irregular; las imágenes de Commons ya están."
+  },
+  {
+   "leccion": "ADAPTAR 'Más como esto' y el zoom semántico de Pinterest Lens: que cada atributo de la ficha sea una puerta a la grilla de todos los que lo comparten, no solo 'del mismo grupo' taxonómico.",
+   "aplicacion_concreta": "En Bestiario y Flora, en la ficha modal: la sección 'Del mismo grupo' se vuelve 'Más como este' con 6 a 9 imágenes elegidas por semejanza de atributos (mismo bioma, mismo tamaño, mismo color dominante, mismo continente), y cada dato de la ficha ('nocturno', 'venenoso', 'come hormigas') es tocable y abre la grilla de todos los que lo cumplen. En Pasaporte: tocar 'bandera con animal' o 'sin salida al mar' hace lo mismo.",
+   "costo": "medio: requiere atributos normalizados y un índice invertido precalculado en la tanda (atributo → lista de ids); Claude ya los genera, falta estructurarlos."
+  },
+  {
+   "leccion": "COPIAR TAL CUAL el sello que viaja con el ítem (Top 10 de Netflix): el ranking como contexto que acompaña a la ficha a cualquier fila.",
+   "aplicacion_concreta": "En Pasaporte, en todas las filas (no solo en Top 10): insignia pequeña sobre la miniatura '#3 más poblado', '#1 más chico', y en Bestiario '#2 más rápido'. Al abrir la ficha, la insignia es un enlace a la fila Top 10 correspondiente, con el número gigante.",
+   "costo": "bajo: los rankings ya existen; es un campo 'insignias' por ítem y un estilo."
+  },
+  {
+   "leccion": "ADAPTAR 'Próximamente / Vale la pena esperar' y la pestaña Today de Pinterest para la fila 'Un día como hoy': el catálogo con dimensión temporal, sin algoritmo, con datos fijos de fechas.",
+   "aplicacion_concreta": "En la fila 'Un día como hoy' (ya preparada): cargar fechas desde Wikidata (independencia P571, fecha de publicación P577, descubrimiento, estreno de episodio) y mostrar 'Hoy hace 214 años...'. En Butaca: fila 'Se estrenó un día como hoy' y 'Próximo arco' con botón 'Recordarme' que guarda en el navegador y muestra aviso al volver. En Festín: 'Hoy se celebra...' (días nacionales de comidas).",
+   "costo": "medio: hace falta una pasada de la tanda para extraer fechas de Wikidata y normalizarlas a mes/día."
+  },
+  {
+   "leccion": "COPIAR TAL CUAL el voto negativo explícito y el 'Menos de esto': controles baratos que dan sensación de dominio sin necesitar modelo.",
+   "aplicacion_concreta": "En todos los catálogos, en la ficha modal y en los tiles de la grilla: acción 'No me interesa' (tecla X en TV) que saca el ítem de la cola de hoy y de los 'Más como este' futuros, y en las píldoras de tema 'Menos de esto' que baja esa fila al final del inicio. Todo en localStorage, con una pantalla 'Lo que ocultaste' para deshacer.",
+   "costo": "bajo: dos listas en el navegador y un reordenamiento de filas al cargar."
+  },
+  {
+   "leccion": "ADAPTAR la idea de fondo de Discover Weekly: aprovechar el orden que ya hicieron otros. Spotify no 'entiende' música, lee 2 mil millones de playlists hechas por personas. Los catálogos pueden leer las categorías, listas y anexos que Wikipedia ya hizo.",
+   "aplicacion_concreta": "En la tanda de generación (no en la pantalla): usar las categorías y 'Anexos' de Wikipedia ('Anexo:Países sin litoral', 'Anexo:Banderas con animales', 'Anexo:Episodios de...') y las listas de Wikidata como fuente de filas y de 'Ver también', en vez de pedirle a Claude que invente agrupaciones. Cada fila lleva al pie 'Fuente: Anexo de Wikipedia' para ser completa y comparable como la lámina.",
+   "costo": "bajo a medio: consultas SPARQL y lectura de categorías ya forman parte del flujo; cambia el criterio de qué filas se generan."
+  },
+  {
+   "leccion": "DESCARTAR el ranking por engagement y el scroll infinito, e imitar su efecto con reglas: el 'volver mañana' lo da la fecha (ficha del día, cola de 12, 30 de la semana), no un modelo.",
+   "aplicacion_concreta": "En el inicio de todos los catálogos: ninguna fila se ordena por 'lo más abierto'; lo personal se limita a 'Seguir explorando' y 'Mi lista'. Las filas del inicio son fijas y completas, y las novedades vienen por calendario (día, semana) y por azar con semilla, visible como tal ('Al azar de hoy').",
+   "costo": "bajo: es una decisión de diseño, no una función; evita construir telemetría."
+  }
+ ],
+ "anti_lecciones": [
+  "No copiar el scroll infinito ni la grilla sin fondo. El inventor del patrón lo describió como 'cocaína conductual' (BBC Panorama, 2018); el canal tiene costos documentados: el 32% de las adolescentes que se sentían mal con su cuerpo se sentían peor en Instagram (investigación interna vía WSJ, 2021), y un forense británico concluyó que el contenido de Instagram y Pinterest contribuyó a la muerte de Molly Russell (2022). Un catálogo pensado también para TV y para chicos tiene que poder decir 'ya viste todo'; el final es una función, no una falla.",
+  "No optimizar por lo que engancha. Sin servidor ni millones de usuarios no hay modelo posible, y aunque lo hubiera: Anderson et al. (WWW 2020) midieron que el consumo algorítmico en Spotify se asocia con menor diversidad y que la diversidad es lo que retiene. La tesis del autor (elegido, ordenado, completo, comparable) es lo contrario de un ranking por clics; imitar el efecto 'siempre hay algo nuevo' con calendario y azar con semilla, no con telemetría local que estrecha.",
+  "No rellenar para que la grilla se vea llena. Spotify metió 'Perfect Fit Content' de artistas fantasma en playlists de ambiente para mejorar márgenes (Harper's, 2024). En los catálogos, una fila con 6 fichas buenas vale más que una de 40 con textos flojos; la cola de revisión humana debe poder dejar filas cortas.",
+  "No confiar en un carrusel que rota solo como mecanismo principal de descubrimiento. Datos de Notre Dame (2013): 1% de clics y 84% de esos en la primera diapositiva; NN/g documenta que el avance automático molesta y hace perder contenido. El visor de 9 segundos actual es exactamente eso; convertirlo en ficha del día estática.",
+  "No esconder la estructura detrás de lo personalizado. Netflix quitó en 2025 los accesos a 'New & Popular' y Categorías; Discover no tiene índice; Explore no tiene mapa. El valor de los catálogos es que el todo sea visible: las pestañas, los grupos completos y el contador 'viste X de Y' tienen que estar siempre, por encima de cualquier fila 'para vos'.",
+  "No depender de un canal volátil ni replicar su opacidad. Google Discover es 'crítico pero volátil' para los medios (Reuters Institute 2025) y cayó 15% en 2025 mientras la búsqueda caía 34% (Chartbeat); nadie sabe por qué entra o sale. En los catálogos todo lo que aparece debe poder explicarse en una línea ('porque es lunes', 'porque guardaste Mongolia', 'porque un día como hoy...').",
+  "No copiar la grilla puramente visual sin texto para datos que se comparan. En Explore y Pinterest la imagen manda porque el objetivo es la inspiración; en Pasaporte el valor es el número gigante y la escala comparable (la montaña dibujada a escala). Usar el mosaico para curiosear, pero con rótulo y dato visibles en los tiles, y mantener las filas Top 10 con el número grande.",
+  "No simular comunidad. El sello 'Top 10' funciona en Netflix porque hay millones de cuentas; inventar un 'popular' sin usuarios sería mentir. Reemplazarlo por rankings reales de datos (más poblado, más alto, más visto en Wikipedia si se trae en la tanda) y decir de dónde sale."
+ ],
+ "fuentes": [
+  {
+   "titulo": "Spotify launches Discover Weekly personalised 'mixtape' playlist (Music Ally, 2015)",
+   "url": "https://musically.com/2015/07/20/spotify-discover-weekly-personalised-mixtape-playlist/"
+  },
+  {
+   "titulo": "Spotify's Discover Weekly Hits 40 Million Users, 5 Billion Tracks Streamed (Paste, 2016)",
+   "url": "https://www.pastemagazine.com/music/spotifys-discover-weekly-hits-40-million-users"
+  },
+  {
+   "titulo": "Spotify Discover Weekly playlists have streamed nearly 5bn tracks (Music Ally, 2016)",
+   "url": "https://musically.com/2016/05/25/spotify-discover-weekly-playlists-5bn-tracks/"
+  },
+  {
+   "titulo": "Discover Weekly Turns 10 (Spotify Newsroom, 2025)",
+   "url": "https://newsroom.spotify.com/2025-06-30/discover-weekly-turns-10-celebrating-100-billion-tracks-streamed-and-a-decade-of-personalized-discovery/"
+  },
+  {
+   "titulo": "The Little Hack That Could: The Story of Spotify's Discover Weekly (IEEE Spectrum)",
+   "url": "https://spectrum.ieee.org/the-little-hack-that-could-the-story-of-spotifys-discover-weekly-recommendation-engine-2650274671"
+  },
+  {
+   "titulo": "What made Discover Weekly one of our most successful feature launches to date? (Spotify Engineering, 2015)",
+   "url": "https://engineering.atspotify.com/2015/11/what-made-discover-weekly-one-of-our-most-successful-feature-launches-to-date"
+  },
+  {
+   "titulo": "Spotify bugs bite back (Anecdote podcast, 2018)",
+   "url": "https://www.anecdote.com/2018/11/spotify-bugs-bite-back-35/"
+  },
+  {
+   "titulo": "Algorithmic Effects on the Diversity of Consumption on Spotify (Anderson et al., WWW 2020)",
+   "url": "https://www.cs.toronto.edu/~ashton/pubs/alg-effects-spotify-www2020.pdf"
+  },
+  {
+   "titulo": "Spotify reveals Discover tab, Collections and Follow (Engadget, 2012)",
+   "url": "https://www.engadget.com/2012-12-06-spotify-reveals-discover-tab-collections-and-follow-social-feat.html"
+  },
+  {
+   "titulo": "Apple unveils all-new App Store (Apple Newsroom, 2017)",
+   "url": "https://www.apple.com/newsroom/2017/06/apple-unveils-all-new-app-store/"
+  },
+  {
+   "titulo": "In iOS 11, App Store editorial comes out of the shadows (Six Colors, 2017)",
+   "url": "https://sixcolors.com/post/2017/06/in-ios-11-app-store-editorial-comes-out-of-the-shadows/"
+  },
+  {
+   "titulo": "iOS 11: The MacStories Review, App Store (MacStories, 2017)",
+   "url": "https://www.macstories.net/stories/ios-11-the-macstories-review/21/"
+  },
+  {
+   "titulo": "iOS 11's App Store Increases Downloads of Featured Apps up to 800% (Sensor Tower, 2018)",
+   "url": "https://sensortower.com/blog/ios-11-featuring-impact"
+  },
+  {
+   "titulo": "App Store Browsing Has Grown to Drive 15% of Downloads Since iOS 11 (Sensor Tower)",
+   "url": "https://sensortower.com/blog/app-store-download-sources"
+  },
+  {
+   "titulo": "App Store hits 20M registered developers, $100B in revenues, 500M visitors per week (TechCrunch, 2018)",
+   "url": "https://techcrunch.com/2018/06/04/app-store-hits-20m-registered-developers-at-100b-in-revenues-500m-visitors-per-week/"
+  },
+  {
+   "titulo": "App Store 'Today' Stories Now Fully Available on the Web (MacRumors, 2019)",
+   "url": "https://www.macrumors.com/2019/08/15/app-store-today-stories-on-desktop/"
+  },
+  {
+   "titulo": "App Store (página oficial de Apple)",
+   "url": "https://www.apple.com/app-store/"
+  },
+  {
+   "titulo": "Introducing Apple Music (Apple Newsroom, 2015)",
+   "url": "https://www.apple.com/newsroom/2015/06/08Introducing-Apple-Music-All-The-Ways-You-Love-Music-All-in-One-Place-/"
+  },
+  {
+   "titulo": "Jimmy Iovine Talks Apple Music (MacRumors, 2015)",
+   "url": "https://www.macrumors.com/2015/08/06/jimmy-iovine-talks-apple-music/"
+  },
+  {
+   "titulo": "Making Instagram Explore Better for Your Interests (Instagram, 2019)",
+   "url": "https://about.instagram.com/blog/announcements/making-explore-an-even-better-home-for-your-interests"
+  },
+  {
+   "titulo": "Instagram Ranking Explained (Instagram)",
+   "url": "https://about.instagram.com/blog/announcements/instagram-ranking-explained"
+  },
+  {
+   "titulo": "Powered by AI: Instagram's Explore recommender system (Instagram Engineering, 2019)",
+   "url": "https://instagram-engineering.com/powered-by-ai-instagrams-explore-recommender-system-7ca901d2a882"
+  },
+  {
+   "titulo": "Scaling the Instagram Explore recommendations system (Engineering at Meta, 2023)",
+   "url": "https://engineering.fb.com/2023/08/09/ml-applications/scaling-instagram-explore-recommendations-system/"
+  },
+  {
+   "titulo": "Instagram begins rolling out redesigned Explore tab with topic channels (9to5Mac, 2018)",
+   "url": "https://9to5mac.com/2018/06/25/instagram-topic-channels/"
+  },
+  {
+   "titulo": "Instagram launches personalized video feed and themed channels in Explore (TechCrunch, 2016)",
+   "url": "https://techcrunch.com/2016/04/14/instagram-videos-you-might-like/"
+  },
+  {
+   "titulo": "Instagram adds Stories to Explore tab. Here's how to get on it (TechCrunch, 2019)",
+   "url": "https://techcrunch.com/2019/05/16/how-instagram-explore-works/"
+  },
+  {
+   "titulo": "Introducing 'You're All Caught Up' in Instagram Feed (Instagram, 2018)",
+   "url": "https://about.instagram.com/blog/announcements/introducing-youre-all-caught-up-in-feed"
+  },
+  {
+   "titulo": "Related Pins at Pinterest: The Evolution of a Real-World Recommender System (arXiv, 2017)",
+   "url": "https://arxiv.org/abs/1702.07969"
+  },
+  {
+   "titulo": "Visual Discovery at Pinterest (arXiv, 2017)",
+   "url": "https://arxiv.org/pdf/1702.04680"
+  },
+  {
+   "titulo": "Celebrating one year of Pinterest Lens (Pinterest Newsroom archive, 2018)",
+   "url": "https://newsroom-archive.pinterest.com/celebrating-one-year-of-pinterest-lens"
+  },
+  {
+   "titulo": "Pinterest sees 600 million visual searches every month (VentureBeat, 2018)",
+   "url": "https://venturebeat.com/2018/02/08/pinterest-lens-sees-600-million-visual-searches-every-month/"
+  },
+  {
+   "titulo": "Introducing the Today tab for daily inspiration (Pinterest Newsroom archive, 2020)",
+   "url": "https://newsroom-archive.pinterest.com/introducing-the-today-tab-for-daily-inspiration"
+  },
+  {
+   "titulo": "Pinterest launches a Today tab featuring daily recommendations and trending topics (TechCrunch, 2020)",
+   "url": "https://techcrunch.com/2020/03/24/pinterest-launches-a-today-tab-featuring-daily-recommendations-and-trending-topics"
+  },
+  {
+   "titulo": "Pinterest, Inc. Form 8-K Q2 2025 press release (SEC)",
+   "url": "https://www.sec.gov/Archives/edgar/data/1506293/000150629325000195/q2-25xpressrelease.htm"
+  },
+  {
+   "titulo": "Evan Sharp (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Evan_Sharp"
+  },
+  {
+   "titulo": "Google Feed rebranded to 'Google Discover' (9to5Google, 2018)",
+   "url": "https://9to5google.com/2018/09/24/google-discover-feed-search/"
+  },
+  {
+   "titulo": "Introducing Google Discover (Google blog, 2018)",
+   "url": "https://blog.google/products/search/introducing-google-discover/"
+  },
+  {
+   "titulo": "Journalism, Media, and Technology Trends and Predictions 2025 (Reuters Institute)",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/sites/default/files/2025-01/Trends_and_Predictions_2025.pdf"
+  },
+  {
+   "titulo": "Digital News Report 2025, resumen ejecutivo (Reuters Institute)",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025/dnr-executive-summary"
+  },
+  {
+   "titulo": "Global publisher Google traffic dropped by a third in 2025 (Press Gazette / Chartbeat, 2026)",
+   "url": "https://pressgazette.co.uk/media-audience-and-business-data/google-traffic-down-2025-trends-report-2026/"
+  },
+  {
+   "titulo": "Now, for the first time, you can see what's popular on Netflix (About Netflix, 2020)",
+   "url": "https://about.netflix.com/en/news/see-whats-popular-on-netflix"
+  },
+  {
+   "titulo": "Netflix Launches Top 10 Daily Rankings (Variety, 2020)",
+   "url": "https://variety.com/2020/digital/news/netflix-top-10-daily-rankings-popular-titles-1203513514/"
+  },
+  {
+   "titulo": "Netflix New & Popular TV Tab Shows Titles Coming in the Next 365 Days (Variety, 2020)",
+   "url": "https://variety.com/2020/digital/news/netflix-will-show-connected-tv-users-titles-coming-in-the-next-365-days-1234793136/"
+  },
+  {
+   "titulo": "Netflix's new 'Worth the Wait' section (Engadget, 2020)",
+   "url": "https://www.engadget.com/netflix-worth-the-wait-124034365.html"
+  },
+  {
+   "titulo": "Netflix's New UI Overhaul Will Remove Two Popular Features (What's on Netflix, 2025)",
+   "url": "https://www.whats-on-netflix.com/news/netflixs-upcoming-ui-overhaul-will-remove-two-popular-features-new-popular-categories/"
+  },
+  {
+   "titulo": "An update to the Netflix TV experience and layout (Netflix Help Center)",
+   "url": "https://help.netflix.com/en/node/321880164349028"
+  },
+  {
+   "titulo": "Valve says the Steam 'Discovery Update' is working (PC Gamer, 2014)",
+   "url": "https://www.pcgamer.com/valve-says-the-steam-discovery-update-is-working/"
+  },
+  {
+   "titulo": "Are the new Steam Discovery tools having any effect on game sales? (Game Developer, 2014)",
+   "url": "https://www.gamedeveloper.com/business/are-the-new-steam-discovery-tools-having-any-effect-on-game-sales-"
+  },
+  {
+   "titulo": "Steam Discovery Update (Steam, página oficial)",
+   "url": "https://store.steampowered.com/about/newstore"
+  },
+  {
+   "titulo": "Steam Discovery Update 2.0 Available Now (Steam News, 2016)",
+   "url": "https://store.steampowered.com/oldnews/25475"
+  },
+  {
+   "titulo": "I Wish Upon a Steam (Lars Doucet, Fortress of Doors, 2014)",
+   "url": "https://www.fortressofdoors.com/steam-sales-post-discoverability-update/"
+  },
+  {
+   "titulo": "Search and You May Find (Nielsen Norman Group)",
+   "url": "https://www.nngroup.com/articles/search-and-you-may-find/"
+  },
+  {
+   "titulo": "Home Page Carousels: Good or Bad? Guide to Existing Studies (Website Optimizers, con datos de Notre Dame 2013)",
+   "url": "http://www.websiteoptimizers.com/blog/home-page-carousels-good-ultimate-guide-existing-studies-real-data/"
+  },
+  {
+   "titulo": "A Survey of Serendipity in Recommender Systems (Kotkov et al., 2016)",
+   "url": "https://www.researchgate.net/publication/306075233_A_Survey_of_Serendipity_in_Recommender_Systems"
+  },
+  {
+   "titulo": "Wall Street Journal's Facebook Files: Here's What to Know (Time, 2021)",
+   "url": "https://time.com/6097704/facebook-instagram-wall-street-journal/"
+  },
+  {
+   "titulo": "Social media a factor in death of UK schoolgirl, inquest finds (TechCrunch, 2022)",
+   "url": "https://techcrunch.com/2022/09/30/molly-russell-inquest-verdict/"
+  },
+  {
+   "titulo": "Facebook, Snapchat, Twitter like 'behavioural cocaine' (Mobile Marketing Magazine sobre BBC Panorama, 2018)",
+   "url": "https://mobilemarketingmagazine.com/facebook-snapchat-twitter-social-media-addiction-bbc-panorama"
+  },
+  {
+   "titulo": "Spotify is filling playlists with ghost artists, new report alleges (Consequence sobre Harper's, 2024)",
+   "url": "https://consequence.net/2024/12/spotify-perfect-fit-content-report/"
+  },
+  {
+   "titulo": "Controversy over fake artists on Spotify (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Controversy_over_fake_artists_on_Spotify"
+  }
+ ],
+ "no_encontrado": [
+  "Limitación de método: el proxy de red de esta sesión bloqueó la apertura directa de todas las fuentes (Apple, Instagram, Meta, Google, Netflix, Spotify, Pinterest, arXiv, Wikipedia, medios). Las cifras salen de los extractos que devolvieron las búsquedas web (más de 40 búsquedas distintas), y las URLs citadas son las que esas búsquedas devolvieron; conviene abrirlas para verificar antes de publicar. Además el presupuesto de búsquedas de la sesión se agotó antes de las dos últimas consultas.",
+  "No encontré una fuente primaria que explique la decisión de diseño de la grilla de Explore (3 columnas con un tile de doble alto): la descripción del mosaico es observación de la interfaz, no está respaldada por un documento de Instagram.",
+  "No pude confirmar la cifra '12% menos de diversidad de géneros en seis meses' que un extracto atribuía al estudio de Anderson et al. (2020); dejé solo las conclusiones cualitativas que sí figuran en el resumen del paper.",
+  "No pude confirmar la fecha de lanzamiento de la pestaña Browse de Spotify (c. 2013) ni la evolución de la pestaña Home; solo la de Discover (diciembre 2012).",
+  "No encontré cifras actuales (2024-2026) de uso de Instagram Explore; las últimas públicas son de 2019 (más de la mitad de las cuentas por mes, 200 millones por día).",
+  "No pude verificar cuántas historias publica por día el App Store Today ni el tamaño actual del equipo editorial en una fuente periodística; las cifras '40K historias' y '120 editores' vienen de la página de marketing de Apple.",
+  "No llegué a investigar el 'Sensitive Content Control' de Explore (2021) ni las Cuentas para adolescentes (2024) de Instagram, que serían relevantes para medir cuánto corrigió el canal sus costos.",
+  "No pude abrir el paper 'Visual Discovery at Pinterest' (2017) ni documentación de ingeniería del inicio de Pinterest (Pixie, PinSage, pestaña 'More ideas' de 2018), así que el mecanismo del inicio de Pinterest está descripto solo a nivel general.",
+  "No encontré datos de Apple Music posteriores a 2015 sobre la proporción actual de curaduría humana vs. algorítmica en su inicio.",
+  "No encontré la fecha exacta del lanzamiento de 'New & Popular' en móviles (en TV fue octubre de 2020, en prueba desde abril).",
+  "No pude abrir el post original de Erik Runyon (Notre Dame, 2013) sobre el carrusel; la cifra 1%/84% está tomada de una guía secundaria que lo compila."
+ ]
+}

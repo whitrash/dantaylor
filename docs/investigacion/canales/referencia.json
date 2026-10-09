@@ -1,0 +1,703 @@
+{
+ "canal": "Las enciclopedias y medios de referencia de antes de internet (línea de base): Britannica 15.ª edición (Propædia / Micropædia / Macropædia, 1974), Encarta (1993–2009), Larousse (\"Lo sé todo\", Petit Larousse con láminas), Salvat y las enciclopedias por fascículos de kiosco (Monitor, CEAL), Guinness World Records, los atlas y las láminas de banderas, el programa \"The Most Extreme\" de Animal Planet (2002–2007, en Hispanoamérica \"Animal Planet al extremo\") y, como heredero, los anexos/listas de episodios de Wikipedia.",
+ "expectativa_usuario": "\"Quiero que me muestren lo más asombroso de un tema, todo junto, ordenado y comparable, y poder ver el conjunto entero aunque no sepa qué buscar ni por dónde empezar.\"",
+ "modo_humano": "Sobre todo EXPLORAR, y en segundo lugar INVESTIGAR. Pero el canal también servía para COMUNICARSE y para ACOMPAÑARSE, y eso suele olvidarse.\n- Explorar: el diseño empujaba a hojear sin un objetivo: la lámina con todas las banderas, el vecino alfabético, la \"rueda\" de temas de Encarta 2004, el castillo de MindMaze, el conteo del 10 al 1. Hanselman (2019) describe que pasaba \"horas vagando por artículos al azar\" en un conocimiento \"abrumador pero contenido: acotado\".\n- Investigar: la tarea escolar era el uso más fuerte de Encarta (Xataka la llama \"la referencia para hacer los deberes\"). Britannica (1974) se diseñó para tres usuarios: el que busca un dato simple, el que quiere una explicación detallada y el que quiere aprender de forma sistemática. Wikipedia midió esos mismos tres pedidos 43 años después: 35 % dato puntual, 33 % panorama, 32 % profundidad.\n- Comunicarse: Guinness nació literalmente para cortar discusiones de pub (1951, la del ave de caza más rápida de Europa). Un ranking cerrado da tema de charla y un árbitro común. La TV con horario fijo hacía que todos vieran el mismo número 1 la misma noche. MindMaze era trivia para jugar en familia.\n- Acompañarse: el ritual semanal del fascículo en el kiosco, la revista Billiken siguiendo el calendario escolar de efemérides, el documental \"de fondo\" un domingo. No hay estudios con cifras sobre esto: lo infiero del formato (cita fija, colección que crece en el estante), no tiene fuente que lo mida.",
+ "unidad": "Depende del soporte, pero siempre es una unidad CERRADA y COMPARABLE: la lámina (una página doble con todos los ítems al mismo tamaño), la entrada corta (Micropædia, de menos de 750 palabras) o el artículo largo (Macropædia), el récord (foto + número grande + una línea), el ítem de un conteo (10 por episodio de unos 46 min), el fascículo semanal (que luego se encuaderna en tomos) y, en Wikipedia, la fila de una tabla de episodios dentro de una tabla por temporada.",
+ "quien_decide": "Decide un EDITOR, dentro de un FORMATO que obliga a cerrar, y nadie personaliza: todos reciben lo mismo.\n- Editores con nombre: el Esquema del Conocimiento de la Propædia lo armaron Adler y 86 hombres y una mujer. Los McWhirter verificaban y elegían los récords. NHNZ elegía el tema y el orden del 10 al 1 de cada episodio, y Wikipedia admite que esos rankings \"no siguen un procedimiento científicamente riguroso\". Salvat y el CEAL planificaban 262 o 59 entregas de antemano.\n- El formato también decide: entran 10 puestos, 198 páginas (Guinness 1955) o 30 tomos (Britannica 1974).\n- La persona decide el recorrido dentro de ese conjunto cerrado: índice, buscador Pinpointer, saltar de la Micro a la Macro.\n- El azar aporta el vecino alfabético, las puertas de MindMaze (la dirección es casi aleatoria salvo cuando una antorcha muestra el mapa) y la rueda giratoria de Encarta 2004.\n- No hay algoritmo que aprenda de vos. A largo plazo decidió el mercado: Britannica perdió la mitad de sus ventas frente a Encarta (1990→1996) y Encarta perdió frente a Wikipedia (97 % contra 1,27 % de las visitas a enciclopedias online en EE. UU., según Hitwise en 2009).",
+ "tiene_final": "Sí, y en varias escalas:\n- el conteo llega al número 1 y el episodio termina;\n- la colección de fascículos se completa (Monitor: 262 entregas);\n- el libro de récords se reemplaza al año siguiente;\n- MindMaze tiene un final (llegar a 20.000 puntos abre la escalera a la cámara del rey);\n- la enciclopedia es enorme pero acotada (Hanselman: \"bounded\").\n\nEfectos:\n- Positivos: da cierre y la sensación de \"ya vi todo\". Konnikova (New Yorker, 2013) explica que la lista atrae porque \"promete un final definido\". Además permite comparar, porque el conjunto completo está a la vista. El final compartido (todos vieron el mismo número 1) daba tema de conversación.\n- Negativos: el final también es fecha de vencimiento. El impreso envejecía (Britannica imprimía cada dos años; Encarta vendía la idea de actualizaciones anuales y luego mensuales). Y cerrar obliga a elegir, con sesgos editoriales: la Encarta francesa contaba Waterloo de forma menos catastrófica que la inglesa.\n- Contraste con hoy: el feed no tiene final ni conjunto visible, y el chat con IA tiene todo pero no te trae nada. Pew (2025) midió que, cuando aparece un resumen de IA, la gente termina la sesión el 26 % de las veces, contra 16 % sin resumen: se cierra la pregunta, no la exploración.",
+ "mecanismo": "POR DENTRO (producción): eran obras CERRADAS, financiadas por adelantado y con un criterio editorial explícito.\n- Britannica 15.ª (1974) costó US$ 32 millones solo en redacción, con más de 4.000 colaboradores de más de 100 países. Adler diseñó primero un esquema de todo el conocimiento: 10 partes, 41 divisiones y 167 secciones, pensado como un \"Círculo del Aprendizaje\" sin jerarquía. Todos los artículos se escribieron para encajar en ese esquema. El esquema era la Propædia; las entradas cortas (Micropædia: 10 tomos, 102.214 artículos de menos de 750 palabras) y las largas (Macropædia: 19 tomos, 4.207 artículos) colgaban de él.\n- Encarta no escribió desde cero: licenció el texto de la Funk & Wagnalls (la enciclopedia de supermercado) y le sumó multimedia. Vendía en CD-ROM a US$ 395 en 1993 y después a menos de 100. Localizaba cada edición con editoriales nacionales: la española, desde la 97, tenía unos 42–43 mil artículos.\n- Guinness: los McWhirter verificaban cada récord y lo ordenaban por categorías. La categoría la pone el editor (hoy los capítulos son del tipo Espacio / Vida en la Tierra / Cuerpo humano / Proezas / Ingeniería / Deportes).\n- The Most Extreme (NHNZ para Animal Planet): un rasgo por episodio (Saltadores, Glotones, Velocidad, Tramposos, Constructores, Fuerza, Mamás, Venenos…), 10 animales ordenados del 10 al 1. Cada puesto trae una animación que traslada la capacidad del animal a escala humana y una entrevista con una persona que comparte el rasgo. Ojo: el orden \"no es científicamente riguroso\".\n- Fascículos: el plan completo se fijaba antes de salir (Monitor: 262 entregas semanales para 12 tomos más índice; Capítulo del CEAL: 59 entregas), con tapas o carpetas para encuadernar.\n\nPOR FUERA (cómo LLEGA sin que la pidas): cuatro mecanismos.\n1) EL ESPACIO OBLIGA A VER JUNTO. En la lámina, todo aparece al mismo tamaño en la misma página: las 1.197 banderas a color de National Geographic (1917), las láminas de banderas y de hongos o aves del Petit Larousse desde 1905, las cartas de montañas y ríos a escala (de 1816 a fin del siglo XIX). No elegís qué mirar: lo ves todo y comparás sin querer.\n2) EL ORDEN OBLIGA A SEGUIR. El ranking del 10 al 1 con adelantos (\"ya llegamos al…\", la fórmula de American Top 40 desde 1970) mantiene el suspenso hasta el número 1. Y el sesgo de los números redondos hace que \"Top 10\" se perciba como una categoría con frontera (Isaac & Schindler, 2014).\n3) EL TIEMPO TRAE LA SIGUIENTE ENTREGA. El fascículo semanal, la edición anual de Guinness para Navidad y la grilla de TV entregan solos el próximo pedazo y marcan un ritmo compartido.\n4) EL AZAR Y LA VECINDAD. El vecino alfabético, la rueda de unas 120 tarjetas de Encarta 2004 y las puertas de MindMaze. A la vez existía el camino de \"pedir\": índice, buscador Pinpointer y la Micropædia como índice remisivo.\n\nLAS TRES CAPAS Y SU PARECIDO CON LO DE HOY. La Propædia funciona como mapa (pestañas y filas temáticas), la Micropædia como tarjeta o ficha corta (la ficha modal de 3 líneas) y la Macropædia como lectura a fondo (subsecciones). El parecido con \"feed → inicio → subsecciones\" es parcial. Un feed NO es una Propædia: el feed te trae piezas sin mostrarte el mapa. La Propædia te daba el mapa sin traerte nada; de hecho, la crítica de la época y el artículo de Reference Services Review (1999) muestran que la división Micro/Macro \"frustraba\", y en 1985 hubo que agregar un índice de 2 tomos y condensar la Macropædia a unos 700 artículos. Lo valioso es que la demanda real se reparte en tercios: 35 % dato, 33 % panorama y 32 % profundidad, según Wikipedia en 14 idiomas (2017). Las tres capas responden a algo real; lo que falló fue tener dos lugares parecidos sin un índice que los uniera.\n\nQUÉ SE PERDIÓ Y QUÉ QUEDÓ.\n- Se perdieron el conjunto visible y cerrado, la escala dibujada, la voz editorial uniforme y legible para chicos (Tony Chor, ex Encarta, 2009) y el ritmo compartido.\n- Quedaron, en Wikipedia: las listas y anexos (la lista de episodios de Game of Thrones fue la 3.ª página más vista de toda Wikipedia la semana del 2 al 8 de junio de 2013, con 827.553 visitas), Special:Random (alrededor del 3,5 % de las páginas vistas en 2010) y la portada con efemérides.\n- Hoy hasta eso se erosiona: Wikimedia informó una caída del 8 % interanual en páginas vistas por humanos entre marzo y agosto de 2025, atribuida a los resúmenes de IA y al video corto.",
+ "historia": "- 1768: primera Britannica, en Edimburgo.\n- 1816–1823: aparecen las cartas comparativas de alturas de montañas y largos de ríos, inspiradas en los perfiles de Humboldt de 1809 (Smith 1816; Thomson y Lizars 1817; Darton 1823 junta montañas y ríos). El género dura unos 80 años.\n- 1905: Petit Larousse Illustré (Claude Augé) con suplementos de banderas, atlas, cronología y láminas didácticas.\n- 1917: National Geographic publica su \"Flag Number\", con 1.197 banderas a color.\n- 1919: nace Billiken (17 de noviembre), con láminas centrales que siguen el calendario escolar de efemérides.\n- 1951: discusión de caza en Irlanda (10 de noviembre) que lleva a Hugh Beaver a la idea del libro de récords.\n- 1955: el 27 de agosto se encuaderna la primera edición de Guinness (198 páginas). Para Navidad es best seller en el Reino Unido.\n- 1960: Larousse publica en Argentina \"Lo sé todo. Enciclopedia documental en colores\".\n- 1965: Salvat lanza Monitor: 262 fascículos semanales y 300.000 colecciones vendidas en España e Hispanoamérica.\n- 1966–1968: Spivacow funda el CEAL (21 de septiembre de 1966). \"Capítulo\" sale en 59 fascículos semanales de kiosco entre agosto de 1967 y septiembre de 1968, con más de 150.000 ejemplares por semana.\n- 1970: American Top 40 (3 de julio) populariza la cuenta regresiva con adelantos.\n- 1970–1973: Enciclopedia Salvat de la Fauna (Rodríguez de la Fuente).\n- 1971: Purnell's History of the 20th Century. La History of the Second World War de Purnell, en 128 partes semanales, es emblema de la moda del partwork.\n- 1974: Britannica 15.ª, en tres partes (Propædia, Micropædia, Macropædia), con un costo de US$ 32 millones.\n- 1972–1976: la FTC denuncia (1972) y ordena (9 de marzo de 1976) a Britannica cesar prácticas engañosas de venta puerta a puerta.\n- 1985: Britannica se reestructura: índice de 2 tomos, Micropædia de 12 tomos y Macropædia condensada en 17 tomos. Total: 32 tomos.\n- 1989–1990: Britannica tiene 2.300 vendedores (1989) y llega a su pico en 1990 con 120.000 juegos vendidos en EE. UU. y US$ 650 millones.\n- 1993: Encarta (CD-ROM, US$ 395, base Funk & Wagnalls) con más de 25.000 artículos, 7.000 fotos, 7 horas de audio, 800 mapas y MindMaze.\n- 1995: Encarta 95 con interfaz estilo Windows 95, el buscador Pinpointer y seis Interactividades.\n- 1996: Britannica vende alrededor de US$ 325 millones, la mitad que en 1990.\n- 1997: Encarta 97 en español. La edición Deluxe trae \"Collages\" sobre 20 temas. Se venden ediciones internacionales en unos 30 países.\n- 1998: Guinness deja de registrar la mascota más pesada para no incentivar la sobrealimentación (ya en los 90 había retirado los récords de glotonería).\n- 1999: Guinness 2000 \"Millennium Edition\", a todo color, con mucha foto y poco texto.\n- 2000: Encarta online.\n- 2001: nace Wikipedia.\n- 2002: The Most Extreme se estrena el 7 de julio.\n- 2003: Encarta 2004 con el \"Visual Browser\", una rueda de unas 120 tarjetas.\n- 2005: estudio de Nature: 162 errores en Wikipedia contra 123 en Britannica sobre 42 artículos.\n- 2007: quinta y última temporada de The Most Extreme. Último episodio el 12 de junio, según la Wikipedia en español.\n- 2009: Microsoft anuncia el 30 de marzo el cierre de Encarta (\"la gente busca y consume información de maneras considerablemente distintas\"). Deja de venderla en junio y cierra MSN Encarta el 31 de octubre (Japón, el 31 de diciembre).\n- 2012: Britannica deja el papel en marzo, tras 244 años. Del juego de 2010 (US$ 1.400) vendió 8.000 de 12.000.\n- 2013: la lista de episodios de Game of Thrones queda 3.ª entre las páginas más vistas de Wikipedia en una semana.\n- 2017–2018: Wikipedia mide por qué la leen (35/33/32 entre dato, panorama y profundidad).\n- 2019: el post \"I miss Microsoft Encarta\" de Hanselman llega a 1.198 puntos en Hacker News.\n- 2025: Wikimedia informa una caída del 8 % en páginas vistas humanas. Pew: con resumen de IA, los clics bajan de 15 % a 8 %.",
+ "patrones_ux": [
+  {
+   "nombre": "La lámina (todo junto, mismo tamaño)",
+   "descripcion": "Una página doble o una pantalla con TODOS los ítems de un conjunto (banderas, aves, hongos, uniformes) en una grilla regular, mismo tamaño, mismo marco, con la etiqueta debajo. Ejemplos: las láminas de banderas del Petit Larousse (desde 1905) y las 1.197 banderas a color del 'Flag Number' de National Geographic (1917). Se mira, no se busca.",
+   "por_que_funciona": "Muestra el conjunto completo, así que ver lo que falta o lo raro sale solo. Con el mismo tamaño, comparar es inevitable: dos banderas casi iguales una al lado de la otra. Y la identificación visual mejora con imágenes: en un experimento con 704 personas sobre artículos de Wikipedia, las imágenes mejoraron mucho las preguntas de reconocimiento visual, pero no las de conocimiento general."
+  },
+  {
+   "nombre": "El ranking dibujado a escala",
+   "descripcion": "Las cartas de 'alturas comparativas de las principales montañas y largos de los ríos' (de 1816 a fin del siglo XIX) dibujan todas las montañas sobre la misma línea de base y en la misma escala, con los ríos 'colgando'. Guinness y The Most Extreme hacen lo mismo traduciendo la cifra a una escala humana (la animación que muestra cuánto saltarías si fueras pulga).",
+   "por_que_funciona": "El orden se entiende de un vistazo, sin leer números, y el tamaño relativo se queda en la memoria. La traducción a escala humana convierte un dato abstracto en algo que se puede contar en la mesa."
+  },
+  {
+   "nombre": "La cuenta regresiva del 10 al 1 con adelanto",
+   "descripcion": "Un tema por episodio, diez puestos que se revelan de a uno en orden descendente, con frases que anticipan sin revelar ('ya llegamos al…', la fórmula de American Top 40 desde 1970). En The Most Extreme cada puesto tiene la misma estructura: animal, comparación animada con humanos, entrevista a una persona con el mismo rasgo, clip viejo de archivo.",
+   "por_que_funciona": "Es un conjunto cerrado con un final garantizado (el número 1), y el suspenso empuja a quedarse. El criterio raro (el más tramposo, la mejor mamá) sorprende. El ganador inesperado (la pulga, el escarabajo) premia la espera. Además, los números redondos funcionan como categorías mentales: 'Top 10' se vive como frontera (Isaac & Schindler, 2014)."
+  },
+  {
+   "nombre": "Tres capas: mapa → entrada corta → entrada larga",
+   "descripcion": "Britannica 1974: la Propædia (esquema temático de 10 partes, 41 divisiones y 167 secciones) manda a la Micropædia (más de 102 mil entradas de menos de 750 palabras, con remisiones) y esta a la Macropædia (4.207 artículos largos). Cada volumen se puede usar solo o combinado.",
+   "por_que_funciona": "Atiende tres necesidades distintas que siguen existiendo: el dato, el panorama y la profundidad, que Wikipedia midió en 35/33/32 % en 2017. Falla cuando las capas se pisan sin un índice común; por eso en 1985 se agregó un índice de 2 tomos."
+  },
+  {
+   "nombre": "Portada con entradas elegidas y rueda de temas",
+   "descripcion": "Encarta 95: pantalla de inicio que lleva a artículos, galerías multimedia, funciones online y diccionario, más el buscador Pinpointer (fijo a la izquierda desde Encarta 2000). Encarta 97 Deluxe: 'Collages', 20 presentaciones multimedia de temas transversales. Encarta 2004: el 'Visual Browser' ocupa casi toda la pantalla inicial, con una rueda de unas 120 tarjetas temáticas que gira 'como un carrusel'.",
+   "por_que_funciona": "Le da una puerta de entrada a quien no sabe qué buscar, sin quitarle el buscador a quien sí sabe. Las tarjetas son una muestra editorial del todo, no una selección hecha por un algoritmo."
+  },
+  {
+   "nombre": "El juego sobre el propio corpus (MindMaze)",
+   "descripcion": "Castillo en primera persona: cada piso tiene 100 salas en grilla de 10×10 y cada puerta se abre respondiendo una pregunta de 4 opciones, con 2 intentos. Hay 9 materias elegibles (Ciencias de la vida, Geografía, Historia…) y dificultad ajustable. Al llegar a 20.000 puntos se accede a la cámara del rey.",
+   "por_que_funciona": "Convierte el hojeo en recuerdo activo, tiene una meta y un final, y era un 'edutainment' que los padres aceptaban. Su punto débil documentado: con 4 opciones y 2 intentos, adivinar da 50 %."
+  },
+  {
+   "nombre": "La colección por entregas con contenedor",
+   "descripcion": "Fascículo semanal en el kiosco con numeración ('N.º 41 de 262'), tapas o carpetas para encuadernar, y el plan completo anunciado desde el primer número (Monitor: 262 entregas para 12 tomos más índice; History of the Second World War de Purnell: 128 partes en 8 tomos con carpetas).",
+   "por_que_funciona": "Hay ritmo (una cita fija por semana), un progreso visible en el estante y la promesa de un todo terminado. El 'efecto del progreso regalado' (Nunes & Drèze, 2006) muestra que una tarea presentada como ya empezada se completa más: 34 % contra 19 %."
+  },
+  {
+   "nombre": "Categoría fija + foto + número grande",
+   "descripcion": "Guinness organiza por capítulos estables (Espacio, Vida en la Tierra, Cuerpo humano, Proezas, Ingeniería, Entretenimiento, Mundo moderno, Deportes en la edición 2022). Desde la edición 2000 cada récord es una foto grande con la cifra destacada y poco texto.",
+   "por_que_funciona": "Se hojea a cualquier altura sin perder el hilo. La cifra grande es el dato que se lleva a la conversación, y la foto prueba y fija. La categoría estable ayuda a orientarse en ediciones sucesivas."
+  },
+  {
+   "nombre": "Efemérides atadas al calendario",
+   "descripcion": "Billiken (desde 1919) organizaba tapas y láminas centrales según el ciclo escolar de efemérides. La portada de Wikipedia mantiene una sección de efemérides diarias.",
+   "por_que_funciona": "La fecha de hoy es una excusa para que algo llegue sin pedirlo, y es la misma para todos, así que da tema común. Además se renueva sola todos los días."
+  },
+  {
+   "nombre": "La tabla de episodios completa (heredero en Wikipedia)",
+   "descripcion": "Una tabla por temporada con la plantilla {{Episode list}}: número, título, fecha, resumen (y en algunas series de anime, el material de origen). Toda la serie se ve de una vez, en orden.",
+   "por_que_funciona": "Es la lámina aplicada a una obra en el tiempo: completa, ordenada y comparable. Sirve antes de ver (qué me falta), durante (dónde estoy) y después (qué adaptó). Su tráfico lo confirma: la lista de Game of Thrones llegó a 827.553 visitas en una semana de 2013."
+  }
+ ],
+ "que_funciona": [
+  "Conjunto CERRADO y visible: la lámina, el Top 10, la colección de 262 fascículos, la enciclopedia acotada ('bounded', Hanselman 2019). Permite saber cuánto hay y cuánto falta.",
+  "Comparación forzada por el formato: mismo tamaño, misma escala, misma estructura por ítem (en The Most Extreme cada puesto es animal + equivalente humano + entrevista).",
+  "Criterio editorial explícito y voz uniforme, legible para chicos. Es lo que más extrañó un ex integrante del equipo de Encarta (Tony Chor, 2009).",
+  "Final garantizado y suspenso (del 10 al 1): la lista 'promete un final definido' (Konnikova, 2013).",
+  "Ritmo compartido: un tema por emisión, un fascículo por semana, un libro por Navidad. Todos ven lo mismo y se puede hablar al día siguiente; Guinness nació para cortar discusiones.",
+  "Varias puertas para distintas necesidades: mapa (Propædia), dato (Micropædia), profundidad (Macropædia), buscador (Pinpointer), azar (MindMaze, la rueda de Encarta 2004). La demanda real se reparte en tercios (35/33/32).",
+  "Funcionar sin red: Encarta en CD/DVD se siguió usando en computadoras desconectadas del mundo en desarrollo (Hanselman). Es justo lo que ya tienen los catálogos de un solo HTML.",
+  "Rarezas y criterios insólitos (los más tramposos, las mejores mamás, los récords raros): la sorpresa es el anzuelo, y el dato que sobrevive es el que se cuenta."
+ ],
+ "que_falla": [
+  "La estructura en capas confundía cuando las capas se pisaban. La división Micro/Macro de 1974 fue 'la decisión más controvertida' y frustró a los lectores. En 1985 hubo que agregar un índice de 2 tomos y condensar la Macropædia.",
+  "Envejecimiento: el impreso se reeditaba cada 2 años (Britannica) y Encarta tuvo que vender actualizaciones anuales y luego mensuales. Un ranking impreso queda viejo el día que se rompe el récord.",
+  "Precio y acceso: Britannica costaba US$ 1.400 en papel (2010), Encarta salió a US$ 395 (1993), y la colección por fascículos encarece con cada número.",
+  "El editor también se equivoca o tiene sesgo: Nature (2005) encontró 123 errores u omisiones en 42 artículos de Britannica (contra 162 en Wikipedia), y la Encarta francesa suavizaba Waterloo.",
+  "Rankings sin método: los de The Most Extreme 'no siguen un procedimiento científicamente riguroso'. Entretienen, pero pueden fijar falsos 'números 1'.",
+  "Rankings que incentivan daño: Guinness tuvo que retirar la glotonería (años 90) y la mascota más pesada (1998).",
+  "Trivia de opción múltiple que premia adivinar: MindMaze, con 4 opciones y 2 intentos, se gana a ciegas en un 50 %.",
+  "No sobrevivió al cambio de modelo: Encarta cerró en 2009 con 1,27 % de las visitas a enciclopedias online frente a 97 % de Wikipedia. Britannica dejó el papel en 2012 tras vender solo 8.000 de 12.000 juegos."
+ ],
+ "evidencia": [
+  {
+   "afirmacion": "Microsoft anunció el cierre de Encarta con un motivo oficial de cambio de hábitos, no de calidad",
+   "dato": "30/03/2009. Cita: 'people today seek and consume information in considerably different ways than in years past'. Dejó de vender Encarta y Student en junio de 2009 y cerró MSN Encarta el 31/10/2009 (Japón, el 31/12/2009)",
+   "fuente_titulo": "Technologizer – Microsoft Encarta: A Casualty of the Web",
+   "url": "https://technologizer.com/2009/03/30/microsoft-encarta-a-casualty-of-the-web/",
+   "anio": "2009"
+  },
+  {
+   "afirmacion": "Al cerrar, Encarta era marginal frente a Wikipedia en visitas online",
+   "dato": "Según Hitwise, Wikipedia tenía el 97 % de las visitas a enciclopedias online en EE. UU., MSN Encarta 1,27 % y Encyclopedia.com 0,76 %",
+   "fuente_titulo": "The Register – Microsoft kills MSN Encarta",
+   "url": "https://www.theregister.co.uk/2009/03/30/microsoft_kills_msn_encarta/",
+   "anio": "2009"
+  },
+  {
+   "afirmacion": "Contenido y precio de la primera Encarta",
+   "dato": "Más de 25.000 artículos, 7.000 fotos, 7 horas de sonido, 800 mapas y casi 100 animaciones, basada en la Funk & Wagnalls, a US$ 395",
+   "fuente_titulo": "COMPUTE! n.º 156, septiembre de 1993, p. 74 – Encarta (Stephen Levy)",
+   "url": "https://www.atarimagazines.com/compute/issue156/74_Encarta.php",
+   "anio": "1993"
+  },
+  {
+   "afirmacion": "Encarta 95 introdujo el buscador Pinpointer y las Interactividades",
+   "dato": "Pinpointer mejorado y cinco nuevas 'Interactivities' (seis en total: nutrición, fractales, inmigración…). Más de 8.000 imágenes, casi 9 horas de sonido y 100 minutos de video y animación",
+   "fuente_titulo": "Review of Encarta 1995 for Personal Computer World (Derbyshire)",
+   "url": "https://people.well.com/user/derb/encarta95.htm",
+   "anio": "1995"
+  },
+  {
+   "afirmacion": "Encarta 97 Deluxe agregó 'Collages', recorridos editoriales por temas",
+   "dato": "Más de 31.000 artículos (6.000 nuevos o actualizados) y 'Collages' multimedia sobre 20 temas, de la biodiversidad a las comunicaciones",
+   "fuente_titulo": "THE Journal – Encarta 97 Adds Content, Extra CD",
+   "url": "https://thejournal.com/articles/1997/04/01/encarta-97-adds-content-extra-cd.aspx",
+   "anio": "1997"
+  },
+  {
+   "afirmacion": "La portada de Encarta 2004 era una rueda giratoria de temas, un antecedente directo del visor rotativo",
+   "dato": "El 'Visual Browser' domina la pantalla inicial: una rueda de unas 120 tarjetas de temas, de los aborígenes australianos a la Primera Guerra Mundial. Reference Library 2004: más de 68.000 artículos",
+   "fuente_titulo": "Ottawa PC Users' Group – Encarta 2004 review / Microsoft PR 26/06/2003",
+   "url": "https://opcug.ca/Reviews/Encarta2004.html",
+   "anio": "2003"
+  },
+  {
+   "afirmacion": "MindMaze era un juego cerrado con estructura y final",
+   "dato": "Cada piso tiene 100 salas en grilla de 10×10; 9 materias; preguntas de 4 opciones con 2 intentos; a los 20.000 puntos se accede a la cámara del rey. Incluido desde la primera Encarta (1993)",
+   "fuente_titulo": "Wikipedia – Encarta MindMaze",
+   "url": "https://en.wikipedia.org/wiki/Encarta_MindMaze",
+   "anio": "1993"
+  },
+  {
+   "afirmacion": "Lo que la gente dice extrañar de Encarta es que era acotada y que funcionaba sin red",
+   "dato": "Post del 13/08/2019: el conocimiento era 'abrumador pero accesible y contenido: acotado'; Encarta se sigue usando en el mundo en desarrollo en computadoras desconectadas. En Hacker News: 1.198 puntos y 410 comentarios",
+   "fuente_titulo": "Scott Hanselman – I miss Microsoft Encarta",
+   "url": "https://www.hanselman.com/blog/i-miss-microsoft-encarta",
+   "anio": "2019"
+  },
+  {
+   "afirmacion": "Un ex integrante del equipo de Encarta destacó la voz editorial y la legibilidad para chicos",
+   "dato": "'Consistent editorial voice and perspective' frente a la visión colectiva de Wikipedia; los chicos pierden artículos escritos para entenderse; fue la primera enciclopedia con actualizaciones anuales y luego mensuales",
+   "fuente_titulo": "Tony Chor – Farewell to Encarta",
+   "url": "https://www.tonychor.com/2009/04/farewell-to-encarta.html",
+   "anio": "2009"
+  },
+  {
+   "afirmacion": "La Encarta en español salió en 1997 y las ediciones locales tenían contenido distinto",
+   "dato": "Versión española desde Encarta 97, con unos 42.000–43.000 artículos (menos que la inglesa). Las ediciones locales licenciaban contenido nacional",
+   "fuente_titulo": "Wikipedia – Encarta",
+   "url": "https://en.wikipedia.org/wiki/Encarta",
+   "anio": "1997"
+  },
+  {
+   "afirmacion": "La curaduría por país generaba 'verdades' distintas",
+   "dato": "La descripción de la derrota de Napoleón en Waterloo es mucho menos catastrófica en la Encarta francesa que en la inglesa",
+   "fuente_titulo": "WRAL – Microsoft's Encyclopedias Differ in Language and Content",
+   "url": "https://www.wral.com/story/148805",
+   "anio": "2000 (aprox.)"
+  },
+  {
+   "afirmacion": "Estructura en tres capas de Britannica 1974",
+   "dato": "Propædia: 10 partes, 41 divisiones, 167 secciones, desarrollada por 86 hombres y 1 mujer. Micropædia: 10 tomos y 102.214 artículos de menos de 750 palabras. Macropædia: 19 tomos y 4.207 artículos",
+   "fuente_titulo": "Wikipedia – Propædia",
+   "url": "https://en.wikipedia.org/wiki/Prop%C3%A6dia",
+   "anio": "1974"
+  },
+  {
+   "afirmacion": "Las tres capas se diseñaron para tres tipos de usuario",
+   "dato": "Los 30 tomos responden a 'quienes buscan datos simples; quienes piden información detallada y explicativa; y quienes desean un enfoque sistemático de aprendizaje continuo'",
+   "fuente_titulo": "Educational Leadership (ASCD), diciembre de 1974 – reseña de Britannica 3",
+   "url": "https://files.ascd.org/staticfiles/ascd/pdf/journals/ed_lead/el_197412_james.pdf",
+   "anio": "1974"
+  },
+  {
+   "afirmacion": "La división Micro/Macro tuvo que corregirse",
+   "dato": "En 1985 se agregó un índice de 2 tomos (total 32 tomos) y la Macropædia se condensó en 17 tomos con unos 700 artículos",
+   "fuente_titulo": "Wikipedia – Macropædia",
+   "url": "https://en.wikipedia.org/wiki/Macrop%C3%A6dia",
+   "anio": "1985"
+  },
+  {
+   "afirmacion": "Costo y escala editorial de la 15.ª edición",
+   "dato": "US$ 32 millones solo en redacción (la mayor inversión privada en edición hasta entonces); más de 4.000 autores de más de 100 países",
+   "fuente_titulo": "Britannica – Fifteenth edition",
+   "url": "https://britannica.com/topic/Encyclopaedia-Britannica-English-language-reference-work/Fifteenth-edition",
+   "anio": "1974"
+  },
+  {
+   "afirmacion": "Britannica llegó a su pico justo antes del CD-ROM",
+   "dato": "En 1990, 120.000 juegos vendidos en EE. UU. y US$ 650 millones de ingresos; 2.300 vendedores en 1989. Encarta salió a menos de US$ 100",
+   "fuente_titulo": "Tuck School of Business – Encyclopaedia Britannica (A), caso 2-0007",
+   "url": "https://mba.tuck.dartmouth.edu/pages/faculty/chris.trimble/osi/downloads/20007_EncyBrit_A.pdf",
+   "anio": "1990"
+  },
+  {
+   "afirmacion": "Las ventas de Britannica cayeron a la mitad tras Encarta",
+   "dato": "Unos US$ 325 millones en 1996, aproximadamente la mitad de 1990",
+   "fuente_titulo": "NYU Stern (L. Cabral) – caso Britannica",
+   "url": "https://pages.stern.nyu.edu/lcabral/teaching/britannica.pdf",
+   "anio": "1996"
+  },
+  {
+   "afirmacion": "Britannica dejó el papel",
+   "dato": "Marzo de 2012, tras 244 años. El juego de 32 tomos costaba US$ 1.400; de la edición 2010 se vendieron 8.000 de 12.000",
+   "fuente_titulo": "Mail & Guardian – Encyclopaedia Britannica ends print edition",
+   "url": "https://mg.co.za/friday/2012-03-14-encyclopaedia-britannica-ends-print-edition/",
+   "anio": "2012"
+  },
+  {
+   "afirmacion": "Las tres necesidades de Britannica reaparecen medidas en Wikipedia",
+   "dato": "Encuesta en 14 idiomas (junio de 2017, más de 215.000 respuestas): 35 % busca un dato puntual, 33 % un panorama y 32 % profundidad",
+   "fuente_titulo": "Wikimedia Foundation – Why the world reads Wikipedia",
+   "url": "https://diff.wikimedia.org/2018/03/15/why-the-world-reads-wikipedia/",
+   "anio": "2018"
+  },
+  {
+   "afirmacion": "Guinness nació para cortar discusiones",
+   "dato": "Discusión del 10/11/1951 sobre el ave de caza más rápida de Europa; primera edición de 198 páginas encuadernada el 27/08/1955; best seller en el Reino Unido para Navidad de 1955",
+   "fuente_titulo": "Guinness World Records – Why was the Guinness World Records book first published?",
+   "url": "https://www.guinnessworldrecords.com/news/2022/9/why-was-the-guinness-world-records-book-first-published-714607",
+   "anio": "1955"
+  },
+  {
+   "afirmacion": "Guinness pasó a un diseño de foto grande y poco texto",
+   "dato": "La 'Millennium Edition' 2000 fue 'dramáticamente distinta': a todo color, con mucha foto y poco texto",
+   "fuente_titulo": "BookPage – reseña de Guinness World Records 2000",
+   "url": "https://bookpage.com/reviews/860-review-nonfiction/",
+   "anio": "1999"
+  },
+  {
+   "afirmacion": "Guinness retiró rankings que incentivaban daño",
+   "dato": "En los 90 sacó los récords de glotonería y en 1997 los reintrodujo solo por velocidad o cantidad acotada. En 1998 eliminó la mascota más pesada para no incentivar la sobrealimentación",
+   "fuente_titulo": "Guinness World Records – 60 years on, the categories that GWR no longer monitors",
+   "url": "https://www.guinnessworldrecords.com/news/2015/8/60-years-on-the-categories-that-guinness-world-records-no-longer-monitors-393758",
+   "anio": "1998"
+  },
+  {
+   "afirmacion": "The Most Extreme: formato de 10 animales en cuenta regresiva por rasgo",
+   "dato": "Estreno el 07/07/2002. Cada episodio elige un rasgo y ordena 10 animales; trae una animación que compara con un humano, entrevistas a personas con el mismo rasgo y clips viejos. El ranking 'no sigue un procedimiento científicamente riguroso'. 5 temporadas, 77 episodios",
+   "fuente_titulo": "Wikipedia – The Most Extreme",
+   "url": "https://en.wikipedia.org/wiki/The_Most_Extreme",
+   "anio": "2002"
+  },
+  {
+   "afirmacion": "En Hispanoamérica se llamó 'Animal Planet al extremo'",
+   "dato": "5 temporadas y 76 episodios de 46 minutos, del 07/07/2002 al 12/06/2007, producida en Nueva Zelanda",
+   "fuente_titulo": "Wikipedia en español – Animal Planet al extremo",
+   "url": "https://es.wikipedia.org/wiki/Animal_Planet_al_extremo",
+   "anio": "2007"
+  },
+  {
+   "afirmacion": "The Most Extreme fue de lo más visto de Animal Planet y su productora lo definió como TV para la generación MTV",
+   "dato": "Artículo del 26/01/2007: 'one of Animal Planet's highest-rated shows since its launch in 2002'; Michael Stedman (NHNZ): 'wildlife television for the MTV generation'",
+   "fuente_titulo": "World Screen – NHNZ's The Most Extreme Scores Season Five on Animal Planet",
+   "url": "https://worldscreen.com/?p=86857",
+   "anio": "2007"
+  },
+  {
+   "afirmacion": "Temas concretos de la primera temporada",
+   "dato": "13 episodios: Jumpers, Gluttons, Speed, Births, Cheats, Survivors, Fighters, Builders, Horrors, Smarts, Strength, Lovers, Biters (julio a noviembre de 2002, uno por semana)",
+   "fuente_titulo": "TheTVDB – The Most Extreme, Season 1",
+   "url": "https://thetvdb.com/series/the-most-extreme/seasons/official/1",
+   "anio": "2002"
+  },
+  {
+   "afirmacion": "La lámina de banderas como formato canónico",
+   "dato": "National Geographic, vol. XXXII n.º 4 (octubre de 1917), pp. 281–420: 1.197 banderas a todo color y 300 ilustraciones en blanco y negro",
+   "fuente_titulo": "FOTW Flags of the World – bibliografía: Flags of the World (Our Flag Number)",
+   "url": "https://crwflags.com/fotw/Flags/bib-gma.html",
+   "anio": "1917"
+  },
+  {
+   "afirmacion": "El ranking dibujado a escala tiene más de dos siglos",
+   "dato": "Cartas comparativas de montañas desde alrededor de 1816 (Smith); Darton (1823) junta montañas y ríos en una sola lámina; el género dura unos 80 años",
+   "fuente_titulo": "Geographicus – Mountains and Rivers (Colton, 1852)",
+   "url": "https://geographicus.com/P/AntiqueMap/mountainsandrivers-colton-1852",
+   "anio": "1823"
+  },
+  {
+   "afirmacion": "El Petit Larousse incluía láminas de banderas y láminas didácticas",
+   "dato": "Desde 1905: suplementos con banderas del mundo, atlas, cronología universal y láminas (trajes, condecoraciones, hongos, aves); unas 50 'páginas rosas'",
+   "fuente_titulo": "Wikipedia – Petit Larousse",
+   "url": "https://en.wikipedia.org/wiki/Petit_Larousse",
+   "anio": "1905"
+  },
+  {
+   "afirmacion": "La enciclopedia por fascículos de kiosco tenía un plan cerrado y escala masiva",
+   "dato": "Monitor (Salvat, 1965): 262 fascículos semanales para 12 tomos más índice; 300.000 colecciones vendidas en España e Hispanoamérica",
+   "fuente_titulo": "Wikipedia – Editorial Salvat",
+   "url": "https://en.wikipedia.org/wiki/Editorial_Salvat",
+   "anio": "1965"
+  },
+  {
+   "afirmacion": "En Argentina, el fascículo de kiosco compitió con los diarios",
+   "dato": "'Capítulo' del CEAL: 59 fascículos semanales en kioscos de todo el país (agosto de 1967 a septiembre de 1968). Ventas de más de 150.000 ejemplares por semana",
+   "fuente_titulo": "Orbis Tertius (UNLP) – artículo sobre Capítulo/CEAL",
+   "url": "https://www.orbistertius.unlp.edu.ar/article/view/OTe131/11683",
+   "anio": "1967"
+  },
+  {
+   "afirmacion": "'Lo sé todo' existió como enciclopedia documental a color de Larousse en 1960",
+   "dato": "Tomos digitalizados con el rótulo 'Lo Se Todo Tomo 01–06, Larousse 1960'",
+   "fuente_titulo": "Internet Archive – Lo Se Todo Tomo 01 Larousse 1960",
+   "url": "https://archive.org/details/LoSeTodoTomo01Larousse1960",
+   "anio": "1960"
+  },
+  {
+   "afirmacion": "Una tarea presentada como ya empezada se termina más",
+   "dato": "300 tarjetas de lavadero de autos: 34 % de quienes recibieron una tarjeta de 10 sellos con 2 ya puestos canjeó el premio, contra 19 % con una tarjeta de 8 vacía (mismo esfuerzo)",
+   "fuente_titulo": "Nunes & Drèze – The Endowed Progress Effect, Journal of Consumer Research 32(4)",
+   "url": "https://ideas.repec.org/a/oup/jconrs/v32y2006i4p504-512.html",
+   "anio": "2006"
+  },
+  {
+   "afirmacion": "El 'Top 10' funciona como categoría mental",
+   "dato": "Los consumidores agrupan las listas en categorías de números redondos y exageran las diferencias en la frontera: subir del 11 al 10 vale más que del 10 al 9",
+   "fuente_titulo": "Isaac & Schindler – The Top-Ten Effect, Journal of Consumer Research",
+   "url": "https://ideas.repec.org/a/oup/jconrs/doi10.1086-674546.html",
+   "anio": "2014"
+  },
+  {
+   "afirmacion": "Las imágenes ayudan a reconocer, no a saber más en general",
+   "dato": "Experimento con 704 participantes, 94 artículos de Wikipedia y 470 preguntas: las imágenes mejoran mucho la identificación visual, pero no las preguntas de conocimiento general",
+   "fuente_titulo": "Imagine a dragon made of seaweed: How images enhance learning in Wikipedia (arXiv 2403.07613)",
+   "url": "https://arxiv.org/abs/2403.07613v1",
+   "anio": "2024"
+  },
+  {
+   "afirmacion": "Las listas de episodios de Wikipedia son de lo más visitado",
+   "dato": "Semana del 2 al 8 de junio de 2013: 'List of Game of Thrones episodes' fue la 3.ª página más vista de Wikipedia, con 827.553 visitas",
+   "fuente_titulo": "Wikipedia Signpost – Traffic report 2013-06-12",
+   "url": "https://signpost.news/2013-06-12/Traffic_report",
+   "anio": "2013"
+  },
+  {
+   "afirmacion": "Los carruseles automáticos casi no se usan más allá del primer ítem",
+   "dato": "Notre Dame (enero a junio de 2013): solo 1,08 % hizo clic en el carrusel, y el 89,1 % de esos clics fue en el primer ítem",
+   "fuente_titulo": "Erik Runyon – Carousel Interaction Stats",
+   "url": "https://erikrunyon.com/2013/07/carousel-interaction-stats/",
+   "anio": "2013"
+  },
+  {
+   "afirmacion": "El chat o resumen de IA 'tiene todo pero no te trae nada': corta la exploración",
+   "dato": "68.879 búsquedas de 900 adultos de EE. UU.: con resumen de IA se hace clic en un resultado en 8 % de las visitas (15 % sin resumen); 1 % hace clic en las fuentes del resumen; la sesión termina 26 % de las veces contra 16 %",
+   "fuente_titulo": "Pew Research Center – Google users are less likely to click on links when an AI summary appears",
+   "url": "https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Hasta el heredero, Wikipedia, pierde lectores humanos",
+   "dato": "Las páginas vistas por humanos cayeron 8 % interanual entre marzo y agosto de 2025, atribuido a los resúmenes de IA y al video corto (Marshall Miller, Wikimedia)",
+   "fuente_titulo": "TechCrunch – Wikipedia says traffic is falling due to AI search summaries and social video",
+   "url": "https://techcrunch.com/2025/10/18/wikipedia-says-traffic-is-falling-due-to-ai-search-summaries-and-social-video",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "El editor experto también se equivocaba",
+   "dato": "42 pares de artículos científicos: 8 errores graves (4 y 4) y 162 errores u omisiones en Wikipedia contra 123 en Britannica",
+   "fuente_titulo": "Mail & Guardian – Report: Wikipedia rivals Britannica on science (Nature, Giles 2005)",
+   "url": "https://mg.co.za/article/2005-12-15-report-wikipedia-rivals-britannica-on-science/",
+   "anio": "2005"
+  },
+  {
+   "afirmacion": "El modelo de negocio de la enciclopedia en papel tenía costos para las familias",
+   "dato": "La FTC ordenó a Britannica (orden final del 09/03/1976, denuncia del 11/12/1972) dejar de presentar la venta puerta a puerta como 'encuesta', dejar de usar precios y regalos engañosos y dejar de reclutar vendedores con falsos puestos gerenciales",
+   "fuente_titulo": "FTC – In the Matter of Encyclopaedia Britannica Inc. et al., 88 FTC 421",
+   "url": "https://ftc.gov/system/files/ftc_gov/pdf/In-the-Matter-of-Encyclopaedia-Britannica-Inc-Et-Al.8-FTC-421.pdf",
+   "anio": "1976"
+  },
+  {
+   "afirmacion": "La cuenta regresiva con adelantos es una fórmula de medios con fecha de origen",
+   "dato": "American Top 40 debutó el 03/07/1970 en 7 radios, con adelantos del tipo 'estamos a una canción del cantante con tazas de oro de US$ 10.000'",
+   "fuente_titulo": "WRVO/NPR – 50 years ago, Casey Kasem began counting down the hits",
+   "url": "https://www.wrvo.org/2020-07-03/50-years-ago-casey-kasem-began-counting-down-the-hits-on-american-top-40",
+   "anio": "1970"
+  },
+  {
+   "afirmacion": "El botón de azar fue de lo más usado de Wikipedia",
+   "dato": "Special:Random: alrededor del 3,5 % de las páginas vistas, unas 5,9 millones por día en 2010",
+   "fuente_titulo": "Wikipedia: Most read articles in 2010 (espejo en gwern.net)",
+   "url": "https://www.gwern.net/wiki/Wikipedia:Most_read_articles_in_2010",
+   "anio": "2010"
+  }
+ ],
+ "lecciones_para_catalogo": [
+  {
+   "leccion": "[COPIAR TAL CUAL] La lámina: el conjunto completo, al mismo tamaño, en una sola vista.",
+   "aplicacion_concreta": "En Pasaporte, pestaña Banderas: sumar un botón 'Ver lámina' que muestre las 230 banderas en una grilla regular (mismo alto, mismo marco, nombre debajo), con orden por continente, alfabético o color dominante. Con las flechas se recorre la grilla y Enter abre la ficha (sirve para TV). Las filas 'Banderas casi iguales' y 'con animales' abren su propia mini-lámina, con los pares lado a lado y la diferencia marcada. Replicarlo en Bestiario (siluetas de un grupo), Flora (hojas) e Ingenio (íconos).",
+   "costo": "Bajo: las imágenes ya vienen de Commons y es una grilla CSS con carga diferida. El riesgo es el peso del HTML único: usar miniaturas o un sprite."
+  },
+  {
+   "leccion": "[ADAPTAR] El ranking a escala, con una regla fija conocida.",
+   "aplicacion_concreta": "En Pasaporte, en la fila Top 10 'más grandes / más chicos', una vista 'a escala' con las siluetas de los 10 países dibujadas en la misma escala y Argentina siempre al costado como regla. Es la versión visual de 'Cuántas Argentinas entran'; los microestados van en recuadro con lupa. En Bestiario, los Top 10 de tamaño con siluetas junto a una persona de 1,70 m. En Cosmos, planetas y estrellas a escala; en Atlas, montañas sobre la misma línea de base (la carta de 1823).",
+   "costo": "Medio: hacen falta siluetas SVG simplificadas y valores numéricos de Wikidata normalizados. Ojo con proyecciones y unidades."
+  },
+  {
+   "leccion": "[ADAPTAR] La cuenta regresiva del 10 al 1 con suspenso, y con el criterio a la vista.",
+   "aplicacion_concreta": "En todas las filas Top 10 (Pasaporte, Bestiario, Cosmos): un botón 'Cuenta regresiva' que pasa a pantalla completa, ideal para TV y teclado. Revela del 10 al 1 de a uno, con el número gigante, la foto, la cifra grande y una comparación humana. Antes del 1 muestra un adelanto ('el número 1 entra 3 veces en Buenos Aires'). Arriba, siempre visibles: el criterio, la fuente y la fecha del dato, para no repetir el 'no riguroso' de The Most Extreme. En Creer o no creer: 'Los 10 mitos más creídos'.",
+   "costo": "Bajo: reusa los datos de las filas Top 10; es una vista nueva con transiciones y textos de adelanto generados en tanda y revisados."
+  },
+  {
+   "leccion": "[ADAPTAR] 'Un tema por día' compartido, sin servidor, usando la fecha como semilla.",
+   "aplicacion_concreta": "En el visor de arriba (todos los catálogos): en lugar de rotar ítems sueltos cada 9 s, mostrar 'El tema de hoy', un conjunto cerrado de 10 elegido con la fecha como semilla (AAAA-MM-DD). Así todos los que abren ese día ven lo mismo, como la grilla de TV, y se puede comentar. Si se mantiene la rotación, que gire solo dentro de esos 10, con un botón Pausa visible, que se detenga con foco o hover (NN/g; WCAG 2.2.2) y con una tira de miniaturas que muestre los 10 a la vez.",
+   "costo": "Bajo: es una función determinística de la fecha sobre una lista curada de temas. Cuesta más armar unos 365 temas buenos (se pueden generar en tanda y revisar)."
+  },
+  {
+   "leccion": "[ADAPTAR] Las tres capas de Britannica, con un solo buscador que las una.",
+   "aplicacion_concreta": "En todos los catálogos: (1) Micropædia = la ficha modal actual (3 líneas + 'Tres cosas que no sabías' + datos). (2) Macropædia = un 'Leer a fondo' opcional solo para fichas que lo merecen: en Creer o no creer, la historia del mito; en Ingenio, cómo funciona el invento; en Butaca, el arco completo. (3) Propædia = una pantalla 'Mapa del catálogo' con el árbol temático completo y conteos ('Bestiario › Aves › Rapaces (23)'), navegable por teclado. El buscador devuelve resultados de las tres capas en una sola lista, para no repetir la confusión Micro/Macro que obligó al índice de 1985.",
+   "costo": "Medio a alto: el texto largo requiere generación y revisión humana más cuidadosa. El mapa sale de la clasificación que ya existe."
+  },
+  {
+   "leccion": "[ADAPTAR] La colección que se completa, sin trampas.",
+   "aplicacion_concreta": "En Pasaporte, función 'Sellos': cada ficha abierta sella ese país en el navegador (localStorage, que ya usan 'Mi lista' y 'Seguir explorando'). Cada fila muestra 'Viste 12 de 54' y en la lámina las banderas no vistas aparecen apagadas. Igual en Bestiario ('Felinos: 9/37') y en Butaca ('Episodios vistos de este arco'). Se aprovecha el progreso visible (efecto del progreso regalado: 34 % contra 19 %), pero sin rachas, sin notificaciones y sin sellos falsos regalados.",
+   "costo": "Bajo: un conjunto de IDs en localStorage y un contador por fila. Hay que manejar que el almacenamiento puede venir vacío."
+  },
+  {
+   "leccion": "[ADAPTAR] El fascículo semanal como entrega cerrada y numerada.",
+   "aplicacion_concreta": "Una fila nueva 'Entrega de la semana' (número de semana ISO como semilla): 10 fichas cruzadas entre catálogos con un hilo editorial, por ejemplo 'Islas' (Pasaporte + Atlas + Bestiario + Festín), numerada 'Entrega N.º 41'. Al terminarla se puede 'encuadernar' en Mi lista como colección. Reproduce el ritmo de Monitor o Capítulo sin servidor ni cuentas.",
+   "costo": "Medio: 52 hilos por año de curaduría transversal (Claude en tanda más revisión humana). El mecanismo técnico es trivial."
+  },
+  {
+   "leccion": "[ADAPTAR] MindMaze: preguntas sobre el propio catálogo, pero sin premiar adivinar.",
+   "aplicacion_concreta": "En Pasaporte, modo '¿De quién es esta bandera?' sobre las 'casi iguales' (Chad/Rumania, Indonesia/Mónaco) y '¿Cuál es más grande?' con pares del Top 10. En Creer o no creer, '¿Mito o verdad?'. En Bestiario, '¿Qué animal es el número 1?'. Una sola respuesta, sin segundo intento (MindMaze se ganaba a ciegas en un 50 %). Al responder, bien o mal, se abre la ficha con la explicación. Final claro: 10 preguntas y un resultado.",
+   "costo": "Medio: las preguntas se derivan de los datos que ya existen (pares de banderas, rankings); hay que revisar los distractores."
+  },
+  {
+   "leccion": "[COPIAR TAL CUAL] Efemérides: la fecha de hoy como excusa para traer algo.",
+   "aplicacion_concreta": "Llenar la fila 'Un día como hoy', hoy preparada y vacía, con fechas de Wikidata: en Pasaporte, independencias y países que dejaron de existir (fecha de disolución); en Ingenio, patentes y primeras demostraciones; en Cosmos, lanzamientos; en Butaca, estrenos de episodios; en Festín, días nacionales de platos. Si un catálogo no tiene nada hoy, mostrar 'esta semana'. Es la lógica de las láminas de Billiken atadas al calendario escolar.",
+   "costo": "Medio: consultas a Wikidata en tanda, limpieza de fechas (precisión de año contra día, calendarios) y revisión humana."
+  },
+  {
+   "leccion": "[COPIAR TAL CUAL] La tabla de episodios completa como lámina temporal.",
+   "aplicacion_concreta": "En Butaca, para cada serie, una vista 'Toda la serie': una tabla por temporada (N.º, título, fecha, arco, capítulos del manga adaptados, relleno sí/no), con los arcos como bandas de color para ver de un vistazo dónde empieza y termina cada uno y qué parte es relleno. Clic en la fila abre la ficha del episodio. Es el heredero directo de los anexos de Wikipedia, que figuran entre las páginas más vistas.",
+   "costo": "Alto: la columna de capítulos adaptados no está normalizada en Wikipedia ni en Wikidata; requiere fuentes por serie y revisión humana estricta."
+  }
+ ],
+ "anti_lecciones": [
+  "No copiar el carrusel que rota solo y esconde el resto. Las cifras de Notre Dame muestran 1,08 % de clics y 89,1 % de ellos en el primer ítem, y NN/g documenta que la rotación reduce la visibilidad, molesta y perjudica a quien lee lento o con lector de pantalla. La rueda de Encarta 2004 tenía el mismo problema. Si el visor rota, que muestre el conjunto y se pueda pausar.",
+  "No copiar el modelo de venta que explotaba la culpa de los padres. La FTC ordenó a Britannica en 1976 dejar de disfrazar la venta como 'encuesta', de usar precios y regalos engañosos y de reclutar con falsos puestos gerenciales. Un catálogo gratuito no debería usar 'tu hijo se va a quedar atrás' ni nada parecido.",
+  "No copiar la trampa del fascículo: primer número regalado y después caro. En un catálogo sin dinero el equivalente es usar el progreso como presión (rachas, 'te faltan 3', notificaciones). La colección tiene que ser un mapa de lo visto, no una deuda.",
+  "No crear rankings que premien conductas dañinas o absurdas. Guinness tuvo que retirar la glotonería (años 90) y la mascota más pesada (1998). En Bestiario o Festín, evitar Top 10 que celebren el maltrato animal o el consumo extremo.",
+  "No inventar un orden sin método. The Most Extreme reconoce que sus rankings no eran científicamente rigurosos. Si el criterio es dudoso ('el más inteligente'), mejor una lámina sin números que un número 1 falso; y siempre mostrar criterio, fuente y fecha.",
+  "No copiar una sola 'verdad' por mercado. La Encarta francesa suavizaba Waterloo. En Pasaporte, fronteras raras y países que ya no existen tienen que mostrar las versiones en disputa, no elegir una en silencio.",
+  "No duplicar capas sin índice común. La división Micro/Macro de 1974 frustró a los lectores y obligó a reestructurar en 1985. Ficha corta y 'Leer a fondo' no pueden contradecirse ni estar en lugares separados del buscador.",
+  "No idealizar al editor. Nature (2005) encontró unos 3 errores por artículo en Britannica, cerca de los 4 de Wikipedia. 'Elegido' no es 'correcto': la cola de revisión humana sigue siendo necesaria aunque el texto suene a enciclopedia.",
+  "No confundir nostalgia con evidencia. Lo que se extraña de Encarta (Hanselman, Hacker News) es real, pero es memoria de infancia. No hay estudios de época que midan aprendizaje o enganche de estos formatos; las lecciones tienen que validarse con uso real del catálogo."
+ ],
+ "fuentes": [
+  {
+   "titulo": "Technologizer – Microsoft Encarta: A Casualty of the Web (2009)",
+   "url": "https://technologizer.com/2009/03/30/microsoft-encarta-a-casualty-of-the-web/"
+  },
+  {
+   "titulo": "The Register – Microsoft kills MSN Encarta (2009)",
+   "url": "https://www.theregister.co.uk/2009/03/30/microsoft_kills_msn_encarta/"
+  },
+  {
+   "titulo": "COMPUTE! n.º 156 (1993) – Encarta",
+   "url": "https://www.atarimagazines.com/compute/issue156/74_Encarta.php"
+  },
+  {
+   "titulo": "Personal Computer World – Review of Encarta 1995",
+   "url": "https://people.well.com/user/derb/encarta95.htm"
+  },
+  {
+   "titulo": "THE Journal – Encarta 97 Adds Content, Extra CD",
+   "url": "https://thejournal.com/articles/1997/04/01/encarta-97-adds-content-extra-cd.aspx"
+  },
+  {
+   "titulo": "Microsoft – Encarta Sets the World Standard (1997)",
+   "url": "https://news.microsoft.com/source/1997/03/03/microsoft-encarta-sets-the-world-standard-for-electronic-encyclopedias/"
+  },
+  {
+   "titulo": "Microsoft – Encarta Takes Learning to a New Level of Discovery (2003)",
+   "url": "https://news.microsoft.com/source/2003/06/26/microsoft-encarta-takes-learning-to-a-new-level-of-discovery/"
+  },
+  {
+   "titulo": "OPCUG – Encarta 2004 review",
+   "url": "https://opcug.ca/Reviews/Encarta2004.html"
+  },
+  {
+   "titulo": "Wikipedia – Encarta MindMaze",
+   "url": "https://en.wikipedia.org/wiki/Encarta_MindMaze"
+  },
+  {
+   "titulo": "Wikipedia – Encarta",
+   "url": "https://en.wikipedia.org/wiki/Encarta"
+  },
+  {
+   "titulo": "Scott Hanselman – I miss Microsoft Encarta (2019)",
+   "url": "https://www.hanselman.com/blog/i-miss-microsoft-encarta"
+  },
+  {
+   "titulo": "Hacker News – I Miss Microsoft Encarta",
+   "url": "https://news.ycombinator.com/item?id=20739629"
+  },
+  {
+   "titulo": "Tony Chor – Farewell to Encarta (2009)",
+   "url": "https://www.tonychor.com/2009/04/farewell-to-encarta.html"
+  },
+  {
+   "titulo": "WRAL – Microsoft's Encyclopedias Differ in Language and Content",
+   "url": "https://www.wral.com/story/148805"
+  },
+  {
+   "titulo": "Xataka – En 1993 Microsoft creó la Encarta…",
+   "url": "https://www.xataka.com/historia-tecnologica/1993-microsoft-creo-encarta-para-revolucionar-conocimiento-veinte-anos-despues-seria-arrasada-maremoto"
+  },
+  {
+   "titulo": "Wikipedia – Propædia",
+   "url": "https://en.wikipedia.org/wiki/Prop%C3%A6dia"
+  },
+  {
+   "titulo": "Wikipedia – Macropædia",
+   "url": "https://en.wikipedia.org/wiki/Macrop%C3%A6dia"
+  },
+  {
+   "titulo": "ASCD Educational Leadership (1974) – reseña de Britannica 3",
+   "url": "https://files.ascd.org/staticfiles/ascd/pdf/journals/ed_lead/el_197412_james.pdf"
+  },
+  {
+   "titulo": "Britannica – Fifteenth edition",
+   "url": "https://britannica.com/topic/Encyclopaedia-Britannica-English-language-reference-work/Fifteenth-edition"
+  },
+  {
+   "titulo": "Reference Services Review (1999) – The evolution of the Encyclopaedia Britannica: from the Macropaedia to Britannica Online",
+   "url": "https://emeraldinsight.com/doi/abs/10.1108/00907329910275196"
+  },
+  {
+   "titulo": "Tuck – Encyclopaedia Britannica (A)",
+   "url": "https://mba.tuck.dartmouth.edu/pages/faculty/chris.trimble/osi/downloads/20007_EncyBrit_A.pdf"
+  },
+  {
+   "titulo": "NYU Stern – caso Britannica",
+   "url": "https://pages.stern.nyu.edu/lcabral/teaching/britannica.pdf"
+  },
+  {
+   "titulo": "Mail & Guardian – Britannica ends print edition (2012)",
+   "url": "https://mg.co.za/friday/2012-03-14-encyclopaedia-britannica-ends-print-edition/"
+  },
+  {
+   "titulo": "FTC – In the Matter of Encyclopaedia Britannica (1976)",
+   "url": "https://ftc.gov/system/files/ftc_gov/pdf/In-the-Matter-of-Encyclopaedia-Britannica-Inc-Et-Al.8-FTC-421.pdf"
+  },
+  {
+   "titulo": "Saturday Evening Post – Death of a Sales Scheme (2017)",
+   "url": "https://saturdayeveningpost.com/2017/08/death-sales-scheme-encyclopedia-shysters-door-door-age"
+  },
+  {
+   "titulo": "Guinness World Records – Why was the book first published?",
+   "url": "https://www.guinnessworldrecords.com/news/2022/9/why-was-the-guinness-world-records-book-first-published-714607"
+  },
+  {
+   "titulo": "Guinness World Records – Categories no longer monitored",
+   "url": "https://www.guinnessworldrecords.com/news/2015/8/60-years-on-the-categories-that-guinness-world-records-no-longer-monitors-393758"
+  },
+  {
+   "titulo": "BookPage – Guinness World Records 2000",
+   "url": "https://bookpage.com/reviews/860-review-nonfiction/"
+  },
+  {
+   "titulo": "Guinness Record Book Collecting – capítulos por edición",
+   "url": "https://guinness.book-of-records.info/2020s.html"
+  },
+  {
+   "titulo": "Wikipedia – The Most Extreme",
+   "url": "https://en.wikipedia.org/wiki/The_Most_Extreme"
+  },
+  {
+   "titulo": "Wikipedia en español – Animal Planet al extremo",
+   "url": "https://es.wikipedia.org/wiki/Animal_Planet_al_extremo"
+  },
+  {
+   "titulo": "World Screen – The Most Extreme Season Five (2007)",
+   "url": "https://worldscreen.com/?p=86857"
+  },
+  {
+   "titulo": "Scoop – Extreme Milestone for NHNZ (2007)",
+   "url": "https://www.scoop.co.nz/stories/BU0701/S00243/extreme-milestone-for-nhnz.htm"
+  },
+  {
+   "titulo": "TheTVDB – The Most Extreme, temporada 1",
+   "url": "https://thetvdb.com/series/the-most-extreme/seasons/official/1"
+  },
+  {
+   "titulo": "FOTW – Flags of the World (National Geographic, 1917)",
+   "url": "https://crwflags.com/fotw/Flags/bib-gma.html"
+  },
+  {
+   "titulo": "Geographicus – Mountains and Rivers (Colton, 1852)",
+   "url": "https://geographicus.com/P/AntiqueMap/mountainsandrivers-colton-1852"
+  },
+  {
+   "titulo": "Wikipedia – Petit Larousse",
+   "url": "https://en.wikipedia.org/wiki/Petit_Larousse"
+  },
+  {
+   "titulo": "Internet Archive – Lo Sé Todo, Larousse 1960",
+   "url": "https://archive.org/details/LoSeTodoTomo01Larousse1960"
+  },
+  {
+   "titulo": "Wikipedia – Editorial Salvat",
+   "url": "https://en.wikipedia.org/wiki/Editorial_Salvat"
+  },
+  {
+   "titulo": "Orbis Tertius (UNLP) – Capítulo / CEAL",
+   "url": "https://www.orbistertius.unlp.edu.ar/article/view/OTe131/11683"
+  },
+  {
+   "titulo": "La Nación – A 50 años de un gran Capítulo",
+   "url": "https://www.lanacion.com.ar/opinion/a-50-anos-de-un-gran-capitulo-nid2139746/"
+  },
+  {
+   "titulo": "Island Rare Books – Purnell's History of the Second World War",
+   "url": "https://www.islandrarebooks.org.uk/?p=68301"
+  },
+  {
+   "titulo": "Wikipedia – Partwork",
+   "url": "https://en.wikipedia.org/wiki/Partwork"
+  },
+  {
+   "titulo": "Billiken – Billiken cumple 104 años",
+   "url": "https://billiken.lat/interesante/billiken-cumple-104-anos/"
+  },
+  {
+   "titulo": "Nunes & Drèze (2006) – The Endowed Progress Effect",
+   "url": "https://ideas.repec.org/a/oup/jconrs/v32y2006i4p504-512.html"
+  },
+  {
+   "titulo": "Isaac & Schindler (2014) – The Top-Ten Effect",
+   "url": "https://ideas.repec.org/a/oup/jconrs/doi10.1086-674546.html"
+  },
+  {
+   "titulo": "APS / The New Yorker (Konnikova, 2013) – A List of Reasons Why Our Brains Love Lists",
+   "url": "https://www.psychologicalscience.org/news/a-list-of-reasons-why-our-brains-love-lists.html"
+  },
+  {
+   "titulo": "arXiv – How images enhance learning in Wikipedia (2024)",
+   "url": "https://arxiv.org/abs/2403.07613v1"
+  },
+  {
+   "titulo": "Wikimedia – Why the world reads Wikipedia (2018)",
+   "url": "https://diff.wikimedia.org/2018/03/15/why-the-world-reads-wikipedia/"
+  },
+  {
+   "titulo": "arXiv – Why the World Reads Wikipedia: Beyond English Speakers",
+   "url": "https://arxiv.org/pdf/1812.00474"
+  },
+  {
+   "titulo": "Wikipedia Signpost – Traffic report 2013-06-12",
+   "url": "https://signpost.news/2013-06-12/Traffic_report"
+  },
+  {
+   "titulo": "Guinness World Records – Most viewed Wikipedia page for a TV series",
+   "url": "https://www.guinnessworldrecords.com/world-records/436030-most-viewed-wikipedia-page-for-a-tv-series"
+  },
+  {
+   "titulo": "Erik Runyon – Carousel Interaction Stats (2013)",
+   "url": "https://erikrunyon.com/2013/07/carousel-interaction-stats/"
+  },
+  {
+   "titulo": "Queensland Government Design System – The case against carousels (cita a NN/g)",
+   "url": "https://designsystem.qld.gov.au/about/exploring-our-decisions/carousels"
+  },
+  {
+   "titulo": "Pew Research Center – AI summaries and clicks (2025)",
+   "url": "https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/"
+  },
+  {
+   "titulo": "TechCrunch – Wikipedia says traffic is falling (2025)",
+   "url": "https://techcrunch.com/2025/10/18/wikipedia-says-traffic-is-falling-due-to-ai-search-summaries-and-social-video"
+  },
+  {
+   "titulo": "Mail & Guardian – Wikipedia rivals Britannica on science (2005)",
+   "url": "https://mg.co.za/article/2005-12-15-report-wikipedia-rivals-britannica-on-science/"
+  },
+  {
+   "titulo": "WRVO/NPR – 50 years of American Top 40",
+   "url": "https://www.wrvo.org/2020-07-03/50-years-ago-casey-kasem-began-counting-down-the-hits-on-american-top-40"
+  },
+  {
+   "titulo": "Marcia Bates (1989) – Browsing and berrypicking",
+   "url": "https://pages.gseis.ucla.edu/faculty/bates/berrypicking.html"
+  }
+ ],
+ "no_encontrado": [
+  "LIMITACIÓN DE MÉTODO: WebFetch estaba bloqueado por el proxy de red para todos los dominios que probé (Wikipedia, Britannica, TechRadar, Hanselman, Technologizer y otros). Todas las cifras salen de los resúmenes que devuelve el buscador web para cada URL citada, no de leer las páginas completas. Antes de publicar algo, conviene abrir las fuentes y confirmar las citas textuales.",
+  "El nombre en Latinoamérica 'Los más extremos', 'Los 10 más' o 'Los 20 más': no lo encontré. Lo único confirmado es 'Animal Planet al extremo' (Wikipedia en español). 'Los 20 más' podría ser otro programa o un recuerdo mezclado.",
+  "Si en Latinoamérica The Most Extreme se emitía 'un tema por día' (tira diaria): no lo confirmé. En EE. UU. los estrenos de 2002 fueron semanales; las repeticiones diarias en Animal Planet Latinoamérica pueden haber existido, pero no hay fuente.",
+  "Número exacto de episodios de The Most Extreme: las fuentes no coinciden (77 en la Wikipedia en inglés, 76 en la española, 65 producidos por NHNZ entre 2002 y 2007 según Scoop, 89 en otra fuente secundaria). No pude resolverlo. Tampoco confirmé al supuesto creador 'Shelby Wilson'.",
+  "'Lo sé todo': confirmé que es de Larousse en 1960 (Internet Archive), pero no cuántos tomos tuvo en total, si se vendió por fascículos en kiosco ni si es traducción de 'Tout l'univers' (Hachette) o 'Conoscere' (Fabbri).",
+  "Detalle de la portada de Encarta en las versiones en español de los 90 y si tenía secciones del tipo '¿Sabías que…?' o 'Un día como hoy': no lo encontré. Tampoco pude confirmar que existiera un 'Gallery Wizard'.",
+  "Unidades vendidas de Encarta por año: solo encontré que fue 'la enciclopedia multimedia más vendida', sin cifras.",
+  "Encuesta de De Agostini ('73 % piensa completar la colección'), costo de lanzamiento de un partwork (más de £1 millón) y tasa real de abandono de fascículos: aparecen en resúmenes, pero no pude atribuirlos con seguridad a una fuente concreta. No los usé como evidencia.",
+  "Atribución exacta de los 150.000 ejemplares semanales de 'Capítulo' (CEAL): aparece junto a Orbis Tertius y La Nación (Gregorich) en los resultados; no pude verificar cuál de las dos lo dice.",
+  "Lineamientos de Wikipedia sobre una columna 'capítulos adaptados' en las listas de episodios de anime: no hallé una regla; varía según el artículo.",
+  "Fecha de inicio de las secciones 'Un día como hoy' y '¿Sabías que…?' de la portada de Wikipedia: no la confirmé.",
+  "Porcentajes de 'super-encounterers' de Erdelez (1999) sobre el hallazgo casual de información: no encontré las cifras.",
+  "Cita textual de Tufte sobre las 'small multiples' ('inevitably comparative'): no la confirmé. Solo encontré 'Compared to what?'.",
+  "Declaraciones editoriales de Guinness sobre por qué eligieron el diseño de foto + número grande: no las encontré. Solo hay reseñas que describen el cambio de la edición 2000.",
+  "Estudios con datos sobre costos de atención, sueño o soledad atribuibles a las enciclopedias, la TV documental o los fascículos de esa época: no encontré. Los costos documentados son de otro tipo: ventas engañosas (FTC 1976), precio y récords que incentivaban daño."
+ ]
+}

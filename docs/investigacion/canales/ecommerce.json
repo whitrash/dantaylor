@@ -1,0 +1,532 @@
+{
+ "canal": "El catálogo de e-commerce: Amazon, MercadoLibre, Zalando, Steam, el catálogo impreso de IKEA (1951–2021) y las comparativas tipo Wirecutter. Facetas, filtros, \"ordenar por\", \"ver todos\", comparar, reseñas, \"los que compraron esto también\", Más vendidos, lista de deseos, página de producto.",
+ "expectativa_usuario": "Quiero ver todo lo que hay de esto, filtrar hasta quedarme con tres o cuatro, ponerlos lado a lado y confiar en que elijo bien; y si lo abro sin nada en mente (IKEA, la cola de Steam, Más vendidos), quiero que me tienten con algo que no sabía que quería.",
+ "modo_humano": "Sobre todo INVESTIGAR: la persona llega con una necesidad más o menos definida, acota (facetas), ordena, compara y verifica (reseñas, especificaciones, \"compra verificada\"). En segundo lugar EXPLORAR, en un modo distinto y con otra interfaz: el catálogo de IKEA se hojeaba en el sillón sin buscar nada; la Discovery Queue de Steam, \"Más vendidos\", \"Movers & Shakers\" y \"los que compraron esto también\" son el catálogo convertido en paseo. El canal funciona porque separa bien los dos modos: la grilla con filtros para buscar, los ambientes/colas/rankings para inspirarse. COMUNICARSE aparece de manera débil y asíncrona (reseñas de desconocidos, \"¿te resultó útil?\", preguntas y respuestas, curadores y etiquetas de Steam): es comunicación entre extraños mediada por el producto, no una conversación. ACOMPAÑARSE no es el modo de este canal: no hay nadie del otro lado y lo más parecido es el consuelo de la compra, que es justamente lo que no hay que copiar.",
+ "unidad": "La ficha de producto, y antes de llegar a ella, la celda de la grilla: miniatura uniforme + nombre + precio + estrellas + cantidad de reseñas. Variantes: en Wirecutter la unidad es la guía (\"Nuestra elección / Económica / Premium\"), en el catálogo de IKEA la doble página de ambiente con precios, en Steam la cápsula del juego dentro de una cola de 12, en Más vendidos la fila con número de ranking gigante.",
+ "quien_decide": "Capas superpuestas, y la gracia es que la persona siente que decide ella: (1) LA PERSONA decide de verdad cuando usa facetas, \"ordenar por precio\", el comparador y la lista de deseos: son operaciones explícitas, reversibles y con el conteo a la vista. (2) EL ALGORITMO decide el orden por defecto (\"Destacados\"/\"Relevancia\", opaco, mezcla ventas, margen y publicidad), las recomendaciones ítem-a-ítem (Amazon desde fines de los 90, formalizado en el paper de 2003), los Más vendidos (ventas recientes por categoría) y en Steam las recomendaciones por horas jugadas. (3) EL QUE PAGA decide parte de la primera pantalla: resultados patrocinados; la publicidad de Amazon facturó decenas de miles de millones de dólares en 2024. (4) EL EDITOR decide en Wirecutter (prueban muchos, eligen pocos), en los estilistas que armaban los ambientes del catálogo de IKEA y en los curadores de Steam. (5) LA COMUNIDAD decide con reseñas, votos \"útil\" y etiquetas de Steam (generadas por usuarios). El AZAR casi no aparece, salvo en la Discovery Queue de Steam.",
+ "tiene_final": "Sí, y es una de sus virtudes frente al feed: la categoría dice \"1–48 de 2.341 resultados\", cada filtro muestra cuántos quedan, el embudo termina en una comparación y la comparación en una decisión; el catálogo de IKEA tenía última página e índice de precios; la Discovery Queue de Steam muestra 12 juegos y después avisa que terminaste la cola (podés empezar otra, pero hubo un final). Ese final produce sensación de completitud y control: \"lo vi todo, elegí\". El final se pierde en dos lugares: el scroll infinito (Baymard documentó que esconde el pie de página y hace perder la posición) y las cadenas de recomendación (\"también compraron\" → \"también compraron\") que convierten el catálogo en feed. Donde el catálogo imita al feed, pierde lo que lo hacía distinto.",
+ "mecanismo": "POR DENTRO, un catálogo es una base de ítems con atributos estructurados por categoría (una zapatilla tiene talle y color; una heladera, litros y clase energética) más imágenes normalizadas. Los atributos los cargan los vendedores con plantillas de campos obligatorios (en MercadoLibre, \"Características\"; en Amazon, \"Detalles técnicos\") y la plataforma los limpia y deduplica (el \"catálogo\" de MercadoLibre agrupa publicaciones de muchos vendedores bajo una sola ficha de producto). Las imágenes se normalizan por regla: Amazon exige que la imagen principal tenga fondo blanco puro (RGB 255,255,255) y que el producto ocupe al menos el 85% del encuadre; Zalando fotografía todo con el mismo fondo y pose, al punto de que sus miniaturas sirvieron para armar un dataset de aprendizaje automático (Fashion-MNIST, 2017: 70.000 imágenes de 28×28 en escala de grises, 10 categorías). Esa es la \"lámina\": si todas las miniaturas tienen el mismo tamaño, fondo y ángulo, la grilla se puede comparar de un vistazo. Sobre esa base, la interfaz expone tres operaciones: ACOTAR (búsqueda facetada: filtros por atributo con conteo de resultados, selección múltiple con O dentro de una faceta e Y entre facetas, barra de filtros aplicados; la facetación viene del proyecto Flamenco de Marti Hearst en Berkeley a principios de los 2000 y de Endeca, fundada en 1999 y comprada por Oracle en 2011), ORDENAR (precio, novedad, valoración, popularidad; el orden por defecto, \"relevancia\", es el único opaco) y VER (grilla de celdas uniformes con paginación, \"Cargar más\" o \"Ver todos\"). Baymard midió en 2015 que solo el 16% de los grandes sitios ofrecía un filtrado razonablemente bueno y que el 42% carecía de filtros específicos de la categoría; en 2016 encontró que \"Cargar más\" con carga diferida funciona mejor que la paginación y que el scroll infinito.\n\nLA CAPA SOCIAL Y ALGORÍTMICA convierte la base en prueba. Reseñas (Amazon las tiene desde 1995): promedio de estrellas, histograma de distribución, orden por \"más útiles\", insignia de \"compra verificada\"; el promedio de Amazon no es una media simple sino un puntaje calculado por un modelo que pondera antigüedad, votos de utilidad y compra verificada. Steam traduce el porcentaje de reseñas positivas y la cantidad a una etiqueta de nueve niveles (de \"Extremadamente positivas\", que exige al menos 95% positivas y 500 reseñas, a \"Extremadamente negativas\"), muestra las horas jugadas de cada reseñador, separa \"recientes\" de \"todas\" y desde 2019 excluye por defecto las oleadas de reseñas fuera de tema (review bombing). Las recomendaciones de Amazon usan filtrado colaborativo ítem-a-ítem (Linden, Smith y York, IEEE Internet Computing, 2003): en lugar de buscar usuarios parecidos a vos, se precalcula fuera de línea una tabla de \"ítems que suelen comprarse junto con este ítem\" y en tiempo real se suman las tablas de lo que vos miraste o compraste; por eso escala a millones de productos y por eso existe \"los que compraron esto también compraron\". Los Más vendidos son un ranking por categoría basado en ventas recientes (Amazon dice \"actualizado con frecuencia\"; históricamente, \"cada hora\"); \"Movers & Shakers\" lista los que más subieron en el ranking en las últimas 24 horas con el porcentaje de salto: un Top 10 vivo. En Steam, el recomendador interactivo de 2019 se entrena solo con horas jugadas, no con etiquetas ni reseñas, y la Discovery Queue entrega 12 juegos por vez con \"No me interesa\" y \"A la lista de deseos\"; la lista de deseos a su vez avisa de ofertas y lanzamientos y le sirve al desarrollador como medida de demanda.\n\nLA CAPA EDITORIAL resuelve el modo inspiración. El catálogo de IKEA no era una lista: eran ambientes (habitaciones completas fotografiadas o renderizadas, con precios al pie), ordenados por cuartos de la casa, con el índice de productos al final; llegaba gratis al buzón, se hojeaba sin buscar nada y recién después se iba al negocio con la página doblada. Wirecutter hace lo inverso con el mismo espíritu: prueba decenas de productos y devuelve una elección (\"Nuestra elección\", \"Económica\", \"Premium\", \"También buena\") con secciones fijas: \"Por qué confiar en nosotros\", \"Cómo elegimos y probamos\", \"Defectos que no son descalificantes\", \"La competencia\". Cobra comisión por afiliación cuando comprás a través de su link y desde 2021 también suscripción. Las comparativas vienen de antes (Consumer Reports, 1936).\n\nLA ECONOMÍA explica los sesgos: el catálogo es a la vez tienda y medio publicitario. El orden por defecto y los huecos \"patrocinados\" se venden; las reseñas se falsifican (Amazon declaró haber bloqueado más de 200 millones de reseñas sospechosas en 2020; la FTC de Estados Unidos prohibió las reseñas falsas por regla en agosto de 2024); y una franja medible de sitios usa patrones oscuros (urgencia y escasez falsas, confirmshaming) para empujar la conversión. Todo lo que el canal hace bien (completitud, comparabilidad, final) convive con incentivos para romperlo.",
+ "historia": "1872: Montgomery Ward publica el primer catálogo de venta por correo en Estados Unidos; 1888: primer catálogo de Sears (relojes), que en 1893 ya es el catálogo general; el \"Big Book\" de Sears deja de imprimirse en 1993. 1936: nace Consumer Reports, la comparativa independiente. 1951: Ingvar Kamprad publica el primer catálogo de IKEA, 285.000 ejemplares repartidos en el sur de Suecia. Julio de 1995: abre Amazon como librería online con reseñas de clientes desde el inicio. 1998–1999: Amazon patenta el filtrado colaborativo ítem-a-ítem (US 6.266.649, concedida en 2001) y la compra \"1-Click\" (US 5.960.411, 1999); 1999: nacen MercadoLibre (Buenos Aires) y Endeca (búsqueda facetada comercial). 2003: Valve lanza Steam (septiembre) y se publica el paper de Amazon sobre recomendaciones ítem-a-ítem en IEEE Internet Computing. 2007: MercadoLibre sale al Nasdaq. 2008: nace Zalando en Berlín. 2011: Brian Lam funda Wirecutter; Oracle compra Endeca. Noviembre de 2013: Steam lanza reseñas de usuarios. 2014: Steam agrega etiquetas de usuarios (febrero) y la Discovery Update con la Discovery Queue y los curadores (septiembre). 2015–2016: Baymard publica el estado del filtrado y de la paginación en e-commerce. 2016: el catálogo de IKEA alcanza su pico (unos 200 millones de ejemplares, 69 versiones, 32 idiomas); The New York Times compra Wirecutter (octubre); Pew mide que el 82% de los adultos estadounidenses consulta reseñas antes de una primera compra. 2017: Steam Direct reemplaza a Greenlight; Zalando Research publica Fashion-MNIST; el paper de Amazon de 2003 recibe el premio Test of Time. 2019: Steam Labs (recomendador interactivo); Steam excluye por defecto las reseñas fuera de tema; Mathur y otros publican el estudio de patrones oscuros sobre 11.000 sitios. 7 de diciembre de 2020: Inter IKEA anuncia que el catálogo 2021 (publicado en agosto de 2020) es el último, tras 70 años. 2021: Wirecutter pone muro de pago (septiembre) y su gremio hace huelga en el Black Friday. 2023: Zalando anuncia su asistente de moda con ChatGPT (abril); la FTC demanda a Amazon por antimonopolio (septiembre). 2024: la FTC emite la regla que prohíbe reseñas falsas (agosto); la publicidad de Amazon factura 56.200 millones de dólares en el año.",
+ "patrones_ux": [
+  {
+   "nombre": "Facetas con conteo y multi-selección",
+   "descripcion": "Panel lateral (o cajón en móvil) con grupos de filtros por atributo: cada valor muestra entre paréntesis cuántos resultados quedan si lo aplicás ('Rojo (54)'); se pueden tildar varios valores del mismo grupo (O lógico) y combinar grupos (Y lógico); las listas largas se truncan con 'Ver más'; arriba de la grilla quedan los filtros aplicados como chips con una cruz y un 'Quitar todo'.",
+   "por_que_funciona": "Convierte una búsqueda abierta en una serie de decisiones chicas y reversibles; el conteo evita el callejón sin salida de '0 resultados' y le dice a la persona cuánto falta para quedarse con pocos. Baymard encontró que la falta de filtros específicos de la categoría (talle en ropa, litros en heladeras) es la falla más común."
+  },
+  {
+   "nombre": "Ordenar por, con el criterio a la vista",
+   "descripcion": "Un desplegable junto al conteo de resultados: 'Más relevantes' (por defecto), 'Menor precio', 'Mayor precio', 'Más vendidos', 'Mejor valorados', 'Más nuevos'. El encabezado dice '1–48 de 2.341 resultados'.",
+   "por_que_funciona": "Cambia el eje de lectura de toda la grilla con un clic y hace explícito que hay un orden. Falla cuando 'Mejor valorados' usa el promedio sin ponderar la cantidad de reseñas (un producto con una sola reseña de 5 estrellas queda primero), algo que Baymard señala como error frecuente."
+  },
+  {
+   "nombre": "Grilla de miniaturas iguales (la lámina)",
+   "descripcion": "Celdas del mismo tamaño con la imagen principal recortada al mismo encuadre y fondo (Amazon: fondo blanco puro, producto al 85% del marco; Zalando: misma pose y fondo gris claro), debajo nombre, precio, estrellas y cantidad de reseñas; al pasar el mouse, segunda imagen o variantes de color.",
+   "por_que_funciona": "Cuando lo único que cambia entre celdas es el objeto, el ojo compara forma, color y proporción sin leer. La uniformidad es lo que hace que una grilla de 48 cosas se pueda escanear en segundos; una grilla con fondos y tamaños distintos obliga a leer celda por celda."
+  },
+  {
+   "nombre": "Ver todos / Cargar más con el total a la vista",
+   "descripcion": "La fila o el carrusel muestra 8–12 ítems y termina en una celda 'Ver los 54'; la grilla completa carga de a tandas con un botón 'Cargar más (quedan 120)' y el pie de página sigue accesible.",
+   "por_que_funciona": "Promete el todo y lo cumple. Baymard midió que 'Cargar más' con carga diferida supera a la paginación (menos clics, menos pérdida de contexto) y al scroll infinito (que esconde el pie de página y hace perder la posición al volver atrás)."
+  },
+  {
+   "nombre": "Comparador lado a lado",
+   "descripcion": "Casilla 'Comparar' en cada celda; al tildar dos o más aparece una bandeja inferior pegajosa con las miniaturas y un botón 'Comparar (3)'; la tabla resultante tiene un producto por columna y un atributo por fila, con la opción 'Mostrar solo diferencias'. Amazon lo ofrece prearmado en la ficha ('Comparar con artículos similares').",
+   "por_que_funciona": "Alinea los mismos atributos en el mismo renglón: la comparación deja de ser memoria y pasa a ser mirada. Nielsen Norman recomienda limitarlo a unos cinco ítems; para más, primero filtrar."
+  },
+  {
+   "nombre": "Ranking vivo con número gigante y flecha de cambio",
+   "descripcion": "Más vendidos: lista por categoría numerada 1 a 100 con la miniatura, el precio y las estrellas; Movers & Shakers: los que más subieron en el ranking en 24 horas, con el porcentaje de salto ('+1.240%') y la posición anterior tachada. Encabezado honesto: 'Nuestros productos más populares según ventas. Actualizado con frecuencia'.",
+   "por_que_funciona": "Un Top 10 que cambia da motivo para volver y convierte datos de ventas en una historia ('esto está subiendo'). El número grande ordena la lectura y el porcentaje da la emoción del movimiento."
+  },
+  {
+   "nombre": "Resumen de reseñas: estrellas, histograma, filtros y 'más útiles'",
+   "descripcion": "Promedio con una línea de estrellas y el total ('4,4 de 5 · 12.380 valoraciones'); histograma de 5 a 1 estrellas clicable para filtrar; orden por 'Más útiles' o 'Más recientes'; insignia 'Compra verificada'; botón '¿Te resultó útil?'. Steam resume todo en una etiqueta ('Muy positivas, 92% de 4.512') y muestra las horas jugadas del que opina.",
+   "por_que_funciona": "La distribución dice más que el promedio (un 4,2 con muchos 5 y muchos 1 es un producto polémico); la etiqueta de Steam ahorra interpretar porcentajes; las horas jugadas y la compra verificada responden a la pregunta implícita '¿este sabe de lo que habla?'. El estudio de Spiegel encontró que la probabilidad de compra alcanza su máximo entre 4,2 y 4,5 estrellas, no en 5."
+  },
+  {
+   "nombre": "Ficha de producto en bloques fijos",
+   "descripcion": "Galería a la izquierda; a la derecha título, estrellas, precio, variantes; debajo 'Acerca de este artículo' en 5 viñetas; tabla de especificaciones de dos columnas; 'Comparar con similares'; 'Preguntas y respuestas'; reseñas; 'Los que compraron esto también compraron'. Wirecutter usa otro bloque fijo: 'Nuestra elección', 'Por qué confiar', 'Cómo elegimos', 'Defectos que no descalifican', 'La competencia'.",
+   "por_que_funciona": "La estructura idéntica para todos los ítems es lo que hace comparables dos fichas abiertas en pestañas distintas: la persona aprende una vez dónde está cada cosa. Los bloques editoriales de Wirecutter funcionan porque muestran el trabajo (qué probaron y por qué descartaron) en lugar de pedir confianza."
+  },
+  {
+   "nombre": "Cola de descubrimiento finita (Steam Discovery Queue)",
+   "descripcion": "Un botón 'Explorar tu cola' muestra un juego por pantalla, con sus etiquetas, tráiler y reseñas resumidas; botones 'Siguiente', 'No me interesa', 'A la lista de deseos'; a los 12 juegos aparece 'Terminaste tu cola' con la opción de empezar otra.",
+   "por_que_funciona": "Da la exploración del feed con el final del catálogo: un ritual corto, con cierre, que mejora las recomendaciones con cada 'No me interesa' sin sentirse interminable."
+  },
+  {
+   "nombre": "Lista de deseos como memoria externa",
+   "descripcion": "Corazón o 'Agregar a la lista' en celda y ficha; página propia ordenable (por fecha, precio, descuento); en Steam avisa por correo cuando algo de la lista sale o entra en oferta; en Amazon la lista se puede compartir.",
+   "por_que_funciona": "Separa 'me interesa' de 'lo compro ahora', baja la ansiedad de decidir y crea un motivo de regreso. Para el vendedor es una medida de demanda antes de la venta."
+  },
+  {
+   "nombre": "Ambiente con precios (el catálogo de IKEA)",
+   "descripcion": "Doble página con una habitación completa fotografiada o renderizada; cada objeto lleva un número pequeño que remite a nombre y precio al pie; el catálogo se ordena por cuartos de la casa y el índice de productos va al final.",
+   "por_que_funciona": "Vende el contexto antes que el objeto: la persona no busca una lámpara, se imagina viviendo ahí; recién entonces el índice le da el modo 'búsqueda exacta'. Es el patrón de inspiración que la grilla con filtros no puede dar."
+  }
+ ],
+ "que_funciona": [
+  "El conteo siempre visible ('1–48 de 2.341', 'Rojo (54)', 'Ver los 230'): la persona sabe cuánto hay y cuánto falta, y eso da la sensación de completitud que el feed nunca da.",
+  "Separar los dos modos con dos interfaces: grilla con facetas para buscar, ambientes/colas/rankings para inspirarse (IKEA, Discovery Queue, Más vendidos).",
+  "Miniaturas normalizadas por regla (fondo, encuadre, proporción): la grilla se compara con la vista, no con la lectura.",
+  "Facetas con selección múltiple y chips de filtros aplicados: decisiones chicas, reversibles, sin callejones de '0 resultados'.",
+  "Tabla de atributos en el mismo orden en todas las fichas del grupo: comparabilidad implícita sin comparador.",
+  "El comparador de 2 a 5 ítems con 'solo diferencias'.",
+  "Rankings vivos (Más vendidos, Movers & Shakers) con número gigante y porcentaje de cambio: razón para volver y narrativa del movimiento.",
+  "Reseñas con histograma, orden por utilidad e insignias de verificación; en Steam, la etiqueta de consenso que resume porcentaje y cantidad, y las horas jugadas del que opina.",
+  "El trabajo editorial a la vista (Wirecutter: 'Cómo elegimos', 'La competencia'): la confianza se gana mostrando el descarte.",
+  "La cola finita de Steam: exploración con final.",
+  "La lista de deseos como memoria externa y como filtro de 'me interesa' frente a 'lo compro'.",
+  "El catálogo impreso llegaba a la casa sin que lo pidieras y se hojeaba sin objetivo: inspiración en el sillón, que ninguna web reemplazó del todo."
+ ],
+ "que_falla": [
+  "El orden por defecto ('Destacados') es opaco y mezcla relevancia con publicidad y margen; la persona cree que ve lo mejor y ve lo que conviene a la plataforma.",
+  "Los resultados patrocinados ocupan la primera pantalla y se confunden con los orgánicos.",
+  "Reseñas falsas, incentivadas o compradas; inflación de estrellas (todo es 4,5); Amazon bloqueó más de 200 millones de reseñas sospechosas en un solo año.",
+  "Fichas inconsistentes porque los atributos los carga cada vendedor: filtros que faltan, talles en tres formatos, 'ver más' que no muestra nada; Baymard midió en 2015 que solo el 16% de los grandes sitios filtraba bien.",
+  "Scroll infinito que esconde el pie de página, hace perder la posición al volver y elimina el final.",
+  "'Ordenar por valoración' sin ponderar la cantidad: un ítem con una reseña de 5 estrellas le gana a uno con 3.000 reseñas y 4,7.",
+  "Cadenas de recomendación que convierten el catálogo en feed ('también compraron' → 'también compraron'), con pérdida de serendipia y 'más de lo mismo'.",
+  "Patrones oscuros: urgencia falsa ('solo quedan 2'), cuentas regresivas inventadas, confirmshaming; un estudio de Princeton los encontró en unos 1.250 de 11.000 sitios.",
+  "Sobrecarga de facetas: 40 filtros sin conteo, filtros que dejan 0 resultados, listas truncadas que ocultan el valor que buscabas.",
+  "El catálogo de IKEA murió por costo y por el cambio de hábitos, pero la web que lo reemplazó perdió el modo 'hojear sin buscar'; la inspiración se repartió a Instagram y Pinterest.",
+  "Steam: casi 19.000 lanzamientos por año hacen que la visibilidad dependa del algoritmo y de la lista de deseos previa; el catálogo completo existe pero nadie lo ve entero."
+ ],
+ "evidencia": [
+  {
+   "afirmacion": "El catálogo impreso de IKEA alcanzó su pico de distribución en 2016 y se retiró después de 70 años.",
+   "dato": "Unos 200 millones de ejemplares en 2016, en 69 versiones, 32 idiomas y más de 50 mercados; el catálogo 2021 fue el último (comunicado del 7 de diciembre de 2020).",
+   "fuente_titulo": "Inter IKEA Systems – Turning the page on the IKEA Catalogue",
+   "url": "https://about.ikea.com/en/newsroom/2020/12/07/turning-the-page-on-the-ikea-catalogue",
+   "anio": "2020"
+  },
+  {
+   "afirmacion": "IKEA justificó el cierre por el cambio de hábitos de consumo de medios y el crecimiento online.",
+   "dato": "En el año fiscal 2020 las ventas minoristas online de IKEA crecieron 45% y IKEA.com superó los 4.000 millones de visitas (verificar cifras exactas en el comunicado).",
+   "fuente_titulo": "Inter IKEA Systems – Turning the page on the IKEA Catalogue",
+   "url": "https://about.ikea.com/en/newsroom/2020/12/07/turning-the-page-on-the-ikea-catalogue",
+   "anio": "2020"
+  },
+  {
+   "afirmacion": "El primer catálogo de IKEA fue de 1951 y lo armó Ingvar Kamprad.",
+   "dato": "Tirada de 285.000 ejemplares distribuidos en el sur de Suecia (verificar en el IKEA Museum).",
+   "fuente_titulo": "IKEA Museum – The IKEA catalogue",
+   "url": "https://ikeamuseum.com/en/explore/the-story-of-ikea/ikea-catalogue/",
+   "anio": "1951"
+  },
+  {
+   "afirmacion": "Amazon describe y usa filtrado colaborativo ítem-a-ítem para 'los que compraron esto también compraron'.",
+   "dato": "Linden, Smith y York, 'Amazon.com Recommendations: Item-to-Item Collaborative Filtering', IEEE Internet Computing vol. 7 n.º 1, pp. 76–80, enero–febrero de 2003 (DOI 10.1109/MIC.2003.1167344); patente estadounidense 6.266.649 presentada en 1998.",
+   "fuente_titulo": "IEEE Xplore – Amazon.com recommendations: item-to-item collaborative filtering",
+   "url": "https://ieeexplore.ieee.org/document/1167344",
+   "anio": "2003"
+  },
+  {
+   "afirmacion": "Ese paper recibió el premio Test of Time y Amazon publicó un balance de dos décadas de recomendaciones.",
+   "dato": "Smith y Linden, 'Two Decades of Recommender Systems at Amazon.com', IEEE Internet Computing vol. 21 n.º 3, mayo–junio de 2017.",
+   "fuente_titulo": "IEEE Xplore – Two Decades of Recommender Systems at Amazon.com",
+   "url": "https://ieeexplore.ieee.org/document/7927889",
+   "anio": "2017"
+  },
+  {
+   "afirmacion": "Una parte grande de las compras en Amazon sale de recomendaciones.",
+   "dato": "McKinsey estimó en 2013 que el 35% de lo que se compra en Amazon proviene de recomendaciones de producto (y el 75% de lo que se mira en Netflix, de recomendaciones).",
+   "fuente_titulo": "McKinsey – How retailers can keep up with consumers",
+   "url": "https://www.mckinsey.com/industries/retail/our-insights/how-retailers-can-keep-up-with-consumers",
+   "anio": "2013"
+  },
+  {
+   "afirmacion": "'Movers & Shakers' es un ranking vivo de 24 horas y 'Más vendidos' se basa en ventas recientes.",
+   "dato": "Encabezado de Amazon: 'Our biggest gainers in sales rank over the past 24 hours. Updated frequently'; Más vendidos: 'Our most popular products based on sales. Updated frequently' (históricamente decía 'Updated hourly'; verificar el texto vigente).",
+   "fuente_titulo": "Amazon – Movers & Shakers",
+   "url": "https://www.amazon.com/gp/movers-and-shakers",
+   "anio": "2026"
+  },
+  {
+   "afirmacion": "El promedio de estrellas de Amazon no es una media simple.",
+   "dato": "Amazon declara que calcula la valoración con un modelo de aprendizaje automático que pondera la antigüedad de la reseña, los votos de utilidad y si proviene de una compra verificada (verificar el nodo de ayuda vigente).",
+   "fuente_titulo": "Amazon Help – About Customer Reviews",
+   "url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=G8UYX7LALQC8V9KA",
+   "anio": "2026"
+  },
+  {
+   "afirmacion": "Amazon impone miniaturas uniformes por regla.",
+   "dato": "La imagen principal debe tener fondo blanco puro (RGB 255,255,255) y el producto debe ocupar al menos el 85% del encuadre (verificar el documento vigente de Seller Central).",
+   "fuente_titulo": "Amazon Seller Central – Product image requirements",
+   "url": "https://sellercentral.amazon.com/help/hub/reference/external/G1881",
+   "anio": "2026"
+  },
+  {
+   "afirmacion": "El catálogo es también un medio publicitario.",
+   "dato": "Los ingresos por servicios de publicidad de Amazon fueron de 56.200 millones de dólares en 2024 (resultados del cuarto trimestre de 2024, febrero de 2025).",
+   "fuente_titulo": "Amazon Investor Relations – Amazon.com Announces Fourth Quarter Results (2024)",
+   "url": "https://ir.aboutamazon.com/news-release/news-release-details/2025/Amazon-com-Announces-Fourth-Quarter-Results/",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "Las reseñas falsas son un problema a escala industrial.",
+   "dato": "Amazon informó haber frenado más de 200 millones de reseñas sospechosas de ser falsas durante 2020, antes de que se publicaran.",
+   "fuente_titulo": "About Amazon – Creating a trustworthy reviews experience",
+   "url": "https://www.aboutamazon.com/news/how-amazon-works/creating-a-trustworthy-reviews-experience",
+   "anio": "2021"
+  },
+  {
+   "afirmacion": "Estados Unidos prohibió por regla las reseñas y testimonios falsos.",
+   "dato": "La FTC anunció la regla final el 14 de agosto de 2024 (vigente desde el 21 de octubre de 2024), con multas civiles por violación.",
+   "fuente_titulo": "FTC – Federal Trade Commission Announces Final Rule Banning Fake Reviews and Testimonials",
+   "url": "https://www.ftc.gov/news-events/news/press-releases/2024/08/federal-trade-commission-announces-final-rule-banning-fake-reviews-testimonials",
+   "anio": "2024"
+  },
+  {
+   "afirmacion": "Mostrar reseñas aumenta la conversión y el máximo no está en 5 estrellas.",
+   "dato": "Spiegel Research Center (Northwestern) con datos de PowerReviews: mostrar reseñas puede subir la conversión hasta 270% (380% en productos caros); la probabilidad de compra es máxima entre 4,2 y 4,5 estrellas; las primeras cinco reseñas concentran la mayor parte del efecto; la insignia de comprador verificado suma alrededor de 15%.",
+   "fuente_titulo": "Spiegel Research Center – How Online Reviews Influence Sales",
+   "url": "https://spiegel.medill.northwestern.edu/online-reviews/",
+   "anio": "2017"
+  },
+  {
+   "afirmacion": "La mayoría consulta reseñas antes de una primera compra.",
+   "dato": "Pew: 82% de los adultos estadounidenses consulta valoraciones o reseñas online al menos a veces cuando compra algo por primera vez; 40% casi siempre.",
+   "fuente_titulo": "Pew Research Center – Online Shopping and E-Commerce: Online reviews",
+   "url": "https://www.pewresearch.org/internet/2016/12/19/online-reviews/",
+   "anio": "2016"
+  },
+  {
+   "afirmacion": "La mayoría de los grandes sitios de e-commerce filtra mal.",
+   "dato": "Baymard (Christian Holst), sobre 50 grandes sitios estadounidenses: solo el 16% ofrecía una experiencia de filtrado razonablemente buena; el 42% carecía de filtros específicos de la categoría.",
+   "fuente_titulo": "Smashing Magazine / Baymard – The Current State of E-Commerce Filtering",
+   "url": "https://www.smashingmagazine.com/2015/04/the-current-state-of-e-commerce-filtering/",
+   "anio": "2015"
+  },
+  {
+   "afirmacion": "'Cargar más' con carga diferida supera a la paginación y al scroll infinito.",
+   "dato": "Hallazgos de pruebas de usabilidad de Baymard: el scroll infinito esconde el pie de página y hace perder la posición; la paginación agrega clics; 'Cargar más' + carga diferida al hacer scroll fue la combinación con mejor desempeño.",
+   "fuente_titulo": "Smashing Magazine / Baymard – Infinite Scrolling, Pagination Or 'Load More' Buttons? Usability Findings In eCommerce",
+   "url": "https://www.smashingmagazine.com/2016/03/pagination-infinite-scrolling-load-more-buttons/",
+   "anio": "2016"
+  },
+  {
+   "afirmacion": "El experimento de las mermeladas: más opciones atraen más pero convierten menos.",
+   "dato": "Iyengar y Lepper (2000): con 24 mermeladas se detuvo el 60% de los que pasaban y compró el 3%; con 6, se detuvo el 40% y compró el 30%.",
+   "fuente_titulo": "Journal of Personality and Social Psychology – When Choice is Demotivating",
+   "url": "https://doi.org/10.1037/0022-3514.79.6.995",
+   "anio": "2000"
+  },
+  {
+   "afirmacion": "La 'sobrecarga de opciones' no es robusta: depende de cómo se estructura la oferta.",
+   "dato": "Metaanálisis de Scheibehenne, Greifeneder y Todd sobre 50 experimentos: tamaño de efecto medio prácticamente cero (d ≈ 0,02), con fuerte heterogeneidad según condiciones.",
+   "fuente_titulo": "Journal of Consumer Research – Can There Ever Be Too Many Options? A Meta-Analytic Review of Choice Overload",
+   "url": "https://doi.org/10.1086/651235",
+   "anio": "2010"
+  },
+  {
+   "afirmacion": "Los patrones oscuros son medibles a escala en el e-commerce.",
+   "dato": "Mathur y otros (Princeton/Chicago) rastrearon unos 11.000 sitios de compras: 1.818 instancias de patrones oscuros en 1.254 sitios (≈11%), 15 tipos en 7 categorías; 183 sitios con prácticas directamente engañosas (p. ej., cuentas regresivas falsas).",
+   "fuente_titulo": "arXiv – Dark Patterns at Scale: Findings from a Crawl of 11K Shopping Websites (CSCW 2019)",
+   "url": "https://arxiv.org/abs/1907.07032",
+   "anio": "2019"
+  },
+  {
+   "afirmacion": "Steam resume las reseñas en una etiqueta que combina porcentaje y cantidad.",
+   "dato": "'Extremadamente positivas' exige ≥95% positivas y ≥500 reseñas; 'Muy positivas' ≥80% con ≥50; 'Positivas' ≥80% con 10–49; 'Mayormente positivas' 70–79%; 'Variadas' 40–69%; 'Mayormente negativas' 20–39%; por debajo de 20%: 'Negativas', 'Muy negativas' y 'Extremadamente negativas' según cantidad (verificar en la documentación de Steamworks).",
+   "fuente_titulo": "Steamworks Documentation – Steam Reviews",
+   "url": "https://partner.steamgames.com/doc/store/reviews",
+   "anio": "2026"
+  },
+  {
+   "afirmacion": "Steam excluye por defecto las oleadas de reseñas fuera de tema.",
+   "dato": "Anuncio 'User Reviews Revisited' de marzo de 2019: la actividad de reseñas 'off-topic' se identifica y se quita del puntaje por defecto, con opción de incluirla.",
+   "fuente_titulo": "Steam Blog – User Reviews Revisited",
+   "url": "https://steamcommunity.com/games/593110/announcements/detail/1808664240333155775",
+   "anio": "2019"
+  },
+  {
+   "afirmacion": "El catálogo de Steam crece a un ritmo que vuelve imposible verlo entero.",
+   "dato": "Según SteamDB, alrededor de 14.500 juegos se lanzaron en 2023 y cerca de 19.000 en 2024 (cifras aproximadas; verificar en la página de estadísticas).",
+   "fuente_titulo": "SteamDB – Steam game releases by year",
+   "url": "https://steamdb.info/stats/releases/",
+   "anio": "2024"
+  },
+  {
+   "afirmacion": "Las miniaturas de Zalando están tan estandarizadas que sirvieron de dataset de aprendizaje automático.",
+   "dato": "Fashion-MNIST (Xiao, Rasul y Vollgraf, Zalando Research, arXiv 1708.07747, 2017): 60.000 imágenes de entrenamiento y 10.000 de prueba, 28×28 píxeles en escala de grises, 10 categorías (remera, pantalón, buzo, vestido, abrigo, sandalia, camisa, zapatilla, bolso, botín), tomadas de las miniaturas de producto de Zalando. [Verificado en vivo en esta sesión.]",
+   "fuente_titulo": "GitHub – zalandoresearch/fashion-mnist",
+   "url": "https://github.com/zalandoresearch/fashion-mnist",
+   "anio": "2017"
+  },
+  {
+   "afirmacion": "Zalando llevó la IA conversacional al catálogo.",
+   "dato": "Zalando anunció en abril de 2023 un asistente de moda basado en ChatGPT, en beta inicial en Alemania, Austria, Irlanda y el Reino Unido, para traducir preguntas en lenguaje natural a filtros del catálogo.",
+   "fuente_titulo": "Zalando Corporate – Zalando to launch fashion assistant powered by ChatGPT",
+   "url": "https://corporate.zalando.com/en/technology/zalando-launch-fashion-assistant-powered-chatgpt",
+   "anio": "2023"
+  },
+  {
+   "afirmacion": "Wirecutter nació como sitio independiente y lo compró The New York Times.",
+   "dato": "Fundado en 2011 por Brian Lam; adquirido por The New York Times Company en octubre de 2016 por un monto reportado de unos 30 millones de dólares; modelo de comisiones de afiliación.",
+   "fuente_titulo": "The New York Times – New York Times Company Buys The Wirecutter",
+   "url": "https://www.nytimes.com/2016/10/25/business/media/new-york-times-company-buys-the-wirecutter.html",
+   "anio": "2016"
+  },
+  {
+   "afirmacion": "Wirecutter publica su método como parte de la interfaz.",
+   "dato": "Secciones fijas en cada guía: 'Our pick / Budget pick / Upgrade pick', 'Why you should trust us', 'How we picked and tested', 'Flaws but not dealbreakers', 'The competition'; muro de pago desde septiembre de 2021.",
+   "fuente_titulo": "Wirecutter – About Wirecutter",
+   "url": "https://www.nytimes.com/wirecutter/about/",
+   "anio": "2021"
+  },
+  {
+   "afirmacion": "MercadoLibre es el catálogo dominante de la región.",
+   "dato": "Fundada en 1999 en Buenos Aires; cotiza en el Nasdaq desde 2007; opera en 18 países de América Latina (las cifras de volumen 2024 no se pudieron confirmar en esta sesión).",
+   "fuente_titulo": "MercadoLibre Investor Relations",
+   "url": "https://investor.mercadolibre.com/",
+   "anio": "2025"
+  },
+  {
+   "afirmacion": "La búsqueda facetada tiene un origen académico y uno comercial.",
+   "dato": "Proyecto Flamenco (Marti Hearst, UC Berkeley, principios de los 2000) formalizó la navegación facetada; Endeca, fundada en 1999, la comercializó y fue comprada por Oracle en 2011.",
+   "fuente_titulo": "UC Berkeley – The Flamenco Search Interface Project",
+   "url": "http://flamenco.berkeley.edu/",
+   "anio": "2002"
+  },
+  {
+   "afirmacion": "El catálogo impreso es un género de más de un siglo.",
+   "dato": "Sears publicó su primer catálogo en 1888 (relojes) y el general desde 1893; el 'Big Book' dejó de imprimirse en 1993.",
+   "fuente_titulo": "Sears Archives – History of the Sears Catalog",
+   "url": "http://www.searsarchives.com/catalogs/history.htm",
+   "anio": "1993"
+  },
+  {
+   "afirmacion": "Las tablas de comparación tienen un límite útil de ítems.",
+   "dato": "Nielsen Norman Group recomienda tablas de comparación para hasta unos cinco ítems con atributos comparables, distingue tablas estáticas (predefinidas) de dinámicas (el usuario elige qué comparar), y sugiere filtrar primero cuando hay más opciones.",
+   "fuente_titulo": "Nielsen Norman Group – Comparison Tables for Products, Services, and Features",
+   "url": "https://www.nngroup.com/articles/comparison-tables/",
+   "anio": "2018"
+  }
+ ],
+ "lecciones_para_catalogo": [
+  {
+   "leccion": "COPIAR TAL CUAL: cada fila promete el todo y lo cumple. Toda fila horizontal termina en una celda 'Ver los N' con el conteo real, y el título de la fila lleva el número entre paréntesis. El 'Ver todos' abre una grilla completa, con 'Cargar más (quedan N)' si son muchos, nunca scroll infinito.",
+   "aplicacion_concreta": "En Pasaporte, la fila 'Europa' se titula 'Europa (44)' y su última celda es 'Ver los 44'; la fila 'Banderas con animales' igual. En Bestiario, 'Felinos · Ver los 41'. La grilla completa es una pantalla nueva del mismo visor, con el buscador y los filtros arriba, y el pie siempre accesible.",
+   "costo": "Bajo: el conteo ya está en catalogo.json (árbol con facetas) y la grilla es la misma celda de la fila repetida en una cuadrícula."
+  },
+  {
+   "leccion": "ADAPTAR: facetas visuales con conteo, multi-selección y chips de filtros aplicados. Dentro de una faceta, O lógico ('con rojo' o 'con azul'); entre facetas, Y lógico; cada valor muestra cuántos quedan; los que dejan 0 se atenúan; arriba quedan los chips aplicados con 'Quitar todo'. Algunos filtros llevan su propio glifo (una estrellita, un cuadrado rojo, una silueta de animal).",
+   "aplicacion_concreta": "En Pasaporte, en la grilla 'Ver todos' y en los resultados del buscador: panel con 'Continente', 'Color dominante (con rojo 150)', 'Elementos (con estrellas 58, con animales 23, con sol, con luna)', 'Forma (tricolor vertical, horizontal, con cruz)', 'Sin salida al mar', 'Isla'. En Bestiario: dieta, continente, estado UICN, tamaño (más chico que un gato / más grande que un auto). En Butaca: estado (en emisión / terminada), cantidad de episodios (<26 / 26–100 / >100), origen (manga / novela / original), demografía.",
+   "costo": "Medio: el filtrado en el navegador es trivial, pero exige que la clasificación en tanda (Dominio.facetas) devuelva esos atributos booleanos y que pasen por la cola de revisión humana; una bandera mal etiquetada 'con animal' se nota al instante en la grilla."
+  },
+  {
+   "leccion": "ADAPTAR: la tabla ordenable con barras a escala es la lámina del libro de récords. Cada Top 10 tiene detrás una tabla con todos los ítems del grupo, con una columna por medida, encabezados clicables para ordenar y una barra proporcional dentro de cada celda para que el ojo compare sin leer números.",
+   "aplicacion_concreta": "En Pasaporte, en cada fila Top 10 ('Más poblados', 'Más apretados'), un botón 'Ver la tabla de los 230' abre una tabla con superficie, población, densidad y 'Argentinas que entran', ordenable por cualquier columna, con el país que venías mirando resaltado y la bandera a tamaño uniforme en la primera columna. En Cosmos: planetas y lunas por radio, masa, distancia y período. En Bestiario: peso, longitud, velocidad, longevidad. En Butaca: series por episodios, temporadas y años en emisión.",
+   "costo": "Bajo: ordenamiento en JS sobre fichas.jsonl; las medidas ya están normalizadas por core/texto.py y la barra es un div con ancho porcentual."
+  },
+  {
+   "leccion": "ADAPTAR: comparador de 2 a 4 ítems lado a lado, con bandeja inferior y 'Mostrar solo diferencias'. Límite de 4 (Nielsen Norman recomienda no pasar de unos 5). La bandeja vive en localStorage junto con 'Mi lista'.",
+   "aplicacion_concreta": "En Pasaporte, botón 'Comparar' en la ficha modal y al mantener presionado una celda (o con una tecla en el modo TV): bandeja inferior con las banderas tildadas y 'Comparar (3)'; la pantalla de comparación muestra una columna por país y un renglón por atributo (bandera al mismo tamaño, superficie, población, capital, idiomas, moneda, 'cuántas veces entra uno en el otro'), con las diferencias resaltadas. En Butaca: comparar series (episodios, temporadas, arcos, estado, qué capítulo del manga adapta el último episodio). En Festín: dos platos por ingredientes, origen y técnica.",
+   "costo": "Medio: una pantalla nueva y la lógica de bandeja; los datos ya están en la ficha. Lo que cuesta es que los atributos tengan el mismo nombre y unidad en todas las fichas del grupo, que es trabajo de la cola de revisión."
+  },
+  {
+   "leccion": "COPIAR LA REGLA, ADAPTAR LA TÉCNICA: miniaturas iguales. Como Amazon (fondo uniforme, el objeto ocupa el 85% del marco) y Zalando (misma pose y fondo), todas las celdas de un grupo tienen el mismo encuadre, proporción y fondo. Nada se estira: lo que no encaja se centra con letterbox.",
+   "aplicacion_concreta": "En Pasaporte, todas las banderas en un marco 3:2 con el mismo borde fino y fondo neutro: Nepal, Suiza y el Vaticano centradas, no deformadas; en la fila 'Banderas casi iguales' el mismo tamaño hace visible la diferencia. En Bestiario y Flora, recorte automático de la imagen de Commons a un marco cuadrado con un degradado neutro y, en la ficha, una silueta a escala junto a una persona de 1,75 m (la lámina del libro de récords aplicada a animales). En Butaca, el póster siempre en 2:3.",
+   "costo": "Bajo para banderas (son SVG); medio-alto para fotos: recorte y sustracción de fondo en lote más revisión humana de las que fallan; conviene empezar con la silueta a escala, que es dibujo propio y no depende de la foto."
+  },
+  {
+   "leccion": "ADAPTAR CON REGLAS FIJAS, AZAR DEL DÍA Y NAVEGADOR: el ranking vivo de 'Más vendidos' y 'Movers & Shakers' sin servidor. No hay ventas, pero hay tres fuentes de movimiento: la fecha (semilla), el alta de fichas (novedades) y lo que esta persona abrió (localStorage).",
+   "aplicacion_concreta": "En Pasaporte, una fila 'Top 10 de hoy' que cada día elige por semilla de fecha uno de los rankings disponibles (hoy 'más poblados', mañana 'más apretados'), con el número gigante y el texto 'Mañana: otro ranking'. Una fila 'Lo que más abriste' construida desde el historial del navegador, con flecha de cambio respecto a la semana pasada ('subió 3 puestos'), que es el 'Movers & Shakers' personal. Una fila 'Nuevos en el catálogo' según la fecha de alta de la ficha (el 'New Releases' de Amazon y Steam), útil en Butaca y Artes, que están en construcción. Todo con el encabezado honesto: 'Según lo que abriste en este navegador'.",
+   "costo": "Bajo: semilla de fecha, fecha de alta en el JSON y un contador en localStorage."
+  },
+  {
+   "leccion": "COPIAR: la cola de descubrimiento finita de Steam. Reemplaza o complementa el botón 'Uno al azar' con un ritual con final: 12 fichas, una por pantalla, con 'Siguiente', 'No me interesa' y 'A mi lista', y al terminar 'Terminaste la cola de hoy'.",
+   "aplicacion_concreta": "En todos los catálogos, botón 'Cola de hoy' junto a 'Uno al azar': las 12 fichas salen de una semilla de fecha (todos los que abran el catálogo ese día ven la misma cola, lo que da tema de conversación), excluyendo lo ya abierto en este navegador; 'No me interesa' baja ese grupo en futuras colas (regla fija en localStorage, no un modelo). El cierre 'Terminaste la cola de hoy — volvé mañana o empezá otra' alimenta además la fila 'Un día como hoy' cuando tenga datos.",
+   "costo": "Bajo: reutiliza la ficha modal y la lógica de 'Uno al azar'."
+  },
+  {
+   "leccion": "ADAPTAR: 'Nuestra elección' a lo Wirecutter. Cada grupo tiene una cápsula editorial con una elección, dos líneas de por qué y 'La competencia' (tres alternativas), y la confianza se gana mostrando el trabajo: de dónde salió el dato y qué se descartó.",
+   "aplicacion_concreta": "En Festín, al inicio de cada fila ('Empanadas del mundo', 'Panes planos'): 'Si solo vas a probar una: la salteña — por qué en dos líneas — también buenas: tucumana, de Pino, pastel'. En Butaca: 'Por dónde empezar' por serie (arco recomendado para engancharse, episodios de relleno marcados en gris en la lista, 'si venís del manga, arrancá en el 25'). En Creer o no creer: 'El mito más repetido de este grupo'. El 'Por qué confiar' se resuelve con un pie 'Fuentes: Wikipedia, Wikidata' y el puntaje de completitud visible.",
+   "costo": "Bajo: es texto generado en tanda por Claude con revisión humana, como el resto de la ficha; solo hay que agregar el campo al esquema del dominio."
+  },
+  {
+   "leccion": "ADAPTAR: prueba social sin usuarios. No se pueden inventar reseñas ni 'a 1.200 personas les gustó', pero sí se puede copiar lo que las reseñas comunican: una etiqueta de consenso (Steam), una insignia de verificación ('Compra verificada' → 'Verificado con Wikidata') y un indicador de completitud.",
+   "aplicacion_concreta": "En Creer o no creer, cada mito lleva una etiqueta con el código de colores de Steam: 'Confirmado', 'Mixto', 'Mayormente falso', 'Sin pruebas', con la cantidad de fuentes consultadas y, en la ficha, el histograma de 'qué dicen las fuentes'. En todas las fichas, una insignia 'Verificado con Wikidata' cuando el dato numérico coincide con la fuente estructurada, y la barra de completitud (catalogo.completitud() ya existe) como cinta discreta en la celda, de modo que lo incompleto no se esconda sino que se vea.",
+   "costo": "Bajo-medio: la etiqueta y el conteo de fuentes salen del análisis en tanda; la verificación con Wikidata ya es parte de la ingestión multi-fuente (tabla aportes)."
+  },
+  {
+   "leccion": "COPIAR: la tabla de datos en el mismo orden en todas las fichas del grupo (las 'Características' de MercadoLibre), y DESCARTAR el filtrado colaborativo literal: 'Del mismo grupo' y 'Ver también' se arman con reglas de contenido y co-visita local, no con millones de usuarios.",
+   "aplicacion_concreta": "En la ficha modal de Pasaporte y Bestiario, la sección 'Datos' pasa a ser una tabla de dos columnas con los mismos atributos en el mismo orden para todo el grupo, con '—' donde falta y un link 'Comparar con otros del grupo' que abre el comparador precargado. 'Ver también' se llena con regla fija (comparte dos o más atributos: misma región y bandera parecida; mismo bioma y misma dieta) más 'Abiertos junto con este en este navegador' (co-visita en localStorage), con el motivo a la vista: 'Porque también tiene una estrella y está en África'.",
+   "costo": "Bajo: cambio de plantilla en la ficha y una función de similitud por atributos; el motivo visible evita la caja negra del 'también compraron'."
+  }
+ ],
+ "anti_lecciones": [
+  "No copiar el orden por defecto opaco ('Destacados', 'Relevancia') ni los huecos patrocinados. En el e-commerce ese orden mezcla ventas, margen y publicidad (la publicidad de Amazon facturó 56.200 millones de dólares en 2024) y la persona cree que ve lo mejor. En los catálogos, el orden por defecto tiene que ser nombrable en una palabra ('alfabético', 'por superficie', 'por fecha de alta') y estar escrito al lado del conteo.",
+  "No copiar el scroll infinito ni las cadenas de recomendación sin fin. Baymard documentó que el scroll infinito esconde el pie de página y hace perder la posición; las cadenas 'también compraron → también compraron' convierten el catálogo en feed. La tesis del autor es justamente lo contrario: ver el todo y terminar. 'Cargar más (quedan N)' y la cola de 12 con cierre.",
+  "No copiar los patrones oscuros: urgencia falsa ('solo quedan 2'), cuentas regresivas, confirmshaming, 'otras 14 personas están mirando esto'. Mathur y otros los encontraron en cerca del 11% de 11.000 sitios y en 183 casos eran directamente engañosos. La única urgencia honesta en un catálogo es la que expira de verdad: 'Cola de hoy' y 'Un día como hoy'.",
+  "No inventar prueba social. Sin usuarios no hay reseñas, y simular estrellas o 'a 1.200 personas les gustó' es exactamente lo que la FTC prohibió en 2024 y lo que Amazon bloquea a razón de cientos de millones por año. Lo que sí se puede mostrar es consenso de fuentes, verificación y completitud, con el método a la vista.",
+  "No copiar el 'ordenar por valoración' ingenuo ni la sobrecarga de facetas. Baymard señala que ordenar por promedio sin ponderar la cantidad premia al ítem con una sola reseña de 5 estrellas; en los catálogos, los rankings de 'rareza' o 'interés' no pueden ordenarse por un puntaje sin peso. Y 40 filtros sin conteo, con valores que dejan 0 resultados, son peores que 6 bien elegidos.",
+  "No usar el experimento de las mermeladas para recortar el catálogo. Iyengar y Lepper (3% de compra con 24 opciones frente a 30% con 6) se cita para justificar mostrar poco, pero el metaanálisis de Scheibehenne (50 experimentos, efecto medio ≈ 0) muestra que el problema no es la cantidad sino la falta de estructura. Los 230 países se muestran todos; lo que hay que hacer es ordenarlos, agruparlos y hacerlos comparables.",
+  "No copiar la lógica de conversión. Toda la UX del e-commerce empuja a un carrito (desde la patente de 1-Click de 1999), y sus costos documentados para la gente son la manipulación (patrones oscuros, reseñas falsas) y la compra impulsiva; la moda online además arrastra tasas de devolución altísimas (no se pudo confirmar la cifra de Zalando en esta sesión). Un catálogo que no vende nada no debe medir su éxito en clics ni en 'tiempo en pantalla', sino en 'lo vio entero' y 'volvió mañana a la cola'.",
+  "No depender de atributos cargados sin control. La falla estructural del e-commerce (Baymard: 42% sin filtros específicos de categoría) viene de que cada vendedor carga sus fichas como quiere. El equivalente en los catálogos es confiar ciegamente en los atributos que genera Claude en tanda: la cola de revisión humana no es un extra, es lo que hace posibles las facetas y la tabla ordenable.",
+  "No perder el modo 'hojear sin buscar' al digitalizar. IKEA retiró el catálogo en 2020 por costo y cambio de hábitos, pero su web no reemplazó la inspiración del ambiente en el sillón, que se fue a Instagram y Pinterest. Si los catálogos solo ofrecen grilla y filtros, pierden la mitad del canal: el visor que rota solo, la cola de hoy y 'Un día como hoy' son el ambiente de IKEA, no un adorno."
+ ],
+ "fuentes": [
+  {
+   "titulo": "Inter IKEA Systems – Turning the page on the IKEA Catalogue (7 de diciembre de 2020)",
+   "url": "https://about.ikea.com/en/newsroom/2020/12/07/turning-the-page-on-the-ikea-catalogue"
+  },
+  {
+   "titulo": "IKEA Museum – The IKEA catalogue",
+   "url": "https://ikeamuseum.com/en/explore/the-story-of-ikea/ikea-catalogue/"
+  },
+  {
+   "titulo": "Linden, Smith y York – Amazon.com recommendations: item-to-item collaborative filtering (IEEE Internet Computing, 2003)",
+   "url": "https://ieeexplore.ieee.org/document/1167344"
+  },
+  {
+   "titulo": "Smith y Linden – Two Decades of Recommender Systems at Amazon.com (IEEE Internet Computing, 2017)",
+   "url": "https://ieeexplore.ieee.org/document/7927889"
+  },
+  {
+   "titulo": "McKinsey – How retailers can keep up with consumers (2013)",
+   "url": "https://www.mckinsey.com/industries/retail/our-insights/how-retailers-can-keep-up-with-consumers"
+  },
+  {
+   "titulo": "Amazon – Movers & Shakers",
+   "url": "https://www.amazon.com/gp/movers-and-shakers"
+  },
+  {
+   "titulo": "Amazon – Best Sellers",
+   "url": "https://www.amazon.com/Best-Sellers/zgbs"
+  },
+  {
+   "titulo": "Amazon Help – About Customer Reviews",
+   "url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=G8UYX7LALQC8V9KA"
+  },
+  {
+   "titulo": "Amazon Seller Central – Product image requirements",
+   "url": "https://sellercentral.amazon.com/help/hub/reference/external/G1881"
+  },
+  {
+   "titulo": "Amazon Investor Relations – Fourth Quarter 2024 Results",
+   "url": "https://ir.aboutamazon.com/news-release/news-release-details/2025/Amazon-com-Announces-Fourth-Quarter-Results/"
+  },
+  {
+   "titulo": "About Amazon – Creating a trustworthy reviews experience (2021)",
+   "url": "https://www.aboutamazon.com/news/how-amazon-works/creating-a-trustworthy-reviews-experience"
+  },
+  {
+   "titulo": "FTC – Final Rule Banning Fake Reviews and Testimonials (agosto de 2024)",
+   "url": "https://www.ftc.gov/news-events/news/press-releases/2024/08/federal-trade-commission-announces-final-rule-banning-fake-reviews-testimonials"
+  },
+  {
+   "titulo": "Spiegel Research Center (Northwestern) – How Online Reviews Influence Sales (2017)",
+   "url": "https://spiegel.medill.northwestern.edu/online-reviews/"
+  },
+  {
+   "titulo": "Pew Research Center – Online Shopping and E-Commerce: Online reviews (2016)",
+   "url": "https://www.pewresearch.org/internet/2016/12/19/online-reviews/"
+  },
+  {
+   "titulo": "Baymard Institute – Product Lists & Filtering research hub",
+   "url": "https://baymard.com/research/ecommerce-product-lists"
+  },
+  {
+   "titulo": "Smashing Magazine / Baymard – The Current State of E-Commerce Filtering (2015)",
+   "url": "https://www.smashingmagazine.com/2015/04/the-current-state-of-e-commerce-filtering/"
+  },
+  {
+   "titulo": "Smashing Magazine / Baymard – Infinite Scrolling, Pagination Or 'Load More' Buttons? (2016)",
+   "url": "https://www.smashingmagazine.com/2016/03/pagination-infinite-scrolling-load-more-buttons/"
+  },
+  {
+   "titulo": "Nielsen Norman Group – Comparison Tables for Products, Services, and Features",
+   "url": "https://www.nngroup.com/articles/comparison-tables/"
+  },
+  {
+   "titulo": "Nielsen Norman Group – Filters vs. Facets: Definitions",
+   "url": "https://www.nngroup.com/articles/filters-vs-facets/"
+  },
+  {
+   "titulo": "Iyengar y Lepper – When Choice is Demotivating (JPSP, 2000)",
+   "url": "https://doi.org/10.1037/0022-3514.79.6.995"
+  },
+  {
+   "titulo": "Scheibehenne, Greifeneder y Todd – Can There Ever Be Too Many Options? (JCR, 2010)",
+   "url": "https://doi.org/10.1086/651235"
+  },
+  {
+   "titulo": "Mathur et al. – Dark Patterns at Scale (arXiv, CSCW 2019)",
+   "url": "https://arxiv.org/abs/1907.07032"
+  },
+  {
+   "titulo": "Steamworks Documentation – Steam Reviews",
+   "url": "https://partner.steamgames.com/doc/store/reviews"
+  },
+  {
+   "titulo": "Steamworks Documentation – Discoverability on Steam",
+   "url": "https://partner.steamgames.com/doc/store/discovery"
+  },
+  {
+   "titulo": "Steam Blog – User Reviews Revisited (2019)",
+   "url": "https://steamcommunity.com/games/593110/announcements/detail/1808664240333155775"
+  },
+  {
+   "titulo": "SteamDB – Steam game releases by year",
+   "url": "https://steamdb.info/stats/releases/"
+  },
+  {
+   "titulo": "GitHub – zalandoresearch/fashion-mnist (verificado en vivo)",
+   "url": "https://github.com/zalandoresearch/fashion-mnist"
+  },
+  {
+   "titulo": "arXiv – Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine Learning Algorithms (2017)",
+   "url": "https://arxiv.org/abs/1708.07747"
+  },
+  {
+   "titulo": "Zalando Corporate – Zalando to launch fashion assistant powered by ChatGPT (2023)",
+   "url": "https://corporate.zalando.com/en/technology/zalando-launch-fashion-assistant-powered-chatgpt"
+  },
+  {
+   "titulo": "Zalando Corporate – Company",
+   "url": "https://corporate.zalando.com/en/company"
+  },
+  {
+   "titulo": "The New York Times – New York Times Company Buys The Wirecutter (2016)",
+   "url": "https://www.nytimes.com/2016/10/25/business/media/new-york-times-company-buys-the-wirecutter.html"
+  },
+  {
+   "titulo": "Wirecutter – About Wirecutter",
+   "url": "https://www.nytimes.com/wirecutter/about/"
+  },
+  {
+   "titulo": "MercadoLibre – Más vendidos (Argentina)",
+   "url": "https://www.mercadolibre.com.ar/mas-vendidos"
+  },
+  {
+   "titulo": "MercadoLibre Investor Relations",
+   "url": "https://investor.mercadolibre.com/"
+  },
+  {
+   "titulo": "UC Berkeley – The Flamenco Search Interface Project",
+   "url": "http://flamenco.berkeley.edu/"
+  },
+  {
+   "titulo": "Sears Archives – History of the Sears Catalog",
+   "url": "http://www.searsarchives.com/catalogs/history.htm"
+  }
+ ],
+ "no_encontrado": [
+  "LIMITACIÓN GENERAL DE ESTA SESIÓN: no se pudo hacer ninguna búsqueda web (el cupo de WebSearch del turno ya estaba agotado por otros agentes: 0 búsquedas realizadas de las 8 pedidas) y el proxy de salida denegó por política (403 en CONNECT) todos los dominios de fuentes primarias que intenté abrir: baymard.com, nngroup.com, en.wikipedia.org, about.ikea.com, ikeamuseum.com, amazon.com, amazon.science, partner.steamgames.com, store.steampowered.com, steamcommunity.com, spiegel.medill.northwestern.edu, corporate.zalando.com, pewresearch.org, ftc.gov, nytimes.com, ieeexplore.ieee.org, arxiv.org, doi.org, mercadolibre.com.ar, investor.mercadolibre.com, steamdb.info, sellercentral, aboutamazon.com, smashingmagazine (no probado pero mismo patrón). Solo respondió github.com. Por eso TODAS las cifras y fechas de 'evidencia', salvo la de Fashion-MNIST, salen de conocimiento previo del investigador con la URL canónica de donde provienen, y NO fueron verificadas en vivo: hay que abrir cada URL y confirmar antes de usarlas en un texto publicado. No usé espejos, archivos ni lectores intermedios para rodear el bloqueo.",
+  "Verificado en vivo únicamente: el README de github.com/zalandoresearch/fashion-mnist (60.000 + 10.000 imágenes de 28×28 en escala de grises, 10 clases, arXiv 1708.07747, 2017).",
+  "Baymard: no pude confirmar los porcentajes del benchmark más reciente (2024–2026) de listas de productos y filtrado (qué porcentaje de sitios tiene desempeño 'pobre' o 'mediocre' hoy), ni el número exacto de sitios y guías del benchmark actual. Las cifras que incluí (16% de filtrado razonable, 42% sin filtros de categoría) son del estudio de 2015 publicado en Smashing Magazine.",
+  "Baymard: no pude confirmar la cifra '95% de los usuarios se apoya en reseñas' ni los porcentajes de adopción de herramientas de comparación y de miniaturas inconsistentes; por eso no los puse en 'evidencia'.",
+  "Baymard: no pude confirmar la recomendación numérica de cuántos productos cargar inicialmente en desktop y móvil antes de 'Cargar más'.",
+  "IKEA: no pude confirmar en vivo la tirada exacta del primer catálogo de 1951 (285.000), las cifras del comunicado de 2020 (45% de crecimiento online y 4.000 millones de visitas) ni el porcentaje de imágenes del catálogo hechas por computadora (se suele citar alrededor del 75% hacia 2014; no lo incluí en evidencia).",
+  "Amazon: no pude confirmar si los encabezados de Más vendidos y Movers & Shakers dicen hoy 'Updated hourly' o 'Updated frequently', ni el nodo exacto de la página de ayuda sobre el cálculo de estrellas; tampoco la cifra de reseñas sospechosas bloqueadas en 2023 (se suele citar 'más de 250 millones'), por eso usé la de 2020.",
+  "Amazon: no pude medir qué porcentaje de la primera pantalla de resultados es patrocinado (hay estudios de Marketplace Pulse y la demanda de la FTC de 2023 lo menciona, pero no pude abrirlos).",
+  "MercadoLibre: no pude confirmar GMV ni unidades vendidas de 2024 (recordaba alrededor de 51.500 millones de dólares de GMV), ni cómo se calcula exactamente la página 'Más vendidos' (ventana de tiempo, frecuencia de actualización), ni las reglas de imágenes de las publicaciones de catálogo.",
+  "Zalando: no pude confirmar clientes activos (alrededor de 50 millones), mercados (25), GMV 2024 ni la tasa de devoluciones (se suele citar cerca del 50%); por eso la dejé fuera de evidencia.",
+  "Steam: no pude confirmar que los umbrales de las etiquetas de reseñas estén en la documentación de Steamworks (son ampliamente documentados por la comunidad), ni la URL exacta del anuncio 'User Reviews Revisited' de 2019, ni las cifras de lanzamientos por año de SteamDB (aproximadas), ni los datos de Valve sobre el efecto de la Discovery Update de 2014 en vistas de páginas de producto, ni el pico de usuarios concurrentes de 2025.",
+  "Wirecutter: no pude confirmar el monto exacto de la compra por el NYT (reportado en unos 30 millones de dólares por medios, no por las partes), ni cifras de ingresos por afiliación, ni la fecha exacta del muro de pago y de la huelga de 2021.",
+  "Nielsen Norman Group: no pude confirmar autor y fecha del artículo de tablas de comparación ni el número exacto de ítems que recomiendan como tope.",
+  "Pew Research: no pude confirmar si existe una actualización posterior a 2016 de la encuesta sobre reseñas y compras online.",
+  "Costos para la gente específicos del canal (sueño, atención, soledad): no encontré ni pude buscar estudios comparables a los de redes sociales; lo documentado para e-commerce es manipulación (patrones oscuros), reseñas falsas y compra impulsiva, y así lo dije en anti_lecciones."
+ ]
+}
