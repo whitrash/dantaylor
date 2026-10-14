@@ -3,16 +3,19 @@
 `python -m catalogo panel` levanta un servidor HTTP local (sin dependencias)
 que sirve `panel.html` y un resumen JSON en `/api/estado`. La página lo
 consulta cada 2 segundos y muestra progreso, ritmo, costo, tiempo restante,
-qué se está analizando ahora y la actividad reciente.
+qué se está analizando ahora, la actividad reciente y las novedades.
 
 El mismo resumen es lo que `analizar --estado-json ruta.json` escribe a disco,
 así que cualquier otro programa (un indicador de bandeja, un widget) puede
 leerlo sin hablar con el servidor.
+
+Única escritura: `POST /api/novedades/<id>/<vista|descartada|nueva>`.
 """
 
 from __future__ import annotations
 
 import json
+import re
 import sys
 import time
 import webbrowser
@@ -36,7 +39,9 @@ TIPOS_VISIBLES = (
     "lote_recibido",
     "fase",
     "fin",
+    "novedad",
 )
+_RUTA_NOVEDAD = re.compile(r"^/api/novedades/(\d+)/(vista|descartada|nueva)$")
 
 
 def resumen(almacen: Almacen) -> dict:
@@ -96,9 +101,11 @@ def resumen(almacen: Almacen) -> dict:
         "restantes": restantes,
         "serie": serie,
         "en_curso": en_curso,
-        "eventos": almacen.eventos_recientes(30, TIPOS_VISIBLES),
+        "eventos": almacen.eventos_recientes(40, TIPOS_VISIBLES),
         "lotes": almacen.todos_los_lotes_abiertos(),
         "errores_recientes": almacen.eventos_recientes(8, ("error",)),
+        "novedades": almacen.novedades(estado="nueva", limite=12),
+        "novedades_total": almacen.contar_novedades("nueva"),
     }
 
 
@@ -157,13 +164,26 @@ class _Manejador(BaseHTTPRequestHandler):
         else:
             self._responder(404, "text/plain; charset=utf-8", b"no encontrado")
 
+    def do_POST(self) -> None:  # noqa: N802
+        coincidencia = _RUTA_NOVEDAD.match(self.path.split("?", 1)[0])
+        if not coincidencia:
+            self._responder(404, "text/plain; charset=utf-8", b"no encontrado")
+            return
+        almacen = Almacen(self.ruta_db)
+        try:
+            ok = almacen.marcar_novedad(int(coincidencia.group(1)), coincidencia.group(2))
+        finally:
+            almacen.cerrar()
+        self._responder(204 if ok else 404, "text/plain; charset=utf-8", b"")
+
     def _responder(self, codigo: int, tipo: str, cuerpo: bytes) -> None:
         self.send_response(codigo)
         self.send_header("Content-Type", tipo)
         self.send_header("Content-Length", str(len(cuerpo)))
         self.send_header("Cache-Control", "no-store")
         self.end_headers()
-        self.wfile.write(cuerpo)
+        if cuerpo:
+            self.wfile.write(cuerpo)
 
     def log_message(self, *args) -> None:  # silencio: el panel se consulta cada 2 s
         pass

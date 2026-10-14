@@ -8,6 +8,7 @@ from ..core.texto import clave_texto, primero
 from .base import Dominio, lista, opciones, texto
 
 RANGOS = ["$", "$$", "$$$", "desconocido"]
+SITUACIONES = ["abierto", "cerrado", "mudado", "desconocido"]
 FORMATOS = ["cadena", "franquicia", "independiente", "desconocido"]
 SERVICIOS = [
     "envío a domicilio",
@@ -71,7 +72,7 @@ TAXONOMIA = Taxonomia(
 class Comercios(Dominio):
     nombre = "comercios"
     tema = "comercio minorista (supermercados, librerías y locales de barrio)"
-    version_prompt = "1"
+    version_prompt = "2"  # 2: se agregó "situacion"
     ttl_dias = 30  # horarios, servicios y precios cambian: se reanaliza cada mes
     taxonomia = TAXONOMIA
     facetas = ("ciudad", "barrio", "rango_precios", "servicios", "formato")
@@ -81,7 +82,8 @@ class Comercios(Dominio):
     # Datos locales y cambiantes: el modelo no los sabe; siempre con web, acotada.
     politica_web = "siempre"
     max_busquedas = 3
-    campos_volatiles = ("servicios", "rango_precios")
+    campos_volatiles = ("situacion", "servicios", "rango_precios")
+    campos_novedad = ("situacion", "servicios", "formato", "rango_precios")
     reglas_web = """
 - Incluye la ciudad y el barrio del registro en cada búsqueda ("Librería Páginas Recoleta Buenos Aires").
 - Primero confirma que el comercio existe y sigue abierto en esa dirección. Si no hay rastro, deja la ficha mínima con confianza "baja".
@@ -93,6 +95,7 @@ class Comercios(Dominio):
 - "servicios": solo los que figuran en el registro o son evidentes por el formato (p. ej., una cadena grande acepta tarjeta).
 - "rango_precios": relativo a otros comercios del mismo rubro.
 - "formato": "cadena" o "franquicia" solo si reconoces la marca; si no, "independiente" o "desconocido".
+- "situacion": "abierto" si hay evidencia reciente de actividad; "cerrado" si una fuente confiable dice que cerró; "mudado" si cambió de dirección (anota la nueva en "descripcion"); "desconocido" si no hay evidencia. Nunca "cerrado" por falta de datos.
 """
 
     def normalizar(self, fila: dict) -> dict:
@@ -134,6 +137,7 @@ class Comercios(Dominio):
             "rango_precios": opciones(RANGOS),
             "servicios": lista(opciones(SERVICIOS)),
             "formato": opciones(FORMATOS),
+            "situacion": opciones(SITUACIONES, "Si sigue abierto en esa dirección."),
         }
 
     def clave_orden(self, registro: Registro) -> tuple:

@@ -203,6 +203,23 @@ embebe esa URL y listo.
 Si Detector lanza estos comandos él mismo, que pase siempre `--db` con una
 ruta fija y `--estado-json` a donde Detector lee.
 
+### Paso 7. Actualidad (después de que lo básico funcione)
+
+Lee `docs/REVISION_Y_ACTUALIDAD.md`. Resumen operativo:
+
+- `vigilar animales curiosidades` una vez por semana: consulta la API de
+  Wikipedia (revisiones y visitas; gratis, con `User-Agent` identificado) y
+  manda a `verificar` lo que muestra movimiento firme. **Primera tarea tuya**:
+  probarlo con red real sobre 5 fichas (`--limite 5`), porque en la nube el
+  proxy bloqueaba Wikimedia y solo se probó con dobles de la API.
+- Las novedades salen del refresco: cuando una ficha reanalizada cambia un
+  campo de `campos_novedad` con fuentes citadas. Se ven en `novedades` y en el
+  panel, con puntaje y motivos. Comercios tiene el campo nuevo `situacion`
+  (`version_prompt` subió a 2: las fichas viejas de comercios se reanalizan
+  en la próxima corrida; es esperable).
+- Ajusta `NIVEL_FUENTES` en `catalogo/core/novedades.py` con las fuentes que
+  aparezcan en la práctica (municipios, medios locales).
+
 ## 4. Formatos de intercambio
 
 **Entrada (`ingerir`)**: CSV (UTF-8, con encabezado), JSONL o JSON. Una carpeta

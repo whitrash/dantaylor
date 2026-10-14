@@ -16,6 +16,8 @@ Documentos:
 - [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md): qué se comparte entre catálogos, qué no, y qué se tomó del mundo de los supermercados.
 - [docs/LOGISTICA_PARALELA.md](docs/LOGISTICA_PARALELA.md): costos, límites, las dos vías de ejecución (cuenta o clave de API), las dos pasadas, el plan por etapas.
 - [docs/INFORME_PARA_CLAUDE_LOCAL.md](docs/INFORME_PARA_CLAUDE_LOCAL.md): instrucciones para la sesión de Claude que integre esto con los proyectos reales en la computadora.
+- [docs/REVISION_Y_ACTUALIDAD.md](docs/REVISION_Y_ACTUALIDAD.md): revisión crítica de lo hecho y el mecanismo de actualidad sin anzuelo (qué es noticia y por qué).
+- [docs/INSTRUCCIONES_PARA_RECOLECTOR.md](docs/INSTRUCCIONES_PARA_RECOLECTOR.md): qué tiene que entregar un bot recolector de datos.
 
 ## Instalación
 
@@ -86,6 +88,24 @@ python -m catalogo analizar animales --reintentar-errores --modo tiempo-real
 
 `--sin-web` desactiva todo esto para una corrida.
 
+## Actualidad sin anzuelo
+
+Es noticia lo que cambia una ficha con motivo, no lo que dice un titular. Cada
+novedad lleva un puntaje (0-100) y sus razones: cambio concreto, fuentes
+independientes (las copias no suman), jerarquía de la fuente, persistencia
+(una edición de Wikipedia sin revertir a los días; visitas sostenidas, no un
+pico), rasgos de anzuelo en el titular (restan), recencia y redundancia.
+
+```bash
+python -m catalogo vigilar animales curiosidades   # ¿se mueven sus artículos de Wikipedia? -> a verificar
+python -m catalogo analizar animales curiosidades comercios --claude-code   # verifica; si cambió algo, es novedad
+python -m catalogo novedades                       # lista con puntaje y motivos (también en el panel)
+```
+
+Comercios tiene ahora `situacion` (abierto, cerrado, mudado, desconocido): un
+cierre corroborado por el municipio y un medio es novedad; un cierre citado por
+un solo blog queda "a confirmar".
+
 ## Estructura
 
 ```
@@ -95,11 +115,14 @@ catalogo/
     almacen.py       SQLite: estados, huellas, TTL, lotes, fuentes, métricas, corridas, eventos
     analizador.py    simulado · API de Claude (con web) · Message Batches · claude -p
     pipeline.py      ingerir → importar → analizar (dos pasadas) → catalogar; estado.json
-    panel.py/.html   panel visual: servidor HTTP local + /api/estado
+    panel.py/.html   panel visual: servidor HTTP local + /api/estado + novedades
+    novedades.py     actualidad: puntaje y motivos de cada cambio (anti-anzuelo)
     taxonomia.py     árbol de categorías (vocabulario controlado + orden)
     catalogo.py      identidad final, orden, árbol, facetas, cola de revisión, exportación
     texto.py         normalización de texto y medidas
   dominios/        una clase por catálogo: animales, curiosidades, comercios
+  recolectores/    señales externas gratuitas (wikipedia: ediciones firmes, visitas sostenidas)
+herramientas/      verificador de archivos entregados por un recolector
 ejemplos/          datos de muestra, una carpeta por dominio y un archivo por fuente
 tests/             pytest, sin red (dobles del cliente de la API y de `claude -p`)
 ```

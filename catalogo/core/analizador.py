@@ -350,9 +350,7 @@ class ProcesadorPorLotes:
             ids.append(lote.id)
         return ids
 
-    async def recoger(
-        self, dominio: Dominio, al_guardar: Callable[[str, str, str, dict | None], None] | None = None
-    ) -> dict[str, int]:
+    async def recoger(self, dominio: Dominio, al_guardar: Callable[..., None] | None = None) -> dict[str, int]:
         """Espera todos los lotes abiertos del dominio (en paralelo) y guarda los resultados."""
         cuenta = {"listos": 0, "verificar": 0, "errores": 0, "reencolados": 0}
         lotes = self.almacen.lotes_abiertos(dominio.nombre)
@@ -383,23 +381,24 @@ class ProcesadorPorLotes:
                     self.almacen.guardar_error(dominio.nombre, item.clave, f"{type(error).__name__}: {error}")
                     cuenta["errores"] += 1
                     if al_guardar:
-                        al_guardar(dominio.nombre, item.clave, "error", None)
+                        al_guardar(dominio.nombre, item.clave, "error", None, None, None)
                 else:
                     estado = dominio.estado_tras_analisis(ficha, con_web) if self.web else "listo"
                     metricas = metricas_de(mensaje, 0.0, lote=True)
+                    previa = self.almacen.analisis_actual(dominio.nombre, item.clave)
                     self.almacen.guardar_analisis(
                         dominio.nombre, item.clave, ficha, mensaje.model, metricas, estado=estado, con_web=con_web
                     )
                     cuenta["listos" if estado == "listo" else "verificar"] += 1
                     if al_guardar:
-                        al_guardar(dominio.nombre, item.clave, estado, metricas)
+                        al_guardar(dominio.nombre, item.clave, estado, metricas, ficha, previa)
             elif resultado.type == "errored" and resultado.error.error.type == "invalid_request_error":
                 self.almacen.guardar_error(
                     dominio.nombre, item.clave, f"pedido inválido: {resultado.error.error.message}"
                 )
                 cuenta["errores"] += 1
                 if al_guardar:
-                    al_guardar(dominio.nombre, item.clave, "error", None)
+                    al_guardar(dominio.nombre, item.clave, "error", None, None, None)
             else:
                 # Error del servidor, cancelado o vencido: vuelve a la cola.
                 self.almacen.marcar(dominio.nombre, [item.clave], "pendiente")

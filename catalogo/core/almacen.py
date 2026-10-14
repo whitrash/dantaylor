@@ -95,6 +95,23 @@ CREATE TABLE IF NOT EXISTS eventos (
     detalle    TEXT
 );
 CREATE INDEX IF NOT EXISTS eventos_por_ts ON eventos (ts);
+CREATE TABLE IF NOT EXISTS novedades (
+    id             INTEGER PRIMARY KEY AUTOINCREMENT,
+    dominio        TEXT NOT NULL,
+    clave          TEXT NOT NULL,
+    titulo         TEXT NOT NULL,
+    resumen        TEXT NOT NULL,
+    campo          TEXT,
+    valor_anterior TEXT,
+    valor_nuevo    TEXT,
+    puntaje        INTEGER NOT NULL,
+    categoria      TEXT NOT NULL,
+    motivos        TEXT NOT NULL,
+    fuentes        TEXT NOT NULL,
+    detectada_en   REAL NOT NULL,
+    estado         TEXT NOT NULL DEFAULT 'nueva'
+);
+CREATE INDEX IF NOT EXISTS novedades_por_estado ON novedades (estado, detectada_en);
 """
 
 # Columnas agregadas después de la primera versión: se suman a bases existentes.
@@ -438,6 +455,64 @@ class Almacen:
             "confianza_baja": fila["confianza_baja"] or 0,
         }
 
+    def analisis_actual(self, dominio: str, clave: str) -> dict | None:
+        fila = self.db.execute("SELECT analisis FROM items WHERE dominio=? AND clave=?", (dominio, clave)).fetchone()
+        return json.loads(fila["analisis"]) if fila and fila["analisis"] else None
+
+    # --- novedades (actualidad) -----------------------------------------
+
+    def registrar_novedad(
+        self,
+        dominio: str,
+        clave: str,
+        titulo: str,
+        resumen: str,
+        veredicto: dict,
+        valor_anterior: object = None,
+    ) -> int:
+        with self.db:
+            cursor = self.db.execute(
+                "INSERT INTO novedades (dominio, clave, titulo, resumen, campo, valor_anterior, valor_nuevo, puntaje,"
+                " categoria, motivos, fuentes, detectada_en) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (
+                    dominio,
+                    clave,
+                    titulo,
+                    resumen,
+                    veredicto.get("campo"),
+                    _json(valor_anterior) if valor_anterior is not None else None,
+                    _json(veredicto.get("valor")) if veredicto.get("valor") is not None else None,
+                    veredicto["puntaje"],
+                    veredicto["categoria"],
+                    _json(veredicto.get("motivos", [])),
+                    _json(veredicto.get("fuentes", [])),
+                    time.time(),
+                ),
+            )
+            return int(cursor.lastrowid)
+
+    def novedades(self, dominio: str | None = None, estado: str | None = "nueva", limite: int = 50) -> list[dict]:
+        condiciones, parametros = [], []
+        if dominio:
+            condiciones.append("dominio=?")
+            parametros.append(dominio)
+        if estado:
+            condiciones.append("estado=?")
+            parametros.append(estado)
+        donde = (" WHERE " + " AND ".join(condiciones)) if condiciones else ""
+        filas = self.db.execute(
+            f"SELECT * FROM novedades{donde} ORDER BY puntaje DESC, detectada_en DESC LIMIT ?", (*parametros, limite)
+        )
+        return [_novedad(f) for f in filas]
+
+    def contar_novedades(self, estado: str = "nueva") -> int:
+        return self.db.execute("SELECT COUNT(*) FROM novedades WHERE estado=?", (estado,)).fetchone()[0]
+
+    def marcar_novedad(self, novedad_id: int, estado: str) -> bool:
+        assert estado in ("nueva", "vista", "descartada")
+        with self.db:
+            return self.db.execute("UPDATE novedades SET estado=? WHERE id=?", (estado, novedad_id)).rowcount == 1
+
     def dominios_presentes(self) -> list[str]:
         return [f["dominio"] for f in self.db.execute("SELECT DISTINCT dominio FROM items ORDER BY dominio")]
 
@@ -453,6 +528,15 @@ def _a_item(fila: sqlite3.Row) -> Item:
         datos=json.loads(fila["datos"]),
         fuentes=json.loads(fila["fuentes"]),
     )
+
+
+def _novedad(fila: sqlite3.Row) -> dict:
+    novedad = dict(fila)
+    for campo in ("motivos", "fuentes", "valor_anterior", "valor_nuevo"):
+        novedad[campo] = (
+            json.loads(novedad[campo]) if novedad[campo] else ([] if campo in ("motivos", "fuentes") else None)
+        )
+    return novedad
 
 
 def _evento(fila: sqlite3.Row) -> dict:

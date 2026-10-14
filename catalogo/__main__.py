@@ -4,6 +4,8 @@ python -m catalogo ingerir animales ejemplos/animales/wikipedia.csv --fuente wik
 python -m catalogo importar animales fichas_viejas.jsonl        # lo ya analizado, sin pagar de nuevo
 python -m catalogo analizar animales comercios --claude-code     # con Claude Code local (tu cuenta)
 python -m catalogo analizar animales --modo lotes --no-esperar   # con clave de API, a mitad de precio
+python -m catalogo vigilar animales curiosidades                 # ¿se mueven sus artículos de Wikipedia?
+python -m catalogo novedades                                     # qué cambió, con motivo y puntaje
 python -m catalogo panel --abrir                                 # panel visual en el navegador
 python -m catalogo catalogar animales --salida salida
 python -m catalogo estado
@@ -122,6 +124,18 @@ def main(argv: list[str] | None = None) -> None:
     p.add_argument("--intervalo-lotes", type=float, default=60.0)
     opciones_analisis(p)
 
+    p = sub.add_parser("vigilar", help="detectar movimiento en Wikipedia y mandar a verificar lo que se mueve")
+    p.add_argument("dominios", nargs="+", choices=DOMINIOS)
+    p.add_argument("--idioma", default="es", help="edición de Wikipedia (es, en…)")
+    p.add_argument("--dias", type=int, default=30, help="ventana de días a mirar")
+    p.add_argument("--limite", type=int, help="máximo de fichas a revisar por dominio")
+
+    p = sub.add_parser("novedades", help="listar novedades (cambios con motivo y puntaje)")
+    p.add_argument("--dominio", choices=DOMINIOS)
+    p.add_argument("--todas", action="store_true", help="incluir vistas y descartadas")
+    p.add_argument("--vista", type=int, metavar="ID", help="marcar una novedad como vista")
+    p.add_argument("--descartar", type=int, metavar="ID", help="descartar una novedad")
+
     p = sub.add_parser("catalogar", help="armar y exportar el catálogo ordenado")
     p.add_argument("dominios", nargs="+", choices=DOMINIOS)
     p.add_argument("--salida", type=Path, default=Path("salida"))
@@ -194,6 +208,24 @@ def main(argv: list[str] | None = None) -> None:
                     )
                 )
             )
+        elif args.comando == "vigilar":
+            for nombre in args.dominios:
+                dominio = obtener(nombre)
+                if not dominio.vigilar_wikipedia:
+                    _imprimir(
+                        {"dominio": nombre, "aviso": "este dominio no vigila Wikipedia (sus items no tienen artículo)"}
+                    )
+                    continue
+                cuenta = pipeline.vigilar(almacen, dominio, idioma=args.idioma, dias=args.dias, limite=args.limite)
+                _imprimir({"dominio": nombre, **cuenta})
+        elif args.comando == "novedades":
+            if args.vista is not None:
+                _imprimir({"id": args.vista, "vista": almacen.marcar_novedad(args.vista, "vista")})
+            elif args.descartar is not None:
+                _imprimir({"id": args.descartar, "descartada": almacen.marcar_novedad(args.descartar, "descartada")})
+            else:
+                lista = almacen.novedades(args.dominio, None if args.todas else "nueva", limite=200)
+                _imprimir(lista)
         elif args.comando == "catalogar":
             for nombre in args.dominios:
                 armado, rutas = pipeline.catalogar(almacen, obtener(nombre), args.salida)
@@ -213,6 +245,7 @@ def main(argv: list[str] | None = None) -> None:
                     **almacen.estado(nombre),
                     **almacen.metricas(nombre),
                     "lotes_abiertos": almacen.lotes_abiertos(nombre),
+                    "novedades_nuevas": len(almacen.novedades(nombre, "nueva", limite=1000)),
                 }
                 if args.errores:
                     datos["detalle_errores"] = dict(almacen.errores(nombre))

@@ -28,7 +28,7 @@ import time
 from pathlib import Path
 from typing import TYPE_CHECKING, Callable, Iterable, Iterator
 
-from . import catalogo, panel
+from . import catalogo, novedades, panel
 from .almacen import Almacen
 from .analizador import AnalizadorClaude, ProcesadorPorLotes
 from .modelos import Item
@@ -183,10 +183,37 @@ class _Corrida:
 
     def resultado(self, dominio: Dominio, item: Item, ficha: dict, modelo: str, metricas: dict, con_web: bool) -> None:
         estado = dominio.estado_tras_analisis(ficha, con_web) if self.web else "listo"
+        previa = self.almacen.analisis_actual(dominio.nombre, item.clave)
         self.almacen.guardar_analisis(
             dominio.nombre, item.clave, ficha, modelo, metricas, estado=estado, con_web=con_web
         )
+        if estado == "listo":
+            self.novedad(dominio, item.clave, dominio.titulo_item(item), previa, ficha)
         self.contar(dominio.nombre, estado, metricas, titulo=dominio.titulo_item(item), clave=item.clave, modelo=modelo)
+
+    def novedad(self, dominio: Dominio, clave: str, titulo: str, previa: dict | None, ficha: dict) -> None:
+        """Si la ficha reanalizada cambió en algo que es noticia, lo registra con su veredicto."""
+        if not previa:
+            return
+        senales = novedades.cambios_entre_fichas(dominio.campos_de_novedad(), previa, ficha)
+        if not senales:
+            return
+        veredicto = novedades.puntuar(senales, previa)
+        if veredicto.categoria == "descartada":
+            return
+        resumen = novedades.resumen_cambio(titulo, veredicto.campo, previa.get(veredicto.campo), veredicto.valor)
+        self.almacen.registrar_novedad(
+            dominio.nombre, clave, titulo, resumen, veredicto.como_dict(), previa.get(veredicto.campo)
+        )
+        self.evento(
+            "novedad",
+            dominio.nombre,
+            clave,
+            titulo=titulo,
+            resumen=resumen,
+            puntaje=veredicto.puntaje,
+            categoria=veredicto.categoria,
+        )
 
     def contar(
         self, dominio: str, estado: str, metricas: dict | None, *, titulo: str | None, clave: str, **extra
@@ -422,7 +449,9 @@ async def _recoger(almacen, dominios, procesador: ProcesadorPorLotes, corrida: _
     analizador = procesador.analizador
     totales = {d.nombre: {"listos": 0, "verificar": 0, "errores": 0, "reencolados": 0} for d in dominios}
 
-    def al_guardar(dominio: str, clave: str, estado: str, metricas: dict | None) -> None:
+    def al_guardar(dominio: str, clave: str, estado: str, metricas: dict | None, ficha=None, previa=None) -> None:
+        if estado == "listo" and ficha is not None:
+            corrida.novedad(corrida.dominios[dominio], clave, clave, previa, ficha)
         if estado == "error":
             corrida.por_dominio[dominio]["errores"] += 1
             corrida.evento("error", dominio, clave, titulo=clave)
@@ -484,6 +513,61 @@ async def recoger_lotes(
     corrida.evento("fin", estado="terminada")
     instantanea.tal_vez(forzar=True)
     return totales
+
+
+def vigilar(
+    almacen: Almacen,
+    dominio: Dominio,
+    *,
+    idioma: str = "es",
+    dias: int = 30,
+    limite: int | None = None,
+    obtener=None,
+    ahora: float | None = None,
+    avisar: Callable[[str], None] = lambda m: print(m, file=sys.stderr),
+) -> dict:
+    """Mira si los artículos de Wikipedia de las fichas listas se mueven. Lo que
+    muestra movimiento firme pasa a `verificar` (la próxima corrida lo reanaliza
+    con web) y queda anotado como novedad "a confirmar". No decide qué cambió:
+    eso lo decide la ficha nueva."""
+    from ..recolectores import wikipedia
+
+    obtener = obtener or wikipedia.obtener_json
+    cuenta = {"revisados": 0, "a_verificar": 0, "sin_movimiento": 0, "errores": 0}
+    registros = [r for r in almacen.analizados(dominio.nombre) if r.vigente]
+    if limite is not None:
+        registros = registros[:limite]
+    for registro in registros:
+        titulo = dominio.titulo_wikipedia(registro)
+        if not titulo:
+            continue
+        cuenta["revisados"] += 1
+        try:
+            senales = wikipedia.senales(titulo, idioma, dias, obtener=obtener, ahora=ahora)
+        except Exception as error:  # red, artículo inexistente, respuesta rara: se sigue con el próximo
+            cuenta["errores"] += 1
+            avisar(f"  {titulo}: {type(error).__name__}: {error}")
+            continue
+        veredicto = novedades.puntuar(senales, registro.analisis, ahora)
+        if veredicto.categoria == "a_confirmar":
+            nombre = dominio.titulo(registro)
+            resumen = novedades.resumen_cambio(nombre, None, None, None)
+            almacen.marcar(dominio.nombre, [registro.item.clave], "verificar")
+            almacen.registrar_novedad(dominio.nombre, registro.item.clave, nombre, resumen, veredicto.como_dict())
+            almacen.registrar_evento(
+                None,
+                "novedad",
+                dominio.nombre,
+                registro.item.clave,
+                titulo=nombre,
+                resumen=resumen,
+                puntaje=veredicto.puntaje,
+                categoria="a_confirmar",
+            )
+            cuenta["a_verificar"] += 1
+        else:
+            cuenta["sin_movimiento"] += 1
+    return cuenta
 
 
 def catalogar(almacen: Almacen, dominio: Dominio, carpeta: Path) -> tuple[dict, list[Path]]:

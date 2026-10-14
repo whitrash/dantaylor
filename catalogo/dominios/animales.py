@@ -80,6 +80,8 @@ class Animales(Dominio):
     politica_web = "si_dudoso"
     max_busquedas = 2
     campos_volatiles = ("estado_conservacion",)
+    campos_novedad = ("estado_conservacion", "nombre_cientifico")
+    vigilar_wikipedia = True
     reglas_web = """
 - Para "estado_conservacion", la referencia es la Lista Roja de la UICN (iucnredlist.org) o Wikidata; no lo tomes de un blog.
 - Si el registro trae nombre científico, busca por ese nombre, no por el común."""
@@ -134,6 +136,14 @@ class Animales(Dominio):
         comun = registro.analisis.get("nombre_comun") or registro.item.datos.get("nombre")
         cientifico = registro.analisis.get("nombre_cientifico") or registro.item.datos.get("nombre_cientifico")
         return f"{comun} ({cientifico})" if cientifico and cientifico != comun else str(comun)
+
+    def titulo_wikipedia(self, registro: Registro) -> str | None:
+        # El artículo de la especie suele estar por nombre científico; si no, por el común.
+        return str(
+            registro.analisis.get("nombre_cientifico")
+            or registro.analisis.get("nombre_comun")
+            or registro.item.datos["nombre"]
+        )
 
     def clave_catalogo(self, registro: Registro) -> str:
         # "Puma" y "León de montaña" entran como dos filas distintas, pero el

@@ -72,6 +72,11 @@ class Dominio:
     # Campos de la ficha que cambian con el tiempo: si quedan vacíos en la
     # primera pasada, el item va a la segunda (con web). Se nombran en el prompt.
     campos_volatiles: tuple[str, ...] = ()
+    # Campos cuyo cambio entre un análisis y el siguiente es "noticia" del catálogo
+    # (si está vacío, se usan los volátiles).
+    campos_novedad: tuple[str, ...] = ()
+    # Si el dominio tiene artículos de Wikipedia que vigilar (enciclopedias sí, comercios no).
+    vigilar_wikipedia: bool = False
     reglas_web: str = ""
 
     # --- 1. recolección y normalización ---------------------------------
@@ -249,6 +254,15 @@ Búsqueda web:
     def titulo_item(self, item: Item) -> str:
         """Nombre legible antes de tener ficha (para el panel)."""
         return str(item.datos.get("nombre") or item.datos.get("titulo") or item.clave)
+
+    def campos_de_novedad(self) -> tuple[str, ...]:
+        return self.campos_novedad or self.campos_volatiles
+
+    def titulo_wikipedia(self, registro: Registro) -> str | None:
+        """Título del artículo de Wikipedia a vigilar; None si no aplica."""
+        if not self.vigilar_wikipedia:
+            return None
+        return str(registro.analisis.get("titulo") or registro.item.datos.get("titulo") or self.titulo(registro))
 
     def clave_orden(self, registro: Registro) -> tuple:
         """Orden dentro de una misma categoría hoja."""

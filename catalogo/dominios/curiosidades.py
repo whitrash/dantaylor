@@ -64,6 +64,8 @@ class Curiosidades(Dominio):
     campos_busqueda = ("categoria", "titulo", "descripcion")
     politica_web = "si_dudoso"
     max_busquedas = 2
+    campos_novedad = ("anio", "dato_curioso", "personas")
+    vigilar_wikipedia = True
     reglas_web = """
 - Los récords y los "el más grande/rápido/antiguo" se superan: confirma que el dato siga vigente y acláralo si ya no lo está."""
     reglas = """
