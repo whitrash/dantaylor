@@ -69,6 +69,10 @@ class Dominio:
     reglas: str = ""
     politica_web: str = "nunca"
     max_busquedas: int = 3
+    max_busquedas_refresco: int = 1
+    # Campos que se reverifican en un refresco (ficha vencida); el resto se copia.
+    # Vacío = los volátiles. Sin volátiles ni esto, el dominio no refresca: reanaliza.
+    campos_refresco: tuple[str, ...] = ()
     # Campos de la ficha que cambian con el tiempo: si quedan vacíos en la
     # primera pasada, el item va a la segunda (con web). Se nombran en el prompt.
     campos_volatiles: tuple[str, ...] = ()
@@ -115,7 +119,14 @@ class Dominio:
         """Campos propios de la ficha de este dominio (JSON Schema)."""
         raise NotImplementedError
 
-    def esquema(self) -> dict:
+    def campos_de_refresco(self) -> tuple[str, ...]:
+        propios = self.campos_refresco or self.campos_volatiles
+        return tuple(dict.fromkeys((*propios, "confianza", "fuentes_web"))) if propios else ()
+
+    def puede_refrescar(self) -> bool:
+        return bool(self.campos_refresco or self.campos_volatiles)
+
+    def esquema(self, refresco: bool = False) -> dict:
         propiedades = {
             "ruta": opciones(self.taxonomia.hojas(), "Categoría hoja de la taxonomía."),
             **self.propiedades(),
@@ -123,6 +134,9 @@ class Dominio:
             "confianza": opciones(CONFIANZA),
             "fuentes_web": lista(),
         }
+        if refresco:
+            campos = self.campos_de_refresco()
+            propiedades = {k: v for k, v in propiedades.items() if k in campos}
         return {
             "type": "object",
             "properties": propiedades,
@@ -130,7 +144,7 @@ class Dominio:
             "additionalProperties": False,
         }
 
-    def herramienta_ficha(self) -> dict:
+    def herramienta_ficha(self, refresco: bool = False) -> dict:
         """Herramienta estricta por la que el modelo entrega la ficha cuando
         también tiene herramientas de búsqueda."""
         from ..core.analizador import HERRAMIENTA_FICHA  # evita import circular
@@ -139,10 +153,10 @@ class Dominio:
             "name": HERRAMIENTA_FICHA,
             "description": "Entrega la ficha final del registro. Llamar exactamente una vez, al terminar.",
             "strict": True,
-            "input_schema": self.esquema(),
+            "input_schema": self.esquema(refresco),
         }
 
-    def instrucciones(self, con_web: bool = False) -> str:
+    def instrucciones(self, con_web: bool = False, refresco: bool = False) -> str:
         """Prompt de sistema. Tiene que ser idéntico para todos los items del
         dominio (nada de fechas ni ids) para que la caché de prompts funcione."""
         base = f"""Eres un catalogador experto en {self.tema}. Recibes un registro (y a veces una imagen) y devuelves su ficha para un catálogo, en español.
@@ -172,16 +186,30 @@ Búsqueda web:
 """
         else:
             base += "\nNo tienes acceso a internet: trabaja con tu conocimiento y con los datos del registro.\n"
+        if refresco:
+            campos = ", ".join(f'"{c}"' for c in self.campos_de_refresco())
+            base += f"""
+Refresco de una ficha existente:
+- El registro trae su ficha anterior. Verifica únicamente estos campos: {campos}. Devuelve solo esos campos.
+- Si no hay evidencia de cambio, repite el valor anterior tal cual; no "mejores" lo que no cambió.
+- Si la evidencia dice que cambió, pon el valor nuevo y cita la fuente en "fuentes_web".
+"""
         return (
             base
             + f'\nTaxonomía (las hojas son las únicas categorías válidas para "ruta"):\n{self.taxonomia.describir()}'
         )
 
-    def contenido_texto(self, item: Item) -> str:
+    def contenido_texto(self, item: Item, previa: dict | None = None) -> str:
         visibles = {k: v for k, v in item.datos.items() if k not in _CAMPOS_IMAGEN}
-        return "Registro a catalogar:\n" + json.dumps(visibles, ensure_ascii=False, sort_keys=True, indent=2)
+        texto = "Registro a catalogar:\n" + json.dumps(visibles, ensure_ascii=False, sort_keys=True, indent=2)
+        if previa is not None:
+            anterior = {k: v for k, v in previa.items() if k != "etiquetas"}
+            texto += "\n\nFicha anterior (verificar solo los campos indicados):\n" + json.dumps(
+                anterior, ensure_ascii=False, sort_keys=True, indent=2
+            )
+        return texto
 
-    def contenido(self, item: Item) -> list[dict]:
+    def contenido(self, item: Item, previa: dict | None = None) -> list[dict]:
         """Mensaje de usuario para un item: imagen opcional + datos en JSON."""
         bloques: list[dict] = []
         if item.datos.get("imagen_url"):
@@ -191,17 +219,33 @@ Búsqueda web:
             tipo = mimetypes.guess_type(ruta.name)[0] or "image/jpeg"
             datos = base64.standard_b64encode(ruta.read_bytes()).decode()
             bloques.append({"type": "image", "source": {"type": "base64", "media_type": tipo, "data": datos}})
-        bloques.append({"type": "text", "text": self.contenido_texto(item)})
+        bloques.append({"type": "text", "text": self.contenido_texto(item, previa)})
         return bloques
 
-    def validar(self, analisis: dict) -> dict:
+    def validar(self, analisis: dict, refresco: bool = False) -> dict:
         analisis.setdefault("fuentes_web", [])
-        faltan = [c for c in self.esquema()["required"] if c not in analisis]
+        faltan = [c for c in self.esquema(refresco)["required"] if c not in analisis]
         if faltan:
             raise ValueError(f"faltan campos: {', '.join(faltan)}")
-        if not self.taxonomia.es_valida(analisis["ruta"]):
+        if not refresco and not self.taxonomia.es_valida(analisis["ruta"]):
             raise ValueError(f"ruta fuera de la taxonomía: {analisis['ruta']!r}")
         return analisis
+
+    def refresco_aplicable(self, previa: dict | None) -> bool:
+        """Una ficha vencida se refresca solo si el dominio tiene campos volátiles y
+        la ficha anterior todavía cumple el esquema (si cambió el esquema, se reanaliza)."""
+        if not previa or not self.puede_refrescar():
+            return False
+        try:
+            self.validar(dict(previa))
+        except ValueError:
+            return False
+        return True
+
+    def fusionar_refresco(self, previa: dict, parcial: dict) -> dict:
+        """Ficha completa = anterior + campos reverificados."""
+        permitidos = self.esquema(True)["properties"]
+        return self.validar({**previa, **{k: v for k, v in parcial.items() if k in permitidos}})
 
     def necesita_web(self, con_web_disponible: bool = True) -> bool:
         """Si la primera (o única) pasada de este dominio va con web."""
@@ -262,7 +306,12 @@ Búsqueda web:
         """Título del artículo de Wikipedia a vigilar; None si no aplica."""
         if not self.vigilar_wikipedia:
             return None
-        return str(registro.analisis.get("titulo") or registro.item.datos.get("titulo") or self.titulo(registro))
+        return str(
+            registro.item.datos.get("titulo_wikipedia")
+            or registro.analisis.get("titulo")
+            or registro.item.datos.get("titulo")
+            or self.titulo(registro)
+        )
 
     def clave_orden(self, registro: Registro) -> tuple:
         """Orden dentro de una misma categoría hoja."""

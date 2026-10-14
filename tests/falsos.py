@@ -14,7 +14,7 @@ PREFIJO = "Registro a catalogar:\n"
 def datos_del_pedido(params: dict) -> dict:
     texto = params["messages"][0]["content"][-1]["text"]
     assert texto.startswith(PREFIJO)
-    return json.loads(texto[len(PREFIJO) :])
+    return json.loads(texto[len(PREFIJO) :].split("\n\nFicha anterior")[0])
 
 
 def uso(busquedas: int = 0):
@@ -146,7 +146,7 @@ def resultado_cli(ficha: dict | None, costo: float = 0.03, busquedas: int = 0, *
 
 def prompt_del_comando(comando: list[str]) -> dict:
     texto = comando[comando.index("-p") + 1]
-    return json.loads(texto[len(PREFIJO) :].split("\n\nImagen")[0])
+    return json.loads(texto[len(PREFIJO) :].split("\n\nImagen")[0].split("\n\nFicha anterior")[0])
 
 
 def opcion(comando: list[str], nombre: str) -> str | None:

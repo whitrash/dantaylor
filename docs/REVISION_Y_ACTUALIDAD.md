@@ -16,9 +16,9 @@ accesibilidad).
 |---|---|---|
 | Identidad nombre + dirección canónica | Firme | Resuelve sucursales y "Av./Avenida". Falla con mudanzas (misma tienda, nueva dirección = item nuevo). Ahora el campo `situacion: mudado` lo marca y la descripción trae la nueva dirección; la fusión automática de ambos registros sigue pendiente. |
 | Política web "siempre", 3 búsquedas, ciudad en la consulta | Firme | Probado con un local real: 4 fuentes, sitio propio, confianza alta, 10 s, US$ 0,056. |
-| Vencimiento a 30 días con prioridad | Firme | Es el único mecanismo de actualidad que existía. Limitación: reanaliza la ficha completa; un refresco parcial (solo horario/situación) costaría la mitad. Pendiente. |
+| Vencimiento a 30 días con prioridad | Firme | Era el único mecanismo de actualidad. Ahora un vencido con ficha válida se **refresca en parte**: solo `situacion`, `servicios` y `rango_precios` (más confianza y fuentes) con esquema reducido, esfuerzo bajo y una búsqueda; la descripción, el rubro y la ruta se copian. Si la ficha es de un esquema viejo, se reanaliza entera. |
 | `situacion` (abierto/cerrado/mudado/desconocido) | **Nuevo** | Es lo que faltaba para que un refresco diga algo útil. Regla en el prompt: nunca "cerrado" por falta de datos. |
-| Fuentes estructuradas (OSM, municipio) | **No hecho** | Sigue siendo la mayor mejora de costo pendiente. Sin esto, cada comercio paga 1-3 búsquedas. |
+| Fuentes estructuradas (OSM, municipio) | **No hecho** | Sigue siendo la mayor mejora de costo pendiente en comercios. Sin esto, cada comercio paga 1-3 búsquedas. (Para enciclopedias ya existe `recolectar` desde Wikidata.) |
 | Riesgo principal | — | **Falsos cierres.** Un comercio sin presencia web parece cerrado. Mitigación: el prompt lo prohíbe, y la novedad "cerrado" exige corroboración (ver §2) antes de mostrarse como novedad; si no, queda "a confirmar". |
 
 ### 1.2 Enciclopedias (animales, curiosidades)
@@ -40,8 +40,10 @@ accesibilidad).
   ("rate limit", "usage limit"…); si el mensaje cambia, un límite se contaría
   como error del item. El contador de búsquedas en esa vía es aproximado
   (fuentes citadas). Windows sin probar.
-- **Deuda:** el refresco mensual de comercios reanaliza todo el item; un modo
-  "solo campos volátiles" bajaría el costo a la mitad.
+- **Hecho tras la revisión:** refresco parcial de vencidos (`motivo` en el
+  item, `fusionar_refresco` en el dominio) y recolector de Wikidata
+  (`recolectar`). Queda: recolector GBIF/Overpass y fusión automática de
+  mudanzas en comercios.
 
 ---
 
@@ -99,6 +101,7 @@ Umbrales: **≥60 novedad**, **35-59 a confirmar**, **<35 descartada**.
 ### 2.5 Cómo se usa
 
 ```bash
+python -m catalogo recolectar animales curiosidades     # una vez: QID, imagen, estado UICN desde Wikidata, gratis
 python -m catalogo vigilar animales curiosidades        # semanal; marca a verificar lo que se mueve
 python -m catalogo analizar animales curiosidades comercios --claude-code   # verifica y refresca
 python -m catalogo novedades                            # lista con puntaje y motivos

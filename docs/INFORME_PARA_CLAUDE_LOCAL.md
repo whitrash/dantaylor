@@ -157,6 +157,9 @@ En `catalogo/dominios/*.py`:
 - `propiedades()`: los campos reales de la ficha.
 - `normalizar()`: los nombres de columna que exporta Detector.
 - `prioridad_fuentes`: qué fuente gana en conflicto.
+- `campos_volatiles`: lo único que se reverifica cuando un item vence
+  (`campos_refresco` si quieres otra lista). Sin volátiles, un vencido se
+  reanaliza entero.
 - Si hay un cuarto catálogo, es otra subclase de `Dominio` registrada en
   `catalogo/dominios/__init__.py`.
 
@@ -194,7 +197,9 @@ embebe esa URL y listo.
   Concurrencia 2-4 con cuenta: más no sirve, se topa con el límite del plan y
   el motor pausa solo.
 - Mes: `analizar comercios --claude-code` (los vencidos a 30 días entran
-  solos, primero en la cola).
+  solos, primero en la cola, y se refrescan en parte: solo situación,
+  servicios y precios, con esfuerzo bajo y una búsqueda; el resumen de la
+  corrida dice cuántos fueron `refrescos`).
 - Si hay clave de API y volumen (miles): `analizar <dominio> --modo lotes
   --no-esperar` y después `recoger <dominio>`. Mitad de precio, < 24 h.
 - `estado --errores` y la sección "Para revisar" de `catalogo.md` como tarea
@@ -207,6 +212,11 @@ ruta fija y `--estado-json` a donde Detector lee.
 
 Lee `docs/REVISION_Y_ACTUALIDAD.md`. Resumen operativo:
 
+- `recolectar animales curiosidades` una vez, antes de analizar: consulta
+  Wikidata (dos pedidos por item, gratis) y agrega QID, nombre científico,
+  imagen de Commons, estado UICN, peso, largo y el título exacto del
+  artículo en Wikipedia. El QID pasa a ser la clave del catálogo y `vigilar`
+  usa ese título. También sin red real en la nube: probarlo con `--limite 5`.
 - `vigilar animales curiosidades` una vez por semana: consulta la API de
   Wikipedia (revisiones y visitas; gratis, con `User-Agent` identificado) y
   manda a `verificar` lo que muestra movimiento firme. **Primera tarea tuya**:
@@ -264,19 +274,21 @@ de secciones + facetas + `revisar`) y `catalogo.md` legible.
 ```
 
 Tipos de evento: `fase`, `inicio`, `listo`, `verificar`, `error`, `reintento`,
-`pausa`, `tope_costo`, `lote_enviado`, `lote_recibido`, `fin`.
+`pausa`, `tope_costo`, `lote_enviado`, `lote_recibido`, `novedad`, `fin`. Los
+`inicio` y `listo` de un refresco parcial llevan `"refresco": true`.
 
 ## 6. Lo que NO está hecho (y cómo hacerlo si hace falta)
 
-1. **Recolectores de fuentes estructuradas** (gratis, antes del modelo): Wikidata
-   (QID, nombre científico, imagen P18, estado UICN P141), Wikipedia (extracto),
-   GBIF (taxonomía) para enciclopedias; OpenStreetMap/Overpass (nombre,
-   dirección, horario, web) y datos abiertos municipales para comercios. Bajan
-   búsquedas y suben precisión. Diseño: un módulo por fuente en
-   `catalogo/recolectores/`, que usa `ejecutar_en_paralelo` con 5-10
-   simultáneos, `User-Agent` identificado, y guarda aportes con prioridad alta
-   (`guardar_aportes`). Hazlo después de la muestra de 20, si las búsquedas
-   por ficha son el costo dominante.
+1. **Recolectores que faltan** (gratis, antes del modelo). Wikidata ya está
+   (`catalogo/recolectores/wikidata.py`, comando `recolectar`). Faltan:
+   Wikipedia (extracto), GBIF (taxonomía) para enciclopedias;
+   OpenStreetMap/Overpass (nombre, dirección, horario, web) y datos abiertos
+   municipales para comercios. Diseño: un módulo por fuente en
+   `catalogo/recolectores/` con la misma forma que el de Wikidata (función
+   `consultar(dominio, texto, obtener=...)` que devuelve una fila en el formato
+   de `normalizar()`; `pipeline.recolectar` la guarda como aporte con la
+   prioridad de `prioridad_fuentes`). Hazlo después de la muestra de 20, si las
+   búsquedas por ficha son el costo dominante.
 2. **Vía API con web, probada de verdad**: la combinación web_search +
    herramienta estricta `entregar_ficha` está escrita según la documentación
    pero solo probada con dobles. Si el usuario tiene clave de API, la primera

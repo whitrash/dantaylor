@@ -74,7 +74,7 @@ class Animales(Dominio):
     ttl_dias = None  # una especie no cambia: se analiza una vez
     taxonomia = TAXONOMIA
     facetas = ("continentes", "dieta", "estado_conservacion")
-    prioridad_fuentes = {"gbif": 3, "uicn": 3, "wikipedia": 2}
+    prioridad_fuentes = {"gbif": 3, "uicn": 3, "wikidata": 3, "wikipedia": 2}
     campos_busqueda = ("nombre", "notas")
     # Conocimiento estable: primera pasada sin web; la web solo confirma lo dudoso.
     politica_web = "si_dudoso"
@@ -113,6 +113,14 @@ class Animales(Dominio):
         notas = primero(fila, "notas", "descripcion", "descripción")
         if notas:
             datos["notas"] = notas
+        for campo, alias in {
+            "qid": ("qid", "wikidata"),
+            "estado_conservacion": ("estado_conservacion", "estado_uicn", "uicn"),
+            "titulo_wikipedia": ("titulo_wikipedia",),
+        }.items():
+            valor = primero(fila, *alias)
+            if valor:
+                datos[campo] = valor
         return datos
 
     def clave(self, datos: dict) -> str:
@@ -139,6 +147,8 @@ class Animales(Dominio):
 
     def titulo_wikipedia(self, registro: Registro) -> str | None:
         # El artículo de la especie suele estar por nombre científico; si no, por el común.
+        if registro.item.datos.get("titulo_wikipedia"):
+            return str(registro.item.datos["titulo_wikipedia"])
         return str(
             registro.analisis.get("nombre_cientifico")
             or registro.analisis.get("nombre_comun")
@@ -148,4 +158,6 @@ class Animales(Dominio):
     def clave_catalogo(self, registro: Registro) -> str:
         # "Puma" y "León de montaña" entran como dos filas distintas, pero el
         # análisis devuelve el mismo nombre científico: en el catálogo son uno.
+        if registro.item.datos.get("qid"):
+            return str(registro.item.datos["qid"]).lower()
         return clave_texto(registro.analisis.get("nombre_cientifico")) or registro.item.clave

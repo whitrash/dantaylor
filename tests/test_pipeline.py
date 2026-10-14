@@ -46,9 +46,9 @@ class Registrador(AnalizadorSimulado):
         self.ajustar = ajustar  # ajustar(item, ficha) modifica la ficha simulada
         self.costo = costo
 
-    async def analizar(self, dominio, item, con_web=False):
+    async def analizar(self, dominio, item, con_web=False, previa=None):
         self.llamadas.append((dominio.nombre, item.clave, con_web))
-        ficha, modelo, metricas = await super().analizar(dominio, item, con_web)
+        ficha, modelo, metricas = await super().analizar(dominio, item, con_web, previa)
         if self.ajustar:
             self.ajustar(item, ficha)
         metricas["costo_usd"] = self.costo

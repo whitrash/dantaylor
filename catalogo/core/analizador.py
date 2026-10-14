@@ -9,8 +9,12 @@
   computadora) como subproceso, varios a la vez. Usa la cuenta con la que ya
   se entra; no hace falta clave de API. Sin lotes ni control de caché.
 
-Todos devuelven `(ficha, modelo, metricas)`; la ficha ya validada contra el
-esquema del dominio; `metricas` trae segundos, tokens, búsquedas y costo.
+Todos reciben `(dominio, item, con_web, previa)` y devuelven
+`(ficha, modelo, metricas)`. Con `previa` (ficha anterior de un item vencido)
+hacen un **refresco**: esquema reducido a los campos volátiles, menos
+búsquedas y esfuerzo bajo; devuelven solo esos campos y quien llama los
+fusiona con la ficha anterior (`Dominio.fusionar_refresco`). `metricas` trae
+segundos, tokens, búsquedas y costo.
 """
 
 from __future__ import annotations
@@ -127,7 +131,7 @@ def metricas_de(mensaje, segundos: float, lote: bool = False) -> dict:
     }
 
 
-def interpretar(dominio: Dominio, mensaje) -> dict:
+def interpretar(dominio: Dominio, mensaje, refresco: bool = False) -> dict:
     if mensaje.stop_reason == "refusal":
         detalle = getattr(mensaje, "stop_details", None)
         raise Rechazo(f"el modelo rechazó el item (categoría: {getattr(detalle, 'category', None)})")
@@ -140,14 +144,14 @@ def interpretar(dominio: Dominio, mensaje) -> dict:
     for bloque in mensaje.content:
         if bloque.type == "tool_use" and bloque.name == HERRAMIENTA_FICHA:
             try:
-                return dominio.validar(dict(bloque.input))
+                return dominio.validar(dict(bloque.input), refresco)
             except ValueError as error:
                 raise RespuestaInvalida(str(error)) from error
     texto = next((b.text for b in reversed(mensaje.content) if b.type == "text"), None)
     if texto is None:
         raise RespuestaInvalida("la respuesta no trae ficha ni texto")
     try:
-        return dominio.validar(json.loads(_sin_cerco(texto)))
+        return dominio.validar(json.loads(_sin_cerco(texto)), refresco)
     except ValueError as error:  # incluye json.JSONDecodeError
         raise RespuestaInvalida(str(error)) from error
 
@@ -168,7 +172,9 @@ class AnalizadorSimulado:
     def __init__(self, latencia: float = 0.0):
         self.latencia = latencia
 
-    async def analizar(self, dominio: Dominio, item: Item, con_web: bool = False) -> tuple[dict, str, dict]:
+    async def analizar(
+        self, dominio: Dominio, item: Item, con_web: bool = False, previa: dict | None = None
+    ) -> tuple[dict, str, dict]:
         inicio = time.monotonic()
         if self.latencia:
             await asyncio.sleep(self.latencia)
@@ -179,7 +185,10 @@ class AnalizadorSimulado:
             "busquedas": 1 if con_web else 0,
             "costo_usd": 0.0,
         }
-        return dominio.validar(dominio.simular(item)), self.modelo, metricas
+        ficha = dominio.simular(item)
+        if previa is not None:
+            ficha = {k: v for k, v in ficha.items() if k in dominio.campos_de_refresco()}
+        return dominio.validar(ficha, previa is not None), self.modelo, metricas
 
     @staticmethod
     def es_reintentable(error: BaseException) -> bool:
@@ -203,48 +212,59 @@ class AnalizadorClaude:
         esfuerzo: str = "medium",
         max_tokens: int = 16000,
         cliente: anthropic.AsyncAnthropic | None = None,
+        esfuerzo_refresco: str = "low",
     ):
         self.modelo = modelo or MODELO_POR_DEFECTO
         self.esfuerzo = esfuerzo
+        self.esfuerzo_refresco = esfuerzo_refresco
         self.max_tokens = max_tokens
         self.cliente = cliente or anthropic.AsyncAnthropic()
 
-    def parametros(self, dominio: Dominio, item: Item, con_web: bool = False) -> dict:
+    def parametros(self, dominio: Dominio, item: Item, con_web: bool = False, previa: dict | None = None) -> dict:
         """Pedido para un item. Lo comparten el modo en tiempo real y el de lotes.
 
         Todo lo que va antes del registro (system, tools) es idéntico para todo
-        el dominio: así la caché de prompts sirve para cada item siguiente."""
+        el dominio (y la variante con/sin web, con/sin refresco): así la caché
+        de prompts sirve para cada item siguiente."""
+        refresco = previa is not None
         pedido = {
             "model": self.modelo,
             "max_tokens": self.max_tokens,
             "system": [
-                {"type": "text", "text": dominio.instrucciones(con_web), "cache_control": {"type": "ephemeral"}}
+                {
+                    "type": "text",
+                    "text": dominio.instrucciones(con_web, refresco),
+                    "cache_control": {"type": "ephemeral"},
+                }
             ],
-            "messages": [{"role": "user", "content": dominio.contenido(item)}],
-            "output_config": {"effort": self.esfuerzo},
+            "messages": [{"role": "user", "content": dominio.contenido(item, previa)}],
+            "output_config": {"effort": self.esfuerzo_refresco if refresco else self.esfuerzo},
         }
         if con_web:
             # Herramientas fijas por dominio (nada por item, o se pierde la caché).
             # La ficha vuelve por `entregar_ficha` con esquema estricto.
+            busquedas = dominio.max_busquedas_refresco if refresco else dominio.max_busquedas
             pedido["tools"] = [
-                {"type": "web_search_20260209", "name": "web_search", "max_uses": dominio.max_busquedas},
+                {"type": "web_search_20260209", "name": "web_search", "max_uses": busquedas},
                 {
                     "type": "web_fetch_20260209",
                     "name": "web_fetch",
-                    "max_uses": dominio.max_busquedas,
+                    "max_uses": busquedas,
                     "max_content_tokens": 20000,
                 },
-                dominio.herramienta_ficha(),
+                dominio.herramienta_ficha(refresco),
             ]
         else:
             # Salida estructurada: el JSON siempre respeta el esquema y "ruta"
             # siempre es una hoja válida de la taxonomía (es un enum).
-            pedido["output_config"]["format"] = {"type": "json_schema", "schema": dominio.esquema()}
+            pedido["output_config"]["format"] = {"type": "json_schema", "schema": dominio.esquema(refresco)}
         return pedido
 
-    async def analizar(self, dominio: Dominio, item: Item, con_web: bool = False) -> tuple[dict, str, dict]:
+    async def analizar(
+        self, dominio: Dominio, item: Item, con_web: bool = False, previa: dict | None = None
+    ) -> tuple[dict, str, dict]:
         inicio = time.monotonic()
-        pedido = self.parametros(dominio, item, con_web)
+        pedido = self.parametros(dominio, item, con_web, previa)
         uso_total: dict[str, int] = {}
         for _ in range(MAX_PAUSAS + 1):
             mensaje = await self.cliente.beta.messages.create(**pedido, betas=[BETA_FALLBACK], fallbacks="default")
@@ -254,7 +274,7 @@ class AnalizadorClaude:
                 break
             # La API pausó un turno largo de búsquedas: se reenvía tal cual para que siga.
             pedido["messages"] = pedido["messages"] + [{"role": "assistant", "content": mensaje.content}]
-        ficha = interpretar(dominio, mensaje)
+        ficha = interpretar(dominio, mensaje, previa is not None)
         segundos = time.monotonic() - inicio
         metricas = {
             "segundos": round(segundos, 2),
@@ -318,13 +338,20 @@ class ProcesadorPorLotes:
     def cliente(self) -> anthropic.AsyncAnthropic:
         return self.analizador.cliente
 
+    def _previa(self, dominio: Dominio, item: Item) -> dict | None:
+        """Ficha anterior si el item es un vencido refrescable (ver `Dominio.refresco_aplicable`)."""
+        if item.motivo != "vencido":
+            return None
+        previa = self.almacen.analisis_actual(dominio.nombre, item.clave)
+        return previa if dominio.refresco_aplicable(previa) else None
+
     def _tandas(self, dominio: Dominio, items: Iterable[Item], con_web: bool) -> Iterator[tuple[list[dict], list[str]]]:
         pedidos: list[dict] = []
         claves: list[str] = []
         bytes_tanda = 0
         for item in items:
             try:
-                params = self.analizador.parametros(dominio, item, con_web)
+                params = self.analizador.parametros(dominio, item, con_web, self._previa(dominio, item))
             except OSError as error:  # p. ej. una imagen local que no existe: falla ese item, no el lote
                 self.almacen.guardar_error(dominio.nombre, item.clave, f"{type(error).__name__}: {error}")
                 continue
@@ -375,8 +402,11 @@ class ProcesadorPorLotes:
                     self.almacen.marcar(dominio.nombre, [item.clave], "pendiente")
                     cuenta["reencolados"] += 1
                     continue
+                previa_refresco = self._previa(dominio, item)
                 try:
-                    ficha = interpretar(dominio, mensaje)
+                    ficha = interpretar(dominio, mensaje, previa_refresco is not None)
+                    if previa_refresco is not None:
+                        ficha = dominio.fusionar_refresco(previa_refresco, ficha)
                 except ErrorDeAnalisis as error:
                     self.almacen.guardar_error(dominio.nombre, item.clave, f"{type(error).__name__}: {error}")
                     cuenta["errores"] += 1
@@ -385,6 +415,8 @@ class ProcesadorPorLotes:
                 else:
                     estado = dominio.estado_tras_analisis(ficha, con_web) if self.web else "listo"
                     metricas = metricas_de(mensaje, 0.0, lote=True)
+                    if previa_refresco is not None:
+                        metricas["refresco"] = True
                     previa = self.almacen.analisis_actual(dominio.nombre, item.clave)
                     self.almacen.guardar_analisis(
                         dominio.nombre, item.clave, ficha, mensaje.model, metricas, estado=estado, con_web=con_web
@@ -457,28 +489,32 @@ class AnalizadorClaudeCode:
         ejecutable: str = "claude",
         carpeta: str | None = None,
         ejecutar: Ejecutor | None = None,
+        esfuerzo_refresco: str = "low",
     ):
         self.modelo = modelo
         self.esfuerzo = esfuerzo
+        self.esfuerzo_refresco = esfuerzo_refresco
         self.max_turnos = max_turnos
         self.max_costo_item = max_costo_item
         self.timeout = timeout
         self.ejecutable = ejecutable
         self.carpeta = carpeta or tempfile.mkdtemp(prefix="catalogo-claude-")
         self.ejecutar = ejecutar or _ejecutar_subproceso
-        self._archivos_sistema: dict[tuple[str, bool], str] = {}
+        self._archivos_sistema: dict[tuple[str, bool, bool], str] = {}
 
-    def _archivo_sistema(self, dominio: Dominio, con_web: bool) -> str:
-        clave = (dominio.nombre, con_web)
+    def _archivo_sistema(self, dominio: Dominio, con_web: bool, refresco: bool) -> str:
+        clave = (dominio.nombre, con_web, refresco)
         if clave not in self._archivos_sistema:
-            ruta = Path(self.carpeta) / f"sistema-{dominio.nombre}-{'web' if con_web else 'sin-web'}.txt"
-            ruta.write_text(dominio.instrucciones(con_web), encoding="utf-8")
+            nombre = f"sistema-{dominio.nombre}-{'web' if con_web else 'sin-web'}{'-refresco' if refresco else ''}.txt"
+            ruta = Path(self.carpeta) / nombre
+            ruta.write_text(dominio.instrucciones(con_web, refresco), encoding="utf-8")
             self._archivos_sistema[clave] = str(ruta)
         return self._archivos_sistema[clave]
 
-    def comando(self, dominio: Dominio, item: Item, con_web: bool = False) -> list[str]:
+    def comando(self, dominio: Dominio, item: Item, con_web: bool = False, previa: dict | None = None) -> list[str]:
+        refresco = previa is not None
         herramientas = ["WebSearch", "WebFetch"] if con_web else []
-        prompt = dominio.contenido_texto(item)
+        prompt = dominio.contenido_texto(item, previa)
         if item.datos.get("imagen_archivo"):
             herramientas.append("Read")
             prompt += f"\n\nImagen del registro (leela con Read): {os.path.abspath(item.datos['imagen_archivo'])}"
@@ -490,9 +526,9 @@ class AnalizadorClaudeCode:
             "--output-format",
             "json",
             "--json-schema",
-            json.dumps(dominio.esquema(), ensure_ascii=False),
+            json.dumps(dominio.esquema(refresco), ensure_ascii=False),
             "--system-prompt-file",
-            self._archivo_sistema(dominio, con_web),
+            self._archivo_sistema(dominio, con_web, refresco),
             "--tools",
             lista,
             "--allowedTools",
@@ -505,15 +541,19 @@ class AnalizadorClaudeCode:
             f"{self.max_costo_item:.2f}",
             "--no-session-persistence",
             "--effort",
-            self.esfuerzo,
+            self.esfuerzo_refresco if refresco else self.esfuerzo,
         ]
         if self.modelo:
             comando += ["--model", self.modelo]
         return comando
 
-    async def analizar(self, dominio: Dominio, item: Item, con_web: bool = False) -> tuple[dict, str, dict]:
+    async def analizar(
+        self, dominio: Dominio, item: Item, con_web: bool = False, previa: dict | None = None
+    ) -> tuple[dict, str, dict]:
         inicio = time.monotonic()
-        codigo, salida, errores = await self.ejecutar(self.comando(dominio, item, con_web), self.carpeta, self.timeout)
+        codigo, salida, errores = await self.ejecutar(
+            self.comando(dominio, item, con_web, previa), self.carpeta, self.timeout
+        )
         resultado = _ultimo_json(salida)
         texto = " ".join(str(x) for x in (resultado.get("result", ""), errores) if x)
         if codigo != 0 or resultado.get("is_error"):
@@ -534,7 +574,7 @@ class AnalizadorClaudeCode:
             except ValueError as error:
                 raise RespuestaInvalida("la respuesta no trae structured_output ni JSON") from error
         try:
-            ficha = dominio.validar(ficha)
+            ficha = dominio.validar(ficha, previa is not None)
         except ValueError as error:
             raise RespuestaInvalida(str(error)) from error
         uso = resultado.get("usage") or {}

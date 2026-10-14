@@ -223,8 +223,9 @@ no para descubrir.
 ### Pipeline
 
 ```
-1. recolectar (gratis, HTTP en paralelo, sin modelo)
-   Wikidata: QID, nombre científico, imagen (P18), estado UICN (P141), masa, longitud
+1. recolectar (gratis, HTTP, sin modelo)
+   Wikidata [hecho]: QID, nombre científico, imagen (P18), estado UICN (P141), masa, longitud,
+   título del artículo en Wikipedia; año (P571) para curiosidades
    Wikipedia (REST summary): extracto + miniatura
    GBIF: taxonomía aceptada, sinónimos
         │  10-20 pedidos simultáneos por fuente, User-Agent identificado
@@ -308,9 +309,10 @@ Propiedad clave: **los datos son locales y cambian**. El modelo no sabe nada de
 3. catalogar (clave = nombre + dirección canónica; facetas ciudad/barrio/rubro)
         │
         ▼
-4. refresco mensual (ttl_dias = 30): reverificación PARCIAL
-   Solo campos volátiles: existencia, horario, teléfono, servicios.
-   1 búsqueda + fetch del sitio; la descripción y el rubro no se rehacen.
+4. refresco mensual (ttl_dias = 30): reverificación PARCIAL  [hecho]
+   Solo campos volátiles: situación, servicios, rango de precios (+ confianza, fuentes).
+   Esquema reducido, esfuerzo low, 1 búsqueda; la descripción y el rubro se copian.
+   Un vencido con ficha de esquema viejo o incompleta se reanaliza entero.
 ```
 
 ### Números estimados (2.000 comercios, Opus 5.5)
@@ -362,13 +364,14 @@ En orden de valor sobre esfuerzo. Tamaños aproximados.
 | 1 | `importar <dominio> <archivos>`: cargar las fichas ya hechas como `listo` | No volver a pagar lo que ya está analizado | **Hecho** (`pipeline.importar`) |
 | 2 | `AnalizadorClaudeCode`: subproceso `claude -p` con `--json-schema`; lee `structured_output`, `total_cost_usd`, `usage`; distingue límite de uso (pausa global) de error del item | Vía B con el mismo motor | **Hecho y probado con `claude -p` real** (`--claude-code`) |
 | 3 | `politica_web` por dominio + herramientas `web_search_20260209` / `web_fetch_20260209` + ficha por herramienta estricta `entregar_ficha`; `pause_turn` se continúa en tiempo real y se reencola en lotes | Vía A con web | **Hecho** (probado con dobles; falta corrida real con clave) |
-| 4 | Etapa `recolectar`: un módulo por fuente (`wikidata`, `wikipedia`, `gbif`, `overpass`) | Menos búsquedas, más precisión | Pendiente (diseño en el informe para el Claude local, §6) |
+| 4 | Etapa `recolectar`: un módulo por fuente (`wikidata`, `wikipedia`, `gbif`, `overpass`) | Menos búsquedas, más precisión | **Hecho para Wikidata** (`recolectar animales curiosidades`: QID, nombre científico, imagen de Commons, estado UICN, masa, longitud, año, título del artículo). GBIF y Overpass pendientes |
 | 5 | Estado `verificar` (segunda pasada) + `campos_volatiles` por dominio + `fuentes_web` en la ficha | Dos pasadas en enciclopedias; una con web en comercios | **Hecho** (`estado_tras_analisis`) |
 | 6 | Columna `prioridad` en la cola | Comercios vencidos antes que carga masiva | **Hecho** (`vencer` pone prioridad 1) |
 | 7 | `--max-costo` por corrida | Tope de gasto | **Hecho** (no arranca items nuevos al llegar al tope) |
-| 8 | Campo `qid` / `osm_id` en la identidad | Deduplicación más robusta | Pendiente (va con el cambio 4) |
+| 8 | Campo `qid` / `osm_id` en la identidad | Deduplicación más robusta | **Hecho para `qid`** (si el item lo tiene, es la clave del catálogo y el título de Wikipedia a vigilar). `osm_id` pendiente |
 | 9 | Métricas por item (segundos, tokens, búsquedas, costo), `corridas` y `eventos` en la base | Saber qué cuesta y qué pasa | **Hecho** |
 | 10 | Panel visual (`python -m catalogo panel`) + `--estado-json` para otros programas | Reemplazar el ícono naranja por progreso, ritmo, ETA, costo, actividad | **Hecho** (`core/panel.py`, `core/panel.html`) |
+| 11 | Refresco parcial de vencidos: el item lleva `motivo` (nuevo/cambio/vencido); un vencido con ficha válida reverifica solo `campos_volatiles` (+ confianza y fuentes) con esquema reducido, esfuerzo `low` y 1 búsqueda; el resto de la ficha se copia | Refresco mensual a una fracción del costo | **Hecho** (`fusionar_refresco`; cuenta como `refrescos` en el resumen y `↻ refresco` en el panel) |
 
 Lo que no cambió en esta ronda: `taxonomia.py` (salvo que el nombre de la hoja
 también cuenta como palabra clave), `catalogo.py`, `texto.py`.
@@ -397,8 +400,8 @@ dentro del rango estimado. Si no, ajustar prompt/política y repetir.
 - Decidir modelo por pasada. Opus 5.5 por defecto; Sonnet 5.5 (mitad de precio)
   es candidato para la pasada 1 de enciclopedias y para el refresco de
   comercios, **solo si la muestra muestra igual calidad**.
-- Recolectores estructurados (Wikidata/GBIF; Overpass) y medir cuánto bajan las
-  búsquedas.
+- Correr `recolectar animales curiosidades` con red real antes de analizar y
+  medir cuánto bajan las búsquedas; después GBIF y Overpass.
 
 **Etapa 2: volumen.**
 

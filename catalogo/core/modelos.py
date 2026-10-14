@@ -16,6 +16,9 @@ class Item:
     clave: str
     datos: dict
     fuentes: list[str] = field(default_factory=list)
+    # Por qué está en la cola: nuevo | cambio | vencido | None. Un "vencido" con
+    # ficha previa válida se refresca (solo campos volátiles) en vez de reanalizarse.
+    motivo: str | None = None
 
 
 @dataclass

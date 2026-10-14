@@ -169,6 +169,7 @@ class _Corrida:
         self.por_dominio = {d.nombre: {"listos": 0, "verificar": 0, "errores": 0} for d in dominios}
         self.costo = 0.0
         self.reintentos = 0
+        self.refrescos = 0
         self.hechos = 0
         self.detenido = False
         self._paso = max(1, total // 10)
@@ -177,9 +178,19 @@ class _Corrida:
         self.almacen.registrar_evento(self.id, tipo, dominio, clave, **detalle)
         self.instantanea.tal_vez()
 
-    def inicio(self, dominio: Dominio, item: Item, con_web: bool) -> None:
+    def inicio(self, dominio: Dominio, item: Item, con_web: bool, refresco: bool = False) -> None:
         self.almacen.marcar(dominio.nombre, [item.clave], "en_curso")
-        self.evento("inicio", dominio.nombre, item.clave, titulo=dominio.titulo_item(item), con_web=con_web)
+        self.evento(
+            "inicio", dominio.nombre, item.clave, titulo=dominio.titulo_item(item), con_web=con_web, refresco=refresco
+        )
+
+    def previa_para_refresco(self, dominio: Dominio, item: Item) -> dict | None:
+        """La ficha anterior, si este item es un vencido que se puede refrescar en
+        vez de reanalizar (campos volátiles solamente)."""
+        if item.motivo != "vencido":
+            return None
+        previa = self.almacen.analisis_actual(dominio.nombre, item.clave)
+        return previa if dominio.refresco_aplicable(previa) else None
 
     def resultado(self, dominio: Dominio, item: Item, ficha: dict, modelo: str, metricas: dict, con_web: bool) -> None:
         estado = dominio.estado_tras_analisis(ficha, con_web) if self.web else "listo"
@@ -189,7 +200,15 @@ class _Corrida:
         )
         if estado == "listo":
             self.novedad(dominio, item.clave, dominio.titulo_item(item), previa, ficha)
-        self.contar(dominio.nombre, estado, metricas, titulo=dominio.titulo_item(item), clave=item.clave, modelo=modelo)
+        self.contar(
+            dominio.nombre,
+            estado,
+            metricas,
+            titulo=dominio.titulo_item(item),
+            clave=item.clave,
+            modelo=modelo,
+            refresco=bool(metricas.get("refresco")),
+        )
 
     def novedad(self, dominio: Dominio, clave: str, titulo: str, previa: dict | None, ficha: dict) -> None:
         """Si la ficha reanalizada cambió en algo que es noticia, lo registra con su veredicto."""
@@ -220,6 +239,7 @@ class _Corrida:
     ) -> None:
         m = metricas or {}
         self.por_dominio[dominio]["listos" if estado == "listo" else "verificar"] += 1
+        self.refrescos += 1 if extra.get("refresco") else 0
         self.costo += m.get("costo_usd") or 0.0
         self.evento(
             estado,
@@ -283,6 +303,7 @@ class _Corrida:
             "corrida_id": self.id,
             "segundos": round(segundos, 2),
             "reintentos": self.reintentos,
+            "refrescos": self.refrescos,
             "costo_usd": round(self.costo, 4),
             "detenido_por_costo": self.detenido,
             "dominios": self.por_dominio,
@@ -326,9 +347,11 @@ async def analizar(
     corrida_id = almacen.iniciar_corrida(modo, [d.nombre for d in dominios], concurrencia, analizador.nombre, total)
     instantanea = Instantanea(almacen, estado_json)
     corrida = _Corrida(almacen, corrida_id, dominios, total, instantanea, avisar, max_costo, web)
+    vencidos = sum(1 for d in dominios for i in pendientes[d.nombre] if i.motivo == "vencido" and d.puede_refrescar())
     avisar(
         f"{total} items pendientes en {', '.join(pendientes)} · modo {modo} · {analizador.nombre}"
         + ("" if web else " · sin web")
+        + (f" · {vencidos} vencidos: refresco parcial" if vencidos else "")
     )
     inicio = time.monotonic()
     try:
@@ -358,8 +381,13 @@ async def _fase(
 ):
     async def trabajo(entrada: Entrada):
         dominio, item, con_web = entrada
-        corrida.inicio(dominio, item, con_web)
-        return await analizador.analizar(dominio, item, con_web)
+        previa = corrida.previa_para_refresco(dominio, item)
+        corrida.inicio(dominio, item, con_web, refresco=previa is not None)
+        ficha, modelo, metricas = await analizador.analizar(dominio, item, con_web, previa)
+        if previa is not None:
+            ficha = dominio.fusionar_refresco(previa, ficha)
+            metricas = {**metricas, "refresco": True}
+        return ficha, modelo, metricas
 
     def al_terminar(entrada: Entrada, resultado: tuple[dict, str, dict]) -> None:
         dominio, item, con_web = entrada
@@ -513,6 +541,50 @@ async def recoger_lotes(
     corrida.evento("fin", estado="terminada")
     instantanea.tal_vez(forzar=True)
     return totales
+
+
+def recolectar(
+    almacen: Almacen,
+    dominio: Dominio,
+    *,
+    fuente: str = "wikidata",
+    idioma: str = "es",
+    limite: int | None = None,
+    solo_pendientes: bool = True,
+    obtener=None,
+    avisar: Callable[[str], None] = lambda m: print(m, file=sys.stderr),
+) -> dict:
+    """Trae datos estructurados gratis (Wikidata) para los items y los guarda como
+    aporte de esa fuente. La clave del item no cambia: el QID y el nombre
+    científico entran en `datos`, y la identidad final del catálogo los usa."""
+    from ..recolectores import wikidata
+
+    obtener = obtener or wikidata.obtener_json
+    if solo_pendientes:
+        items = almacen.pendientes(dominio.nombre, limite)
+    else:
+        items = [r.item for r in almacen.analizados(dominio.nombre)][:limite]
+    cuenta = {"consultados": 0, "con_datos": 0, "sin_resultado": 0, "ya_tenian": 0, "errores": 0}
+    for item in items:
+        if item.datos.get("qid"):
+            cuenta["ya_tenian"] += 1
+            continue
+        texto = item.datos.get("nombre_cientifico") or dominio.titulo_item(item)
+        cuenta["consultados"] += 1
+        try:
+            fila = wikidata.consultar(dominio.nombre, texto, idioma, obtener)
+        except Exception as error:  # red o respuesta rara: se sigue con el próximo
+            cuenta["errores"] += 1
+            avisar(f"  {texto}: {type(error).__name__}: {error}")
+            continue
+        if not fila:
+            cuenta["sin_resultado"] += 1
+            continue
+        datos = dominio.normalizar({**fila, "nombre": item.datos.get("nombre"), "titulo": item.datos.get("titulo")})
+        almacen.guardar_aportes([Item(dominio.nombre, item.clave, datos, [fuente])])
+        almacen.ingerir([_canonico(almacen, dominio, item.clave)], dominio.version_prompt)
+        cuenta["con_datos"] += 1
+    return cuenta
 
 
 def vigilar(

@@ -96,6 +96,10 @@ class Curiosidades(Dominio):
         imagen = primero(fila, "imagen_url", "imagen", "foto", "image_url")
         if imagen:
             datos["imagen_url" if imagen.startswith(("http://", "https://")) else "imagen_archivo"] = imagen
+        for campo in ("qid", "titulo_wikipedia"):
+            valor = primero(fila, campo)
+            if valor:
+                datos[campo] = valor
         return datos
 
     def clave(self, datos: dict) -> str:
@@ -114,6 +118,9 @@ class Curiosidades(Dominio):
 
     def titulo(self, registro: Registro) -> str:
         return str(registro.analisis.get("titulo") or registro.item.datos.get("titulo"))
+
+    def clave_catalogo(self, registro: Registro) -> str:
+        return str(registro.item.datos["qid"]).lower() if registro.item.datos.get("qid") else registro.item.clave
 
     def clave_orden(self, registro: Registro) -> tuple:
         # Dentro de cada categoría, orden cronológico (lo que no tiene año, al final).

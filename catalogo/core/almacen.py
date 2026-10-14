@@ -123,6 +123,7 @@ _COLUMNAS_ITEMS = {
     "tokens_entrada": "INTEGER",
     "tokens_salida": "INTEGER",
     "busquedas": "INTEGER",
+    "motivo": "TEXT",
 }
 
 
@@ -190,8 +191,8 @@ class Almacen:
                 fuentes = json.dumps(item.fuentes, ensure_ascii=False)
                 if fila is None:
                     self.db.execute(
-                        "INSERT INTO items (dominio, clave, datos, fuentes, huella, estado, actualizado_en)"
-                        " VALUES (?, ?, ?, ?, ?, 'pendiente', ?)",
+                        "INSERT INTO items (dominio, clave, datos, fuentes, huella, estado, motivo, actualizado_en)"
+                        " VALUES (?, ?, ?, ?, ?, 'pendiente', 'nuevo', ?)",
                         (item.dominio, item.clave, _json(item.datos), fuentes, nueva, ahora),
                     )
                     cuenta["nuevos"] += 1
@@ -199,7 +200,7 @@ class Almacen:
                     # Cambiaron los datos o la versión del prompt: hay que reanalizar.
                     # El análisis anterior se conserva (se muestra como no vigente).
                     self.db.execute(
-                        "UPDATE items SET datos=?, fuentes=?, huella=?, estado='pendiente',"
+                        "UPDATE items SET datos=?, fuentes=?, huella=?, estado='pendiente', motivo='cambio',"
                         " intentos=0, error=NULL, lote_id=NULL, actualizado_en=? WHERE dominio=? AND clave=?",
                         (_json(item.datos), fuentes, nueva, ahora, item.dominio, item.clave),
                     )
@@ -233,7 +234,8 @@ class Almacen:
         limite = time.time() - ttl_dias * 86400
         with self.db:
             return self.db.execute(
-                "UPDATE items SET estado='pendiente', prioridad=1 WHERE dominio=? AND estado='listo' AND analizado_en < ?",
+                "UPDATE items SET estado='pendiente', prioridad=1, motivo='vencido'"
+                " WHERE dominio=? AND estado='listo' AND analizado_en < ?",
                 (dominio, limite),
             ).rowcount
 
@@ -279,7 +281,7 @@ class Almacen:
         ahora = time.time()
         with self.db:
             self.db.execute(
-                "UPDATE items SET estado=?, analisis=?, modelo=?, error=NULL, lote_id=NULL, prioridad=0,"
+                "UPDATE items SET estado=?, analisis=?, modelo=?, error=NULL, lote_id=NULL, prioridad=0, motivo=NULL,"
                 " intentos=intentos+1, analizado_en=?, actualizado_en=?, con_web=?,"
                 " segundos=?, costo_usd=?, tokens_entrada=?, tokens_salida=?, busquedas=?"
                 " WHERE dominio=? AND clave=?",
@@ -527,6 +529,7 @@ def _a_item(fila: sqlite3.Row) -> Item:
         clave=fila["clave"],
         datos=json.loads(fila["datos"]),
         fuentes=json.loads(fila["fuentes"]),
+        motivo=fila["motivo"] if "motivo" in fila.keys() else None,
     )
 
 

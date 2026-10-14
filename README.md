@@ -97,6 +97,7 @@ independientes (las copias no suman), jerarquía de la fuente, persistencia
 pico), rasgos de anzuelo en el titular (restan), recencia y redundancia.
 
 ```bash
+python -m catalogo recolectar animales curiosidades  # QID, imagen, estado UICN… desde Wikidata, gratis
 python -m catalogo vigilar animales curiosidades   # ¿se mueven sus artículos de Wikipedia? -> a verificar
 python -m catalogo analizar animales curiosidades comercios --claude-code   # verifica; si cambió algo, es novedad
 python -m catalogo novedades                       # lista con puntaje y motivos (también en el panel)
@@ -104,7 +105,9 @@ python -m catalogo novedades                       # lista con puntaje y motivos
 
 Comercios tiene ahora `situacion` (abierto, cerrado, mudado, desconocido): un
 cierre corroborado por el municipio y un medio es novedad; un cierre citado por
-un solo blog queda "a confirmar".
+un solo blog queda "a confirmar". Los comercios vencidos (30 días) se refrescan
+en parte: solo situación, servicios y precios, con esfuerzo bajo y una búsqueda;
+el resto de la ficha se copia.
 
 ## Estructura
 
@@ -121,7 +124,7 @@ catalogo/
     catalogo.py      identidad final, orden, árbol, facetas, cola de revisión, exportación
     texto.py         normalización de texto y medidas
   dominios/        una clase por catálogo: animales, curiosidades, comercios
-  recolectores/    señales externas gratuitas (wikipedia: ediciones firmes, visitas sostenidas)
+  recolectores/    fuentes gratuitas: wikidata (QID, imagen, UICN, medidas) · wikipedia (ediciones firmes, visitas)
 herramientas/      verificador de archivos entregados por un recolector
 ejemplos/          datos de muestra, una carpeta por dominio y un archivo por fuente
 tests/             pytest, sin red (dobles del cliente de la API y de `claude -p`)

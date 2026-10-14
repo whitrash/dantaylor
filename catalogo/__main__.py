@@ -4,6 +4,7 @@ python -m catalogo ingerir animales ejemplos/animales/wikipedia.csv --fuente wik
 python -m catalogo importar animales fichas_viejas.jsonl        # lo ya analizado, sin pagar de nuevo
 python -m catalogo analizar animales comercios --claude-code     # con Claude Code local (tu cuenta)
 python -m catalogo analizar animales --modo lotes --no-esperar   # con clave de API, a mitad de precio
+python -m catalogo recolectar animales curiosidades              # QID, imagen, estado UICN… desde Wikidata, gratis
 python -m catalogo vigilar animales curiosidades                 # ¿se mueven sus artículos de Wikipedia?
 python -m catalogo novedades                                     # qué cambió, con motivo y puntaje
 python -m catalogo panel --abrir                                 # panel visual en el navegador
@@ -124,6 +125,12 @@ def main(argv: list[str] | None = None) -> None:
     p.add_argument("--intervalo-lotes", type=float, default=60.0)
     opciones_analisis(p)
 
+    p = sub.add_parser("recolectar", help="completar items con datos estructurados de Wikidata (gratis, sin IA)")
+    p.add_argument("dominios", nargs="+", choices=DOMINIOS)
+    p.add_argument("--idioma", default="es", help="idioma para buscar y para el título de Wikipedia (es, en…)")
+    p.add_argument("--limite", type=int, help="máximo de items a consultar por dominio")
+    p.add_argument("--todos", action="store_true", help="también los ya analizados (default: solo pendientes)")
+
     p = sub.add_parser("vigilar", help="detectar movimiento en Wikipedia y mandar a verificar lo que se mueve")
     p.add_argument("dominios", nargs="+", choices=DOMINIOS)
     p.add_argument("--idioma", default="es", help="edición de Wikipedia (es, en…)")
@@ -208,6 +215,16 @@ def main(argv: list[str] | None = None) -> None:
                     )
                 )
             )
+        elif args.comando == "recolectar":
+            for nombre in args.dominios:
+                dominio = obtener(nombre)
+                if not dominio.vigilar_wikipedia:
+                    _imprimir({"dominio": nombre, "aviso": "este dominio no tiene datos en Wikidata (comercios)"})
+                    continue
+                cuenta = pipeline.recolectar(
+                    almacen, dominio, idioma=args.idioma, limite=args.limite, solo_pendientes=not args.todos
+                )
+                _imprimir({"dominio": nombre, **cuenta})
         elif args.comando == "vigilar":
             for nombre in args.dominios:
                 dominio = obtener(nombre)

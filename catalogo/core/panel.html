@@ -399,7 +399,7 @@
     $('eventos').innerHTML = eventos.map((e) => {
       const det = e.detalle || {};
       const titulo = det.resumen || det.titulo || e.clave || det.lote_id || (e.tipo === 'fase' ? `pasada ${det.numero} · ${num(det.items)} items` : '') || (e.tipo === 'fin' ? `corrida ${det.estado}` : '') || (e.tipo === 'pausa' ? `${det.segundos} s` : '');
-      const meta = [det.segundos != null ? dur(det.segundos) : null, det.costo_usd != null ? usd(det.costo_usd) : null, det.busquedas ? `${det.busquedas} búsq.` : null, det.puntaje != null ? `${det.puntaje}/100` : null].filter(Boolean).join(' · ');
+      const meta = [det.segundos != null ? dur(det.segundos) : null, det.costo_usd != null ? usd(det.costo_usd) : null, det.busquedas ? `${det.busquedas} búsq.` : null, det.puntaje != null ? `${det.puntaje}/100` : null, det.refresco ? '↻ refresco' : null].filter(Boolean).join(' · ');
       const sw = e.dominio ? `<span class="swatch" style="background:${swatches[e.dominio] || 'var(--muted)'}" aria-hidden="true"></span>` : '';
       return `<li><span class="hora">${hora(e.ts)}</span>
         <span class="titulo">${sw}${esc(titulo)}${e.dominio ? `<span class="dominio">${esc(e.dominio)}</span>` : ''}${det.error ? ` <span class="error-txt">${esc(det.error.slice(0, 90))}</span>` : ''}</span>
