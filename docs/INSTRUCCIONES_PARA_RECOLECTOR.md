@@ -18,6 +18,7 @@ Catálogos:
 1. **animales** (enciclopedia de fauna)
 2. **curiosidades** (arte, deporte, ciencia, historia)
 3. **comercios** (supermercados, librerías, locales de barrio de una ciudad)
+4. **ofertas** (un producto, en un comercio, a un precio, **con su enlace**)
 
 ## Formato de entrega
 
@@ -111,12 +112,52 @@ Librería Hernández,Av. Corrientes 1436,San Nicolás,Buenos Aires,librería,(01
 Verdulería Don Pepe,Av. Boedo 900,Boedo,Buenos Aires,verdulería,,,
 ```
 
+## Catálogo `ofertas`
+
+**Regla de oro: una oferta sin enlace directo a la página del producto no
+sirve y no se publica.** El enlace se abre y se comprueba todos los días: si
+está muerto, lleva a la portada o a un buscador, es de otro producto, el
+producto está sin stock o el precio de la página no es el anunciado, la oferta
+queda fuera del catálogo.
+
+| Columna | Obligatoria | Qué es | Ejemplo |
+|---|---|---|---|
+| `producto` | sí | marca + producto + variante, como figura en la página | `Leche entera La Serenísima 1 L` |
+| `comercio` | sí | nombre del comercio o cadena | `Supermercado La Estrella` |
+| `precio` | sí | precio de la oferta, solo el número (con o sin separador de miles) | `1250` o `1.250,00` |
+| `enlace` | **sí** | URL de la **página del producto** (no la portada, no una búsqueda, no la home de ofertas) | `https://www.ejemplo.com.ar/p/leche-entera-1l` |
+| `precio_anterior` | no | precio de lista, para calcular el descuento | `1480` |
+| `marca` | no | | `La Serenísima` |
+| `presentacion` | recomendable | tamaño, para el precio por kilo/litro | `1 L`, `500 g`, `pack x 6` |
+| `ean` | no | código de barras, si la página lo muestra | `7790742000019` |
+| `vigencia_hasta` | no | hasta cuándo dura la oferta (AAAA-MM-DD) | `2026-10-31` |
+| `sucursal` | no | si el precio vale solo en una zona | `CABA` |
+
+Antes de entregar una oferta, abrí el enlace y confirmá vos también:
+
+1. Que abre la página de **ese** producto (no la portada, no "resultados de búsqueda").
+2. Que el producto tiene botón de compra o dice "en stock" (no "agotado", "sin stock", "avisame cuando haya").
+3. Que el precio que ves es el que anotás.
+
+Si alguna falla, **no la entregues**. Mejor diez ofertas que funcionan que cien
+que llevan a una página muerta.
+
+```csv
+producto,comercio,precio,precio_anterior,enlace,marca,presentacion
+Leche entera La Serenísima 1 L,Supermercado La Estrella,1250,1480,https://www.laestrella.com.ar/p/leche-entera-la-serenisima-1l,La Serenísima,1 L
+"Aceite de girasol Cocinero 1,5 L",Supermercado La Estrella,3990,4600,https://www.laestrella.com.ar/p/aceite-cocinero-1-5l,Cocinero,"1,5 L"
+```
+
+Ojo con las comas: si un valor tiene coma ("1,5 L"), va entre comillas dobles.
+
 ## Lo que NO hay que hacer
 
 - No inventar datos para rellenar columnas. Vacío es correcto.
 - No mezclar catálogos en un archivo.
 - No redactar fichas largas: la `descripcion`/`notas` es una o dos oraciones.
 - No poner la fuente dentro de los datos; la fuente es el nombre del archivo.
+- No entregar ofertas con enlaces a la portada, a una búsqueda o a una página
+  de "ofertas de la semana": el enlace tiene que ser el del producto.
 - No cambiar los nombres de las columnas (`nombre_cientifico`, no `especie`;
   `anio`, no `año`; `direccion`, no `domicilio`). El motor acepta algunos
   alias, pero lo estándar evita sorpresas.
@@ -126,8 +167,11 @@ Verdulería Don Pepe,Av. Boedo 900,Boedo,Buenos Aires,verdulería,,,
 Quien reciba los archivos corre:
 
 ```bash
-python herramientas/verificar_recoleccion.py animales/ curiosidades/ comercios/
+python herramientas/verificar_recoleccion.py animales/ curiosidades/ comercios/ ofertas/
 ```
+
+En `ofertas` también marca las filas sin precio, sin enlace, con un enlace que
+no es http(s) o que apunta a la portada o a un buscador.
 
 y obtiene, por archivo: filas leídas, filas descartadas (sin identidad),
 duplicados, columnas desconocidas y valores sospechosos ("N/A", "desconocido").

@@ -19,7 +19,10 @@ Además guarda:
   * el aporte de cada fuente por separado (`aportes`); la ficha que se analiza
     es la combinación de todas, según la prioridad de fuentes del dominio;
   * métricas por item (segundos, tokens, búsquedas, costo) y un registro de
-    corridas y eventos, que es lo que lee el panel visual.
+    corridas y eventos, que es lo que lee el panel visual;
+  * la última verificación del enlace de cada item (`enlaces`): vivo, con
+    stock, con el precio anunciado. Es independiente del análisis: se repite
+    cada día sin tocar la ficha.
 
 La base se abre en modo WAL: el panel puede leerla mientras el motor escribe.
 """
@@ -112,6 +115,19 @@ CREATE TABLE IF NOT EXISTS novedades (
     estado         TEXT NOT NULL DEFAULT 'nueva'
 );
 CREATE INDEX IF NOT EXISTS novedades_por_estado ON novedades (estado, detectada_en);
+CREATE TABLE IF NOT EXISTS enlaces (
+    dominio        TEXT NOT NULL,
+    clave          TEXT NOT NULL,
+    url            TEXT,
+    estado         TEXT NOT NULL,
+    url_final      TEXT,
+    http           INTEGER,
+    disponibilidad TEXT,
+    precio_pagina  REAL,
+    motivos        TEXT NOT NULL,
+    verificado_en  REAL NOT NULL,
+    PRIMARY KEY (dominio, clave)
+);
 """
 
 # Columnas agregadas después de la primera versión: se suman a bases existentes.
@@ -515,6 +531,59 @@ class Almacen:
         with self.db:
             return self.db.execute("UPDATE novedades SET estado=? WHERE id=?", (estado, novedad_id)).rowcount == 1
 
+    # --- enlaces verificados (ofertas) -------------------------------------
+
+    def guardar_enlace(self, dominio: str, clave: str, verificacion: dict) -> None:
+        with self.db:
+            self.db.execute(
+                "INSERT INTO enlaces (dominio, clave, url, estado, url_final, http, disponibilidad, precio_pagina,"
+                " motivos, verificado_en) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                " ON CONFLICT (dominio, clave) DO UPDATE SET url=excluded.url, estado=excluded.estado,"
+                " url_final=excluded.url_final, http=excluded.http, disponibilidad=excluded.disponibilidad,"
+                " precio_pagina=excluded.precio_pagina, motivos=excluded.motivos, verificado_en=excluded.verificado_en",
+                (
+                    dominio,
+                    clave,
+                    verificacion.get("url"),
+                    verificacion["estado"],
+                    verificacion.get("url_final"),
+                    verificacion.get("http"),
+                    verificacion.get("disponibilidad"),
+                    verificacion.get("precio_pagina"),
+                    _json(verificacion.get("motivos") or []),
+                    verificacion.get("verificado_en") or time.time(),
+                ),
+            )
+
+    def enlace(self, dominio: str, clave: str) -> dict | None:
+        fila = self.db.execute("SELECT * FROM enlaces WHERE dominio=? AND clave=?", (dominio, clave)).fetchone()
+        return _enlace(fila) if fila else None
+
+    def enlaces(self, dominio: str) -> dict[str, dict]:
+        filas = self.db.execute("SELECT * FROM enlaces WHERE dominio=?", (dominio,))
+        return {f["clave"]: _enlace(f) for f in filas}
+
+    def resumen_enlaces(self, dominio: str) -> dict[str, int]:
+        filas = self.db.execute("SELECT estado, COUNT(*) AS n FROM enlaces WHERE dominio=? GROUP BY estado", (dominio,))
+        return {f["estado"]: f["n"] for f in filas}
+
+    def para_verificar_enlaces(
+        self, dominio: str, max_edad_segundos: float, limite: int | None = None, campo_enlace: str = "enlace"
+    ) -> list[Item]:
+        """Items sin verificación, con una más vieja que `max_edad_segundos` o cuyo
+        enlace cambió desde que se verificó. Primero los nunca verificados."""
+        consulta = (
+            "SELECT i.* FROM items i LEFT JOIN enlaces e ON e.dominio=i.dominio AND e.clave=i.clave"
+            " WHERE i.dominio=? AND (e.verificado_en IS NULL OR e.verificado_en < ?"
+            " OR e.url IS NOT json_extract(i.datos, '$.' || ?))"
+            " ORDER BY e.verificado_en IS NOT NULL, e.verificado_en, i.clave"
+        )
+        parametros: tuple = (dominio, time.time() - max_edad_segundos, campo_enlace)
+        if limite is not None:
+            consulta += " LIMIT ?"
+            parametros += (limite,)
+        return [_a_item(f) for f in self.db.execute(consulta, parametros)]
+
     def dominios_presentes(self) -> list[str]:
         return [f["dominio"] for f in self.db.execute("SELECT DISTINCT dominio FROM items ORDER BY dominio")]
 
@@ -540,6 +609,13 @@ def _novedad(fila: sqlite3.Row) -> dict:
             json.loads(novedad[campo]) if novedad[campo] else ([] if campo in ("motivos", "fuentes") else None)
         )
     return novedad
+
+
+def _enlace(fila: sqlite3.Row) -> dict:
+    enlace = dict(fila)
+    enlace["motivos"] = json.loads(enlace["motivos"]) if enlace["motivos"] else []
+    enlace["senalizable"] = enlace["estado"] == "ok"
+    return enlace
 
 
 def _evento(fila: sqlite3.Row) -> dict:

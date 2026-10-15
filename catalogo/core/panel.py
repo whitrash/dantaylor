@@ -40,6 +40,7 @@ TIPOS_VISIBLES = (
     "fase",
     "fin",
     "novedad",
+    "enlace",
 )
 _RUTA_NOVEDAD = re.compile(r"^/api/novedades/(\d+)/(vista|descartada|nueva)$")
 
@@ -56,6 +57,13 @@ def resumen(almacen: Almacen) -> dict:
             "avance": round(estados["listo"] / total, 4) if total else 0.0,
             **almacen.metricas(nombre),
         }
+        enlaces = almacen.resumen_enlaces(nombre)
+        if enlaces:
+            dominios[nombre]["enlaces"] = {
+                "ok": enlaces.get("ok", 0),
+                **{k: v for k, v in enlaces.items() if k != "ok"},
+            }
+            dominios[nombre]["enlaces_sin_verificar"] = max(0, total - sum(enlaces.values()))
     totales = _sumar(dominios.values())
     corrida = almacen.corrida_activa() or almacen.ultima_corrida()
     ultimo = almacen.ultimo_evento()
@@ -84,7 +92,7 @@ def resumen(almacen: Almacen) -> dict:
             {
                 "dominio": fila["dominio"],
                 "clave": fila["clave"],
-                "titulo": str(datos.get("nombre") or datos.get("titulo") or fila["clave"]),
+                "titulo": str(datos.get("nombre") or datos.get("titulo") or datos.get("producto") or fila["clave"]),
                 "segundos": round(ahora - fila["desde"]) if fila["desde"] else None,
             }
         )

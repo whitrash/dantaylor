@@ -277,6 +277,30 @@ Tipos de evento: `fase`, `inicio`, `listo`, `verificar`, `error`, `reintento`,
 `pausa`, `tope_costo`, `lote_enviado`, `lote_recibido`, `novedad`, `fin`. Los
 `inicio` y `listo` de un refresco parcial llevan `"refresco": true`.
 
+## 5 bis. Ofertas: regla del enlace verificado
+
+Pedido explícito del usuario: **no señalar un producto barato si no se puede
+comprar**. El dominio `ofertas` lo cumple así:
+
+- `python -m catalogo enlaces ofertas` abre cada enlace (`core/enlaces.py`,
+  sin modelo) y guarda el veredicto en la tabla `enlaces`: `ok`, `sin_enlace`,
+  `invalido`, `muerto`, `portada`, `no_aparece`, `sin_stock`,
+  `precio_distinto` o `no_verificado`.
+- `catalogar ofertas` publica solo las `ok` verificadas hace menos de 24 h y
+  con el mismo enlace que se verificó. Las demás van a "No publicadas" con el
+  motivo. Si Detector muestra ofertas, que lea `catalogo.json`, no la base.
+- **Primera tarea tuya:** probarlo con red real sobre 5 ofertas de cada sitio
+  (`--limite 5`). En la nube el proxy bloquea los sitios y solo se probó con
+  páginas simuladas. Mirar sobre todo: sitios que arman la página con
+  JavaScript (el HTML llega vacío y todo sale `no_aparece`; ahí conviene la
+  API del sitio o un navegador sin cabeza) y sitios que devuelven 403 a los
+  robots (salen `no_verificado`).
+- Ajustar en `core/enlaces.py` las frases de "sin stock" y "agregar al
+  carrito" con las de los sitios reales, y `--por-minuto` para no castigar a
+  ningún sitio (con 8 simultáneos y 30/min es razonable).
+- Rutina: `enlaces ofertas` todos los días antes de publicar; cuando una
+  oferta se cae aparece como novedad en el panel.
+
 ## 6. Lo que NO está hecho (y cómo hacerlo si hace falta)
 
 1. **Recolectores que faltan** (gratis, antes del modelo). Wikidata ya está

@@ -5,6 +5,7 @@ python -m catalogo importar animales fichas_viejas.jsonl        # lo ya analizad
 python -m catalogo analizar animales comercios --claude-code     # con Claude Code local (tu cuenta)
 python -m catalogo analizar animales --modo lotes --no-esperar   # con clave de API, a mitad de precio
 python -m catalogo recolectar animales curiosidades              # QID, imagen, estado UICN… desde Wikidata, gratis
+python -m catalogo enlaces ofertas                              # ¿el enlace vive, es el producto, hay stock, es el precio?
 python -m catalogo vigilar animales curiosidades                 # ¿se mueven sus artículos de Wikipedia?
 python -m catalogo novedades                                     # qué cambió, con motivo y puntaje
 python -m catalogo panel --abrir                                 # panel visual en el navegador
@@ -131,6 +132,16 @@ def main(argv: list[str] | None = None) -> None:
     p.add_argument("--limite", type=int, help="máximo de items a consultar por dominio")
     p.add_argument("--todos", action="store_true", help="también los ya analizados (default: solo pendientes)")
 
+    p = sub.add_parser("enlaces", help="verificar los enlaces de las ofertas: vivo, producto, stock y precio")
+    p.add_argument("dominios", nargs="+", choices=DOMINIOS)
+    p.add_argument("--concurrencia", type=int, default=8, help="enlaces abiertos a la vez")
+    p.add_argument("--por-minuto", type=float, help="tope de peticiones por minuto (cuidado con el sitio)")
+    p.add_argument(
+        "--max-edad-horas", type=float, help="reverificar lo más viejo que esto (default: el del dominio, 24 h)"
+    )
+    p.add_argument("--limite", type=int, help="máximo de enlaces por dominio")
+    p.add_argument("--todos", action="store_true", help="reverificar todo aunque sea reciente")
+
     p = sub.add_parser("vigilar", help="detectar movimiento en Wikipedia y mandar a verificar lo que se mueve")
     p.add_argument("dominios", nargs="+", choices=DOMINIOS)
     p.add_argument("--idioma", default="es", help="edición de Wikipedia (es, en…)")
@@ -225,6 +236,23 @@ def main(argv: list[str] | None = None) -> None:
                     almacen, dominio, idioma=args.idioma, limite=args.limite, solo_pendientes=not args.todos
                 )
                 _imprimir({"dominio": nombre, **cuenta})
+        elif args.comando == "enlaces":
+            for nombre in args.dominios:
+                dominio = obtener(nombre)
+                if not dominio.campo_enlace:
+                    _imprimir({"dominio": nombre, "aviso": "este dominio no señala enlaces (solo ofertas)"})
+                    continue
+                cuenta = _correr(
+                    pipeline.verificar_enlaces(
+                        almacen,
+                        dominio,
+                        concurrencia=args.concurrencia,
+                        por_minuto=args.por_minuto,
+                        max_edad_horas=0 if args.todos else args.max_edad_horas,
+                        limite=args.limite,
+                    )
+                )
+                _imprimir({"dominio": nombre, **cuenta})
         elif args.comando == "vigilar":
             for nombre in args.dominios:
                 dominio = obtener(nombre)
@@ -264,6 +292,8 @@ def main(argv: list[str] | None = None) -> None:
                     "lotes_abiertos": almacen.lotes_abiertos(nombre),
                     "novedades_nuevas": len(almacen.novedades(nombre, "nueva", limite=1000)),
                 }
+                if obtener(nombre).campo_enlace:
+                    datos["enlaces"] = almacen.resumen_enlaces(nombre)
                 if args.errores:
                     datos["detalle_errores"] = dict(almacen.errores(nombre))
                 _imprimir(datos)

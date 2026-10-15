@@ -109,6 +109,33 @@ un solo blog queda "a confirmar". Los comercios vencidos (30 días) se refrescan
 en parte: solo situación, servicios y precios, con esfuerzo bajo y una búsqueda;
 el resto de la ficha se copia.
 
+## Ofertas: solo con enlace verificado
+
+Una oferta se señala solo si su enlace funciona. `enlaces` abre cada enlace
+(en paralelo, sin IA, una petición por oferta) y comprueba:
+
+| Comprobación | Si falla |
+|---|---|
+| Hay enlace y es http(s) | `sin_enlace` / `invalido` |
+| Responde (sin 404, sin "página no encontrada" disfrazada) | `muerto` |
+| No termina en la portada ni en un buscador del sitio | `portada` |
+| El producto aparece en la página | `no_aparece` |
+| Hay stock (schema.org primero, después el texto) | `sin_stock` |
+| El precio de la página es el anunciado (±2 %) | `precio_distinto` |
+| La red o el sitio no dejan comprobar ahora (403, 429, 5xx, proxy) | `no_verificado` (no es novedad) |
+
+El catálogo de ofertas publica solo las que están en `ok` y verificadas hace
+menos de 24 h; el resto va a "No publicadas" con el motivo. Una oferta que se
+cae (o vuelve) es novedad con comprobación directa.
+
+```bash
+python herramientas/verificar_recoleccion.py ofertas/   # antes de cargar: precio, enlace, no portada
+python -m catalogo ingerir ofertas ofertas/supermercado.csv
+python -m catalogo analizar ofertas --claude-code        # nombre limpio, marca, presentación, categoría
+python -m catalogo enlaces ofertas                       # todos los días, antes de publicar
+python -m catalogo catalogar ofertas                     # solo lo verificado; precio por kilo/litro
+```
+
 ## Estructura
 
 ```
@@ -120,10 +147,11 @@ catalogo/
     pipeline.py      ingerir → importar → analizar (dos pasadas) → catalogar; estado.json
     panel.py/.html   panel visual: servidor HTTP local + /api/estado + novedades
     novedades.py     actualidad: puntaje y motivos de cada cambio (anti-anzuelo)
+    enlaces.py       verificación de enlaces de ofertas: vivo, producto, stock, precio
     taxonomia.py     árbol de categorías (vocabulario controlado + orden)
     catalogo.py      identidad final, orden, árbol, facetas, cola de revisión, exportación
     texto.py         normalización de texto y medidas
-  dominios/        una clase por catálogo: animales, curiosidades, comercios
+  dominios/        una clase por catálogo: animales, curiosidades, comercios, ofertas
   recolectores/    fuentes gratuitas: wikidata (QID, imagen, UICN, medidas) · wikipedia (ediciones firmes, visitas)
 herramientas/      verificador de archivos entregados por un recolector
 ejemplos/          datos de muestra, una carpeta por dominio y un archivo por fuente

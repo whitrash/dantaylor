@@ -92,7 +92,8 @@
   .tipo { display: inline-flex; align-items: center; gap: 4px; font-size: 0.88em; font-weight: 600; padding: 1px 7px; border-radius: 999px; border: 1px solid var(--border); }
   .tipo.listo { color: var(--good-text); } .tipo.verificar, .tipo.pausa { color: var(--warning-text); }
   .tipo.error, .tipo.tope_costo { color: var(--critical); } .tipo.reintento { color: var(--serious-text); }
-  .tipo.novedad { color: var(--foco); } .tipo.lote_enviado, .tipo.lote_recibido, .tipo.fase, .tipo.fin { color: var(--ink-2); }
+  .tipo.novedad { color: var(--foco); } .tipo.enlace { color: var(--serious-text); }
+  .enlaces { font-size: 0.87em; color: var(--ink-2); margin-top: 6px; } .enlaces b { color: var(--good-text); } .enlaces .mal { color: var(--serious-text); } .tipo.lote_enviado, .tipo.lote_recibido, .tipo.fase, .tipo.fin { color: var(--ink-2); }
   .filtros { display: flex; gap: 6px; flex-wrap: wrap; font-weight: 500; text-transform: none; letter-spacing: 0; }
   .filtros button { padding: 2px 10px; min-height: 26px; font-size: 0.92em; border-radius: 999px; }
   .vacio { color: var(--muted); font-size: 0.9em; padding: 8px 0; }
@@ -197,7 +198,7 @@
   const COLOR_ESTADO = { trabajando: '#0ca30c', pausado: '#fab219', lotes: '#fab219', interrumpido: '#d03b3b', desconectado: '#d03b3b', inactivo: '#898781' };
   const TIPOS = {
     listo: '✓ listo', verificar: '◐ a verificar', error: '✕ error', reintento: '↻ reintento', pausa: '⏸ pausa',
-    tope_costo: '⛔ tope de gasto', lote_enviado: '⇡ lote enviado', lote_recibido: '⇣ lote recibido', fase: '▸ fase', fin: '■ fin', novedad: '✦ novedad'
+    tope_costo: '⛔ tope de gasto', lote_enviado: '⇡ lote enviado', lote_recibido: '⇣ lote recibido', fase: '▸ fase', fin: '■ fin', novedad: '✦ novedad', enlace: '⛓ enlace roto'
   };
   const CATEGORIAS = { novedad: '✦ Novedad', a_confirmar: '◐ A confirmar' };
   let swatches = {};
@@ -399,7 +400,7 @@
     $('eventos').innerHTML = eventos.map((e) => {
       const det = e.detalle || {};
       const titulo = det.resumen || det.titulo || e.clave || det.lote_id || (e.tipo === 'fase' ? `pasada ${det.numero} · ${num(det.items)} items` : '') || (e.tipo === 'fin' ? `corrida ${det.estado}` : '') || (e.tipo === 'pausa' ? `${det.segundos} s` : '');
-      const meta = [det.segundos != null ? dur(det.segundos) : null, det.costo_usd != null ? usd(det.costo_usd) : null, det.busquedas ? `${det.busquedas} búsq.` : null, det.puntaje != null ? `${det.puntaje}/100` : null, det.refresco ? '↻ refresco' : null].filter(Boolean).join(' · ');
+      const meta = [det.segundos != null ? dur(det.segundos) : null, det.costo_usd != null ? usd(det.costo_usd) : null, det.busquedas ? `${det.busquedas} búsq.` : null, det.puntaje != null ? `${det.puntaje}/100` : null, det.refresco ? '↻ refresco' : null, det.estado && e.tipo === 'enlace' ? `${det.estado}: ${(det.motivos || []).join('; ')}` : null].filter(Boolean).join(' · ');
       const sw = e.dominio ? `<span class="swatch" style="background:${swatches[e.dominio] || 'var(--muted)'}" aria-hidden="true"></span>` : '';
       return `<li><span class="hora">${hora(e.ts)}</span>
         <span class="titulo">${sw}${esc(titulo)}${e.dominio ? `<span class="dominio">${esc(e.dominio)}</span>` : ''}${det.error ? ` <span class="error-txt">${esc(det.error.slice(0, 90))}</span>` : ''}</span>

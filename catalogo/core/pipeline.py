@@ -28,7 +28,7 @@ import time
 from pathlib import Path
 from typing import TYPE_CHECKING, Callable, Iterable, Iterator
 
-from . import catalogo, novedades, panel
+from . import catalogo, enlaces, novedades, panel
 from .almacen import Almacen
 from .analizador import AnalizadorClaude, ProcesadorPorLotes
 from .modelos import Item
@@ -642,6 +642,102 @@ def vigilar(
     return cuenta
 
 
+async def verificar_enlaces(
+    almacen: Almacen,
+    dominio: Dominio,
+    *,
+    concurrencia: int = 8,
+    por_minuto: float | None = None,
+    max_edad_horas: float | None = None,
+    limite: int | None = None,
+    obtener=None,
+    ahora: float | None = None,
+    avisar: Callable[[str], None] = lambda m: print(m, file=sys.stderr),
+) -> dict:
+    """Abre el enlace de cada item (ofertas) y guarda el veredicto: vivo, a la
+    página del producto, con stock, con el precio anunciado. Sin modelo, en
+    paralelo. Una oferta que estaba bien y deja de estarlo (o al revés) es
+    novedad: se comprobó directamente."""
+    if not dominio.campo_enlace:
+        raise ValueError(f"el dominio {dominio.nombre} no tiene enlaces que verificar")
+    edad = (dominio.max_edad_enlace_horas if max_edad_horas is None else max_edad_horas) * 3600
+    items = almacen.para_verificar_enlaces(dominio.nombre, edad, limite, dominio.campo_enlace)
+    por_clave = {it.clave: it for it in items}
+    pedidos = [(it.clave, *dominio.pedido_enlace(it)) for it in items]
+    cuenta: dict = {"verificados": len(pedidos), "novedades": 0, **{e: 0 for e in enlaces.ESTADOS}}
+    anteriores = {clave: almacen.enlace(dominio.nombre, clave) for clave in por_clave}
+
+    def guardar(clave, verificacion: enlaces.Verificacion) -> None:
+        item = por_clave[clave]
+        titulo = dominio.titulo_item(item)
+        almacen.guardar_enlace(dominio.nombre, clave, verificacion.como_dict())
+        cuenta[verificacion.estado] += 1
+        if not verificacion.senalizable:
+            almacen.registrar_evento(
+                None,
+                "enlace",
+                dominio.nombre,
+                clave,
+                titulo=titulo,
+                estado=verificacion.estado,
+                motivos=verificacion.motivos,
+            )
+        anterior = anteriores.get(clave)
+        # "no_verificado" no es noticia: no se sabe si cambió algo (y tampoco se publica).
+        if anterior is None or anterior["estado"] == verificacion.estado or verificacion.estado == "no_verificado":
+            return
+        if anterior["estado"] == "ok" or verificacion.estado == "ok":
+            cuenta["novedades"] += 1
+            _novedad_enlace(almacen, dominio, item, anterior, verificacion, ahora)
+
+    await enlaces.verificar_enlaces(
+        pedidos,
+        concurrencia=concurrencia,
+        por_minuto=por_minuto,
+        obtener=obtener or enlaces.obtener_pagina,
+        al_terminar=guardar,
+        ahora=ahora,
+    )
+    resumen = ", ".join(f"{cuenta[e]} {e}" for e in enlaces.ESTADOS if cuenta[e])
+    avisar(f"{dominio.nombre}: {cuenta['verificados']} enlaces verificados" + (f" ({resumen})" if resumen else ""))
+    return cuenta
+
+
+def _novedad_enlace(
+    almacen: Almacen, dominio: Dominio, item: Item, anterior: dict, nueva: enlaces.Verificacion, ahora
+) -> None:
+    """Una oferta que se cae (o vuelve) es novedad con comprobación directa."""
+    titulo = dominio.titulo_item(item)
+    senal = novedades.Senal(
+        "comprobacion",
+        nueva.url or "",
+        ahora or time.time(),
+        campo="enlace",
+        valor=nueva.estado,
+        url=nueva.url or "",
+        nivel=2,
+    )
+    veredicto = novedades.puntuar([senal], {"enlace": anterior["estado"]}, ahora)
+    if veredicto.categoria == "descartada":
+        return
+    if nueva.senalizable:
+        resumen = f"{titulo}: la oferta vuelve a estar disponible ({nueva.descripcion})"
+    else:
+        resumen = f"{titulo}: la oferta ya no sirve ({nueva.descripcion}: {'; '.join(nueva.motivos)})"
+    almacen.registrar_novedad(dominio.nombre, item.clave, titulo, resumen, veredicto.como_dict(), anterior["estado"])
+    almacen.registrar_evento(
+        None,
+        "novedad",
+        dominio.nombre,
+        item.clave,
+        titulo=titulo,
+        resumen=resumen,
+        puntaje=veredicto.puntaje,
+        categoria=veredicto.categoria,
+    )
+
+
 def catalogar(almacen: Almacen, dominio: Dominio, carpeta: Path) -> tuple[dict, list[Path]]:
-    armado = catalogo.construir(dominio, almacen.analizados(dominio.nombre))
+    verificaciones = almacen.enlaces(dominio.nombre) if dominio.campo_enlace else None
+    armado = catalogo.construir(dominio, almacen.analizados(dominio.nombre), verificaciones)
     return armado, catalogo.exportar(armado, carpeta / dominio.nombre)

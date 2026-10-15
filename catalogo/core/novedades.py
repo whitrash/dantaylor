@@ -21,6 +21,9 @@ pueden leer en el panel al lado de cada novedad:
    superlativos absolutos) restan, vengan de donde vengan.
 6. **Recencia y redundancia.** Lo viejo reciclado no es actualidad; lo que la
    ficha ya dice no es novedad.
+7. **Comprobación directa.** Si el motor abrió la página y lo vio (una oferta
+   sin stock, un precio distinto, un enlace muerto), eso vale más que cualquier
+   titular: es observación, no relato.
 
 El resultado es un puntaje de 0 a 100 con sus motivos, y una categoría:
 `novedad` (aplicar/mostrar), `a_confirmar` (reverificar con web) o `descartada`.
@@ -42,6 +45,7 @@ DIAS_EDICION_MUY_FIRME = 7
 DIAS_INTERES_SOSTENIDO = 3
 PENALIZACION_POR_RASGO = 8
 PENALIZACION_MAXIMA = 30
+PUNTOS_COMPROBACION = 25
 
 # Nivel 3: oficial o de referencia. Nivel 2: medios establecidos y sitios propios.
 # Nivel 1: el resto. Nivel 0: granjas de contenido conocidas. Son listas cortas a
@@ -138,7 +142,7 @@ _VACIOS = (None, "", [], "NE", "desconocido", "Desconocida", "desconocida")
 class Senal:
     """Una pieza de evidencia sobre un item."""
 
-    tipo: str  # wikipedia_edicion | wikipedia_visitas | wikidata | oficial | sitio_propio | medio | ficha_cambio | otra
+    tipo: str  # wikipedia_edicion | wikipedia_visitas | wikidata | oficial | sitio_propio | medio | ficha_cambio | comprobacion | otra
     fuente: str  # dominio o URL de donde salió
     cuando: float  # epoch
     titular: str = ""
@@ -306,6 +310,11 @@ def puntuar(senales: list[Senal], ficha_actual: dict | None = None, ahora: float
     if edad > DIAS_RECIENTE:
         puntaje -= 15
         motivos.append(f"la señal más nueva tiene {edad:.0f} días: no es actualidad")
+
+    # 7. Comprobación directa (el motor abrió la página y lo vio).
+    if any(s.tipo == "comprobacion" for s in senales):
+        puntaje += PUNTOS_COMPROBACION
+        motivos.append("comprobado directamente en la página del comercio")
 
     puntaje = max(0, min(100, puntaje))
     if not concretas:

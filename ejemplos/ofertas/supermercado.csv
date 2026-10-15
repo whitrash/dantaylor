@@ -1,0 +1,12 @@
+producto,comercio,precio,precio_anterior,enlace,marca,presentacion,ean,vigencia_hasta
+Leche entera La Serenísima 1 L,Supermercado La Estrella,1250,1480,https://www.laestrella.example/p/leche-entera-la-serenisima-1l,La Serenísima,1 L,7790742000019,2026-10-31
+Yerba mate Playadito 1 kg,Supermercado La Estrella,4890,,https://www.laestrella.example/p/yerba-playadito-1kg,Playadito,1 kg,7790387000012,
+"Aceite de girasol Cocinero 1,5 L",Supermercado La Estrella,3990,4600,https://www.laestrella.example/p/aceite-cocinero-1-5l,Cocinero,1.5 L,,
+"Gaseosa Coca-Cola 2,25 L",Hiper Ahorro,2890,,https://www.hiperahorro.example/producto/coca-cola-2-25l,Coca-Cola,2.25 L,7790895000997,
+Arroz largo fino Gallo Oro 1 kg,Hiper Ahorro,2150,,https://www.hiperahorro.example/producto/arroz-gallo-oro-1kg,Gallo,1 kg,,
+Papel higiénico Elite doble hoja x 4,Hiper Ahorro,2790,3200,https://www.hiperahorro.example/producto/papel-higienico-elite-x4,Elite,pack x 4,,
+Jabón en polvo Ala 3 kg,Hiper Ahorro,9990,,https://www.hiperahorro.example/,Ala,3 kg,,
+Shampoo Sedal 650 ml,Supermercado La Estrella,3490,,,Sedal,650 ml,,
+Alfajor Havanna x 6,Supermercado La Estrella,8900,,https://www.laestrella.example/p/alfajores-havanna-x6,Havanna,pack x 6,,
+Detergente Magistral 750 ml,Hiper Ahorro,2390,,https://www.hiperahorro.example/producto/detergente-magistral-750,Magistral,750 ml,,
+Alimento para perro Pedigree 15 kg,Hiper Ahorro,,,https://www.hiperahorro.example/producto/pedigree-15kg,Pedigree,15 kg,,

@@ -4,8 +4,9 @@ from .animales import Animales
 from .base import Dominio
 from .comercios import Comercios
 from .curiosidades import Curiosidades
+from .ofertas import Ofertas
 
-DOMINIOS: dict[str, Dominio] = {d.nombre: d for d in (Animales(), Curiosidades(), Comercios())}
+DOMINIOS: dict[str, Dominio] = {d.nombre: d for d in (Animales(), Curiosidades(), Comercios(), Ofertas())}
 
 
 def obtener(nombre: str) -> Dominio:

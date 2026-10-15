@@ -4,7 +4,9 @@ Todo esto es lo que hace un catálogo de supermercado con sus fichas, aplicado a
 cualquier dominio:
   * árbol de secciones (góndolas) en el orden en que se declaró la taxonomía;
   * facetas para filtrar (marca/precio allá; continente/dieta/época acá);
-  * completitud de cada ficha y una cola de "revisar" para lo dudoso.
+  * completitud de cada ficha y una cola de "revisar" para lo dudoso;
+  * bloqueos: lo que el dominio dice que NO se publica (una oferta sin enlace
+    verificado) no entra en las secciones; va a "revisar" con el motivo.
 """
 
 from __future__ import annotations
@@ -43,7 +45,8 @@ def _mejor(dominio: Dominio, a: Registro, b: Registro) -> Registro:
     return replace(ganador, item=replace(ganador.item, fuentes=fuentes))
 
 
-def construir(dominio: Dominio, registros: list[Registro]) -> dict:
+def construir(dominio: Dominio, registros: list[Registro], enlaces: dict[str, dict] | None = None) -> dict:
+    enlaces = enlaces or {}
     # 1. Identidad después del análisis (p. ej. dos nombres comunes, una especie).
     unicos: dict[str, Registro] = {}
     alias: dict[str, list[str]] = {}
@@ -63,11 +66,14 @@ def construir(dominio: Dominio, registros: list[Registro]) -> dict:
     raiz: dict = {"secciones": []}
     facetas: dict[str, Counter] = {f: Counter() for f in dominio.facetas}
     revisar = []
+    excluidas = 0
     for clave, registro in ordenados:
+        enlace = enlaces.get(registro.item.clave)
         ficha = {
             "clave": clave,
             "titulo": dominio.titulo(registro),
             **registro.analisis,
+            **dominio.enriquecer(registro, enlace),
             "datos": registro.item.datos,
             "fuentes": registro.item.fuentes,
             "alias": sorted(set(alias[clave]) - {clave}),
@@ -75,6 +81,12 @@ def construir(dominio: Dominio, registros: list[Registro]) -> dict:
             "vigente": registro.vigente,
             "completitud": completitud(dominio, registro),
         }
+        bloqueos = dominio.bloqueos(registro, enlace)
+        if bloqueos:
+            # No se publica: ni en las secciones ni en las facetas. Queda en "revisar" con el porqué.
+            excluidas += 1
+            revisar.append({"clave": clave, "titulo": ficha["titulo"], "motivos": bloqueos, "no_publicada": True})
+            continue
         nodo = raiz
         for parte in registro.analisis["ruta"].split(SEPARADOR):
             secciones = nodo.setdefault("secciones", [])
@@ -99,7 +111,8 @@ def construir(dominio: Dominio, registros: list[Registro]) -> dict:
     return {
         "dominio": dominio.nombre,
         "generado_en": time.strftime("%Y-%m-%d %H:%M:%S"),
-        "total": len(ordenados),
+        "total": len(ordenados) - excluidas,
+        "no_publicadas": excluidas,
         "secciones": raiz["secciones"],
         "facetas": {f: dict(c.most_common()) for f, c in facetas.items()},
         "revisar": revisar,
@@ -114,7 +127,7 @@ def a_markdown(catalogo: dict) -> str:
             lineas.append(f"{'#' * min(nivel, 6)} {seccion['nombre']}")
             lineas.append("")
             for ficha in seccion.get("items", []):
-                resumen = ficha.get("descripcion") or ficha.get("resumen") or ""
+                resumen = ficha.get("descripcion") or ficha.get("resumen") or _resumen_oferta(ficha)
                 marca = "" if ficha.get("confianza") != "baja" else " ⚠️"
                 lineas.append(f"- **{ficha['titulo']}**{marca}" + (f": {resumen}" if resumen else ""))
             if seccion.get("items"):
@@ -128,11 +141,33 @@ def a_markdown(catalogo: dict) -> str:
             lista = ", ".join(f"{v} ({n})" for v, n in list(valores.items())[:15]) or "—"
             lineas.append(f"- **{faceta}**: {lista}")
         lineas.append("")
-    if catalogo["revisar"]:
+    no_publicadas = [r for r in catalogo["revisar"] if r.get("no_publicada")]
+    dudosas = [r for r in catalogo["revisar"] if not r.get("no_publicada")]
+    if no_publicadas:
+        lineas += ["## No publicadas (sin enlace verificado)", ""]
+        lineas += [f"- {r['titulo']}: {', '.join(r['motivos'])}" for r in no_publicadas]
+        lineas.append("")
+    if dudosas:
         lineas += ["## Para revisar", ""]
-        lineas += [f"- {r['titulo']}: {', '.join(r['motivos'])}" for r in catalogo["revisar"]]
+        lineas += [f"- {r['titulo']}: {', '.join(r['motivos'])}" for r in dudosas]
         lineas.append("")
     return "\n".join(lineas)
+
+
+def _resumen_oferta(ficha: dict) -> str:
+    """Una oferta se lee de un vistazo: precio, precio por kilo/litro, descuento y enlace."""
+    if ficha.get("precio") is None or not ficha.get("enlace"):
+        return ""
+    partes = [f"${ficha['precio']:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")]
+    if ficha.get("precio_unitario"):
+        partes.append(
+            f"${ficha['precio_unitario']:,.2f}/{ficha['unidad_precio']}".replace(",", "X")
+            .replace(".", ",")
+            .replace("X", ".")
+        )
+    if ficha.get("descuento_pct"):
+        partes.append(f"-{ficha['descuento_pct']} %")
+    return " · ".join(partes) + f" · [ver]({ficha['enlace']})"
 
 
 def exportar(catalogo: dict, carpeta: Path) -> list[Path]:

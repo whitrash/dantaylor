@@ -21,6 +21,7 @@ from __future__ import annotations
 import base64
 import json
 import mimetypes
+import time
 from pathlib import Path
 
 from ..core.modelos import Item, Registro
@@ -82,6 +83,14 @@ class Dominio:
     # Si el dominio tiene artículos de Wikipedia que vigilar (enciclopedias sí, comercios no).
     vigilar_wikipedia: bool = False
     reglas_web: str = ""
+    # Dominios que señalan algo que hay que poder abrir (ofertas): campo de `datos`
+    # con la URL, del nombre a buscar en la página y del precio anunciado. Si
+    # `exige_enlace`, nada se publica sin una verificación "ok" reciente.
+    campo_enlace: str | None = None
+    campo_producto: str = "nombre"
+    campo_precio: str | None = None
+    exige_enlace: bool = False
+    max_edad_enlace_horas: float = 24.0
 
     # --- 1. recolección y normalización ---------------------------------
 
@@ -321,6 +330,42 @@ Refresco de una ficha existente:
         """Identidad después del análisis. Por defecto la misma que al ingresar;
         animales la redefine (dos nombres comunes, una misma especie)."""
         return registro.item.clave
+
+    def pedido_enlace(self, item: Item) -> tuple[str | None, str | None, float | None]:
+        """(url, nombre del producto, precio anunciado) para verificar el enlace de un item."""
+        if not self.campo_enlace:
+            return None, None, None
+        datos = item.datos
+        precio = datos.get(self.campo_precio) if self.campo_precio else None
+        return (
+            datos.get(self.campo_enlace) or None,
+            str(datos.get(self.campo_producto) or "") or None,
+            float(precio) if isinstance(precio, (int, float)) and precio > 0 else None,
+        )
+
+    def enriquecer(self, registro: Registro, enlace: dict | None = None) -> dict:
+        """Campos calculados que se suman a la ficha del catálogo (precio por kilo,
+        estado del enlace...). Por defecto, nada."""
+        return {}
+
+    def bloqueos(self, registro: Registro, enlace: dict | None = None) -> list[str]:
+        """Motivos por los que esta ficha NO se publica (va a la cola de revisión en
+        vez de al catálogo). Por defecto no hay bloqueos; ofertas exige enlace vivo."""
+        if not self.exige_enlace:
+            return []
+        if enlace is None:
+            return ["enlace sin verificar: correr `enlaces " + self.nombre + "`"]
+        if not enlace.get("senalizable"):
+            motivos = "; ".join(enlace.get("motivos") or [])
+            return [f"enlace {enlace.get('estado')}: {motivos}" if motivos else f"enlace {enlace.get('estado')}"]
+        horas = (time.time() - (enlace.get("verificado_en") or 0)) / 3600
+        if horas > self.max_edad_enlace_horas:
+            return [
+                f"enlace verificado hace {horas:.0f} h (máximo {self.max_edad_enlace_horas:.0f} h): volver a verificar"
+            ]
+        if enlace.get("url") and enlace.get("url") != registro.item.datos.get(self.campo_enlace):
+            return ["el enlace cambió desde la última verificación: volver a verificar"]
+        return []
 
     def valores_faceta(self, registro: Registro, faceta: str) -> list[str]:
         valor = registro.analisis.get(faceta, registro.item.datos.get(faceta))

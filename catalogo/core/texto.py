@@ -71,3 +71,30 @@ def primero(fila: dict, *nombres: str) -> str | None:
         if valor is not None and str(valor).strip():
             return str(valor).strip()
     return None
+
+
+def leer_numero(texto: object) -> float | None:
+    """Número con separadores de cualquier país: '1.234,56' -> 1234.56; '1,234.56' -> 1234.56;
+    '1.234' -> 1234; '12,5' -> 12.5; '$ 899,90' -> 899.9. None si no se entiende."""
+    if texto is None:
+        return None
+    if isinstance(texto, (int, float)):
+        return float(texto)
+    t = re.sub(r"[^\d.,-]", "", str(texto))
+    if not t or not re.search(r"\d", t):
+        return None
+    if "," in t and "." in t:
+        if t.rfind(",") > t.rfind("."):
+            t = t.replace(".", "").replace(",", ".")
+        else:
+            t = t.replace(",", "")
+    elif "," in t:
+        entero, _, decimal = t.rpartition(",")
+        t = entero.replace(",", "") + "." + decimal if len(decimal) <= 2 else t.replace(",", "")
+    elif "." in t:
+        entero, _, decimal = t.rpartition(".")
+        t = entero.replace(".", "") + "." + decimal if len(decimal) <= 2 else t.replace(".", "")
+    try:
+        return float(t)
+    except ValueError:
+        return None
